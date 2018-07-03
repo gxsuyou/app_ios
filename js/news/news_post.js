@@ -56,9 +56,9 @@ $(function() {
 			down: {
 				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
 				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+				height: '11300px', //可选,默认50px.下拉刷新控件的高度,
+				range: '11700px', //可选 默认100px,控件可下拉拖拽的范围
+				offset: '1150px', //可选 默认0px,下拉刷新控件的起始位置
 				auto: false, //可选,默认false.首次加载自动上拉刷新一次
 				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 			}
@@ -498,7 +498,9 @@ function getComment(){
 
 function up(){
 	page++;
+	
 	if(type = "hot") {
+//		alert(page)
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
@@ -577,7 +579,7 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment)
-
+                     //alert(comment);
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
@@ -692,10 +694,19 @@ function up(){
 }
 
 function down() {
-//  window.location.reload();	
-mui("#pullrefresh").pullRefresh().setStopped(true)
-//	setTimeout(function() {
-//		mui('#news_content').pullRefresh().endPulldown(false);
-//	}, 1000);
+     // window.location.reload();	
+//alert(1)
+//mui("#pullrefresh").pullRefresh().setStopped(true)
+     // this.endPullupToRefresh(true);
+     // alert(this);
+      //this.endPullupToRefresh(true);
+//    mui('.new_post_contents').pullRefresh().endPullupToRefresh(r); 
+//    this.endPullUpToRefresh(true);
+      //mui('.new_post_contents').pullRefresh().refresh(true);;
+      return false;
+	setTimeout(function() {
+		mui('#news_content').pullRefresh().endPulldown(false);
+//		mui('.new_post_contents"').pullRefresh().refresh(true);
+	}, 1000);
 
 }
