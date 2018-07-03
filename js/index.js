@@ -17,7 +17,7 @@ mui.plusReady(function() {
 			
 			console.log("当前应用版本：" + wgtVer);
 			//	检测更新
-
+           return false;
 			$.ajax({
 				type: "get",
 				url: "http://www.oneyouxi.com.cn:8877/H5/update",

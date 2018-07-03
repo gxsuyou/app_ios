@@ -99,7 +99,6 @@ $(function() {
 //		获取一级评论结束	
 
 
-	
 		$('body').on('click','.news_post_commentContent',function(){
 			$('.news_secondComment_input').focus();
 //			targetCommentId = $(this).attr("data-id");

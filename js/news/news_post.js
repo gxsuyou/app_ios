@@ -7,9 +7,10 @@ var type = 'hot';
 var firstImg;
 var title;
 $(function() {
-	$('body').on('click','a',function(event){
+	$('body').on('tap','a',function(event){
 		event.preventDefault();
 		var url = $(this).attr('href');
+		
 		mui.openWindow({
 			url: '../play/h5game.html',
 			id: '../play/h5game.html',
@@ -61,18 +62,14 @@ $(function() {
 				auto: false, //可选,默认false.首次加载自动上拉刷新一次
 				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 			}
-
 		}
-
 	})
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
-
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		gameId = self.gameId;
 		up();
-		//alert(1);
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",
@@ -91,16 +88,6 @@ $(function() {
 					if(browse > 99) {
 						browse = 99
 					}
-					//					$.ajax({
-					//						type: "get",
-					//						url: config.base64 + n.detail_addr,
-					//						async: true,
-					//						success: function(data) {
-					//
-					//							$('.detail').html(data)
-					//						}
-					//					});
-
 					firstImg = n.img
 					title = n.title
 
@@ -132,7 +119,7 @@ $(function() {
 				}
 			}
 		});
-		$('body').on('click', '.more_secondComment,.comment_img', function() {
+		$('body').on('tap', '.more_secondComment,.comment_img', function() {
 			if(userId) {
 				var commentId = $(this).attr("data-id")
 				mui.openWindow({
@@ -156,7 +143,7 @@ $(function() {
 
 		})
 
-		$('body').on('click', '.hot', function() {
+		$('body').on('tap', '.hot', function() {
 
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
@@ -167,7 +154,7 @@ $(function() {
 			up()
 
 		})
-		$('body').on('click', '.time', function() {
+		$('body').on('tap', '.time', function() {
 
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
@@ -247,7 +234,7 @@ $(function() {
 		//			收藏部分结束	
 
 		//			点赞部分
-		$('body').on('click', '.thumbs', function() {
+		$('body').on('tap', '.thumbs', function() {
 			if(userId) {
 				var parentId = $(this).children('.thumb').attr("data-commentId")
 				var t = $(this).children('.thumb')
@@ -325,8 +312,7 @@ $(function() {
 			}, false);
 		}
 
-		scroll(function(direction) {
-
+		scroll(function(direction) {      
 			if(direction == "down") {
 				$('.news_userInfo_reply').addClass('hidden')
 			} else {
@@ -337,20 +323,23 @@ $(function() {
 
 		//滚动隐藏结束
 
-		$('.news_userInfo_replyInput').click(function() {
+//		$("body").on('tap','.news_secondComment_input',function(){
+//			console.log(this)
+//		})
+		$("body").on('tap','.news_userInfo_replyInput',function(){
 			$('.news_userInfo_reply').addClass('hidden')
 			$('.news_secondComment').removeClass('hidden')
-			$('.news_secondComment_input').focus()
+			$('.news_secondComment_input').focus();
 
 			$('.news_secondComment_input').blur(function() {
 				setTimeout(function() {
 					$('.news_secondComment').addClass('hidden')
 					$('.news_userInfo_reply').removeClass('hidden')
-				}, 250)
-
-			})
-		})
-		$('body').on('click', '.publish', function(event) {
+				}, 250);
+			});
+		});
+		
+		$('body').on('tap', '.publish', function(event) {
 			event.preventDefault();
 			if(userId) {
 				var content = $(this).prev().val();
@@ -388,12 +377,18 @@ $(function() {
 
 		})
 
-		$('.news_review').click(function() {
-			$('html, body').animate({
+//		$('.news_review').click(function() {
+//			$('html, body').animate({
+//				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
+//			}, 1000)
+//		});
+       $("body").on("tap",".news_review",function(){
+       	   $('html, body,.new_post_contents').animate({
 				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
-			}, 1000)
-		})
-
+			}, 1000);
+       });
+       
+       
 	})
 })
 
@@ -587,11 +582,8 @@ function up(){
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
 					if(com.length < 5) {
-
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
-
 					} else {
-
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
 
 					}
@@ -700,9 +692,10 @@ function up(){
 }
 
 function down() {
-	window.location.reload();
-	setTimeout(function() {
-		mui('#news_content').pullRefresh().endPulldown(true);
-	}, 1000);
+//  window.location.reload();	
+mui("#pullrefresh").pullRefresh().setStopped(true)
+//	setTimeout(function() {
+//		mui('#news_content').pullRefresh().endPulldown(false);
+//	}, 1000);
 
 }

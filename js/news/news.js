@@ -201,7 +201,7 @@ $(function() {
 		})
 	})
 
-	$('body').on("click", ".news_art,.news_art2", function() {
+	$('body').on("tap", ".news_art,.news_art2", function() {
 		var th = $(this);
 		var id = th.attr('data-id');
 		$.ajax({
@@ -212,11 +212,8 @@ $(function() {
 				id: id
 			},
 			success: function(data) {
-
 				if(data.state) {
-
 					th.find('.news_art_viewNum').eq(0).text(data.browse);
-
 				} else {
 
 				}
@@ -242,7 +239,7 @@ $(function() {
 
 		})
 	})
-	$('body').on('click', '.news_newGame_contents > .news_newGame_content', function() {
+	$('body').on('tap', '.news_newGame_contents > .news_newGame_content', function() {
 		mui.openWindow({
 			url: "../game/game_detail.html",
 			id: "../game/game_detail.html",

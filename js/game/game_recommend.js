@@ -269,18 +269,15 @@ $(function() {
 	mui.plusReady(function(){
 		$.ajax({
 		type: "get",
-		url: config.data + "game/getActiveLenOfTen",
+		url: config.data + "game/getActiveLenOfTen?sys=1",
 		async: true,
 		success: function(data) {
+			alert(JSON.stringify(data))
 			if(data.state) {
 				var g = data.game;
 				var list = '';
-				//alert(JSON.stringify(g))
-				//plus.runtime.isApplicationExist({pname:game.game_packagename,action: ''})
-				
-				for(var i = 0; i < g.length; i++) {
-					
-					
+                
+				for(var i = 0; i < g.length; i++) {				
 					var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
 					if(downloadToggle){
 						var buttonDown="打开";
@@ -288,9 +285,7 @@ $(function() {
 						var buttonDown="下载";
 					}
 					
-					var signs = '';
-					
-					
+					var signs = '';					
 					if(g[i].tagList && g[i].tagList !== "null") {
 						var result = g[i].tagList.split(",");
 						var tagId = g[i].tagIdList.split(",");

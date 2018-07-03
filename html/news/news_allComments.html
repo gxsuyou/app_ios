@@ -16,6 +16,7 @@
 
 	<body class="backgroundColor_white">
 		<div class="news_allComments">
+			<!--开头开始-->
 			<div class="header_box">
 				<div class="before_header"></div>
 				<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
@@ -24,7 +25,9 @@
 					<div class="notice">回复楼主</div>
 				</header>
 			</div>
-			<div class="news_post_commentContents">
+			<!--开头结束-->
+			<!--内容开始-->
+			<div class="news_post_commentContents" >
 				<div class="news_post_commentContent ofh ">
 					<div class="news_post_commentContent_head fl"></div>
 					<div class="news_post_commentContent_content fl">
@@ -71,21 +74,22 @@
 							</div>
 
 						</div>
-
 					</div>-->
 				</div>
-				<!--底部回复模块-->
-
-				<div class="news_secondComment backgroundColor_white ">
+				<!--底部回复模块-->				
+			</div>
+			<!--内容结束-->
+			<!--回复开始-->
+			<div class="news_secondComment backgroundColor_white ">
 					<input class="news_secondComment_input" type="text" placeholder="输入回复内容" />
 					<div class="color_green publish font_14">发表</div>
-				</div>
 			</div>
+			<!--回复结束-->
 		</div>
 		<script type="text/javascript">
 			mui.init({
 				beforeback: function() {　　　　 //获得父页面的webview
-					var list = plus.webview.getWebviewById('news_post.html');　　　　 //触发父页面的自定义事件(refresh),从而进行刷新					
+					var list = plus.webview.getWebviewById('news_post.html');//触发父页面的自定义事件(refresh),从而进行刷新					
 					mui.fire(list, 'refresh');
 					//返回true,继续页面关闭逻辑
 					return true;

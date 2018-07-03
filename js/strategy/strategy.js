@@ -1,15 +1,7 @@
 $(function(){
-//	$('body').click(function(){
-//		mui.openWindow({
-//			url:"strategy_add.html"
-//		})
-//	})
-	
-
 	window.addEventListener('refresh',function(event){
 	    down()
 	});
-
 //	获取顶部搜索
 	$.ajax({
 		type:"get",
@@ -39,9 +31,8 @@ $(function(){
 	});
 	
 	//头部游戏导航条点击
-	$('body').on('click','.tacI',function(){
+	$('body').on('tap','.tacI',function(){
 		var msg = $(this).find('.strategy_headImgart').text();
-	
 		mui.openWindow({
 			url:"strategy_search_result.html",
 			id:"strategy_search_result.html",
@@ -77,10 +68,9 @@ $(function(){
 	
 //	d导航栏点击结束
 
-	$('body').on('click','.strategy_content',function(){
+	$('body').on('tap','.strategy_content',function(){
 		var strategyId = $(this).attr('data-id');
 		var browseNum = $(this).find('.browseNum').eq(0).text();
-//		add(strategyId,"browse_num");
 		$(this).find('.browseNum').eq(0).text(parseInt(browseNum)+1) 
 		mui.openWindow({
 			url:"strategy_details.html",

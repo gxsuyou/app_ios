@@ -1,3 +1,11 @@
+
+/*.header_box{
+	position: fixed;
+	top:0;
+}*/
+.news_post_commentContents{
+	
+}
 .notice{
 	position: absolute;
 	left: 50%;
@@ -7,9 +15,9 @@
 .news_post_commentContent{
 	width: 100%;
 	border-top: 1px solid #E7EAEC;
-	
 	margin-top: 45px;
 	border-bottom: 0.75rem solid #e6ebec;
+	
 }
 .news_post_commentContent_head{
 	width: 2.9375rem;
@@ -69,10 +77,9 @@
 .news_secondComment{
 	height: 3rem;
 	width: 100%;
-	position: fixed;
-	bottom: 0;
+	position:fixed;
+	bottom:0;
 	z-index: 99;
-	
 }
 .news_secondComment_input,input[type=text]{
 	position: absolute;

@@ -4,9 +4,7 @@ $(function(){
 	$('.search_img').click(function(){
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g,"");
 		$('.search_lists').children().remove();
-		
 		if(val){
-			
 			pages = 1
 			$.ajax({
 				type:"get",
@@ -48,7 +46,7 @@ $(function(){
 	})
 	
 	
-	$('body').on('click','.search_list',function(){
+	$('body').on('tap','.search_list',function(){
 		mui.openWindow({
 			url:"news_post.html",
 			id:"news_post.html",

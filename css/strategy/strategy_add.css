@@ -1,7 +1,6 @@
 .header_box{
 	z-index:1000;
-	/*position:relative;	*/
-	/*background:red;*/
+	position:fixed;
 }
 body{
 	background-color: white;
@@ -17,34 +16,29 @@ body{
 }
 .strategy_title{
 	height:2.8125rem !important;
-	line-height:2.8125rem !important;
 	color:#282828 !important;
 	padding:0 0 0 0.9375rem !important;
     margin:0 !important;
 	border:none !important;
 	border-bottom:1px solid #E9E9E9 !important;
-	/*position:fixed;
-	background:yellow;
-	z-index: 9999;
-	top:5rem;*/
 	}
-	.strategy_title::-webkit-input-placeholder {
-        /*placeholder颜色  */
-        color: #e9e9e9;
-    }
+.strategy_title::-webkit-input-placeholder {
+    /*placeholder颜色  */
+    color: #e9e9e9;
+}
 
-
+.contents{
+	width:100%;
+}
 #strategy_textarea{
 	width:100%;
-	/*overflow-y:scroll;*/
 	overflow-y:auto;
 	height:30rem;
 	padding:0.9375rem 0.9375rem 0rem 0.9375rem;
 	position:absolute;
-	background-color:#fff;
-	/*background:red;*/
 	top:7rem;
 	height:30rem;
+	-webkit-user-select:text;
 }
 
 

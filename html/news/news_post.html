@@ -14,17 +14,17 @@
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
-	<body class="backgroundColor_white">
+	<body class="backgroundColor_white main_body">
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
 				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-
 				</div>
 				<div class="notice">帖子</div>
 				<div class="share hidden"></div>
 			</header>
 		</div>
+		<!--中间内容部分开始-->
 		<div class="new_post_contents">
 			<div class="news_post_content backgroundColor_white">
 				<h4 class="color_282828"></h4>
@@ -34,10 +34,7 @@
 					<div class=" news_userInfo_date color_9e9e9e font_12"></div>
 				</div>
 				<div class="detail" style="word-wrap: break-word;padding-top: 1rem;">
-					
-
 				</div>
-
 			</div>
 
 			<!--评论部分-->
@@ -126,30 +123,29 @@
 					</div>-->
 				</div>
 			</div>
-
 			<!--底部回帖-->
 
-			<div class="news_userInfo_reply backgroundColor_white ">
-				<div class="news_userInfo_replyInput  font_14 tac">
-					<div class="news_userInfo_replyImg fl"></div>
-					回帖
-				</div>
-				<div class="news_review"></div>
-				<div class="news_reviewNum backgroundColor_green tac color_white">99</div>
-				<div class="news_collect"></div>
-			</div>
 
-			<!--点击回帖后-->
-			<div class="news_secondComment backgroundColor_white ui_flex_h ui_flex_wrapper hidden">
-				<input class="news_secondComment_input" type="text" placeholder="输入回复内容"/>
-				<div class="color_green publish font_14 ui_flex_wide">发 表</div>
-			</div>
-
-			<div class="news_post_list backgroundColor_white ofh">
+			<!--<div class="news_post_list backgroundColor_white ofh">
 				<div class="news_post_listImg fl"></div>
 				<div class="fl font_14  color_282828 news_post_listName">最终幻想15口袋版</div>
 				<div class="fr color_white news_post_download backgroundColor_green tac">下 载</div>
+			</div>-->
+		</div>
+		<!--中间内容部分结束-->
+		<div class="news_userInfo_reply backgroundColor_white">
+			<div class="news_userInfo_replyInput  font_14 tac">
+					<div class="news_userInfo_replyImg fl"></div>
+					回帖
 			</div>
+			<div class="news_review"></div>
+			<div class="news_reviewNum backgroundColor_green tac color_white">99</div>
+			<div class="news_collect"></div>
+		</div>
+			<!--点击回帖后-->
+		<div class="news_secondComment backgroundColor_white ui_flex_h ui_flex_wrapper hidden">
+			<input class="news_secondComment_input" type="text" placeholder="输入回复内容"/>
+			<div class="color_green publish font_14 ui_flex_wide">发 表</div>
 		</div>
 	</body>
 	<script>
@@ -158,5 +154,4 @@
 		});
 	</script>
 	<script src="../../js/news/news_post.js" type="text/javascript" charset="utf-8"></script>
-	
 </html>
