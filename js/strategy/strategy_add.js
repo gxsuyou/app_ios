@@ -56,7 +56,9 @@ $(function() {
 
 
 	$("body").on("tap","#strategy_textarea",function(){
-		//alert(1);
+		$("#strategy_textarea span").css("-webkit-user-select","text");
+//		$("#strategy_textarea").css("height","12rem");
+//		$("#strategy_textarea").focus();
 		mui.plusReady(function(){
 			plus.webview.currentWebview().setStyle({
                 softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
@@ -68,38 +70,40 @@ $(function() {
 	
 	
 	
-	$("body").on("tap",".contents",function(){
-//		mui.plusReady(function(){
-//			plus.webview.currentWebview().setStyle({
-//              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-//          });
-//		});
-     
-     $("#strategy_textarea").focus();
-     setTimeout(function(){$("#strategy_textarea").css("height","100vh"); alert($(window).height());},500);
-      mui.plusReady(function(){ 	
-        plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
-      });
-	  
-	})
+//	$("body").on("tap",".contents",function(){
+////		mui.plusReady(function(){
+////			plus.webview.currentWebview().setStyle({
+////              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+////          });
+////		});
+////   alert(1)
+//   $("#strategy_textarea").focus();
+//   
+//   //setTimeout(function(){$("#strategy_textarea").css("height","100vh");},500);
+//    mui.plusReady(function(){ 	
+//      plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
+//    });
+//	  
+//	})
 	
 
 	$("body").on("blur","#strategy_textarea",function(){
 //		 $("#strategy_textarea").css("top","2rem");
 //   $("#strategy_textarea").css("height","100vh");
-     mui.plusReady(function(){ 	
+     //$("#strategy_textarea").innerHTML = $("#strategy_textarea").innerHTML.replace( /<[^>]*>/g, "" )
+//   var c=$("#strategy_textarea").text();
+//   $("#strategy_textarea").empty().text(c);
+//   
+
+//alert($("#strategy_textarea").html())
+     mui.plusReady(function(){
         plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
 	  });
     //$("body,html").css("height","100vh");
      
      
 	})
-//	document.addEventListener('scroll', function(event) {
-//      event.preventDefault();
-//    
-//   }, false);
-//	
-	
+
 	
 	$('body').on("tap",".publish",function() {
 	var content="<div>"+$("#strategy_textarea").html()+"</div>";
