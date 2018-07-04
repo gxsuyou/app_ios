@@ -39,8 +39,7 @@ $(function() {
 				switch(b.index) {
 					case 0:
 						break;
-					case 1:
-					  
+					case 1:				  
 						galleryImgs(); /*打开相册*/
 						break;
 					default:
@@ -50,29 +49,67 @@ $(function() {
 		}
 	}, false);
 
-
-	
-	
-	
-	
-	$('body').on('click', '.delete_img', function() {
+	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 		$('.img_num').text($('.show_imgs > .show_imgcontent').length + "/9")
 	})
 
+
+	$("body").on("tap","#strategy_textarea",function(){
+		//alert(1);
+		mui.plusReady(function(){
+			plus.webview.currentWebview().setStyle({
+                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+            });
+		});
+	})
 	
-	$('.publish').click(function() {
-		
+	
+	
+	
+	
+	$("body").on("tap",".contents",function(){
+//		mui.plusReady(function(){
+//			plus.webview.currentWebview().setStyle({
+//              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+//          });
+//		});
+     
+     $("#strategy_textarea").focus();
+     setTimeout(function(){$("#strategy_textarea").css("height","100vh"); alert($(window).height());},500);
+      mui.plusReady(function(){ 	
+        plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
+      });
+	  
+	})
+	
 
+	$("body").on("blur","#strategy_textarea",function(){
+//		 $("#strategy_textarea").css("top","2rem");
+//   $("#strategy_textarea").css("height","100vh");
+     mui.plusReady(function(){ 	
+        plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
+	  });
+    //$("body,html").css("height","100vh");
+     
+     
+	})
+//	document.addEventListener('scroll', function(event) {
+//      event.preventDefault();
+//    
+//   }, false);
+//	
+	
+	
+	$('body').on("tap",".publish",function() {
 	var content="<div>"+$("#strategy_textarea").html()+"</div>";
-  
 
-  var indexSrc=$("#strategy_textarea img:first").attr("src");
- if(indexSrc!==undefined){
-	 var indexImg=indexSrc;
- }else{
-	  indexImg=""
- }
+    var indexSrc=$("#strategy_textarea img:first").attr("src");
+    if(indexSrc!==undefined){
+	    var indexImg=indexSrc;
+    }else{
+	    indexImg=""
+    }
 
 		var str = $('.strategy_title').val();
 	 	var title = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
@@ -111,7 +148,9 @@ $(function() {
 	})
 
 	//	发帖子结束
+	
 })
+
 
 // 从相册中选择图片   
 function galleryImgs() {
@@ -236,4 +275,9 @@ function getUpToken(scope, key, callback) {
 		}
 	});
 }
+
 //上传到七牛的function结束
+//$("window").on("scroll",function(){
+//	alert(1);
+//})
+

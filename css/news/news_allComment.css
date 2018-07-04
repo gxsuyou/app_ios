@@ -1,10 +1,24 @@
 
-/*.header_box{
-	position: fixed;
-	top:0;
-}*/
+html,body{
+	height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+.header_box{
+	position: absolute;
+	top:0px;
+}
 .news_post_commentContents{
-	
+    height: 100%;
+    overflow-y:scroll; 
+}
+.news_post_secondcommentContents{
+	height:20rem;
+	overflow: auto;
 }
 .notice{
 	position: absolute;
@@ -17,7 +31,6 @@
 	border-top: 1px solid #E7EAEC;
 	margin-top: 45px;
 	border-bottom: 0.75rem solid #e6ebec;
-	
 }
 .news_post_commentContent_head{
 	width: 2.9375rem;
@@ -77,7 +90,7 @@
 .news_secondComment{
 	height: 3rem;
 	width: 100%;
-	position:fixed;
+	position:absolute;
 	bottom:0;
 	z-index: 99;
 }

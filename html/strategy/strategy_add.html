@@ -176,7 +176,7 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body >
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
@@ -185,21 +185,23 @@
 				<div class="add_comment">攻略发布</div>
 				<div class="publish font_14">发表</div>
 			</header>
-			<input type="text" class="strategy_title" placeholder="标题不可为空,30个字符内"/>
+			
 		</div>
 		<!--header_box结束-->
 		<!--输入内容开始-->
 		<div  class="contents">	 
-         <div contenteditable="true" id="strategy_textarea" placeholder="输入分享你和游戏的故事">
-         </div>
+		  <input type="text" class="strategy_title" placeholder="标题不可为空,30个字符内"/>
+          <div contenteditable="true" id="strategy_textarea" placeholder="输入分享你和游戏的故事"></div>
 		</div>
 		<!--输入内容结束-->
-		<div class="imgBox">	  
+		<!--选择开始-->
+		<div class="imgBox">
 		  <div class="choose_img" id="choose_img" >
 			  <div class="choose" style="padding-left:40px;color:lightgrey;"></div>
 		  </div>
 		  <input type="text" class="choose_game font_14 color_9e9e9e backgroundColor_gray"  placeholder="请填写游戏名称，如：王者荣耀">
 		</div>
+		<!--选择结束-->
 		<script type="text/javascript">
 			mui.init({
 			    swipeBack:true, //启用右滑关闭功能

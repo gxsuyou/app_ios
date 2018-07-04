@@ -81,7 +81,7 @@ $(function() {
 			}
 		});
 		
-		$('body').on('click','.comment_summary',function(){
+		$('body').on('tap','.comment_summary',function(){
 			var newsId = $(this).attr('data-id');
 			mui.openWindow({
 				url:"news_post.html",
@@ -96,17 +96,23 @@ $(function() {
 
 	
 		
-//		获取一级评论结束	
+       //获取一级评论结束	
+       
+       $("body").on('focus',".news_secondComment_input",function(){
+       	 mui.plusReady(function(){
+       	     plus.webview.currentWebview().setStyle({
+                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+            });
+       	 });
+       })
 
-
-		$('body').on('click','.news_post_commentContent',function(){
+		$('body').on('tap','.news_post_commentContent',function(){
 			$('.news_secondComment_input').focus();
-//			targetCommentId = $(this).attr("data-id");
 			targetUserId = $(this).attr("data-userId")
 		})
 		
 //		点击发布
-		$('.publish').click(function(){	
+		$('body').on("tap",".publish",function(){	
 			var content = $(this).prev().val();
 			if(content){
 				$.ajax({

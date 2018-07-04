@@ -1,12 +1,17 @@
 .header_box{
 	z-index:1000;
-	position:fixed;
+	position:absolute;
+	top:0;
 }
-body{
-	background-color: white;
+body,html{
+	background-color: white;  
+    height:100%;
+    overflow:hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 .add_comment{
-	position: absolute;
+	position:absolute;
 	left: 50%;
 	margin-left: -2rem;
 }
@@ -21,24 +26,30 @@ body{
     margin:0 !important;
 	border:none !important;
 	border-bottom:1px solid #E9E9E9 !important;
-	}
+}
 .strategy_title::-webkit-input-placeholder {
     /*placeholder颜色  */
     color: #e9e9e9;
 }
 
 .contents{
+/*	padding-top:3rem;*/
 	width:100%;
+	/*overflow-y:scroll;*/
+	overflow:auto;
+	height:100vh;
+/*	position:relative;*/
+	/*top:3rem;*/
+	/*background:red;*/
 }
 #strategy_textarea{
 	width:100%;
-	overflow-y:auto;
-	height:30rem;
+	overflow-y:scroll;
 	padding:0.9375rem 0.9375rem 0rem 0.9375rem;
-	position:absolute;
-	top:7rem;
-	height:30rem;
+    height:100vh;
+    margin-bottom:5rem;
 	-webkit-user-select:text;
+	-webkit-overflow-scrolling: touch;
 }
 
 
@@ -82,22 +93,10 @@ content:none;
 	margin-right: 0.875rem;
 	position: relative;
 }
-.delete_img{
-	position:fixed;
-	width: 1.4rem;
-	height: 1.4rem;
-	background-image: url(../../Public/image/16FA1BF1-80EC-4EE0-878C-514B5E507970.png);
-	background-position: center;
-	background-repeat:no-repeat;
-	background-size: contain;
-	border-radius: 50%;
-	right: 1rem;
-	top: 0.4rem;
-}
+
 .add_img{
 	width: 6.25rem;
 	height: 6.25rem;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
 	background-color: peachpuff;
 	background-position: center;
 	background-repeat:no-repeat;
@@ -105,15 +104,7 @@ content:none;
 	margin-right: 0.875rem;
 	position: relative;
 }
-.img_num{
-	position: absolute;
-	bottom: 1rem;
-	left: 45%;
-}
-.img_box{
-	position: relative;
-	
-}
+
 img { 
 	object-fit: cover; 
 	border: 1px solid black;
@@ -129,7 +120,7 @@ img {
 
 
 .imgBox{
-  position:fixed;
+  position:absolute;
   bottom:0;
   width:100%;
   z-index:999;
@@ -138,7 +129,6 @@ img {
   display: flex;
   justify-content: flex-start;
   border-top: 1px solid #E7EAEC;
-  
 }
 
 .choose_game{
