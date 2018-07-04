@@ -692,10 +692,11 @@ function up(){
 }
 
 function down() {
-//  window.location.reload();	
-mui("#pullrefresh").pullRefresh().setStopped(true)
-//	setTimeout(function() {
-//		mui('#news_content').pullRefresh().endPulldown(false);
-//	}, 1000);
+ window.location.reload();
+
+//mui("#pullrefresh").pullRefresh().setStopped(true)
+	setTimeout(function() {
+		mui('#news_content').pullRefresh().endPulldown(false);
+	}, 1000);
 
 }
