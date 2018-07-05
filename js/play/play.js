@@ -7,10 +7,12 @@ $(function() {
 	}
 	
 	$('.h5game').on('tap', '.h5list', function() {
-		//					console.log($(this).attr('data-url'))
-		//					alert("11")
+
+		
+
 		var url = $(this).attr('data-url');
 		var gameId = $(this).attr('data-id');
+
 		$.ajax({
 			type: "get",
 			url: config.data + "h5/addMyH5",
@@ -31,7 +33,7 @@ $(function() {
 			url: 'h5game.html',
 			id: 'h5game.html',
 			styles: {
-				top: 0, //新页面顶部位置
+				top:0, //新页面顶部位置
 				bottom: 0 //新页面底部位置
 				//		   width:100%,//新页面宽度，默认为100%
 				//		      height:100%,//新页面高度，默认为100%

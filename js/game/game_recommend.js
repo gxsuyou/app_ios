@@ -24,14 +24,13 @@ $(function() {
 	//	推荐部分
 	//	轮播设置
 	$.ajax({
-		url: config.data + 'game/carousel',
+		url: config.data + 'game/carousel?sys=1',
 		type: "GET",
 		data: {
 			sys: 2
 		},
 		success: function(data) {
-           // alert(JSON.stringify(data));
-		   
+
 			var c = data.carousel;
 			var divlast = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[(c.length - 1)].id + "' data-gameId='" + c[(c.length - 1)].game_id + "'>" +
 				"<div class='slider_item  home" + (c.length - 1) + " '></div>" +
@@ -73,7 +72,7 @@ $(function() {
 
 	})
 
-	$('body').on('click', '.mui-slider-item', function() {
+	$('body').on('tap', '.mui-slider-item', function() {
 		var gameId = $(this).attr("data-gameId")
 		mui.openWindow({
 			url: 'game_detail.html',
@@ -86,11 +85,10 @@ $(function() {
 
 	//轮播设置结束
 
-	//活动位开始
-
+	//活动位一开始三个图片
 	$.ajax({
 		type: "get",
-		url: config.data + "game/active",
+		url: config.data + "game/active?sys=1",
 		async: true,
 		data: {
 			sys: 2
@@ -110,7 +108,7 @@ $(function() {
 		}
 	});
 
-	$('body').on('click', '.game_show', function() {
+	$('body').on('tap', '.game_show', function() {
 		var id = $(this).attr('data-gameId')
 
 		mui.openWindow({
@@ -129,7 +127,7 @@ $(function() {
 
 	$.ajax({
 		type: "get",
-		url: config.data + "game/getSubject",
+		url: config.data + "game/getSubject?sys=1",
 		async: true,
 		data: {
 			sys: 2
@@ -154,8 +152,7 @@ $(function() {
 		}
 	});
 
-	$('.game_topicBox,.game_topicBoxbot').click(function() {
-
+	$('body').on("tap",".game_topicBox,.game_topicBoxbot",function() {
 		mui.openWindow({
 			url: 'game_topic.html',
 			id: 'game_topic.html',
@@ -171,7 +168,7 @@ $(function() {
 	//标签开始
 	$.ajax({
 		type: "get",
-		url: config.data + "game/getActiveTag",
+		url: config.data + "game/getActiveTag?sys=1",
 		async: true,
 		data: {
 			sys: 2
@@ -238,7 +235,7 @@ $(function() {
 		}
 	});
 
-	$('body').on('click', '.game_detail_content > div', function() {
+	$('body').on('tap', '.game_detail_content > div', function() {
 		mui.openWindow({
 			url: 'game_detail.html',
 			id: 'game_detail.html',
@@ -248,7 +245,7 @@ $(function() {
 		})
 	})
 
-	$('body').on('click', '.check_more', function() {
+	$('body').on('tap', '.check_more', function() {
 		var tagId = $(this).attr("data-tagid");
 		var tagName = $(this).prev().text();
 		mui.openWindow({
@@ -272,7 +269,7 @@ $(function() {
 		url: config.data + "game/getActiveLenOfTen?sys=1",
 		async: true,
 		success: function(data) {
-			alert(JSON.stringify(data))
+//			alert(JSON.stringify(data))
 			if(data.state) {
 				var g = data.game;
 				var list = '';
@@ -366,14 +363,13 @@ $(function() {
 
 	$.ajax({
 		type: "get",
-		url: config.data + "game/getActiveLenOfTow",
+		url: config.data + "game/getActiveLenOfTow?sys=1",
 		async: true,
 		success: function(data) {
 			if(data.state) {
 				var g = data.game;
 				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
 				$('.remommend_imgSecond').css('background-image', 'url(' + config.img + encodeURI(g[1].game_title_img) + ')').attr("data-id", g[1].id)
-
 			} else {
 
 			}
@@ -381,7 +377,7 @@ $(function() {
 
 	});
 
-	$('.remommend_imgFirst,.remommend_imgSecond').click(function() {
+	$('body').on("tap",".remommend_imgFirst,.remommend_imgSecond",function() {
 		var gameId = $(this).attr('data-id')
 		mui.openWindow({
 			url: "game_detail.html",
@@ -402,6 +398,8 @@ $(function() {
 	$('.game_rank').children().eq(0).children().css('background-color', 'white')
 	sort = "sort";
 	getRank(sort);
+	
+	
 	$('.game_rank').children().click(function() {
 		mui('.nav_cls_contains').pullRefresh().refresh(true);
 		page = 1;
@@ -413,6 +411,7 @@ $(function() {
 		$('.game_lists').children().remove()
 		getRank(sort);
 	})
+	
 	$('.game_rank').children().eq(0).click(function() {
 		up2 = 1;
 
@@ -426,7 +425,7 @@ $(function() {
 
 	})
 
-	$('body').on('click', '.tag', function(event) {
+	$('body').on('tap', '.tag', function(event) {
 		event.stopPropagation();
 		var tagId = $(this).attr("data-id");
 		var tagName = $(this).text();
@@ -440,7 +439,7 @@ $(function() {
 		})
 	})
 
-	$('.first, .second, .third').click(function() {
+	$('body').on("tap",".first, .second, .third",function() {
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html",
@@ -450,14 +449,14 @@ $(function() {
 		})
 	})
 
-	$('body').on('click', '.game_list', function() {
+	$('body').on('tap', '.game_list', function() {
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html",
 			extras: {
 				gameId: $(this).attr('data-id')
 			}
-		})
+		});
 	})
 
 	//	排行部分结束
@@ -528,13 +527,15 @@ $(function() {
 
 	//	分类结束
 
-	$('.search').click(function() {
+	$('body').on("tap",".search",function() {
 		mui.openWindow({
 			url: "game_search.html",
 			id: "game_search.html"
 		})
-	})
-	$('.bell').click(function() {
+	});
+	
+	
+	$('body').on("tap",".bell",function() {
 		$.ajax({
 			type: "get",
 			url: config.data + "news/cancelMessage",
@@ -562,20 +563,15 @@ $(function() {
 		$('html, body').animate({
 			scrollTop: 0
 		}, 'normal');
-	})
-	//		$('.game_shows > div').click(function() {
-	//			mui.openWindow({
-	//				url: "game_detail.html",
-	//				id: "game_detail.html"
-	//			})
-	//		})
+	});
 
-	$('.game_detail_contents > div').click(function() {
+
+	$('body').on("tap",".game_detail_contents > div",function() {
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html"
 		})
-	})
+	});
 
 	//	$('.check_more').click(function() {
 	//		mui.openWindow({

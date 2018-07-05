@@ -326,7 +326,7 @@ $(function() {
 		$("body").on('tap','.news_userInfo_replyInput',function(){
 		  mui.plusReady(function(){
 		  	plus.webview.currentWebview().setStyle({
-                              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
             });
 			$('.news_userInfo_reply').addClass('hidden')
 			$('.news_secondComment').removeClass('hidden')

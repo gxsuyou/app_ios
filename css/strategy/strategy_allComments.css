@@ -6,8 +6,7 @@
 }
 .news_post_commentContent{
 	width: 100%;
-	border-top: 1px solid #E7EAEC;
-	
+	border-top: 1px solid #E7EAEC;	
 	margin-top: 45px;
 	border-bottom: 0.75rem solid #e6ebec;
 }
@@ -19,14 +18,13 @@
 	margin-right: 0.75rem;
 	border-radius: 50%;
 	/*background-image: url("../../Public/image/yishoucang.png");*/
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 .news_post_commentContent_content{
 	margin-top: 1.3125rem;
-	width: 76%;
+	width:76%;
 	margin-bottom: 1rem;
 }
 .comment_content{
@@ -59,6 +57,21 @@
 	-o-text-overflow:ellipsis; 
 	overflow: hidden; 
 }
+.strategy_all{
+	height:100%;
+	overflow: scroll;
+	padding-bottom:5rem;
+}
+body,html{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+.header_box{
+	position:absolute;
+	top: 0;
+}
 
 .news_allReply{
 	width: 100%;
@@ -70,7 +83,7 @@
 .news_secondComment{
 	height: 3rem;
 	width: 100%;
-	position: fixed;
+	position:absolute;
 	bottom: 0;
 	z-index: 99;
 	

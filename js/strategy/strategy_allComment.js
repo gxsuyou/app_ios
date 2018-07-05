@@ -5,6 +5,9 @@ var target_title;
 var strategyId;
 $(function() {
 	mui.plusReady(function() {
+		plus.webview.currentWebview().setStyle({
+                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+            });
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
 		target_img = self.target_img;
@@ -88,8 +91,20 @@ $(function() {
 				}
 			})
 		})
-         //发表评论
-		$('.publish').click(function() {
+		$("body").on("tap",".news_secondComment_input",function(){
+//			alert(1)
+           // mui('.strategy_all').scroll().scroll.scrollToBottom(100);
+           //alert(1);
+           setTimeout(function(){
+           	//$('.strategy_all').scrollTo(0,"50px");
+           	var scrollY=$('.strategy_all').height()
+           	$('.strategy_all').animate({scrollTop:scrollY},0)
+           },400);
+            
+		})
+		
+         //发表评论       
+		$('body').on("tap",".publish",function() {
 			var content = $(this).siblings('.news_secondComment_input').val();
 			if(content) {			
 				$.ajax({

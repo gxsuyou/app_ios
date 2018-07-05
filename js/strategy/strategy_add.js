@@ -22,7 +22,7 @@ $(function() {
 	});
 
 	document.getElementById('choose_img').addEventListener('tap', function() {
-		
+
 		if(mui.os.plus) {
 			var buttonTit = [
 				{
@@ -54,54 +54,29 @@ $(function() {
 		$('.img_num').text($('.show_imgs > .show_imgcontent').length + "/9")
 	})
 
-
-	$("body").on("tap","#strategy_textarea",function(){
-		$("#strategy_textarea span").css("-webkit-user-select","text");
-//		$("#strategy_textarea").css("height","12rem");
-//		$("#strategy_textarea").focus();
 		mui.plusReady(function(){
 			plus.webview.currentWebview().setStyle({
                 softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
             });
 		});
-	})
+
+	$("body").on("tap","#strategy_textarea",function(){
+		$("#strategy_textarea span").css("-webkit-user-select","text");
+//		alert(2);
+//     $("#strategy_textarea").css("padding-top","5rem")
+       //mui('#strategy_textarea').scroll().scrollToBottom(0);//100毫秒滚动到顶
+//     mui('#strategy_textarea').scroll().scrollTo(0,0,100);
+	});
 	
-	
-	
-	
-	
-//	$("body").on("tap",".contents",function(){
-////		mui.plusReady(function(){
-////			plus.webview.currentWebview().setStyle({
-////              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-////          });
-////		});
-////   alert(1)
-//   $("#strategy_textarea").focus();
-//   
-//   //setTimeout(function(){$("#strategy_textarea").css("height","100vh");},500);
-//    mui.plusReady(function(){ 	
-//      plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
-//    });
-//	  
-//	})
-	
+
+
 
 	$("body").on("blur","#strategy_textarea",function(){
-//		 $("#strategy_textarea").css("top","2rem");
-//   $("#strategy_textarea").css("height","100vh");
-     //$("#strategy_textarea").innerHTML = $("#strategy_textarea").innerHTML.replace( /<[^>]*>/g, "" )
-//   var c=$("#strategy_textarea").text();
-//   $("#strategy_textarea").empty().text(c);
-//   
+//	
+//   mui.plusReady(function(){
+//      plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
+//	  });
 
-//alert($("#strategy_textarea").html())
-     mui.plusReady(function(){
-        plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
-	  });
-    //$("body,html").css("height","100vh");
-     
-     
 	})
 
 	
@@ -281,7 +256,4 @@ function getUpToken(scope, key, callback) {
 }
 
 //上传到七牛的function结束
-//$("window").on("scroll",function(){
-//	alert(1);
-//})
 

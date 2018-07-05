@@ -41,12 +41,11 @@ input[type='search']{
 }
 
 .h5game{
-	padding-top: 10px;
+	padding-top: 90px;
 	background-color: #E7EAEC;
 }
 .h5list{
 	margin: 0 0.625rem;
-	/*margin-top: 0.75rem;*/
 	background-color: white;
 	
 }

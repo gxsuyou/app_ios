@@ -1,10 +1,6 @@
 var msg;
 $(function(){
-//	$('body').click(function(){
-//		mui.openWindow({
-//			url:"strategy_add.html"
-//		})
-//	})
+
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		msg = self.msg; 
@@ -31,7 +27,7 @@ $(function(){
 	
 //	d导航栏点击结束
 
-	$('body').on('click','.strategy_content',function(){
+	$('body').on('tap','.strategy_content',function(){
 		var strategyId = $(this).attr('data-id');
 		add("browse_num");
 		mui.openWindow({

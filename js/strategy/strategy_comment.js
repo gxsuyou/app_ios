@@ -14,10 +14,11 @@ $(function() {
 		}
 	});
 
-	$('body').on('click', '.delete_img', function() {
-		$(this).parent().parent('.show_imgcontent').remove()
 
-	})
+	$('body').on('tap', '.delete_img', function() {
+		$(this).parent().parent('.show_imgcontent').remove();
+	});
+	
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		var strategyId = self.strategyId;
@@ -63,7 +64,7 @@ $(function() {
 			}
 		}, false);
 
-		$('.publish').click(function() {
+		$('body').on("tap",".publish",function() {
 			mui.toast("正在发送，请稍候")
 			var content = $('#strategy_textarea').val();
 			if(content) {
