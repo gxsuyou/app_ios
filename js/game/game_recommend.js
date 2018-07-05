@@ -24,10 +24,10 @@ $(function() {
 	//	推荐部分
 	//	轮播设置
 	$.ajax({
-		url: config.data + 'game/carousel?sys=1',
+		url: config.data + 'game/carousel',
 		type: "GET",
 		data: {
-			sys: 2
+			sys: 1
 		},
 		success: function(data) {
 
@@ -88,10 +88,10 @@ $(function() {
 	//活动位一开始三个图片
 	$.ajax({
 		type: "get",
-		url: config.data + "game/active?sys=1",
+		url: config.data + "game/active",
 		async: true,
 		data: {
-			sys: 2
+			sys: 1
 		},
 		success: function(data) {
 			if(data.state) {
@@ -127,10 +127,10 @@ $(function() {
 
 	$.ajax({
 		type: "get",
-		url: config.data + "game/getSubject?sys=1",
+		url: config.data + "game/getSubject",
 		async: true,
 		data: {
-			sys: 2
+			sys: 1
 		},
 		success: function(data) {
 			if(data.state) {
@@ -168,10 +168,10 @@ $(function() {
 	//标签开始
 	$.ajax({
 		type: "get",
-		url: config.data + "game/getActiveTag?sys=1",
+		url: config.data + "game/getActiveTag",
 		async: true,
 		data: {
-			sys: 2
+			sys: 1
 		},
 		success: function(data) {
 
@@ -589,7 +589,7 @@ function getRank(sort) {
 		url: config.data + "game/getGameByMsg",
 		async: true,
 		data: {
-			sys: 2,
+			sys: 1,
 			page: 1,
 			type: '',
 			sort: sort,
@@ -698,7 +698,7 @@ function getRankup(page, sort) {
 		url: config.data + "game/getGameByMsg",
 		async: true,
 		data: {
-			sys: 2,
+			sys: 1,
 			page: page,
 			type: '',
 			sort: sort,
