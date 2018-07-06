@@ -269,7 +269,6 @@ $(function() {
 		url: config.data + "game/getActiveLenOfTen?sys=1",
 		async: true,
 		success: function(data) {
-//			alert(JSON.stringify(data))
 			if(data.state) {
 				var g = data.game;
 				var list = '';

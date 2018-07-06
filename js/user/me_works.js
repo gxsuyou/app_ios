@@ -13,7 +13,7 @@ $(function() {
 		// 执行相应的ajax或者操作DOM等操作
 	});
 
-	$('body').on('click', '.strategy_content', function() {
+	$('body').on('tap', '.strategy_content', function() {
 		var strategyId = $(this).attr('data-id');
 
 		mui.openWindow({

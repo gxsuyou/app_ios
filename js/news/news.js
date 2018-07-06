@@ -35,7 +35,8 @@ $(function() {
 				$('.news_artAlone > .news_art  .new_art_name').text(n[0].game_name)
 				$('.news_artAlone > .news_art  .news_art_art').text(n[0].title)
 				$('.news_artAlone > .news_art  .news_art_time').text(n[0].add_time)
-               //console.log(n[0].game_id)
+
+
 				if(n[1].game_id) {
 					$('.news_art2').attr({
 						"data-gameId": n[1].game_id
@@ -43,6 +44,8 @@ $(function() {
 				} else {
 					$('.news_art2 > .news_art .news_img_content').addClass('hidden')
 				}
+				
+				
 				$('.news_art2').attr('data-id', n[1].id)
 				$('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
 				$('.news_art2  .news_img_header').css("background-image", "url(" + config.img + encodeURI(n[1].icon) + ")")
@@ -147,7 +150,7 @@ $(function() {
 
 	$.ajax({
 		type: "get",
-		url: config.data + "news/getSlideGame",
+		url: config.data + "news/getSlideGame?sys=1",
 		async: true,
 		success: function(data) {
 			if(data.state) {
@@ -161,12 +164,10 @@ $(function() {
 						"<span class='h_name'>" + g[i].game_name + "</span>" +
 						"<span class='fr'>" + g[i].grade + "分</span>" +
 						"<span class='news_newGame_contentArtstar fr'></span>" +
-
 						"</div>" +
 						"</div>"
 				}
-				$('.news_newGame_contents').append(h)
-
+				$('.news_newGame_contents').append(h);
 			} else {
 
 			}
@@ -229,7 +230,9 @@ $(function() {
 		})
 
 	})
-	$('.game').click(function() {
+	
+	
+	$('body').on("tap",".game",function() {
 		mui.openWindow({
 			url: "../game/game_detail.html",
 			id: "../game/game_detail.html",
@@ -255,7 +258,7 @@ $(function() {
 function getHeaderimg() {
 	$.ajax({
 		type: "get",
-		url: config.data + "news/getHeadGame",
+		url: config.data + "news/getHeadGame?sys=1",
 		async: true,
 		success: function(data) {
 			var g = data.game;
@@ -266,7 +269,6 @@ function getHeaderimg() {
 				$('.game_datail').text(g.game_recommend)
 				$('.new_score').text(g.grade)
 				$('.game').attr("data-id", g.id)
-
 			} else {
 
 			}

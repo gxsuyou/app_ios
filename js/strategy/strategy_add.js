@@ -21,15 +21,20 @@ $(function() {
 		}
 	});
 
-	document.getElementById('choose_img').addEventListener('tap', function() {
 
+   $("body").on("tap","#choose_img",function(e){
+// 	      alert(1);
+// 	      e.stopPropagation();
+//       return false;
+      setTimeout(function(){
+      	
+     
 		if(mui.os.plus) {
 			var buttonTit = [
 				{
 					title: "从手机相册选择"
 				}
 			];
-
 			plus.nativeUI.actionSheet({
 				title: "上传图片",
 				cancel: "取消",
@@ -47,7 +52,9 @@ $(function() {
 				}
 			})
 		}
-	}, false);
+		
+		 },500);
+	});
 
 	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
@@ -60,24 +67,34 @@ $(function() {
             });
 		});
 
-	$("body").on("tap","#strategy_textarea",function(){
+	$("body").on("focus","#strategy_textarea",function(){
+
+		
 		$("#strategy_textarea span").css("-webkit-user-select","text");
-//		alert(2);
-//     $("#strategy_textarea").css("padding-top","5rem")
-       //mui('#strategy_textarea').scroll().scrollToBottom(0);//100毫秒滚动到顶
-//     mui('#strategy_textarea').scroll().scrollTo(0,0,100);
+		setTimeout(function(){
+			var scrollY=$('#strategy_textarea')[0].scrollHeight;
+           $('#strategy_textarea').animate({scrollTop:scrollY},200);        
+		},200);
 	});
 	
 
 
 
-	$("body").on("blur","#strategy_textarea",function(){
+	//$("body").on("blur","#strategy_textarea",function(){
 //	
 //   mui.plusReady(function(){
 //      plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
 //	  });
 
-	})
+//});
+
+   //$('body').on('focus',".choose_game",function(){
+   	  //$('#strategy_textarea').scroll()
+   	  
+   	
+   //});
+
+
 
 	
 	$('body').on("tap",".publish",function() {

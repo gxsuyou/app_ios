@@ -91,12 +91,8 @@ $(function() {
 				}
 			})
 		})
-		$("body").on("tap",".news_secondComment_input",function(){
-//			alert(1)
-           // mui('.strategy_all').scroll().scroll.scrollToBottom(100);
-           //alert(1);
+		$("body").on("focus",".news_secondComment_input",function(){
            setTimeout(function(){
-           	//$('.strategy_all').scrollTo(0,"50px");
            	var scrollY=$('.strategy_all').height()
            	$('.strategy_all').animate({scrollTop:scrollY},0)
            },400);

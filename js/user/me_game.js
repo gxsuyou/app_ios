@@ -28,7 +28,7 @@ $(function(){
 		
 	})
 	
-	$('body').on('click','.game_list',function(){
+	$('body').on('tap','.game_list',function(){
 		mui.openWindow({
 			url:"../game/game_detail.html",
 			id:"../game/game_detail.html",

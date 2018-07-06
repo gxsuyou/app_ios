@@ -25,17 +25,11 @@ a{
 	z-index:99;
 }
 .new_post_contents{
-	/*position:fixed;
-	overflow-y:scroll;
-	height:100%;
-	width:100%;*/ 
-/*	position:absolute;*/
 	height: 100%;
     overflow-y: auto; 
+    padding-bottom:6rem;
 }
-/*.mui-pull-bottom-tips,.mui-pull-top-tips{
-	display:none;
-}*/
+
 .news_userInfo_reply{
 	background-color:#fff;
 	position: fixed;

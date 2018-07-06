@@ -25,7 +25,7 @@ $(function(){
 		up();		
 	})
 	
-	$('body').on('click','.news_art',function(){
+	$('body').on('tap','.news_art',function(){
 		mui.openWindow({
 			url:"../news/news_post.html",
 			id:"../news/news_post.html",
@@ -36,7 +36,7 @@ $(function(){
 		})
 	})
 	
-	$('body').on('click','.strategy_content',function(){
+	$('body').on('tap','.strategy_content',function(){
 		mui.openWindow({
 			url:"../strategy/strategy_details.html",
 			id:"../strategy/strategy_details.html",
