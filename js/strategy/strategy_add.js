@@ -23,9 +23,7 @@ $(function() {
 
 
    $("body").on("tap","#choose_img",function(e){
-// 	      alert(1);
-// 	      e.stopPropagation();
-//       return false;
+
       setTimeout(function(){
       	
      

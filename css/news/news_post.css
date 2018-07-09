@@ -343,4 +343,10 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 .noGood{
 	background-image: url(../../Public/image/good.png);
 }
-
+.bottomInfo{
+	width:100%;
+	text-align:center;
+	color:#7A7A7A;
+	font-size:14px;
+	
+}

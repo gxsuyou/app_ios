@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -12,8 +11,8 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>		
 	</head>
-	<body>
-		<div class="header_box">
+	<body >
+		<div class="header_box" >
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green" id='header'>
 				<div class="header_title"></div>
@@ -23,8 +22,8 @@
 		</div>
 
 		<div class="nav_cls_contains">
-			<!--推荐详情-->
-			<div class="game_recommend ">
+			<!--推荐详情切换开始-->
+			<div class="game_recommend">
 				<!--轮播图-->
 				<div class="mui-slider main_slider">
 					<div class="mui-slider-group mui-slider-loop">
@@ -35,10 +34,8 @@
 					</div>
 				</div>
 				<!--轮播图结束-->
-				<div class="game_shows backgroundColor_white">
-				
+				<div class="game_shows backgroundColor_white">				
 				</div>
-
 				<div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBox">
 					<div style="border-radius: 5px;">
 						<div class="game_recommend_topicImg"></div>
@@ -51,7 +48,7 @@
 
 				<!--标签开始-->
 
-				<div class="game_signsContent ">
+				<div class="game_signsContent" >
 					<!--<div class="backgroundColor_white game_signsAll">-->
 						<!--<div class="ofh" style="height: 2.5rem;line-height: 2.5rem;">
 							<div class="font_14 color_282828 fl">标签名</div>
@@ -96,7 +93,7 @@
 
 				
 
-				<div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBoxbot">
+				<div style="padding:0.4375rem;" class="backgroundColor_gray game_topicBoxbot" >
 					<div style="border-radius: 5px;">
 						<div class="game_recommend_topicImg"></div>
 						<div class="game_recommend_topicArts backgroundColor_white font_14">
@@ -123,10 +120,10 @@
 				</div>
 			</div>
 
-			<!--推荐详情结束-->
+			<!--推荐详情切换结束-->
 
-			<!--排行榜-->
-			<div class="game_ranks hidden">
+			<!--排行榜切换开始-->
+			<div class="game_ranks hidden" >
 				<div class="game_rank ui_flex_wrapper ui_flex_h tac backgroundColor_white color_7a7a7a font_14">
 					<div class="ui_flex_wide " data-sort="sort" data-name='remen'>
 						<div class="backgroundColor_white border_green color_green">热 门</div>
@@ -138,9 +135,7 @@
 						<div>ONE</div>
 					</div>
 				</div>
-
 				<div class="hot_rank"></div>
-
 				<div class="first_three ui_flex_h ui_flex_wrapper">
 					<!--可复用竖向list-->
 					<div class="ui_flex_wide first">
@@ -208,11 +203,8 @@
 						</div>
 						<div class="third_score"></div>
 					</div>
-
 				</div>
-
 				<ul class="game_lists">
-
 					<!--<li class="game_list ofh">
 						<div class="color_9e9e9e fl game_listScore">4</div>
 						<div class="game_listImg fl"></div>
@@ -285,10 +277,10 @@
 						<div class="fr game_listDownload font_14 color_white backgroundColor_green tac">下载</div>
 					</li>-->
 				</ul>
-
 			</div>
-			<!--排行榜结束-->
-
+			<!--排行榜切换结束-->
+			
+			
 			<!--分类开始-->
 			<div class="game_classifys hidden">
 				<div class="game_classify">
@@ -358,8 +350,8 @@
 		<script type="text/javascript">
 			var soc = "2"
 		</script>
-		<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="../../js/game/game_recommend.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var page = 1;
@@ -393,10 +385,8 @@
 			})
 
 			function up() {
-
 				page++;
 				getRankup(page, sort)
-
 			}
 
 			function down() {

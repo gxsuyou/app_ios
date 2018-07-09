@@ -7,9 +7,6 @@ $(function() {
 	}
 	
 	$('.h5game').on('tap', '.h5list', function() {
-
-		
-
 		var url = $(this).attr('data-url');
 		var gameId = $(this).attr('data-id');
 
@@ -56,7 +53,7 @@ $(function() {
 					//      ......
 				}
 			}
-		})
+		});
 
 	})
 

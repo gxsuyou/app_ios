@@ -6,11 +6,11 @@ var sys;
 var type = 'hot';
 var firstImg;
 var title;
+var closeAjax=true;
 $(function() {
 	$('body').on('tap','a',function(event){
 		event.preventDefault();
 		var url = $(this).attr('href');
-		
 		mui.openWindow({
 			url: '../play/h5game.html',
 			id: '../play/h5game.html',
@@ -42,28 +42,28 @@ $(function() {
 	})
 	
 	
-	mui.init({
-		swipeBack: true, //启用右滑关闭功能
-		pullRefresh: {
-			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-			up: {
-				height: 50, //可选.默认50.触发上拉加载拖动距离
-				auto: false, //可选,默认false.自动上拉加载一次
-				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			},
-			down: {
-				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-				offset: '1150px', //可选 默认0px,下拉刷新控件的起始位置
-				auto: false, //可选,默认false.首次加载自动上拉刷新一次
-				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			}
-		}
-	})
+//	mui.init({
+//		swipeBack: true, //启用右滑关闭功能
+//		pullRefresh: {
+//			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+//			up: {
+//				height: 50, //可选.默认50.触发上拉加载拖动距离
+//				auto: false, //可选,默认false.自动上拉加载一次
+//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+//				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//			},
+//			down: {
+//				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+//				height: '50px', //可选,默认50px.下拉刷新控件的高度,
+//				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+//				offset: '50px', //可选 默认0px,下拉刷新控件的起始位置
+//				auto: false, //可选,默认false.首次加载自动上拉刷新一次
+//				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//			}
+//		}
+//	})
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
@@ -166,7 +166,7 @@ $(function() {
 
 		})
 
-		$('.news_post_list').click(function() {
+		$('body').on("tap",".news_post_list",function() {
 			mui.openWindow({
 				url: "../game/game_detail.html",
 				id: "../game/game_detail.html",
@@ -177,7 +177,8 @@ $(function() {
 		})
 
 		//			收藏部分	
-		$('.news_collect').click(function() {
+		
+		$('body').on("tap",".news_collect",function() {
 			if(userId) {
 				var collect = $(this).attr('data-collect')
 				if(collect) {
@@ -301,23 +302,36 @@ $(function() {
 
 		//	滚动隐藏
 		function scroll(fn) {
-			var beforeScrollTop = document.body.scrollTop,
-				fn = fn || function() {};
-			window.addEventListener("scroll", function() {
-				var afterScrollTop = document.body.scrollTop,
-					delta = afterScrollTop - beforeScrollTop;
+			var beforeScrollTop =$('.new_post_contents').scrollTop(),
+			fn = fn || function() {};		
+			$(".new_post_contents").scroll(function(){
+				
+			    toBottomUpload();
+				var afterScrollTop = $('.new_post_contents').scrollTop(),
+				delta = afterScrollTop - beforeScrollTop;
 				if(delta === 0) return false;
 				fn(delta > 0 ? "down" : "up");
 				beforeScrollTop = afterScrollTop;
-			}, false);
+			});
 		}
-
+        function toBottomUpload(){
+        	var height=$('.new_post_contents')[0].scrollHeight;
+        	var scrollTop=$('.new_post_contents').scrollTop();
+        	//alert(height)
+        	//alert(scrollTop)
+        	if(height<scrollTop+700&&closeAjax){
+        			up();
+        			//plus.nativeUI.showWaiting("正在加载...");
+        			
+        	}
+        	
+        }
 		scroll(function(direction) {      
 			if(direction == "down") {
 				$('.news_userInfo_reply').addClass('hidden')
 			} else {
-				document.body.scrollHeight - screen.height - document.body.scrollTop > 16 ? $('.news_userInfo_reply').removeClass('hidden') : ""
-
+				//document.body.scrollHeight - screen.height - document.body.scrollTop > 16 ? $('.news_userInfo_reply').removeClass('hidden') : ""
+                 $('.news_userInfo_reply').removeClass('hidden') 
 			}
 		});
 
@@ -494,9 +508,11 @@ function getComment(){
 
 
 
+
+
+
 function up(){
 	page++;
-	
 	if(type = "hot") {
 //		alert(page)
 		$.ajax({
@@ -513,6 +529,7 @@ function up(){
 					var com = data.comment;
 					var comment = "";
 					var towLen,portrait;
+					$(".bottomInfo").text("正在加载...");
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -577,14 +594,15 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment)
-                     //alert(comment);
+
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
 					if(com.length < 5) {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
+						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
+						$(".bottomInfo").text("没有更多评论了");
 					} else {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
+						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
 
 					}
 
@@ -594,7 +612,6 @@ function up(){
 			}
 		});
 	} else {
-		
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getCommentByPage",
@@ -692,8 +709,9 @@ function up(){
 }
 
 function down() {
-
-//      window.location.reload();	
+//this.endPullupToRefresh(true);
+mui('.new_post_contents').pullRefresh().endPulldownToRefresh()
+       // window.location.reload();	
 //alert(1)
 //mui("#pullrefresh").pullRefresh().setStopped(true)
      // this.endPullupToRefresh(true);

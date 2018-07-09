@@ -260,19 +260,19 @@ $(function() {
 
 	//标签结束
 
-	//		底下新加部分
+	//底下新加部分
 
-	//		列表部分
+	//列表部分下载部分
 	mui.plusReady(function(){
 		$.ajax({
 		type: "get",
 		url: config.data + "game/getActiveLenOfTen?sys=1",
 		async: true,
 		success: function(data) {
+//			alert(JSON.stringify(data));
 			if(data.state) {
 				var g = data.game;
 				var list = '';
-                
 				for(var i = 0; i < g.length; i++) {				
 					var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
 					if(downloadToggle){
@@ -322,6 +322,8 @@ $(function() {
 						"</div>" +
 						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>" +
 						"</li>";
+						
+						//alert(list);
 					if(i < 3) {
 						$('.remommend_listFirst').append(list)
 					} else if(i < 6) {
@@ -365,6 +367,7 @@ $(function() {
 		url: config.data + "game/getActiveLenOfTow?sys=1",
 		async: true,
 		success: function(data) {
+//			alert(JSON.stringify(data));
 			if(data.state) {
 				var g = data.game;
 				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
@@ -511,7 +514,7 @@ $(function() {
 		}
 	});
 
-	$('body').on('click', '.game_classify_name,.apply_classify_name', function() {
+	$('body').on('tap', '.game_classify_name,.apply_classify_name', function() {
 		mui.openWindow({
 			url: "game_classify_sign.html",
 			id: "game_classify_sign.html",
@@ -556,7 +559,7 @@ $(function() {
 		})
 	})
 
-	$(".game_nav>div").click(function() {
+	$("body").on("tap",".game_nav>div",function() {
 		$(this).addClass("color_green border_bottom").siblings().removeClass("color_green border_bottom");
 		$("." + $(this).attr("data-page")).removeClass("hidden").siblings("").addClass("hidden")
 		$('html, body').animate({
@@ -582,6 +585,7 @@ $(function() {
 })
 
 function getRank(sort) {
+    
   mui.plusReady(function(){
 	$.ajax({
 		type: "get",
@@ -631,8 +635,9 @@ function getRank(sort) {
 						} else {
 
 						}
-                        
-                         var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
+                         
+
+                       var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
 					    if(downloadToggle){
 						    var buttonDown="打开";
 					   }else{
@@ -665,15 +670,17 @@ function getRank(sort) {
 							"</li>"
 					}
 				}
-				$('.game_lists').append(list)
+			    //alert(list);
+//			    alert(3);
+                //alert(list);
+			    $('.game_lists').append(list);
+//		        alert($('.game_lists').html());
+				//$('.game_lists').append(list);
 				$('.game_recommend_stars').each(function() {
-
 					var score = $(this).find('.game_recommend_starScore').eq(0).text()
 					var starNum = Math.round(score)
-
 					if(starNum % 2 == 0) {
-
-						var starFinal = (starNum / 2 - 1);
+						var starFinal = (starNum/ 2 - 1);
 						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
 						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
 					} else {
@@ -691,7 +698,6 @@ function getRank(sort) {
 }
 
 function getRankup(page, sort) {
-
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameByMsg",
@@ -724,8 +730,9 @@ function getRankup(page, sort) {
 							}
 						}
 					} else {
-
+      
 					}
+					
 					list +=
 						"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
 						"<div class='color_9e9e9e fl game_listScore'>" + (i + 1 + (page - 1) * 20) + "</div>" +
@@ -750,14 +757,13 @@ function getRankup(page, sort) {
 						"</li>"
 
 				}
-				$('.game_lists').append(list)
+			   //$('.game_lists').append("<div>dwedwedwe</div>");
+				$('.game_lists').append(list);
+//				alert($('.game_lists').html());
 				$('.game_recommend_stars').each(function() {
-
 					var score = $(this).find('.game_recommend_starScore').eq(0).text()
-					var starNum = Math.round(score)
-
+					var starNum = Math.round(score);
 					if(starNum % 2 == 0) {
-
 						var starFinal = (starNum / 2 - 1);
 						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
 						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
@@ -766,7 +772,7 @@ function getRankup(page, sort) {
 						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
 						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 					}
-				})
+				});
 				if(g.length < 20) {
 
 					mui('.nav_cls_contains').pullRefresh().endPullupToRefresh(true);

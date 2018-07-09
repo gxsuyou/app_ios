@@ -5,7 +5,11 @@ var imgNum = 0;
 //	发帖子
 
 $(function() {
-
+    mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+    });
 	//	点击选择图片
 	$('.choose_game').css({'border-radius':'20px','background-color':'#e6ebec'})
 	var h = $(window).height()
@@ -25,7 +29,6 @@ $(function() {
 	document.getElementById('choose_img').addEventListener('tap', function() {
 		if(mui.os.plus) {
 			var buttonTit = [
-
 				{
 					title: "从手机相册选择"
 				}
@@ -49,12 +52,12 @@ $(function() {
 		}
 	}, false);
 
-	$('body').on('click', '.delete_img', function() {
+	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 		$('.img_num').text($('.show_imgs > .show_imgcontent').length + "/9")
 	})
 
-	$('.publish').click(function() {
+	$('body').tap("tap",".publish",function() {
 		
 		var content = $('#strategy_textarea').val();
 		if (content) {
