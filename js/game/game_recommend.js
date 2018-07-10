@@ -187,8 +187,8 @@ $(function() {
 						var bb = 2 * j + 1;
 						content +=
 
-							"<div style='padding-right: 1.0625rem;'>" +
-							"<div class='game_detail_content'>" +
+							"<div style='flex-shrink:0;padding-right:1.0625rem;'>" +
+							"<div class='game_detail_content' >" +
 							"<div class='game_signTop' data-gameId='" + act[i][aa].gameId + "'>" +
 							"<div class='game_signTopimg' style='background-image: url(" + config.img + encodeURI(act[i][aa].game_title_img) + ");'>" +
 
@@ -222,12 +222,12 @@ $(function() {
 						"<div class='font_14 color_282828 fl'>" + i + "</div>" +
 						"<div class='font_12 color_green fr check_more' style='margin-right: 0.9375rem;' data-tagId='" + act[i][0].tagId + "'>查看更多</div>" +
 						"</div>" +
-						"<div class='game_detail_contents ui_flex_wrapper ui_flex_h'  data-tagId='" + act[i][0].tagId + "'>" +
-						content +
+						"<div  class='game_detail_contents  ui_flex_wrapper ui_flex_h'  data-tagId='" + act[i][0].tagId + "'>" 
+						+content+
 						"</div>" +
 						"</div>"
 				}
-				$('.game_signsContent').append(div)
+				$('.game_signsContent').append(div);
 			} else {
 
 			}

@@ -41,7 +41,7 @@ body{
 	margin-left: 0.625rem;
 }
 .strategy_head > ul > li{
-	
+	flex-shrink:0;
 	padding-right: 1.2rem;
 }
 .strategy_headImg{

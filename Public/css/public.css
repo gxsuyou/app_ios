@@ -101,7 +101,7 @@ header{
     -webkit-align-items: stretch;
     -moz-align-items: stretch;
     -ms-align-items: stretch;
-    align-items: stretch;
+    align-items:stretch;
 }
 .ui_flex_wrapper.ui_flex_v {
     /*竖向*/
