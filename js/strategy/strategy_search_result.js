@@ -1,6 +1,5 @@
 var msg;
 $(function(){
-
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		msg = self.msg; 
@@ -44,7 +43,7 @@ $(function(){
 
 
 //	评论
-	$('body').on('click','.comment_img',function(event){
+	$('body').on('tap','.comment_img',function(event){
 		event.preventDefault();
 		var strategyId = $(this).attr('data-id');
 		add(commnet_num);
@@ -59,13 +58,14 @@ $(function(){
 	})
 	
 //	评论end
-	$('.search').click(function(){
+	$('body').on("tap",".search",function(){
 		mui.openWindow({
 			url:"strategy_search.html",
 			id:"strategy_search.html"
 		})
-	})
-	$('.bell').click(function(){
+	});
+	
+	$('body').on("tap",".bell",function(){
 		mui.openWindow({
 			url:"../news/news_center.html",
 			id:"../news/news_center.html"

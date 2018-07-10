@@ -131,14 +131,13 @@
 			
 			function up(){
 				page++;
-				
 				$.ajax({
 					type:"get",
 					url:config.data + "game/getGameByCls",
 					async:true,
 					data:{
 						clsId:clsId,
-						sys:2,
+						sys:1,
 						page:page
 					},
 					success:function(data){

@@ -5,6 +5,12 @@ var imgNum = 0;
 //	发帖子
 var imgArray=[];
 $(function() {
+	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
+
 	//	点击选择图片
 	$('.choose_game').css({'border-radius':'20px','background-color':'#e6ebec'})
 	var h = $(window).height()
@@ -23,10 +29,7 @@ $(function() {
 
 
    $("body").on("tap","#choose_img",function(e){
-
       setTimeout(function(){
-      	
-     
 		if(mui.os.plus) {
 			var buttonTit = [
 				{
@@ -59,15 +62,8 @@ $(function() {
 		$('.img_num').text($('.show_imgs > .show_imgcontent').length + "/9")
 	})
 
-		mui.plusReady(function(){
-			plus.webview.currentWebview().setStyle({
-                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-            });
-		});
-
-	$("body").on("focus","#strategy_textarea",function(){
-
 		
+	$("body").on("focus","#strategy_textarea",function(){
 		$("#strategy_textarea span").css("-webkit-user-select","text");
 		setTimeout(function(){
 			var scrollY=$('#strategy_textarea')[0].scrollHeight;
@@ -75,24 +71,6 @@ $(function() {
 		},200);
 	});
 	
-
-
-
-	//$("body").on("blur","#strategy_textarea",function(){
-//	
-//   mui.plusReady(function(){
-//      plus.webview.currentWebview().setStyle({softinputMode: "adjustResize"});
-//	  });
-
-//});
-
-   //$('body').on('focus',".choose_game",function(){
-   	  //$('#strategy_textarea').scroll()
-   	  
-   	
-   //});
-
-
 
 	
 	$('body').on("tap",".publish",function() {
@@ -123,16 +101,16 @@ $(function() {
 					top_img_src:indexImg
 				},
 				success: function(data) {
-					if(data.state){
-						mui.toast("上传成功");
-						 $("#strategy_textarea").html("");
-		         $(".strategy_title").val("");
-		         $(".choose_game").val("");
-						 setTimeout(function(){
-							 mui.back();
-						 },3000);					 
+					if(data.state){					
+			          $("#strategy_textarea").html("");
+		              $(".strategy_title").val("");
+		              $(".choose_game").val("");
+				     setTimeout(function(){
+				     	mui.toast("上传成功");
+				        mui.back();				        
+			          },4000);					 
 					} else {
-	          mui.toast("上传失败");
+	                   mui.toast("上传失败");
 					}
 				}
 			});
@@ -201,13 +179,13 @@ function appendHtml(src){
             lastNode = frag.appendChild(node);
         }
         range.insertNode(frag);
-				if (lastNode) {
+		    if(lastNode) {
             range = range.cloneRange();
             range.setStartAfter(lastNode);
             range.collapse(true);
             sel.removeAllRanges();
             sel.addRange(range);
-        }
+            }
 		}
  }
 }

@@ -3,15 +3,16 @@ $(function() {
 		var backHeight = plus.navigator.getStatusbarHeight();
 		var finalHeight = parseInt(backHeight) + 11 + "px";
 		$('.back').css('top',finalHeight)
-		
-	})
-	$('.back').click(function(){
-		mui.back()
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
+	$('body').on("tap",".back",function(){
+		mui.back();
 	})
 	
 
 	$('.login_login').on("tap", function() {
-		
 		var username = $.trim($('#user-name').val());
 		var password = $("#user-password").val();
 		var reg = /^1[3|4|5|7|8]\d{9}$/;

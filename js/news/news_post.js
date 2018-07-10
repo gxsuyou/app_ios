@@ -6,7 +6,7 @@ var sys;
 var type = 'hot';
 var firstImg;
 var title;
-var closeAjax=true;
+var closeAjax=false;
 $(function() {
 	$('body').on('tap','a',function(event){
 		event.preventDefault();
@@ -144,26 +144,22 @@ $(function() {
 		})
 
 		$('body').on('tap', '.hot', function() {
-
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'hot';
 			$(this).addClass('color_green')
 			$('.time').removeClass('color_green')
 			page = 0;
-			up()
-
+			up();
 		})
 		$('body').on('tap', '.time', function() {
-
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'time';
 			$(this).addClass('color_green')
 			$('.hot').removeClass('color_green')
 			page = 0;
-			up()
-
+			up();
 		})
 
 		$('body').on("tap",".news_post_list",function() {
@@ -319,7 +315,7 @@ $(function() {
         	var scrollTop=$('.new_post_contents').scrollTop();
         	//alert(height)
         	//alert(scrollTop)
-        	if(height<scrollTop+700&&closeAjax){
+        	if(height<scrollTop+700){
         			up();
         			//plus.nativeUI.showWaiting("正在加载...");
         			
@@ -330,7 +326,6 @@ $(function() {
 			if(direction == "down") {
 				$('.news_userInfo_reply').addClass('hidden')
 			} else {
-				//document.body.scrollHeight - screen.height - document.body.scrollTop > 16 ? $('.news_userInfo_reply').removeClass('hidden') : ""
                  $('.news_userInfo_reply').removeClass('hidden') 
 			}
 		});
@@ -345,13 +340,11 @@ $(function() {
 			$('.news_userInfo_reply').addClass('hidden')
 			$('.news_secondComment').removeClass('hidden')
 			$('.news_secondComment_input').focus();
-
-			$('.news_secondComment_input').blur(function() {
+			$('.news_secondComment_input').blur(function(){
 				setTimeout(function() {
-					$('.news_secondComment').addClass('hidden')
-					$('.news_userInfo_reply').removeClass('hidden')
-							
-				}, 250);
+					$('.news_secondComment').addClass('hidden');
+					$('.news_userInfo_reply').removeClass('hidden');							
+				},250);
 			});
 		  })
 		});
@@ -405,7 +398,8 @@ $(function() {
 })
 
 function getComment(){
-	$.ajax({
+	closeAjax=false;
+	 $.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
 			async: true,
@@ -483,21 +477,15 @@ function getComment(){
 							"</div>"
 					};
 
-					$('.news_post_commentContents').empty().append(comment)
+					$('.news_post_commentContents').empty().append(comment);
 
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
-					if(com.length < 5) {
-
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
-
-					} else {
-
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
-
+					if(com.length < 5) {         
+						closeAjax=true;
+						$(".bottomInfo").text("没有更多评论了");
 					}
-
 				} else {
 
 				}
@@ -513,6 +501,9 @@ function getComment(){
 
 function up(){
 	page++;
+	if(closeAjax){
+		return false;
+	}
 	if(type = "hot") {
 //		alert(page)
 		$.ajax({
@@ -563,7 +554,6 @@ function up(){
 								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
 								"全部回复" +
 								"</div>" +
-
 								"</div>";
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
@@ -600,6 +590,8 @@ function up(){
 					}
 					if(com.length < 5) {
 						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
+//						alert(1)
+                        closeAjax=true;
 						$(".bottomInfo").text("没有更多评论了");
 					} else {
 						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
@@ -694,13 +686,9 @@ function up(){
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
 
 					} else {
-
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
-
 					}
-
 				} else {
-
 				}
 			}
 		});

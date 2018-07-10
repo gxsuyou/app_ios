@@ -30,7 +30,7 @@ $(function() {
 		}
 	})
 
-	$("body").on('click','.search_list',function(){
+	$("body").on('tap','.search_list',function(){
 		var msg = $(this).children('div').text();
 		mui.openWindow({
 			url:"strategy_search_result.html",
@@ -41,7 +41,7 @@ $(function() {
 		})
 	})
 	
-	$('.search_img').click(function(){
+	$('body').on("tap",".search_img",function(){
 		var msg = $(this).siblings('div').children('.search_bar').val();
 		if (msg) {
 			mui.openWindow({

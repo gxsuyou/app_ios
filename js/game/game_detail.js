@@ -22,7 +22,7 @@ $(function() {
 				gameId: gameId
 			},
 			success: function(data) {
-				//alert(JSON.stringify(data.gameDetail));
+				alert(JSON.stringify(data));
 				if(data.state) {
 					game = data.gameDetail;
 					//这个已经把全部数据放进去
@@ -298,7 +298,7 @@ $(function() {
 		
 		//详情页
 
-		$('.game_detail_detail').click(function() {
+		$('body').on("tap",".game_detail_detail",function() {
 			pageIndex="detail";
 			commentModule = false;
 			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
@@ -325,7 +325,13 @@ $(function() {
 		});
        
 	   
-		
+		$("body").on("tap",".download",function(){
+           	if(game.game_download_ios!==null){
+				location.href=game.game_download_ios;
+			}else{
+				alert("越狱包");
+			}
+		})
 		
 		
 		

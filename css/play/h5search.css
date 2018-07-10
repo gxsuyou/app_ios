@@ -11,13 +11,9 @@
 	overflow: scroll;
 }
 .h5img{
-	/*margin: 0.75rem 0;*/
 	border-radius: 5px 5px 0 0;
 	width: 100%;
-	/*height: 9rem;*/
 	height: 40vw;
-	
-	/*background-image: url(../../Public/image/ice2.jpg);*/
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -58,8 +54,7 @@
 	font-size: 14px;
 	border-radius: 15px;
 	height: 25px;
-	line-height: 25px;
-	
+	/*line-height: 25px;*/
 	background-image: url(../../Public/image/search.png);
 	background-repeat: no-repeat; /*设置图片不重复*/
 	background-position: 15px 2px; /*图片显示的位置*/

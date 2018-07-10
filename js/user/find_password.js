@@ -3,7 +3,7 @@ var password;
 var code;
 $(function() {
 	
-	$('.get_code').click(function() {
+	$('body').on("tap",".get_code",function() {
 		username = $.trim($('.phone_num').val());
 		var InterValObj; //timer变量，控制时间
 		var count = 60; //间隔函数，1秒执行
@@ -56,7 +56,7 @@ $(function() {
 		}
 	})
 	
-	$('.find_password').on('click','.next',function(){
+	$('.find_password').on('tap','.next',function(){
 		if ($('.phone_num').val() && $('.set_code').val()) {
 			username = $.trim($('.phone_num').val());
 			code = $('.set_code').val()
@@ -67,7 +67,7 @@ $(function() {
 		}
 	})
 	
-	$('.new_passwords').on('click','.next',function(){
+	$('.new_passwords').on('tap','.next',function(){
 		
 		password = $('.set_newpassword').val()
 		
@@ -111,7 +111,7 @@ $(function() {
 	})
 
 
-	$('.set_finishs').on('click','.next',function(){
+	$('.set_finishs').on('tap','.next',function(){
 		$('.set_finishs').addClass("hidden")
 		$('.find_password').removeClass("hidden")
 		mui.openWindow({

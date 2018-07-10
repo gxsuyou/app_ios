@@ -1,18 +1,15 @@
 $(function() {
-
-	//	document.getElementById("register-back").addEventListener('tap',function(){
-	//		mui.openWindow({
-	//			url:'html/user/login.html'
-	//		})
-	//	}) 
-	var checked;
-	$('#agree').change(function(){
-		
+	var checked;	
+	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
+	$('#agree').change(function(){	
 		checked = this.checked
 	})
 
-	$('#register-get').click(function () {
-		
+	$('body').on("tap","#register-get",function () {
 		var username = $.trim($('#register-phone').val());
 		var code = $('#register-code').val();
 		var password = $('#register-password').val();
@@ -67,7 +64,7 @@ $(function() {
 			return false
 		}
 	})
-	$('#register-button').click(function() {
+	$('body').on("tap","#register-button",function() {
 		var username = $.trim($('#register-phone').val());
 		var code = $('#register-code').val();
 		var password = $('#register-password').val();
@@ -122,7 +119,7 @@ $(function() {
 		}
 	})
 
-	$('.protocol').click(function(){
+	$('body').on("tap",".protocol",function(){
 		mui.openWindow({
 			url:'agreement.html',
 			id:'agreement.html'

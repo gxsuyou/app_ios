@@ -55,10 +55,8 @@ $(function() {
 	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 		$('.img_num').text($('.show_imgs > .show_imgcontent').length + "/9")
-	})
-
-	$('body').tap("tap",".publish",function() {
-		
+	});
+	$('body').on("tap",".publish",function() {
 		var content = $('#strategy_textarea').val();
 		if (content) {
 			$.ajax({
@@ -66,10 +64,8 @@ $(function() {
 			url: config.data + "users/addFeedbackMsg",
 			async: true,
 			data: {
-				userId: userId,
-				
-				content: content,
-				
+				userId: userId,				
+				content: content
 			},
 			success: function(data) {
 				if(data.state) {
@@ -99,11 +95,8 @@ $(function() {
 		});
 		} else{
 			mui.toast("内容不能为空")
-		}
-		
-		
-	})
-
+		}	
+	});
 	//	发帖子结束
 })
 

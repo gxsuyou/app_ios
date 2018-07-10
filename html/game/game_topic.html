@@ -129,12 +129,11 @@
 				async: true,
 				data: {
 					subjectId: subjectId,
-					sys: 2,
+					sys: 1,
 					page: page
 				},
 				success: function(data) {
 					if(data.state) {
-						
 						var g = data.game;
 						var con = '';
 						for(var i = 0; i < g.length; i++) {
@@ -163,14 +162,14 @@
 									"</div>" +
 								"</div>"
 						}
-						$('.game_topicsContents').append(con)
+						$('.game_topicsContents').append(con);
+						
 						$('.game_recommend_stars').each(function() {
 
 							var score = $(this).find('.game_recommend_starScore').eq(0).text()
 							var starNum = Math.round(score)
 
 							if(starNum % 2 == 0) {
-
 								var starFinal = (starNum / 2 - 1);
 								$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
 								$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')

@@ -2,25 +2,23 @@ var page = 1;
 var tagId;
 var tagName;
 $(function(){
-	
-	
 	mui.plusReady(function(){
 		var self = plus.webview.currentWebview();
 		tagId = self.tagId;
-		tagName = self.tagName;
-		
-		getGamebySign(tagId,tagName)
-	})
+		tagName = self.tagName;		
+		//一开始就加载的函数
+		getGamebySign(tagId,tagName);
+	});
 	
-	$('body').on('click','.tag',function(){
+	$('body').on('tap','.tag',function(){
 		$('.game_lists').children().remove();
 		tagId = $(this).attr('data-id');
 		tagName = $(this).text();
-		getGamebySign(tagId,tagName)
-	})
+		getGamebySign(tagId,tagName);
+	});
 	
 	
-	$('body').on('click','.game_list',function(){
+	$('body').on('tap','.game_list',function(){
 		mui.openWindow({
 			url:"game_detail.html",
 			id:"game_detail.html",
@@ -28,7 +26,7 @@ $(function(){
 				gameId:$(this).attr('data-id')
 			}
 		})
-	})
+	});
 	
 	mui.init({
 				swipeBack: true,
@@ -39,6 +37,7 @@ $(function(){
 						auto: false, //可选,默认false.自动上拉加载一次
 						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						auto:true,
 						callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 					},
 					down: {
@@ -53,22 +52,20 @@ $(function(){
 
 				}
 
-			})
+		});
 			
 	
 	
 })
 			function up(){
-				
-				page++;
-				
+				page++;				
 				$.ajax({
 					type:"get",
 					url:config.data + "game/getGameByTag",
 					async:true,
 					data:{
 						tagId:tagId,
-						sys:2,
+						sys:1,
 						page:page
 					},
 					success:function(data){
@@ -108,7 +105,7 @@ $(function(){
 										"</li>"
 							}
 							
-							$('.game_lists').append(li)
+							$('.game_lists').append(li);
 							
 							$('.game_recommend_stars').each(function(){
 				
@@ -127,15 +124,14 @@ $(function(){
 									$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 								}
 							})
-							
+							//alert(g.length);
 							if (g.length < 20) {
 								mui('.game_listSign').pullRefresh().endPullupToRefresh(true);
 							} else{
 								mui('.game_listSign').pullRefresh().endPullupToRefresh(false);
 							}
-	
 						} else{
-							
+							mui('.game_listSign').pullRefresh().endPullupToRefresh(true);
 						}
 					}
 				});
@@ -145,11 +141,9 @@ $(function(){
 			
 			function down() {
 				window.location.reload();
-				setTimeout(function() {
-					mui('.game_listSign').pullRefresh().endPulldown(true);
-				}, 1000);
-
-				//				 mui('#news_content').pullRefresh().endPulldown(true);
+//				setTimeout(function() {
+//					mui('.game_listSign').pullRefresh().endPulldown(true);
+//				}, 1000);
 			}
 
 
@@ -162,7 +156,7 @@ function getGamebySign(tagId,tagName){
 			async:true,
 			data:{
 				tagId:tagId,
-				sys:2,
+				sys:1,
 				page:1
 			},
 			success:function(data){
@@ -210,15 +204,14 @@ function getGamebySign(tagId,tagName){
 								"</li>"
 					}
 					
-					$('.game_lists').append(li)
+					$('.game_lists').append(li);
 					$('.game_recommend_stars').each(function(){
 		
 						var score =  $(this).find('.game_recommend_starScore').eq(0).text()
 						var starNum = Math.round(score)
 						
-						
-						if (starNum % 2 == 0) {
-							
+						//alert(g.length);
+						if (starNum % 2 == 0) {						
 							var starFinal = (starNum / 2 - 1 ); 
 							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
 							$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
@@ -228,7 +221,13 @@ function getGamebySign(tagId,tagName){
 							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 						}
 					})
-					
+					if (g.length < 20) {
+							mui('.game_listSign').pullRefresh().endPullupToRefresh(true);
+//								alert(1);
+						}else{
+							mui('.game_listSign').pullRefresh().endPullupToRefresh(false);
+				    }
+//					
 				} else{
 					
 				}

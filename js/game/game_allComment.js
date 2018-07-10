@@ -12,6 +12,7 @@ $(function() {
 		plus.webview.currentWebview().setStyle({
                 softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
          });
+        // alert(5);
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
 		gameId = self.gameId;
@@ -78,10 +79,9 @@ $(function() {
 		$('.news_secondComment_input').attr('placeholder',"@" + defaultName)
 		targetUserId = $(this).attr('data-userId')
 	})
-	
+
 
 	//点击发布
-	
 	$('body').on("tap",".publish",function() {
 		
 		var content = $(this).prev().val();
@@ -196,6 +196,4 @@ function down() {
 	setTimeout(function() {
 		mui('.game_post_commentContents').pullRefresh().endPulldown(true);
 	}, 1000);
-
-	//				 mui('#news_content').pullRefresh().endPulldown(true);
 }

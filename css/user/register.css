@@ -7,6 +7,10 @@ body{
 	margin-left: -2rem;
 	font-size: 18px;
 }
+.header_box{
+	position:absolute;
+	top:0;
+}
 .mui-input-group{
 	padding-top: 0.5rem;
 }
@@ -18,7 +22,6 @@ body{
 .mui-input-row >input{
 	position: relative;
 	height: 2.8125rem;
-	line-height: 2.8125rem;
 	background-color: #E7EAEC;
 	color: #9E9E9E;
 	font-size: 14px;

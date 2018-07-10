@@ -1,10 +1,8 @@
 var val;
 $(function(){
-	
-	$('.search_img').click(function(){
+	$('body').on("tap",".search_img",function(){
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g,"");
-		$('.search_lists').children().remove();
-		
+		$('.search_lists').children().remove();	
 		if(val){
 			pages = 1
 			$.ajax({
@@ -12,7 +10,7 @@ $(function(){
 				url:config.data + "game/searchGameByMsg",
 				async:true,
 				data:{
-					sys:2,
+					sys:1,
 					msg:val,
 					sort:"sort",
 					page:1
@@ -31,7 +29,7 @@ $(function(){
 									"<div class='fl' style='margin-left: 1rem;'>"+ g[i].game_name +"</div>"+
 								"</div>"
 							}
-							$('.search_lists').append(div)
+							$('.search_lists').append(div);
 						} else{
 							
 						}
@@ -46,7 +44,7 @@ $(function(){
 	})
 	
 	
-	$('body').on('click','.search_list',function(){
+	$('body').on('tap','.search_list',function(){
 		mui.openWindow({
 			url:"game_detail.html",
 			id:"game_detail.html",

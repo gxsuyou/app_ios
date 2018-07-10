@@ -40,7 +40,13 @@ $(function() {
 			old_back();
 		}
 
-		document.getElementById('choose_img').addEventListener('tap', function() {
+//		document.getElementById('choose_img').addEventListener('tap', function() {
+//		
+//		}, false);
+//		
+		
+		$('body').on('tap','.choose_img',function(){
+			setTimeout(function(){
 			if(mui.os.plus) {
 				var buttonTit = [
 
@@ -65,7 +71,9 @@ $(function() {
 					}
 				})
 			}
-		}, false);
+			},500);
+		});
+		
 
 		$('body').on("tap",".publish",function() {
 			mui.toast("正在发送，请稍候")

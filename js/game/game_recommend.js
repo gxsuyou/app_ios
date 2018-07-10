@@ -30,7 +30,7 @@ $(function() {
 			sys: 1
 		},
 		success: function(data) {
-
+            
 			var c = data.carousel;
 			var divlast = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[(c.length - 1)].id + "' data-gameId='" + c[(c.length - 1)].game_id + "'>" +
 				"<div class='slider_item  home" + (c.length - 1) + " '></div>" +
@@ -67,7 +67,6 @@ $(function() {
 			gallery.slider({
 				interval: 0 //自动轮播周期，若为0则不自动播放，默认为0；
 			});
-
 		}
 
 	})
@@ -269,7 +268,6 @@ $(function() {
 		url: config.data + "game/getActiveLenOfTen?sys=1",
 		async: true,
 		success: function(data) {
-//			alert(JSON.stringify(data));
 			if(data.state) {
 				var g = data.game;
 				var list = '';

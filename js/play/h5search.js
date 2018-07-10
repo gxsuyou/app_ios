@@ -13,7 +13,7 @@ $(function() {
 
 	
 
-	$('body').on('click', '.search_cancel', function() {
+	$('body').on('tap', '.search_cancel', function() {
 		$('.search_lists').empty();
 		$('#searchinput').val("");
 		
@@ -25,14 +25,13 @@ $(function() {
 		
 
 		$('#searchinput').on('input propertychange', function() {
-
 			var value = $(this).val().replace(/[\r\n]/g, "");
 			$.ajax({
 				type: "get",
 				url: config.data + "h5/getH5ByMsg",
 				async: true,
 				data: {
-					"msg": value
+					"msg": value			
 				},
 				success: function(data) {
 					if(data.state) {
