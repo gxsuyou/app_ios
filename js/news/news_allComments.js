@@ -97,7 +97,7 @@ $(function() {
 
 	  $('body').on("focus",".news_secondComment_input",function(){
 	  	 setTimeout(function(){
-			var scrollY=$('#strategy_textarea')[0].scrollHeight;
+			var scrollY=$('.news_post_commentContents')[0].scrollHeight;
             $('.news_post_commentContents').animate({scrollTop:scrollY},200);        
 		},200);
 	  })
