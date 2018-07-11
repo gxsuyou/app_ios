@@ -1,14 +1,16 @@
 var username;
 var password;
 var code;
-$(function() {
-	
+var recCode;
+$(function() {	
 	$('body').on("tap",".get_code",function() {
 		username = $.trim($('.phone_num').val());
 		var InterValObj; //timer变量，控制时间
 		var count = 60; //间隔函数，1秒执行
 		var curCount; //当前剩余秒数
+		
 		if(/^1[34578]\d{9}$/.test(username)) {
+			
 			(function sendMessage() {
 				curCount = count;
 				// 设置button效果，开始计时
@@ -16,8 +18,9 @@ $(function() {
 //				document.getElementById("get_code").setAttribute("disabled", "true"); //设置按钮为禁用状态
 				document.getElementById("get_code").innerHTML = curCount + "s后获取"; //更改按钮文字
 				InterValObj = window.setInterval(SetRemainTime, 1000);
-				//			 启动计时器timer处理函数，1秒执行一次
+				// 启动计时器timer处理函数，1秒执行一次
 				// 向后台发送处理数据
+               alert(username)
 				$.ajax({
 					type: "get", // 用get方式传输
 					url: config.data + "users/verify", // 目标地址
@@ -25,9 +28,10 @@ $(function() {
 						"tel": username
 					},
 					success: function(data) {
+						//alert(JSON.stringify(data));
 						if(data.state == "1") {
 							mui.toast("短信验证码已发到您的手机,请查收");
-
+                            recCode=data.code;
 						} else if(data.state == "0") {
 							mui.toast("短信验证码发送失败，请重新发送");
 
@@ -57,23 +61,23 @@ $(function() {
 	})
 	
 	$('.find_password').on('tap','.next',function(){
-		if ($('.phone_num').val() && $('.set_code').val()) {
+		if ($('.phone_num').val() && $('.set_code').val()){
 			username = $.trim($('.phone_num').val());
-			code = $('.set_code').val()
-			$('.find_password').addClass("hidden")
+			code = $('.set_code').val();
+          if(code==recCode){
+            $('.find_password').addClass("hidden")
 			$('.new_passwords').removeClass("hidden")
+          }else{
+          	mui.toast("输入验证码错误");
+          }
 		} else{
 			mui.toast("手机号及验证码不能为空")
 		}
 	})
 	
 	$('.new_passwords').on('tap','.next',function(){
-		
 		password = $('.set_newpassword').val()
-		
-		
 		if (/^1[34578]\d{9}$/.test(username) && password.length >= 6 && code.length == 6  && /^[a-zA-Z0-9]*([a-zA-Z][0-9]|[0-9][a-zA-Z])[a-zA-Z0-9]*$/.test(password)) {
-			
 			$.ajax({
 				type:"POST",
 				url:config.data + "users/upDatePassword",

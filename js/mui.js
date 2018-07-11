@@ -2935,7 +2935,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	$.addInit({
 		name: 'pullrefresh',
 		index: 1000,
-		handle: function() {
+		handle: function() {			
 			var options = $.options;
 			var pullRefreshOptions = options.pullRefresh || {};
 			var hasPulldown = pullRefreshOptions.down && pullRefreshOptions.down.hasOwnProperty('callback');
@@ -2969,6 +2969,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 											$container.pullRefresh(upOptions);
 										}
 										if(hasPulldown) {
+											
 											var parent = webview.parent();
 											var id = webview.id || webview.getURL();
 											if(parent) {

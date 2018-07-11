@@ -22,7 +22,6 @@ $(function() {
 				gameId: gameId
 			},
 			success: function(data) {
-				alert(JSON.stringify(data));
 				if(data.state) {
 					game = data.gameDetail;
 					//这个已经把全部数据放进去

@@ -19,7 +19,6 @@ $(function() {
 		var emailreg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 		if(reg.test(username) || emailreg.test(username)) {
 			if(username != "" && password != "") {
-
 				$.ajax({
 					type: "POST",
 					url: config.data + "users/login",
@@ -29,7 +28,7 @@ $(function() {
 					},
 
 					success: function(data) {
-
+                         alert(JSON.stringify(data));
 						if(data.state == "0") {
 							mui.toast("账号或密码错误")
 						} else {

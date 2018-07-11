@@ -1,6 +1,6 @@
 var game = 1;
 $(function(){
-	$('.me_gameNav > span').click(function(){
+	$('body').on("tap",".me_gameNav > span",function(){
 		var t =$(this)
 		t.css('border-bottom','2px solid #7fddde').addClass('color_green').siblings('span').css('border-bottom','1px solid #E6EBEC').removeClass('color_green')
 		

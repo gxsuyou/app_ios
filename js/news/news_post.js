@@ -42,17 +42,17 @@ $(function() {
 	})
 	
 	
-//	mui.init({
-//		swipeBack: true, //启用右滑关闭功能
-//		pullRefresh: {
-//			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//			up: {
-//				height: 50, //可选.默认50.触发上拉加载拖动距离
-//				auto: false, //可选,默认false.自动上拉加载一次
-//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-//				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//			},
+	mui.init({
+		swipeBack: true, //启用右滑关闭功能
+		pullRefresh: {
+			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+			up: {
+				height: 50, //可选.默认50.触发上拉加载拖动距离
+				auto:true, //可选,默认false.自动上拉加载一次
+				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+			},
 //			down: {
 //				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
 //				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
@@ -62,14 +62,15 @@ $(function() {
 //				auto: false, //可选,默认false.首次加载自动上拉刷新一次
 //				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 //			}
-//		}
-//	})
+		}
+	})
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		gameId = self.gameId;
-		up();
+//		alert(newsId)
+		//up();
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",
@@ -90,11 +91,9 @@ $(function() {
 					}
 					firstImg = n.img
 					title = n.title
-
-					$('.detail').html(n.detail)
-
-					$('.news_post_content').attr("data-id", n.id)
-					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")")
+					$('.detail').html(n.detail);
+					$('.news_post_content').attr("data-id", n.id);
+					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")");
 					$('h4').text(n.title)
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
@@ -485,7 +484,8 @@ function getComment(){
 					if(com.length < 5) {         
 						closeAjax=true;
 						$(".bottomInfo").text("没有更多评论了");
-					}
+					} 
+
 				} else {
 
 				}
@@ -504,8 +504,8 @@ function up(){
 	if(closeAjax){
 		return false;
 	}
+	setTimeout(()=>{
 	if(type = "hot") {
-//		alert(page)
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
@@ -589,13 +589,11 @@ function up(){
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
 					if(com.length < 5) {
-						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
-//						alert(1)
+						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
                         closeAjax=true;
 						$(".bottomInfo").text("没有更多评论了");
 					} else {
-						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
-
+						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
 					}
 
 				} else {
@@ -682,9 +680,7 @@ function up(){
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
 					if(com.length < 5) {
-
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
-
 					} else {
 						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
 					}
@@ -693,7 +689,7 @@ function up(){
 			}
 		});
 	}
-
+  },400);
 }
 
 function down() {

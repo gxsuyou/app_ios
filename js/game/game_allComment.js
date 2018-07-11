@@ -11,8 +11,7 @@ $(function() {
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
                 softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-         });
-        // alert(5);
+        });
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
 		gameId = self.gameId;

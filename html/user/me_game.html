@@ -204,8 +204,7 @@
 						sys:1
 					},
 					success:function(data){
-						var  g = data.gameList;
-						alert(JSON.stringify(data));
+						var g=data.gameList;
 						if (data.state) {
 							var list = '';
 							for (var i = 0; i < g.length; i++) {

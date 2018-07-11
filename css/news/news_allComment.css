@@ -1,27 +1,32 @@
 
+
 html,body{
-	height: 100%;
+	/*height: 1000rem;*/
     margin: 0px;
     padding: 0px;
-    overflow: hidden;
+    height:100%;
+    overflow:hidden;
     /*-webkit-touch-callout: none;
     -webkit-user-select: none;*/
 }
+
 
 .header_box{
 	position: absolute;
 	top:0px;
 }
-.news_allComments{
-	height:100%;
-}
+
 .news_post_commentContents{
-    height:100%;
-    overflow-y:scroll; 
+  /* height:50rem;*/
+   height:100%;
+   overflow-y:scroll;
+   padding-bottom:6rem;
 }
-.news_post_secondcommentContents{
-	padding-bottom:7rem;
+
+.news_post_commentContents>div{
+/*	height:1000rem;*/
 }
+
 .notice{
 	position: absolute;
 	left: 50%;
