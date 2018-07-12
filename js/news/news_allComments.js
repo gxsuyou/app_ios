@@ -31,12 +31,7 @@ $(function() {
 	mui.plusReady(function() {
 		  plus.webview.currentWebview().setStyle({
               softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-         });
-
-       // plus.nativeUI.showWaiting();
-        
-        
-        
+        });
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		commentId = self.commentId;
@@ -44,7 +39,6 @@ $(function() {
 		firstImg = self.firstImg;
 		title = self.title;
 //		获取一级评论
-     
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getCommentById",
@@ -85,7 +79,8 @@ $(function() {
 		
         
 
-		$('body').on('tap','.comment_summary',function(){
+		$('body').on('tap','.comment_summary',function(e){
+			e.stopPropagation();
 			var newsId = $(this).attr('data-id');
 			mui.openWindow({
 				url:"news_post.html",
@@ -94,13 +89,13 @@ $(function() {
 				extras:{
 					newsId:newsId,
 				}
-			})
+			});
 		})
 		
 	  $('body').on("focus",".news_secondComment_input",function(){
 	  	 setTimeout(function(){
 			var scrollY=$('.news_post_commentContents')[0].scrollHeight;
-            $('.news_post_commentContents').animate({scrollTop:scrollY},200);        
+//         $('.news_post_commentContents').animate({scrollTop:scrollY-400},200);        
 		},200);
 	  })
 	
@@ -109,6 +104,8 @@ $(function() {
        //获取一级评论结束	
   
 		$('body').on('tap','.news_post_commentContent',function(){
+//			alert(1)
+//			return false;
 			$('.news_secondComment_input').focus();
 			targetUserId = $(this).attr("data-userId")
 		})

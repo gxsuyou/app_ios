@@ -16,18 +16,20 @@ $(function(){
 			}
 		});
 		
-		$('.nav').css('top',total_height)
-		$('.nav > div').click(function(){
+		$('.nav').css('top',total_height);
+		
+		$('body').on("tap",".nav > div",function(){
 			var selfSort = $(this).attr('data-sort');
 			$(this).addClass('active').siblings('div').removeClass('active');
 			$('.notice_lists').children().remove();
 			mui('.news_center').pullRefresh().refresh(true);
 			page = 0;
 			sort = selfSort;
-			up();
-			
+			up();		
 		});
-		$('body').on('click','.notice_list',function(){
+		
+		
+		$('body').on('tap','.notice_list',function(){
 			var type = $(this).attr("data-type");
 			var commentId = $(this).attr("data-id");
 			var url;

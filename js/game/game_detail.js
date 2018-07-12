@@ -31,14 +31,11 @@ $(function() {
 					var game_name = g.game_name;
 					gameName = game_name;
 					$("#game_detail_download").attr("src", g.game_download_andriod);
-					var fileName = '_downloads/' + game.game_name + '.apk';
-					
-					
+					var fileName = '_downloads/' + game.game_name + '.ipa';
 					if(plus.runtime.isApplicationExist({
 							pname: game.game_packagename,
 							action: ''
 					})) {
-
 					$("#game_detail_download").find(".download_btn_text").text("打开");
 					} else {
 						plus.downloader.enumerate(function(tasks) {
@@ -68,7 +65,6 @@ $(function() {
 					$('.game_company').text(g.game_company);
 					$('.game_infoScore').text(g.grade + "分");
 					$('.gameScore').text(g.grade)
-					//alert(g.grade)
 					if(g.tagList) {
 						var t = g.tagList.split(',');
 						for(var i = 0; i < t.length - 1; i++) {
@@ -338,34 +334,33 @@ $(function() {
 
 		$("body").on("tap","#game_detail_download",function(ev) {
 		   
-		    
 			event = ev || window.event;
 			event.stopPropagation();
 			var t = $(this);
 			var isFile = false;
-			var fileName = '_downloads/' + game.game_name + '.apk';
-			
-			if(game.game_download_ios!==null){
+			var fileName = '_downloads/' + game.game_name + '.ipa';
+			//alert(JSON.stringify(game));
+//			return false;
+			if(String(game.game_download_ios)!="null"){
 				location.href=game.game_download_ios;
-			}else{
-				alert("越狱包");
+				return false;
 			}
-
-			return false;		
+			//alert(game.game_packagename)
+//           alert(game.game_name);
+//           game.game_download_ios2
+//			return false;		
+//        alert(fileName+" "+game.game_download_ios2)
+//        return false;
 			switch($(this).find(".download_btn_text").text()) {
 				case "下载":
-					createDownload(game.game_name,game.game_download_andriod)
+					createDownload(game.game_name,game.game_download_ios2)
 					//				t.text('暂停');
 					break;
 				case "打开":
 					launchApp(game.game_packagename);
-					//launchApp(myApp[1].packageName);
 					break;
-					//				t.launchApp();
 				case "取消":
-					//				console.log(1)
 					plus.downloader.enumerate(function(tasks) {
-						//		var state;
 						for(var i = 0; i < tasks.length; i++) {
 							if(tasks[i].filename == fileName) {
 								tasks[i].abort();
@@ -554,9 +549,8 @@ function createDownload(name, src) {
 	plus.downloader.enumerate(function(tasks) {
 		for(var i = 0; i < tasks.length; i++) {
 
-			if(tasks[i].filename == '_downloads/' + name + '.apk') {
+			if(tasks[i].filename == '_downloads/' + name + '.ipa') {
 				//				tasks[i].abort();
-
 				return;
 
 			}
@@ -568,7 +562,7 @@ function createDownload(name, src) {
 		var dtask = plus.downloader.createDownload("http://apk.oneyouxi.com.cn/" + encodeURI(src), {
 			method: 'GET',
 			data: '',
-			filename: '_downloads/' + name + '.apk',
+			filename: '_downloads/' + name + '.ipa',
 			timeout: '3000',
 			retry: 0,
 			retryInterval: 0
@@ -660,7 +654,7 @@ function installApp(filename) {
 		console.log(widgetInfo)
 	}, function(error) {
 		mui.toast("打开失败")
-		console.log(error)
+		alert(JSON.stringify(error))
 
 	});
 }

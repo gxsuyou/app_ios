@@ -693,21 +693,5 @@ function up(){
 }
 
 function down() {
-//this.endPullupToRefresh(true);
 mui('.new_post_contents').pullRefresh().endPulldownToRefresh()
-       // window.location.reload();	
-//alert(1)
-//mui("#pullrefresh").pullRefresh().setStopped(true)
-     // this.endPullupToRefresh(true);
-     // alert(this);
-      //this.endPullupToRefresh(true);
-//    mui('.new_post_contents').pullRefresh().endPullupToRefresh(r); 
-//    this.endPullUpToRefresh(true);
-      //mui('.new_post_contents').pullRefresh().refresh(true);;
-//    return false;
-//	setTimeout(function() {
-//		mui('#news_content').pullRefresh().endPulldown(false);
-////		mui('.new_post_contents"').pullRefresh().refresh(true);
-//	}, 1000);
-
 }
