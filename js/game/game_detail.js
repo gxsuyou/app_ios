@@ -64,7 +64,7 @@ $(function() {
 					$('.game_nameHeader').text(g.game_name);
 					$('.game_company').text(g.game_company);
 					$('.game_infoScore').text(g.grade + "分");
-					$('.gameScore').text(g.grade)
+					$('.gameScore').text(g.grade);
 					if(g.tagList) {
 						var t = g.tagList.split(',');
 						for(var i = 0; i < t.length - 1; i++) {
@@ -76,13 +76,12 @@ $(function() {
 						$('.game_signs').append(spLast)
 
 					}
-					$('.game_simpleIntro_content').html(g.game_detail)
-					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
-					$('.game_particular_value').children().eq(1).text(g.game_version)
-					$('.game_particular_value').children().eq(2).text(g.game_size + "MB")
-					$('.game_particular_value').children().eq(3).text(g.game_update_date)
-					$('.game_particular_value').children().eq(4).text(g.game_company)
-					//$('.game_particular_value').children().eq(5).text(g.game_company)
+					$('.game_simpleIntro_content').html(g.game_detail);
+					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载");
+					$('.game_particular_value').children().eq(1).text(g.game_version);
+					$('.game_particular_value').children().eq(2).text(g.game_size + "MB");
+					$('.game_particular_value').children().eq(3).text(g.game_update_date);
+					$('.game_particular_value').children().eq(4).text(g.game_company);
 					$.ajax({
 						type: "get",
 						url: config.data + "game/getGameImgListById",
@@ -96,12 +95,12 @@ $(function() {
 								var div = ''
 								for(var i = 0; i < gl.length; i++) {
 									div +=
-										"<div style='margin:0.625rem 0.625rem;margin-left: 0;margin-top: 0.125rem;'>" +
+										"<div style='margin:0.625rem 0.625rem;margin-left:0;margin-top:0.125rem;flex-shrink:0;'>" +
 										"<img class='game_detail_content' src='" + config.img + encodeURI(gl[i].img_src) + "' data-preview-src='' data-preview-group='2' />" +
-										//										"<img class='game_detail_content' style='background-image: url(" + config.img + encodeURI(gl[i].img_src) + ");'></img>" +
+										//"<img class='game_detail_content' style='background-image: url(" + config.img + encodeURI(gl[i].img_src) + ");'></img>" +
 										"</div>"
 								}
-								$('.game_detail_contents').append(div)
+								$('.game_detail_contents').append(div);
 							} else {
 
 							}
@@ -188,12 +187,10 @@ $(function() {
 						
 						
 						div +=
-							"<div class='news_post_commentContent ofh'>" +
-
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='ofh'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-
 							"</div>" +
 							"<div class='game_comment_content'>" +
 							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
@@ -210,7 +207,7 @@ $(function() {
 
 							"</div>"
 					}
-					$('.news_post_commentContentshot').append(div)
+					$('.news_post_commentContentshot').append(div);
 				} else {
 
 				}
@@ -234,7 +231,7 @@ $(function() {
 					var div = '';
 					for(var i = 0; i < gl.length; i++) {
 						div +=
-							"<div>" +
+							"<div style='flex-shrink:0;'>" +
 							"<div class='game_similarContent backgroundColor_white ofh' data-id='" + gl[i].id + "'>" +
 							"<div class='game_similarContentimg' style='background-image: url(" + config.img + encodeURI(gl[i].icon) + ");' ></div>" +
 							"<div class='game_similarContentname font_12 font_bold color_282828'>" + gl[i].game_name + "</div>" +
@@ -444,8 +441,11 @@ $(function() {
 		   tog=1;
 		}	
 	});
-
-	$('body').on('tap', '.comment_content', function() {
+	
+    /* 打开评论详情 */
+   
+	$('body').on('tap', '.news_post_commentContent,.comment_img', function(e) {
+		e.stopPropagation();
 		if(userId) {
 			mui.openWindow({
 				url: "game_allComments.html",
@@ -458,20 +458,20 @@ $(function() {
 					game_name:gameName,
 					game_icon:gameImg
 				}
-			})
+			});
 		} else {
 			mui.openWindow({
 				url: "../user/login.html",
 				id: "../user/login.html",
 
-			})
+			});
 		}
-
 	})
 
 	//	游戏点赞
 
-	$('body').on('tap', '.thumb,.thumb_num', function() {
+	$('body').on('tap', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
 		if(userId) {
 			var ts = $(this);
 			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
@@ -679,7 +679,6 @@ function launchApp(pagename) {
 }
 
 
-
 function detail_strategy(){
 		   $('.news_post_commentContentstra').children().remove();
 			commentModule = false;
@@ -724,9 +723,8 @@ function detail_strategy(){
 								}else{
 									portrait=str[i].portrait;
 								}
-								
 								div +=
-									"<div class='news_post_commentContent strategy_indent ofh' >" +
+									"<div class='news_post_commentContent strategy_indent ofh'  data-id='" + str[i].id + "'>" +
 									"<div class='ofh'>" +
 									  "<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 									   "<div  class='timeName'>"+
@@ -753,11 +751,10 @@ function detail_strategy(){
 									"</div>" +
 									"</div>" +
 									"</div>" +
-
 									"</div>"
 
 							}
-							$('.news_post_commentContentstra').append(div)
+							$('.news_post_commentContentstra').append(div);
 						} else {
 							$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
 
@@ -769,25 +766,8 @@ function detail_strategy(){
 				}
 			});
 			//		获取游戏攻略结束
-
-			$('body').on('tap','.game_comment_content img,.comment_img', function() {
-				var strategyId = $(this).attr("data-id");
-				mui.openWindow({
-					url: "../strategy/strategy_details.html",
-					id: "../strategy/strategy_details.html",
-					extras: {
-						strategyId: strategyId
-					}
-				})
-			});
-			
 	    }
 		
-        
-//      $("body").on("tap",".comment_content",function(){
-//      	alert(1);
-//      })
-        
         
         function check_assess(){      	
         	$.ajax({
@@ -912,12 +892,12 @@ function detail_strategy(){
 								  	portrait=com[i].portrait;
 								  }
 								div +=
-									"<div class='news_post_commentContent ofh'>" +
+									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 									"<div class='ofh'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 									"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
 									"</div>" +
-									"<div class='game_comment_content'>" +
+									"<div class='game_comment_content' >" +
 									"<div class='comment_content font_14' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'>" + com[i].content + "</div>" +
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +

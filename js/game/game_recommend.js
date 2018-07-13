@@ -535,27 +535,20 @@ $(function() {
 	});
 	
 	
-	$('body').on("tap",".bell",function() {
-		$.ajax({
-			type: "get",
-			url: config.data + "news/cancelMessage",
-			async: true,
-			data: {
-				userId: userId
-			},
-			success: function(data) {
-				if(data.state) {
-
-				} else {
-
-				}
-			}
-		});
-		mui.openWindow({
+  	$('body').on("tap",".bell",function() {
+       if(userId){
+		   mui.openWindow({
 			url: "../news/news_center.html",
 			id: "../news/news_center.html"
-		})
+		  });
+       }else{
+       	   mui.openWindow({
+			url:"../user/login.html",
+			id:"../user/login.html"
+		  });
+       }
 	})
+
 
 	$("body").on("tap",".game_nav>div",function() {
 		$(this).addClass("color_green border_bottom").siblings().removeClass("color_green border_bottom");

@@ -6,9 +6,6 @@ $(function(){
 		var self = plus.webview.currentWebview();
 		tagId = self.tagId;
 		tagName = self.tagName;		
-//		alert(tagId);
-		//一开始就加载的函数
-		//getGamebySign(tagId,tagName);
 	});
 	
 	$('body').on('tap','.tag',function(){
@@ -67,11 +64,8 @@ $(function(){
 						sys:1,
 						page:page
 					},
-					success:function(data){
-						
-							
+					success:function(data){		
 						if (data.state) {
-//							alert(JSON.stringify(data))
 							var g = data.gameList;
 							var li = '';
 							
@@ -83,6 +77,12 @@ $(function(){
 										signs +=
 											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
 								}
+							var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
+					        if(downloadToggle){
+						      var buttonDown="打开";
+					        }else{
+						      var buttonDown="下载";
+					        }
 								li +=
 								 		"<li class='game_list ofh' data-id="+ g[i].id +">"+
 											"<div class='color_9e9e9e fl game_listScore'>"+ ((page-1)*20 + i+1) +"</div>"+
@@ -101,10 +101,9 @@ $(function(){
 												"</div>"+
 												"<div class='font_12 color_green'>"+
 												signs +
-								
 												"</div>"+
 											"</div>"+
-											"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>"+
+											"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>"+
 										"</li>"
 							}
 							

@@ -297,30 +297,33 @@ $(function() {
 
 		//	滚动隐藏
 		function scroll(fn) {
-			var beforeScrollTop =$('.new_post_contents').scrollTop(),
+			var beforeScrollTop =$('.new_post_contents').scrollTop(),			
 			fn = fn || function() {};		
+//			$(window).scroll(function (){
+//				//alert(1)
+//				alert($(".new_post_contents").scrollTop())
+//			});
+//			return false;
 			$(".new_post_contents").scroll(function(){
-				
-			    toBottomUpload();
-				var afterScrollTop = $('.new_post_contents').scrollTop(),
+			   // toBottomUpload();
+				var afterScrollTop = $(this).scrollTop(),
 				delta = afterScrollTop - beforeScrollTop;
+//				alert(afterScrollTop);
 				if(delta === 0) return false;
 				fn(delta > 0 ? "down" : "up");
 				beforeScrollTop = afterScrollTop;
 			});
 		}
-        function toBottomUpload(){
-        	var height=$('.new_post_contents')[0].scrollHeight;
-        	var scrollTop=$('.new_post_contents').scrollTop();
-        	//alert(height)
-        	//alert(scrollTop)
-        	if(height<scrollTop+700){
-        			up();
-        			//plus.nativeUI.showWaiting("正在加载...");
-        			
-        	}
-        	
-        }
+//      function toBottomUpload(){
+//      	var height=$('.new_post_contents')[0].scrollHeight;
+//      	var scrollTop=$('.new_post_contents').scrollTop();
+//      	//alert(height)
+//      	//alert(scrollTop)
+//      	if(height<scrollTop+700){
+//      			up();	
+//      	}
+//      	
+//      }
 		scroll(function(direction) {      
 			if(direction == "down") {
 				$('.news_userInfo_reply').addClass('hidden')
@@ -387,12 +390,19 @@ $(function() {
 		})
 
        $("body").on("tap",".news_review",function(){
-       	   $('.new_post_contents').animate({
-				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
-			}, 1000);
-       });
-       
-       
+       	var c=$('.new_post_contents>div').scrollTop();
+       	
+       	var height=$('.new_post_contents')[0].scrollHeight;
+//     	document.getElementById("c")
+//     	alert(c);
+//      $('.new_post_contents').animate({
+//		     scrollTop: $(document).height()+ "px"
+//	    }, 1000);
+//     	   $('.new_post_contents').animate({
+//				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
+//			}, 1000);
+   
+       });    
 	})
 })
 
@@ -693,5 +703,5 @@ function up(){
 }
 
 function down() {
-mui('.new_post_contents').pullRefresh().endPulldownToRefresh()
+   mui('.new_post_contents').pullRefresh().endPulldownToRefresh();
 }

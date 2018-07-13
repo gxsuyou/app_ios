@@ -3,7 +3,6 @@ a{
 	color: deepskyblue !important;
 }
 .main_body,html{
-
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -25,10 +24,17 @@ a{
 	z-index:99;
 }
 .new_post_contents{
-	height: 100%;
-    overflow-y: auto; 
+	height:100%;
+    overflow-y:scroll; 
     padding-bottom:6.5rem;
 }
+
+/*.new_post_contents>div{
+	height: 100%;
+    overflow-y:scroll; 
+    padding-bottom:6.5rem;
+}*/
+
 
 .news_userInfo_reply{
 	background-color:#fff;

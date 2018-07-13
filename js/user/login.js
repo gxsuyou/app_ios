@@ -28,16 +28,13 @@ $(function() {
 					},
 
 					success: function(data) {
-                         alert(JSON.stringify(data));
 						if(data.state == "0") {
 							mui.toast("账号或密码错误")
 						} else {
-
-
 							var userInfo = JSON.stringify(data.user);
 							var userId = data.user.id;
 							window.localStorage.setItem("rememberUser", "true");
-							//						window.localStorage.setItem("userName", userName);
+							//window.localStorage.setItem("userName", userName);
 							window.localStorage.setItem("userInfo", userInfo);
 							window.localStorage.setItem("userId", userId);
 							plus.webview.close(plus.webview.getWebviewById("H5C62934A"),"none");

@@ -180,26 +180,18 @@ $(function() {
 			id: "news_search.html"
 		})
 	})
-	$('.bell').click(function() {
-		$.ajax({
-			type: "get",
-			url: config.data + "news/cancelMessage",
-			async: true,
-			data: {
-				userId: userId
-			},
-			success: function(data) {
-				if(data.state) {
-
-				} else {
-
-				}
-			}
-		});
-		mui.openWindow({
+	$('body').on("tap",".bell",function() {
+       if(userId){
+		   mui.openWindow({
 			url: "news_center.html",
 			id: "news_center.html"
-		})
+		  });
+       }else{
+       	   mui.openWindow({
+			url:"../user/login.html",
+			id:"../user/login.html"
+		  });
+       }
 	})
 
 	$('body').on("tap", ".news_art,.news_art2", function() {
