@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
-
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/profile.css" />
@@ -51,7 +50,7 @@
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
-						<input type="" name="" id="" value="" class="personal_name" maxlength="10"/>
+						<input type="text" name="" id="" value="" class="personal_name" maxlength="10"/>
 					</a>
 				</li>
 				<li class="mui-table-view-cell sex">
@@ -59,7 +58,7 @@
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
-						<input type="date" name="" id="" class="personal_bir"/>
+						<input type="text" name="" id="" class="personal_bir"/>
 					</a>
 				</li>
 			</ul>
@@ -103,12 +102,12 @@
 		
 			mui.plusReady(function(){  
 //              var self=plus.webview.currentWebview();  
-//              console.log(JSON.stringify(self))  
+//              console.log(JSON.stringify(self)) 
                 var old_back = mui.back;  
                 mui.back = function() {  
                     var wobj = plus.webview.getWebviewById("html/user/me.html");//注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，  
                     wobj.reload(true);  
-                    old_back()  
+                     old_back()  
                 }     
             });  
 		</script>

@@ -44,7 +44,7 @@ $(function() {
 			}
 		});
 
-		$('.me_img').click(function() {
+		$('body').on("tap",".me_img",function() {
 			mui.openWindow({
 				url: 'profile.html',
 				id: 'profile.html'

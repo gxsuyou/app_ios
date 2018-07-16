@@ -69,8 +69,6 @@ $(function() {
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		gameId = self.gameId;
-//		alert(newsId)
-		//up();
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",
@@ -171,8 +169,7 @@ $(function() {
 			})
 		})
 
-		//			收藏部分	
-		
+		//收藏部分	
 		$('body').on("tap",".news_collect",function() {
 			if(userId) {
 				var collect = $(this).attr('data-collect')
@@ -333,6 +330,49 @@ $(function() {
 		});
 
 		//滚动隐藏结束
+		
+		
+		$('body').on('tap', 'img', function() {
+			var picurl = $(this).attr("src")
+			var picname;
+			var btnArray = ['否', '是'];
+			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
+				if(e.index == 1) {
+
+					if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
+					{
+						picname = picurl.substring(picurl.lastIndexOf("/") + 1, picurl.length);
+					} else {
+						picname = picurl;
+					}
+					//alert(picname);
+					savePicture(picurl, picname)
+				} else {
+
+				}
+			})
+		});
+		
+		function savePicture(picurl, picname) {
+	       // 创建下载任务
+	     var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
+		// 下载完成
+		  if(status == 200) {
+			//			alert("Download success: " + d.filename);
+			plus.gallery.save(d.filename, function() {
+				mui.toast('保存成功');
+			}, function() {
+				mui.toast('保存失败，请重试！');
+			});
+		  } else {
+			  alert("Download failed: " + status);
+		  }
+
+	   });
+	//dtask.addEventListener( "statechanged", onStateChanged, false );
+	  dtask.start();
+
+    }
 
 		$("body").on('tap','.news_userInfo_replyInput',function(){
 		  mui.plusReady(function(){

@@ -20,7 +20,6 @@ $(function() {
 				InterValObj = window.setInterval(SetRemainTime, 1000);
 				// 启动计时器timer处理函数，1秒执行一次
 				// 向后台发送处理数据
-               alert(username)
 				$.ajax({
 					type: "get", // 用get方式传输
 					url: config.data + "users/verify", // 目标地址
@@ -28,7 +27,6 @@ $(function() {
 						"tel": username
 					},
 					success: function(data) {
-						//alert(JSON.stringify(data));
 						if(data.state == "1") {
 							mui.toast("短信验证码已发到您的手机,请查收");
                             recCode=data.code;

@@ -2,6 +2,11 @@ var id = userInfojson.id || 0;
 
 $(function() {
 	var dataURLup;
+	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
 	$.ajax({
 		type: "get",
 		url: config.data + "users/getUserMsgById",
@@ -25,9 +30,9 @@ $(function() {
 				$('.sexArt').text(sex_art);
 				$('.personal_bir').val(u.birthday);
 				if(u.portrait!=0){
-					$('.profile_header').css('background-image', 'url('+ u.portrait + ')')
+					$('.profile_header').css('background-image', 'url('+ u.portrait + ')');
 				}else{
-					$('.profile_header').css('background-image', 'url(../../Public/image/morentouxiang.png)')
+					$('.profile_header').css('background-image', 'url(../../Public/image/morentouxiang.png)');
 				}
 			} else {
 
@@ -41,7 +46,6 @@ $(function() {
 		outputSize: 640,
 		//adaptive: ['60%', '80%'],
 		file: '#file',
-
 		ok: '#clipBtn',
 		//img: 'img/mm.jpg',
 		loadStart: function() {
@@ -50,11 +54,11 @@ $(function() {
 		},
 		loadComplete: function() {
 			console.log('照片读取完成');
-
+           
 		},
 		done: function(dataURL) {
-			//			console.log(dataURL);
 			dataURLup = dataURL
+            console.log(dataURL.length);
 			$('#profile_header').css('background-image', 'url(' + dataURL + ')')
 			$('.head_cuts').addClass('hidden')
 
@@ -67,7 +71,7 @@ $(function() {
 	//头像结束
 
 	//	填写性别
-	$('.sex').click(function() {
+	$('body').on("tap",".sex",function() {
 		mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
 		var list = document.querySelector('.mui-table-view.mui-table-view-radio');
 		var sexnum;
@@ -105,17 +109,19 @@ $(function() {
 
 	//	填写性别结束
 
-	$('#profile_header').click(function() {
-		$('#file').click()
+	$('body').on("tap","#profile_header",function() {
+		$('#file').click();
 
-	})
-	$('.cancel_button').click(function() {
+	});
+	
+	$('body').on("tap",".cancel_button",function() {
 		$('.head_cuts').addClass('hidden')
-	})
+	});
 
-	$('.publish').click(function() {
-		var name = $('.personal_name').val().trim()
-		var bir = $('.personal_bir').val()
+	$('body').on("tap",".publish",function() {
+		var name = $('.personal_name').val().trim();
+		var bir = $('.personal_bir').val();
+		
 		$.ajax({
 			type: "get",
 			url: config.data + "users/updateNickName",
@@ -128,10 +134,11 @@ $(function() {
 				if(data.state) {
 
 				} else {
-
+				   mui.toast('昵称不能重名');
+                   return false;
 				}
 			}
-		})
+		});
 
 		$.ajax({
 			type: "get",
@@ -149,23 +156,15 @@ $(function() {
 				}
 			}
 		});
-
-		if (dataURLup) {
+		if (dataURLup){
 			uploadHead(id, dataURLup,function(){
-				mui.back()
-				
-			})
-		} else{
-			
+				mui.back()			
+			});
+		} else{		
 			mui.back()
-		}
-		
-		
-		
-		
-	})
-
-})
+		}	
+	});
+});
 
 function uploadHead(id, dataURL,callBack) {
 	$.ajax({

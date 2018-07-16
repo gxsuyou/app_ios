@@ -1,6 +1,17 @@
 var val;
 $(function(){
 	$('body').on("tap",".search_img",function(){
+      search();
+	});
+	
+	$("body").on("input",".search_bar",function(){
+    	search();
+    });
+    
+	
+	
+	
+	function search(){
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g,"");
 		$('.search_lists').children().remove();	
 		if(val){
@@ -16,7 +27,6 @@ $(function(){
 					page:1
 				},
 				success:function(data){
-					
 					if (data.state) {
 						var  div = '';
 						var g = data.game;
@@ -29,20 +39,20 @@ $(function(){
 									"<div class='fl' style='margin-left: 1rem;'>"+ g[i].game_name +"</div>"+
 								"</div>"
 							}
-							$('.search_lists').append(div);
+							$('.search_lists').empty().append(div);
 						} else{
 							
 						}
 						
 					} else{
-						var no_content = "<div class='no_content tac '>没有搜到任何内容</div>"
-							$('.search_lists').append(no_content)
+
+			              var no_content = "<div class='no_content tac '>没有搜到任何内容</div>";
+						  $('.search_lists').empty().append(no_content);
 					}
 				}
 			});
 		}
-	})
-	
+	}
 	
 	$('body').on('tap','.search_list',function(){
 		mui.openWindow({

@@ -1,27 +1,38 @@
+html,body{
+	height:100%;
+	overflow:hidden;
+}
+
+
 .add_comment{
 	position: absolute;
 	left: 50%;
 	margin-left: -2rem;
 }
 .publish{
-	position: absolute;
-	right: 1rem;
-	
+	position:absolute;
+	right:1rem;
 }
+
 .profile_contents{
-	padding-top: 1.8125rem;
+	padding-top:1.8125rem;
+	position:absolute;
+	/*height:100%;
+	overflow:scroll;*/
 }
+
 .profile_header{
-	width: 4.5rem;
-	height: 4.5rem;
-	background-image: url(../../Public/image/morentouxiang.png);
+	width:4.5rem;
+	height:4.5rem;
+	/*background-image: url(../../Public/image/morentouxiang.png);*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
-	margin: 0 auto;
+	margin:0 auto;
 	border-radius: 50%;
 	margin-bottom: 0.9375rem;
 }
+
 .mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before{
 	height: 1px;
 }
@@ -68,11 +79,17 @@ input[type=date]{
 	/*padding-bottom: 2rem;*/
 	height: auto;
 }
+input[type=text]{
+	line-height:auto;
+	height:auto;
+	margin:0;
+	padding:0;
+	margin-bottom:5px;
+}
 #file{
 	width: 5rem;
 	height: 2rem;
 	border: 0;
-	
 }
 
 .head_cuts{
@@ -98,3 +115,4 @@ input[type=date]{
 #clipArea{
 	height: calc(100% - 50px);
 }
+

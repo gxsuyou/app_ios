@@ -30,13 +30,12 @@
 	margin-left: 1.375rem;
 	margin-right:0.875rem;
 	/*background-image: url("../../Public/image/yishoucang.png");*/
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 body{
-	background-color:white;
+	background-color:#e7ebed;
 }
 .game_nameHeader{
 	position: absolute;
@@ -59,8 +58,6 @@ body{
 	height: 3.5625rem;
 	/*background-image: url(../../Public/image/tuijian1.png);*/
 	border-radius: 10px;
-	
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -91,7 +88,6 @@ body{
 	line-height: 1.125rem;
 	padding: 0 0.6rem;
 	margin-right: 0.2rem;
-	
 }
 
 .game_recommend_starScore{

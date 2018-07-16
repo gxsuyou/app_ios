@@ -10,6 +10,14 @@ input[type=text]{
 .search_lists{
 	margin-top:  2.375rem;;
 }
+
+.searchTitle{
+	width:12rem;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 .search_img{
 	width: 1.25rem;
 	height: 1.25rem;

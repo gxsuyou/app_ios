@@ -1,5 +1,5 @@
 body{
-	background-color: white;
+	background-color:#e7ebed;
 }
 .header_title{
 	position: absolute;
@@ -14,7 +14,6 @@ body{
 	top: 5px;
 	width: 35px;
 	height: 35px;
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

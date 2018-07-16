@@ -145,11 +145,9 @@ function galleryImgs() {
 
 				uploader.addFile(e.files[0],{
 					"key": "file"
-				}); // 固定值，千万不要改！！！！！！
-				
+				}); // 固定值，千万不要改！！！！！！		
 				uploader.start();
 				
-
 	}, function(e) {
 		console.log("取消选择图片");
 	}, {

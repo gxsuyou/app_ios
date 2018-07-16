@@ -36,14 +36,13 @@ body::-webkit-scrollbar{
 	display: none;
 }
 .header_box{
-	position: fixed;
+	position:fixed;
 	top: 0;
 	z-index: 99;
 	width: 100%;
 }
 header{
 	background-color: #7fcadf;
-	
     z-index: 10;
     right: 0;
     left: 0;
