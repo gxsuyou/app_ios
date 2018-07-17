@@ -130,8 +130,8 @@ body{
 	overflow: hidden;  /** 隐藏超出的内容 **/
 	text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
 }
 .strategy_content_classify{
 	/*width: 4rem;*/

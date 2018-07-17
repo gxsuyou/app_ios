@@ -559,7 +559,7 @@ function createDownload(name, src) {
 
 		mui.toast("开始下载")
 		$(".download_btn_text").text("取消");
-		var dtask = plus.downloader.createDownload("http://apk.oneyouxi.com.cn/" + encodeURI(src), {
+		var dtask = plus.downloader.createDownload("http://ipa.oneyouxi.com.cn/" + encodeURI(src), {
 			method: 'GET',
 			data: '',
 			filename: '_downloads/' + name + '.ipa',
