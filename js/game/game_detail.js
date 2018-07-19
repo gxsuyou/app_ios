@@ -321,12 +321,12 @@ $(function() {
            	if(game.game_download_ios!==null){
 				location.href=game.game_download_ios;
 			}else{
-				alert("越狱包");
+				//alert("越狱包");
 			}
 		})
 		
 		
-		
+	
 		//		攻略页结束
 
 		$("body").on("tap","#game_detail_download",function(ev) {
@@ -335,23 +335,25 @@ $(function() {
 			event.stopPropagation();
 			var t = $(this);
 			var isFile = false;
-			var fileName = '_downloads/' + game.game_name + '.ipa';
-			//alert(JSON.stringify(game));
-//			return false;
+			
+			//var fileName = '_downloads/' + game.game_name + '.ipa';
+            var fileName = '_downloads/' + game.game_name + '.ipa';
+            
+            
 			if(String(game.game_download_ios)!="null"){
 				location.href=game.game_download_ios;
 				return false;
+			}else{
+				location.href="itms-services://?action=download-manifest&url=http://182.61.26.179:8878/www/download/majian.plist";
+				return false;
 			}
-			//alert(game.game_packagename)
-//           alert(game.game_name);
-//           game.game_download_ios2
-//			return false;		
+		
 //        alert(fileName+" "+game.game_download_ios2)
 //        return false;
+
 			switch($(this).find(".download_btn_text").text()) {
 				case "下载":
-					createDownload(game.game_name,game.game_download_ios2)
-					//				t.text('暂停');
+					createDownload(game.game_name,game.game_download_ios2);
 					break;
 				case "打开":
 					launchApp(game.game_packagename);
@@ -370,7 +372,6 @@ $(function() {
 						$("#loading").css("width", 0 + "%");
 						mui.toast('下载任务已取消');
 					}, 300)
-
 					break;
 				case "安装":
 					installApp(fileName)
@@ -379,6 +380,105 @@ $(function() {
 		})
 
 	})
+	
+	
+	
+	/* 
+	 * 安装
+	 * @params 第一个是包名
+	 * @param 第二个是下载地址
+	 */
+	
+	function createDownload(name, src) {
+	$.ajax({
+		type: "get",
+		url: config.data + "game/addDownloadNum",
+		async: true,
+		data: {
+			id: self.gameId
+		},
+		success: function(data) {
+			if(data.state) {
+				$("#game_msg_install").text(parseInt($("#game_msg_install").text()) + 1)
+			}
+		}
+	});
+	plus.downloader.enumerate(function(tasks) {
+		for(var i = 0; i < tasks.length; i++) {
+
+			if(tasks[i].filename == '_downloads/' + name + '.ipa') {
+				//				tasks[i].abort();
+				return;
+
+			}
+
+		}
+
+		mui.toast("开始下载")
+		$(".download_btn_text").text("取消");
+		var dtask = plus.downloader.createDownload("http://ipa.oneyouxi.com.cn/" + encodeURI(src), {
+			method: 'GET',
+			data: '',
+			filename: '_downloads/'+name+'.ipa',
+			timeout: '3000',
+			retry: 0,
+			retryInterval: 0
+		}, function(d, status) {
+			// 下载完成
+			if(status == 200) {
+				//添加到我的游戏
+				if(userId) {
+					$.ajax({
+						type: "get",
+						url: config.data + "game/addMyGame",
+						async: true,
+						data: {
+							gameId: gameId,
+							userId: userId,
+							sys: 2
+						},
+						success: function(data) {
+							if(data.state) {
+
+							} else {
+
+							}
+						}
+					});
+				}
+				//添加到我的游戏结束
+			    alert("安装中"+dtask.filename);
+				plus.runtime.install(dtask.filename,{force:true},function(widgetInfo) {
+					$(".download_btn_text").text("打开");
+				}, function(error) {
+					console.log(error)
+					alert(JSON.stringify(error))
+				});
+
+			} else {
+				mui.toast("下载失败: " + status);
+				$("#game_detail_download").removeClass("download_btn_active");
+			}
+		});
+		dtask.addEventListener("statechanged", onStateChanged, false);
+		dtask.start();
+	});
+}
+
+/* 安装ios包 */
+function installApp(filename) {
+
+	plus.runtime.install(filename,{force:true},function(widgetInfo) {
+		console.log(widgetInfo)
+	}, function(error) {
+		mui.toast("打开失败")
+		alert(JSON.stringify(error))
+
+	});
+}
+	
+	
+	
 
 	$('body').on("tap",".backImg",function() {
 		mui.back();
@@ -531,81 +631,6 @@ $(function() {
 
 })
 
-function createDownload(name, src) {
-
-	$.ajax({
-		type: "get",
-		url: config.data + "game/addDownloadNum",
-		async: true,
-		data: {
-			id: self.gameId
-		},
-		success: function(data) {
-			if(data.state) {
-				$("#game_msg_install").text(parseInt($("#game_msg_install").text()) + 1)
-			}
-		}
-	});
-	plus.downloader.enumerate(function(tasks) {
-		for(var i = 0; i < tasks.length; i++) {
-
-			if(tasks[i].filename == '_downloads/' + name + '.ipa') {
-				//				tasks[i].abort();
-				return;
-
-			}
-
-		}
-
-		mui.toast("开始下载")
-		$(".download_btn_text").text("取消");
-		var dtask = plus.downloader.createDownload("http://ipa.oneyouxi.com.cn/" + encodeURI(src), {
-			method: 'GET',
-			data: '',
-			filename: '_downloads/' + name + '.ipa',
-			timeout: '3000',
-			retry: 0,
-			retryInterval: 0
-		}, function(d, status) {
-			// 下载完成
-			if(status == 200) {
-				//添加到我的游戏
-				if(userId) {
-					$.ajax({
-						type: "get",
-						url: config.data + "game/addMyGame",
-						async: true,
-						data: {
-							gameId: gameId,
-							userId: userId,
-							sys: 2
-						},
-						success: function(data) {
-							if(data.state) {
-
-							} else {
-
-							}
-						}
-					});
-				}
-				//				添加到我的游戏结束
-
-				plus.runtime.install(dtask.filename, {}, function(widgetInfo) {
-					$(".download_btn_text").text("打开");
-				}, function(error) {
-					console.log(error)
-				});
-
-			} else {
-				mui.toast("下载失败: " + status);
-				$("#game_detail_download").removeClass("download_btn_active");
-			}
-		});
-		dtask.addEventListener("statechanged", onStateChanged, false);
-		dtask.start();
-	});
-}
 
 function onStateChanged(download, status) {
 	//	if(download.state==5){
@@ -649,17 +674,10 @@ function loading(num) {
 	$(".download_loading").css("width", num + "%");
 }
 
-function installApp(filename) {
-	plus.runtime.install(filename, {}, function(widgetInfo) {
-		console.log(widgetInfo)
-	}, function(error) {
-		mui.toast("打开失败")
-		alert(JSON.stringify(error))
 
-	});
-}
 
 function launchApp(pagename) {
+	alert(plus.os.name)
 	if(plus.os.name == "Android") {
 		plus.runtime.launchApplication({
 			pname: pagename,

@@ -215,7 +215,7 @@
 									}else{
 										var signs = '';
 									}
-									
+//								alert(JSON.stringify(g[i]));
 							   if(result.length > 2) {
 							          for(var j = 0; j < 3; j++) {
 								   signs +=
@@ -309,9 +309,7 @@
 					},
 					success: function(data) {
 						if(data.state) {
-
-							var h = data.h5List;
-                            
+							var h = data.h5List;                        
 							var div = "";
 							for(var i = 0; i < h.length; i++) {
 								div +=
