@@ -7,8 +7,8 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 mui.plusReady(function() {
+	plus.navigator.setStatusBarBackground("#7fcadf");
 	var wgtVer = null;
-
 	function plusReady() {
 		// ......
 		// 获取本地应用资源版本号

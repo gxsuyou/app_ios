@@ -537,7 +537,7 @@ function up(){
 	if(closeAjax){
 		return false;
 	}
-	setTimeout(()=>{
+	setTimeout(function(){
 	if(type = "hot") {
 		closeAjax=true;
 		$.ajax({

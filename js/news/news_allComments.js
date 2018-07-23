@@ -4,31 +4,31 @@ var userId = localStorage.getItem("userId") || 22;
 var commentId;
 var targetCommentId;
 var targetUserId;
+var loginToggle=false;
 	   mui.init({
 		swipeBack: true, //启用右滑关闭功能
 		pullRefresh: {
 			container: ".news_post_commentContents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-		    down: {
-				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
-				callback:down
-			},
-			up: {
-				height:50, //可选.默认50.触发上拉加载拖动距离
-				auto:false, //可选,默认false.自动上拉加载一次
-				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			}
+//			up: {
+//				height:50, //可选.默认50.触发上拉加载拖动距离
+//				auto:false, //可选,默认false.自动上拉加载一次
+//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+//				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//			}
+//		    down: {
+//				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+//				height: '50px', //可选,默认50px.下拉刷新控件的高度,
+//				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+//				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+//				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
+//				callback:down
+//			},
 		}
 	});
 
 $(function() {
-//	alert(2);
 	mui.plusReady(function(){
 			plus.webview.currentWebview().setStyle({
                 softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
@@ -78,7 +78,15 @@ $(function() {
 			
 		});
 		
-        
+        $(".news_post_commentContents").scroll(function(){
+        	var height =$(this).height();
+        	var scrollTop=$(this).scrollTop();
+        	var scrollHeight=$(this)[0].scrollHeight;
+        	//到底部执行
+        	if(scrollTop/(scrollHeight-height)>=0.82){
+        		up();
+        	}
+        })
 
 		$('body').on('tap','.comment_summary',function(e){
 			e.stopPropagation();
@@ -164,6 +172,10 @@ $(function() {
 function up(){
 	//获取二级评论
 	//setTimeout(()=>{
+		if(loginToggle){
+			return false;
+		}
+		loginToggle=true;
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getNewsCommentTowByPage",
@@ -173,6 +185,7 @@ function up(){
 				"page": page
 			},
 			success:function(data){
+				loginToggle=false;
 				page++;
 				if (data.state) {				
 					var com = data.comment;	
@@ -206,6 +219,8 @@ function up(){
 					$('.news_post_secondcommentContents').append(div);
 					
 					if(com.length < 10) {
+						$(".bottomInfo").text("没有更多的评论了");
+						loginToggle=true;
 						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(true);	
 					} else {							
 						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(false);				
