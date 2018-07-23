@@ -353,7 +353,7 @@ $(function() {
        
        
        $('body').on('tap','#reload',function(){
-       	
+       	  window.location.reload();
        });
 
 	})

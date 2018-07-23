@@ -514,16 +514,14 @@
     top: 0;
     border-radius: 10px;
 }
-.download_btn_text{
-	
+.download_btn_text{	
 	width: 2.75rem;
-	  position: absolute;
-	  left: 0;
-	  top: 0;
-	  text-align: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: center;
 	z-index: 30;
-	 border-radius: 10px;
-	 height: 1.4375rem;
+	border-radius: 10px;
     line-height: 1.4375rem;
 }
 .game_detail_download{

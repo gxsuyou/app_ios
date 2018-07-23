@@ -40,19 +40,17 @@ $(function() {
 			}
 		})
 	})
-	
-	
 	mui.init({
 		swipeBack: true, //启用右滑关闭功能
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-			up: {
-				height: 50, //可选.默认50.触发上拉加载拖动距离
-				auto:true, //可选,默认false.自动上拉加载一次
-				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			},
+//			up: {
+//				height: 50, //可选.默认50.触发上拉加载拖动距离
+//				auto:true, //可选,默认false.自动上拉加载一次
+//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+//				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//			},
 //			down: {
 //				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
 //				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
@@ -97,6 +95,7 @@ $(function() {
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
 					$('.news_reviewNum').text(n.comment)
+					up();
 					if(n.game_id) {
 						$('.news_post_list').css("top", total_height + "px")
 						$('.new_post_contents').css("margin-top", total_height + 36 + "px")
@@ -110,7 +109,7 @@ $(function() {
 						$('.news_collect').attr('data-collect', '')
 						$('.news_collect').css("background-image", "url(../../Public/image/shoucang.png)")
 					}
-
+                     
 				} else {
 
 				}
@@ -288,52 +287,45 @@ $(function() {
 				})
 			}
 
-		})
-
-		//			点赞部分结束
-
-		//	滚动隐藏
-		function scroll(fn) {
-			var beforeScrollTop =$('.new_post_contents').scrollTop(),			
-			fn = fn || function() {};		
-//			$(window).scroll(function (){
-//				//alert(1)
-//				alert($(".new_post_contents").scrollTop())
-//			});
-//			return false;
-			$(".new_post_contents").scroll(function(){
-			   // toBottomUpload();
-				var afterScrollTop = $(this).scrollTop(),
-				delta = afterScrollTop - beforeScrollTop;
-//				alert(afterScrollTop);
-				if(delta === 0) return false;
-				fn(delta > 0 ? "down" : "up");
-				beforeScrollTop = afterScrollTop;
-			});
-		}
-//      function toBottomUpload(){
-//      	var height=$('.new_post_contents')[0].scrollHeight;
-//      	var scrollTop=$('.new_post_contents').scrollTop();
-//      	//alert(height)
-//      	//alert(scrollTop)
-//      	if(height<scrollTop+700){
-//      			up();	
-//      	}
-//      	
-//      }
-		scroll(function(direction) {      
-			if(direction == "down") {
-				$('.news_userInfo_reply').addClass('hidden')
-			} else {
-                 $('.news_userInfo_reply').removeClass('hidden') 
-			}
 		});
 
+		//点赞部分结束
+
+		//	滚动隐藏
+		function scroll(fn){
+			var beforeScrollTop =$('.new_post_contents').scrollTop(),			
+			fn = fn || function() {};	
+
+			$(".new_post_contents").scroll(function(){				
+				var afterScrollTop = $(this).scrollTop()
+				delta = afterScrollTop - beforeScrollTop;
+				var height=$(this)[0].scrollHeight;
+				if(delta === 0){return false};
+				if(afterScrollTop+700>height){
+					$('.news_userInfo_reply').removeClass('hidden');
+					up();
+					return false;
+				}
+				fn(delta > 0 ? "down" : "up");
+				beforeScrollTop = afterScrollTop;
+				
+			});
+		}
+//		
+//		
+		scroll(function(direction){      
+			if(direction == "down"){
+				$('.news_userInfo_reply').addClass('hidden');
+			} else {
+                 $('.news_userInfo_reply').removeClass('hidden');
+			}
+		});
 		//滚动隐藏结束
 		
+
 		
 		$('body').on('tap', 'img', function() {
-			var picurl = $(this).attr("src")
+			var picurl = $(this).attr("src");
 			var picname;
 			var btnArray = ['否', '是'];
 			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
@@ -345,7 +337,6 @@ $(function() {
 					} else {
 						picname = picurl;
 					}
-					//alert(picname);
 					savePicture(picurl, picname)
 				} else {
 
@@ -429,20 +420,12 @@ $(function() {
 
 		})
 
-       $("body").on("tap",".news_review",function(){
-       	var c=$('.new_post_contents>div').scrollTop();
-       	
+       $("body").on("tap",".news_review",function(){	
        	var height=$('.new_post_contents')[0].scrollHeight;
-//     	document.getElementById("c")
-//     	alert(c);
-//      $('.new_post_contents').animate({
-//		     scrollTop: $(document).height()+ "px"
-//	    }, 1000);
-//     	   $('.new_post_contents').animate({
-//				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
-//			}, 1000);
-   
-       });    
+        $('.new_post_contents').animate({
+		     scrollTop:height+ "px"
+	    }, 1000);
+       });     
 	})
 })
 
@@ -556,6 +539,7 @@ function up(){
 	}
 	setTimeout(()=>{
 	if(type = "hot") {
+		closeAjax=true;
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
@@ -638,12 +622,13 @@ function up(){
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
+					closeAjax=false;
 					if(com.length < 5) {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
+						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
                         closeAjax=true;
 						$(".bottomInfo").text("没有更多评论了");
 					} else {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
+						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
 					}
 
 				} else {
@@ -745,3 +730,5 @@ function up(){
 function down() {
    mui('.new_post_contents').pullRefresh().endPulldownToRefresh();
 }
+
+

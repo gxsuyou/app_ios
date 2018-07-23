@@ -25,10 +25,14 @@ a{
 }
 .new_post_contents{
 	height:100%;
+	width:100%;
     overflow-y:scroll; 
     padding-bottom:6.5rem;
 }
-
+/*.new_post_contents>div{
+	height:200px;
+	overflow-y:scroll;
+}*/
 /*.new_post_contents>div{
 	height: 100%;
     overflow-y:scroll; 
@@ -354,5 +358,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	text-align:center;
 	color:#7A7A7A;
 	font-size:14px;
+	font-weight:600;
+	margin-top:1rem;
 	
 }

@@ -1,31 +1,29 @@
 
 
 html,body{
-	/*height: 1000rem;*/
     margin: 0px;
     padding: 0px;
     height:100%;
     overflow:hidden;
-    /*-webkit-touch-callout: none;
-    -webkit-user-select: none;*/
 }
 
 
 .header_box{
-	position: absolute;
+	position:absolute;
 	top:0px;
 }
 
 .news_post_commentContents{
   /* height:50rem;*/
+   /*width:100%;
    height:100%;
    overflow-y:scroll;
-   padding-bottom:6rem;
+   padding-bottom:0rem;*/
+  height:100%;
+    overflow-y:scroll;
+  padding-bottom:2rem;
 }
 
-.news_post_commentContents>div{
-/*	height:1000rem;*/
-}
 
 .notice{
 	position: absolute;

@@ -17,16 +17,17 @@ mui.plusReady(function() {
 			
 			console.log("当前应用版本：" + wgtVer);
 			//	检测更新
-           return false;
+           //return false;
 			$.ajax({
 				type: "get",
-				url: "http://www.oneyouxi.com.cn:8877/H5/update",
+				url: "http://www.oneyouxi.com.cn:8877/h5/updateIos",
 				async: true,
 				success: function(data) {
 					if(data.state) {
 						newVer = data.mark;
 						console.log(newVer);
 						if(wgtVer && newVer && (wgtVer != newVer)) {
+							
 							downWgt(); // 下载升级包
 						} else {
 							//plus.nativeUI.alert("无新版本可更新！");
@@ -66,16 +67,15 @@ mui.plusReady(function() {
 //					default:
 //						break;
 //				}
-//			}
-//	
+//			}	
 //		}
 
 	// 下载wgt文件
-	var wgtUrl = "http://182.61.26.179:8878/www/APK/H5C62934A.wgt";
+	var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5C62934A.wgt";
 
-	function downWgt() {
+	function downWgt(){
 		plus.nativeUI.showWaiting("正在更新中");
-		plus.downloader.createDownload(wgtUrl, {
+		plus.downloader.createDownload(wgtUrl,{
 			filename: "_doc/update/"
 		}, function(d, status) {
 			if(status == 200) {

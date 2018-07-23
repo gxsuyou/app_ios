@@ -8,18 +8,18 @@ var targetUserId;
 		swipeBack: true, //启用右滑关闭功能
 		pullRefresh: {
 			container: ".news_post_commentContents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//		    down: {
-//				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-//				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-//				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-//				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-//				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-//				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
-//				callback:down
-//			},
+		    down: {
+				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+				height: '50px', //可选,默认50px.下拉刷新控件的高度,
+				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
+				callback:down
+			},
 			up: {
 				height:50, //可选.默认50.触发上拉加载拖动距离
-				auto:true, //可选,默认false.自动上拉加载一次
+				auto:false, //可选,默认false.自动上拉加载一次
 				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
 				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
@@ -28,10 +28,11 @@ var targetUserId;
 	});
 
 $(function() {
-	mui.plusReady(function() {
-		  plus.webview.currentWebview().setStyle({
-              softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-        });
+//	alert(2);
+	mui.plusReady(function(){
+			plus.webview.currentWebview().setStyle({
+                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+            });
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		commentId = self.commentId;
@@ -39,6 +40,7 @@ $(function() {
 		firstImg = self.firstImg;
 		title = self.title;
 //		获取一级评论
+        up();
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getCommentById",
@@ -60,8 +62,7 @@ $(function() {
 					$('.comment_userOne').text(c.nick_name);
 					$('.comment_contentOne').text(c.content);
 					$('.timeOne').text(c.add_time);
-					$('.comment_summary').attr('data-id',c.newsid);
-					
+					$('.comment_summary').attr('data-id',c.newsid);					
 					if (c.news_img) {
 						$('.comment_summary_img').css('background-image','url(' + config.img + encodeURI(c.news_img) + ')')
 					} else{
@@ -93,10 +94,18 @@ $(function() {
 		})
 		
 	  $('body').on("focus",".news_secondComment_input",function(){
-	  	 setTimeout(function(){
-			var scrollY=$('.news_post_commentContents')[0].scrollHeight;
+	  	 //setTimeout(function(){
+			//var scrollY=$('.news_post_commentContents')[0].scrollHeight;
 //         $('.news_post_commentContents').animate({scrollTop:scrollY-400},200);        
-		},200);
+		//},200);
+//		mui.plusReady(function(){
+//          plus.webview.currentWebview().setStyle({
+//            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+//         });
+//      })
+//		 plus.webview.currentWebview().setStyle({
+//            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+//      });
 	  })
 	
 	 
@@ -104,10 +113,8 @@ $(function() {
        //获取一级评论结束	
   
 		$('body').on('tap','.news_post_commentContent',function(){
-//			alert(1)
-//			return false;
 			$('.news_secondComment_input').focus();
-			targetUserId = $(this).attr("data-userId")
+			targetUserId = $(this).attr("data-userId");
 		})
 		
         //点击发布
@@ -156,7 +163,7 @@ $(function() {
 
 function up(){
 	//获取二级评论
-	setTimeout(()=>{
+	//setTimeout(()=>{
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getNewsCommentTowByPage",
@@ -167,8 +174,8 @@ function up(){
 			},
 			success:function(data){
 				page++;
-				if (data.state) {					
-					var com = data.comment;				
+				if (data.state) {				
+					var com = data.comment;	
 					var div ="";
 					var portrait;
 					for (var i = 0; i < com.length; i++) {
@@ -198,7 +205,7 @@ function up(){
 					
 					$('.news_post_secondcommentContents').append(div);
 					
-					if(com.length < 10) {					
+					if(com.length < 10) {
 						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(true);	
 					} else {							
 						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(false);				
@@ -210,7 +217,7 @@ function up(){
 		});
 		
 //		获取二级评论结束
-    },400);
+    //},400);
 }
 
 
