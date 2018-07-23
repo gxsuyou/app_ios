@@ -526,7 +526,7 @@
 	 height: 1.4375rem;
     line-height: 1.4375rem;
 }
-#game_detail_download{
+.game_detail_download{
 	background-color: #8ed8ed;
 	overflow: hidden;
 	border-radius: 10px;
