@@ -764,21 +764,24 @@ function detail_strategy(){
 	    }
 		
         
-        function check_assess(){      	
-        	$.ajax({
-				type: "get",
-				url: config.data + "game/getCommentUserById",
-				async: true,
-				data: {
-					game_id:gameId,
-					user_id:userId
-				},
-				success: function(data) {
-					if(data.state!=1){
+        function check_assess(){   
+        	if(userId){
+        		/*登录下执行*/
+                $.ajax({
+				   type: "get",
+				   url: config.data + "game/getCommentUserById",
+				   async: true,
+				   data: {
+					  game_id:gameId,
+					  user_id:userId
+				    },
+				    success: function(data) {
+					  if(data.state!=1){
 						$(".goToscore").css("display","none");
 					}
-			   }
-		    });
+			    }
+		        });
+        	}
 		    
         }
     

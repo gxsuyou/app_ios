@@ -121,7 +121,7 @@ $(function() {
 	$('body').on("tap",".publish",function() {
 		var name = $('.personal_name').val().trim();
 		var bir = $('.personal_bir').val();
-		
+		/* 先验证昵称 */
 		$.ajax({
 			type: "get",
 			url: config.data + "users/updateNickName",
@@ -132,38 +132,46 @@ $(function() {
 			},
 			success: function(data) {
 				if(data.state) {
-
+					
+					/* 修改生日  */
+					$.ajax({
+						type: "get",
+						url: config.data + "users/updateBirthday",
+						async: true,
+						data: {
+							id: id,
+							birthday: bir
+						},
+						success: function(data) {
+							if(data.state) {
+					
+							} else {
+					
+							}
+						}
+					});
+					
+					/*上传头图*/
+					if (dataURLup){
+			           uploadHead(id, dataURLup,function(){
+				           mui.back()			
+			            });
+		            } else{		
+			            mui.back()
+		            }	
+		            
+		            
+		            
+		            
 				} else {
 				   mui.toast('昵称不能重名');
                    return false;
 				}
 			}
-		});
-
-		$.ajax({
-			type: "get",
-			url: config.data + "users/updateBirthday",
-			async: true,
-			data: {
-				id: id,
-				birthday: bir
-			},
-			success: function(data) {
-				if(data.state) {
-
-				} else {
-
-				}
-			}
-		});
-		if (dataURLup){
-			uploadHead(id, dataURLup,function(){
-				mui.back()			
-			});
-		} else{		
-			mui.back()
-		}	
+		});	
 	});
+	
+	
 });
 
 function uploadHead(id, dataURL,callBack) {

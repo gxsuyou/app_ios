@@ -3,7 +3,7 @@
 	"id": "H5C62934A",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "ONE游戏",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "4.0.8",/*应用版本名称*/
+		"name": "4.0.9",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -102,6 +102,9 @@
         },"Share":{},"OAuth":{}
 	},
 	"plus": {
+		"statusbar":{
+			"immersed":true
+		},
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
 			"waiting": false,"delay":"0"
@@ -109,13 +112,14 @@
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx3c40d1c9660dfaf3","appsecret":"6bb4455d150f0b2cff16c9ea4ce42547","description":"可选，微信分享"},"qq":{"appid":"wx3c40d1c9660dfaf3","description":"QQ分享"}}},
-			"apple": {
+			"apple":{
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks":[],
+				"UIReserveStatusbarOffset": true
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/

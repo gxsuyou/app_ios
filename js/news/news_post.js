@@ -7,6 +7,7 @@ var type = 'hot';
 var firstImg;
 var title;
 var closeAjax=false;
+var replyTog=false;
 $(function() {
 	$('body').on('tap','a',function(event){
 		event.preventDefault();
@@ -62,7 +63,11 @@ $(function() {
 //			}
 		}
 	})
+
 	mui.plusReady(function() {
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
@@ -366,23 +371,32 @@ $(function() {
     }
 
 		$("body").on('tap','.news_userInfo_replyInput',function(){
-		  mui.plusReady(function(){
-		  	plus.webview.currentWebview().setStyle({
-                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-            });
-			$('.news_userInfo_reply').addClass('hidden')
-			$('.news_secondComment').removeClass('hidden')
+	
+//			$('.news_userInfo_reply').addClass('hidden')
+//			$('.news_secondComment').removeClass('hidden')
+ 
+            $('.news_userInfo_reply').css("display","none")
+			$('.news_secondComment').css("display","block")
+ 
 			$('.news_secondComment_input').focus();
+			
 			$('.news_secondComment_input').blur(function(){
 				setTimeout(function() {
-					$('.news_secondComment').addClass('hidden');
-					$('.news_userInfo_reply').removeClass('hidden');							
+//					$('.news_secondComment').addClass('hidden');
+//					$('.news_userInfo_reply').removeClass('hidden');	
+                    $('.news_secondComment').css("display","none");
+					$('.news_userInfo_reply').css("display","block");
 				},250);
 			});
-		  })
+		 
 		});
 		
 		$('body').on('tap', '.publish', function(event) {
+			if(replyTog){
+				mui.toast("正在发布");			
+				return false;
+			}
+			replyTog=true;
 			event.preventDefault();
 			if(userId) {
 				var content = $(this).prev().val();
@@ -400,12 +414,11 @@ $(function() {
 						"news_title": title
 					},
 					success: function(data) {
-						if(data.state == "1") {
-							
-							$('.news_secondComment_input').val("");
-			       //不刷新										
+						if(data.state == "1") {					
+						$('.news_secondComment_input').val(""); //不刷新							      						
 						 getComment();
-						 mui.toast("发送成功");					
+						 mui.toast("发送成功");	
+						 replyTog=false;
 						} else {
 							mui.toast("发送失败，请重试")
 						}
@@ -554,7 +567,7 @@ function up(){
 					var com = data.comment;
 					var comment = "";
 					var towLen,portrait;
-					$(".bottomInfo").text("正在加载...");
+					$(".bottomInfo").html("正在加载<span>...</span>");
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";

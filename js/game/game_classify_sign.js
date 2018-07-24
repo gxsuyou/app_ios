@@ -6,7 +6,7 @@ $(function(){
 		var self = plus.webview.currentWebview();
 		clsId = self.clsId;
 		name = self.name;
-		$('.game_nameHeader').text(name)
+		$('.game_nameHeader').text(name);
 	});
 	$('body').on('tap','.game_list',function(){
 		mui.openWindow({

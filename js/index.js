@@ -7,7 +7,7 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 mui.plusReady(function() {
-	plus.navigator.setStatusBarBackground("#7fcadf");
+	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 	var wgtVer = null;
 	function plusReady() {
 		// ......
@@ -17,7 +17,6 @@ mui.plusReady(function() {
 			
 			console.log("当前应用版本：" + wgtVer);
 			//	检测更新
-           //return false;
 			$.ajax({
 				type: "get",
 				url: "http://www.oneyouxi.com.cn:8877/h5/updateIos",
@@ -89,25 +88,7 @@ mui.plusReady(function() {
 		}).start();
 	}
 
-	//	var h1 = plus.webview.getLaunchWebview()
-	//
-	//	var height = document.documentElement.clientHeight || document.body.clientHeight;
-	//	window.onresize = function() {
-	//		var heightView = document.documentElement.clientHeight || document.body.clientHeight;
-	//		if(heightView < height) {
-	//			plus.webview.currentWebview().setStyle({
-	//				height: height
-	//			});
-	//			//			//修改父页面高度的时候，也要修改子页面的高度  因为子页面距离父页面底部始终是51px  所以这里只需要用父页面的高度减去51px,就是子页面的高度
-	//			//			plus.webview.getWebviewById('html/store/store.html').setStyle({
-	//			//				height: (height * 1 - 51)
-	//			//			});
-	//		} else {
-	//
-	//		}
-	//	}
 	var h1 = plus.webview.getLaunchWebview()
-
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
 	window.onresize = function() {
 		if(plus.webview.getWebviewById('html/play/play.html')) {

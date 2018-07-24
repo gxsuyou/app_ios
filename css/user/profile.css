@@ -2,7 +2,10 @@ html,body{
 	height:100%;
 	overflow:hidden;
 }
-
+.header_box{
+	position: absolute;
+	top:0;
+}
 
 .add_comment{
 	position: absolute;
@@ -16,9 +19,9 @@ html,body{
 
 .profile_contents{
 	padding-top:1.8125rem;
-	position:absolute;
-	/*height:100%;
-	overflow:scroll;*/
+/*	position:absolute;*/
+	height:100%;
+	overflow:scroll;
 }
 
 .profile_header{

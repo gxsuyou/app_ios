@@ -64,13 +64,22 @@ $(function() {
 
 		
 	$("body").on("focus","#strategy_textarea",function(){
-		$("#strategy_textarea span").css("-webkit-user-select","text");
+		///$("#strategy_textarea span").css("-webkit-user-select","text");
 		setTimeout(function(){
 			var scrollY=$('#strategy_textarea')[0].scrollHeight;
            $('#strategy_textarea').animate({scrollTop:scrollY},200);        
 		},200);
 	});
 	
+
+   $("body").on("keyup","#strategy_textarea",function(){
+		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
+		
+         console.log($(this).html())
+	});
+
+
+
 
 	
 	$('body').on("tap",".publish",function() {
@@ -130,19 +139,17 @@ function galleryImgs() {
 	$("#strategy_textarea").focus();
 	plus.gallery.pick(function(e) {
     mui.toast("正在上传,请等待");
-		var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&token=token&url="+config.url_upload,{
+		var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
 					method: "post"
-				}, function(t, status) {
+		}, function(t, status) {				         
 					 var res =JSON.parse(t.responseText);
 					  if(res.errno==0){
 						  var src=res.data[0];
 							appendHtml(`<img style="width:98%;height:auto;" src="${src}"/>`);						
 					  }else{
 						  mui.toast("上传图片失败")
-					  }
-		
-				});
-
+					  }		
+			  });
 				uploader.addFile(e.files[0],{
 					"key": "file"
 				}); // 固定值，千万不要改！！！！！！		

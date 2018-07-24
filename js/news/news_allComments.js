@@ -101,21 +101,7 @@ $(function() {
 			});
 		})
 		
-	  $('body').on("focus",".news_secondComment_input",function(){
-	  	 //setTimeout(function(){
-			//var scrollY=$('.news_post_commentContents')[0].scrollHeight;
-//         $('.news_post_commentContents').animate({scrollTop:scrollY-400},200);        
-		//},200);
-//		mui.plusReady(function(){
-//          plus.webview.currentWebview().setStyle({
-//            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-//         });
-//      })
-//		 plus.webview.currentWebview().setStyle({
-//            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-//      });
-	  })
-	
+
 	 
 		
        //获取一级评论结束	

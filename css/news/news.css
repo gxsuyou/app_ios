@@ -211,11 +211,9 @@
 	color: #282828;
 	width: 92%;
 	max-height: 2.6rem;
-	/*white-space:nowrap;*/
-	
 	overflow: hidden;
 	/** 隐藏超出的内容 **/
-	width: 20em;
+	width: 26em;
 	white-space:nowrap; 
 	text-overflow:ellipsis; 
 	-o-text-overflow:ellipsis; 

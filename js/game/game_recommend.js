@@ -401,6 +401,7 @@ $(function() {
 	
 	
 	$('.game_rank').children().click(function() {
+		
 		mui('.nav_cls_contains').pullRefresh().refresh(true);
 		page = 1;
 		sort = $(this).attr('data-sort')
@@ -408,7 +409,8 @@ $(function() {
 		$(this).children().addClass('border_green color_green').css('background-color', 'white')
 		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
 		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
-		$('.game_lists').children().remove()
+		$('.game_lists').children().remove();
+	    $(".first_three").css("display","none");	
 		getRank(sort);
 	})
 	
@@ -566,17 +568,9 @@ $(function() {
 		})
 	});
 
-	//	$('.check_more').click(function() {
-	//		mui.openWindow({
-	//			url: "game_classify_sign.html",
-	//			id: "game_classify_sign.html"
-	//		})
-	//	})
-
 })
 
 function getRank(sort) {
-    
   mui.plusReady(function(){
 	$.ajax({
 		type: "get",
@@ -594,6 +588,7 @@ function getRank(sort) {
 				var list = '';
 				for(var i = 0; i < g.length; i++) {
 					if(i < 3) {
+						
 						$('.first').attr('data-id', g[0].id)
 						$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
 						$('.first .y_listName').text(g[0].game_name)
@@ -606,6 +601,7 @@ function getRank(sort) {
 						$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
 						$('.third  .y_listName').text(g[2].game_name)
 						$('.third  .game_recommend_starScore').text(g[2].grade)
+						$(".first_three").css("display","flex");
 					} else {
 						var signs = '';
 						if(g[i].tagList && g[i].tagList !== "null") {
@@ -661,12 +657,8 @@ function getRank(sort) {
 							"</li>"
 					}
 				}
-			    //alert(list);
-//			    alert(3);
-                //alert(list);
+
 			    $('.game_lists').append(list);
-//		        alert($('.game_lists').html());
-				//$('.game_lists').append(list);
 				$('.game_recommend_stars').each(function() {
 					var score = $(this).find('.game_recommend_starScore').eq(0).text()
 					var starNum = Math.round(score)

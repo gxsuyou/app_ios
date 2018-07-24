@@ -54,9 +54,7 @@ $(function() {
 					auto: false, //可选,默认false.首次加载自动上拉刷新一次
 					callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				}
-
 			}
-
 		})
 
 		detail();
@@ -656,7 +654,6 @@ function savePicture(picurl, picname) {
 	var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
 		// 下载完成
 		if(status == 200) {
-			//			alert("Download success: " + d.filename);
 			plus.gallery.save(d.filename, function() {
 				mui.toast('保存成功');
 			}, function() {

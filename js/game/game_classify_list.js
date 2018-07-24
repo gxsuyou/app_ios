@@ -5,7 +5,8 @@ $(function(){
 	mui.plusReady(function(){
 		var self = plus.webview.currentWebview();
 		tagId = self.tagId;
-		tagName = self.tagName;		
+		tagName = self.tagName;
+		$('.game_nameHeader').text(tagName);
 	});
 	
 	$('body').on('tap','.tag',function(){
