@@ -43,6 +43,15 @@ $(function() {
 	})
 	mui.init({
 		swipeBack: true, //启用右滑关闭功能
+		gestureConfig: {
+			tap: true, //默认为true
+			doubletap: true, //默认为false
+		    longtap: true, //默认为false
+		    swipe: true, //默认为true
+			drag: true, //默认为true
+			hold: false, //默认为false，不监听
+			release: false //默认为false，不监听
+		},
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 //			up: {
@@ -93,6 +102,8 @@ $(function() {
 					firstImg = n.img
 					title = n.title
 					$('.detail').html(n.detail);
+					$(".detail img").attr("data-preview-src","");
+                    $(".detail img").attr("data-preview-group","1");             
 					$('.news_post_content').attr("data-id", n.id);
 					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")");
 					$('h4').text(n.title)
@@ -303,21 +314,21 @@ $(function() {
 
 			$(".new_post_contents").scroll(function(){				
 				var afterScrollTop = $(this).scrollTop()
-				delta = afterScrollTop - beforeScrollTop;
-				var height=$(this)[0].scrollHeight;
-				if(delta === 0){return false};
-				if(afterScrollTop+700>height){
-					$('.news_userInfo_reply').removeClass('hidden');
+				delta = afterScrollTop - beforeScrollTop,
+				scrollHeight=$(this)[0].scrollHeight,
+				windowHeight=$(window).height();
+				if(scrollHeight<=windowHeight+afterScrollTop+20){
+					fn('up');
 					up();
 					return false;
 				}
+				if(delta === 0){return false};
 				fn(delta > 0 ? "down" : "up");
 				beforeScrollTop = afterScrollTop;
 				
 			});
 		}
-//		
-//		
+	
 		scroll(function(direction){      
 			if(direction == "down"){
 				$('.news_userInfo_reply').addClass('hidden');
@@ -329,7 +340,7 @@ $(function() {
 		
 
 		
-		$('body').on('tap', 'img', function() {
+		$('body').on('longtap', 'img', function() {
 			var picurl = $(this).attr("src");
 			var picname;
 			var btnArray = ['否', '是'];

@@ -1,11 +1,24 @@
-var val;
+var val="";
 $(function(){
 	
 	$('body').on("tap",".search_img",function(){
-		search(true);
+		var id=$('.search_list:first').attr('data-id');
+		if(id){
+			mui.openWindow({
+			   url:"news_post.html",
+			   id:"news_post.html",
+			   extras:{
+				newsId:id
+			   }
+		    })
+		}else{
+			if(val==""){
+				mui.toast("请输入搜索内容")
+			}		
+		}	
 	})
     $("body").on("input",".search_bar",function(){
-    	search(false);
+    	search(true);
     });
     
     
@@ -24,7 +37,8 @@ $(function(){
 					msg:val,
 					page:1
 				},
-				success:function(data){		
+				success:function(data){	
+					console.log(data.state)
 					if (data.state) {						
 						var  div = '';
 						var g = data.newsList;
@@ -39,12 +53,13 @@ $(function(){
 							}
 							$('.search_lists').empty().append(div)
 						} else{
-							var no_content = "<div class='no_content tac'>没有搜到任何内容</div>"
+							var no_content = "<div class='no_content tac'>没有搜到任何内容</div>";
 							$('.search_lists').append(no_content)
 						}						
 					} else{
 						if(show){
-							mui.toast("搜索失败");
+                            var no_content = "<div class='no_content tac'>没有搜到任何内容</div>";
+							$('.search_lists').empty().append(no_content)
 						}					
 					}
 				}

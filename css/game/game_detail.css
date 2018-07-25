@@ -25,9 +25,7 @@
 	position: absolute;
 	right: 1.25rem;
 	width: 2.9375rem;
-	height: 1.6875rem;
-	
-	
+	height: 1.6875rem;	
 }
 
 .border{
@@ -66,7 +64,6 @@
 .game_infoImg{
 	width: 4.375rem;
 	height: 4.375rem;
-	/*background-color: red;*/
 	margin-top: 1.125rem;
 	border-radius: 5px;
 	background-position: center;
@@ -79,8 +76,6 @@
 }
 .game_infoScores{
 	padding-top: 1.5rem;
-	
-	
 }
 .green_star{
 	width: 1.125rem;
@@ -109,11 +104,12 @@
 }
 .game_detail_nav > div{
 	position: relative;
+	/*z-index:9999;
+	background:red;*/
 	
 }
 .game_detail_detail:before,.game_detail_assess:before,.game_detail_strategy:before{
 	content: "";
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -143,22 +139,16 @@
 	background-image: url(../../Public/image/gonglue01.png);
 }
 .game_detail_contents{
-	/*height: 16.8125rem;*/
-	
-	overflow: scroll;
-	
+	overflow:scroll;	
 	margin-left: 0.625rem;
 }
 .game_detail_content{
 	display: block;
-	
 	height: 15.5625rem;
 	/*background-image: url("../../Public/image/yishoucang.png");*/
-	/*background-color: yellow;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
-	
 }
 .game_introduce{
 	border-bottom: 0.625rem solid #E7EAEC;

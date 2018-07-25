@@ -259,7 +259,15 @@ $(function() {
 				fn = fn || function() {};
 			window.addEventListener("scroll", function() {
 				var afterScrollTop = document.body.scrollTop,
-					delta = afterScrollTop - beforeScrollTop;
+					delta = afterScrollTop - beforeScrollTop,
+				    scrollHeight=document.body.scrollHeight,
+				    windowHeight=$(window).height();
+				 /*到底部*/
+				//console.log(scrollHeight,windowHeight+afterScrollTop+20)
+				if(scrollHeight<=windowHeight+afterScrollTop+20){
+					fn('up');
+					return ;
+				}
 				if(delta === 0) return false;
 				fn(delta > 0 ? "down" : "up");
 				beforeScrollTop = afterScrollTop;
@@ -318,7 +326,6 @@ $(function() {
 		//取消收藏结束
 		function up() {
 			page++;
-			//alert(sort);
 			if(sort == "comment_num") {
 				$.ajax({
 					type: "get",
@@ -645,7 +652,6 @@ function down() {
 	setTimeout(function() {
 		mui('.strategy_details').pullRefresh().endPulldown(true);
 	}, 1000);
-	//mui('#news_content').pullRefresh().endPulldown(true);
 }
 
 // 保存图片到相册中 
@@ -664,7 +670,5 @@ function savePicture(picurl, picname) {
 		}
 
 	});
-	//dtask.addEventListener( "statechanged", onStateChanged, false );
 	dtask.start();
-
 }

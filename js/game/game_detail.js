@@ -338,14 +338,14 @@ $(function() {
 				return false;
 			}else{
                 location.href=game.game_download_ios2;
-                setTimeout(()=>{ 
+                setTimeout(function(){ 
                 	mui.toast("正在安装，请按Home键在桌面查看",{duration:"long"});
-                	setTimeout(()=>{
+                	setTimeout(function(){
                 		$('.download_btn').css({"border":"1px solid #8ed8ed","color":"#8ed8ed","background":"#fff"});
                 		$('.download_btn_text').text("刷新");
                 		$("#game_detail_download").attr("id","reload");
                 	},3800);
-                },3000)
+                  },3000)
 				return false;
 			}
 
@@ -494,7 +494,8 @@ $(function() {
 			$('.game_detail_nav').css({
 				"position": "fixed",
 				"top": total_height,
-				"border-bottom": "1px solid #E7EAEC"
+				"border-bottom": "1px solid #E7EAEC",
+				"z-index":9999
 			});
 
 		} else {

@@ -209,15 +209,14 @@
 	margin: 0.6rem 0;
 	margin-left: 0.5rem;
 	color: #282828;
-	width: 92%;
+	width: 98%;
 	max-height: 2.6rem;
-	overflow: hidden;
+/*	overflow: hidden;*/
 	/** 隐藏超出的内容 **/
-	width: 26em;
+	/*width: 26em;
 	white-space:nowrap; 
 	text-overflow:ellipsis; 
-	-o-text-overflow:ellipsis; 
-	  
+	-o-text-overflow:ellipsis; */	  
 }
 
 .official {

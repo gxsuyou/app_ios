@@ -86,7 +86,7 @@ $(function(){
 
 
 //	评论
-	$('body').on('click','.comment_img',function(event){
+	$('body').on('tap','.comment_img',function(event){
 		event.preventDefault();
 		var strategyId = $(this).attr('data-id');
 	

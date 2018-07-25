@@ -29,7 +29,7 @@
 				<div>
 					<div class="star"></div>
 					<div class="score font_bold ui_flex_wrapper">
-						<span style="max-width: 2rem;text-align: left;margin-right:0.1rem;" class="new_score">8.8</span>
+						<span style="max-width:2rem;text-align:left;margin-right:0.1rem;" class="new_score">8.8</span>
 						<span>分</span>
 					</div>
 				</div>
@@ -187,19 +187,17 @@
 			})
 
 			function up() {
-
-				page++;
-                
+				page++;          
 				$.ajax({
 					type: "GET",
 					url: config.data + 'news/getNewsByPage',
 					data: {
 						"page": page
 					},
-					success: function(data) {
+					success: function(data){
 						if(data.state) {
 							var n = data.news;
-							var div = "";							
+							var div = "";	
 							for(var i = 0; i < n.length; i++) {
 								if (n[i].game_id) {
 									div +=
@@ -251,15 +249,17 @@
 										"</div>"
 								}	
 							}
-							$('.news_art_list').append(div)
+							$('.news_art_list').append(div);
+							
 							if(n.length < 5) {
+								
 								mui('#news_content').pullRefresh().endPullupToRefresh(true);
 
 							} else {
 								mui('#news_content').pullRefresh().endPullupToRefresh(false);
 							}
 						} else {
-
+                           mui('#news_content').pullRefresh().endPullupToRefresh(true);
 						}
 					}
 				});
