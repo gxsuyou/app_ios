@@ -352,6 +352,11 @@ $(function() {
 			} else {
 
 			}
+		},
+		error:function(){
+			$(".nav_cls_contains").css("display","none");
+			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	    $('.error').html(errorHTML);
 		}
 	});
 	})
@@ -672,9 +677,12 @@ function getRank(sort) {
 						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 					}
 				})
-			} else {
-
 			}
+		},
+		error:function(){
+			$(".nav_cls_contains").css("display","none");
+			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	    $('.error').html(errorHTML);
 		}
 	});
   });
@@ -769,6 +777,11 @@ function getRankup(page, sort) {
 			} else {
 
 			}
+		},
+		error:function(){
+			$(".nav_cls_contains").css("display","none");
+			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	    $('.error').html(errorHTML);
 		}
 	});
 }

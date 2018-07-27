@@ -1,14 +1,15 @@
+
+
+
 $(function() {
-	function plusReady() {}
-	if(window.plus) {
-		plusReady()
-	} else {
-		document.addEventListener('plusready', plusReady, false);
-	}
+	
+
 	mui.plusReady(function() {
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
 		var playTop = plus.navigator.getStatusbarHeight();
 		$('.before_search').css('height',playTop)
-//		$('.search_head').css('top',playTop)
 	})
 
 	
@@ -33,12 +34,15 @@ $(function() {
 				data: {
 					"msg": value			
 				},
-				success: function(data) {
-					if(data.state) {
-
+				success: function(data){				
+					if(data.state) {              
 						var h = data.h5;
-
 						var div = "";
+						if(h.lenght==0){
+							var no_content = "<div class='no_content tac' style='margin-top:8rem;'>没有搜到任何内容</div>";
+						     $('.search_lists').empty().append(no_content);
+							return false;
+						}
 						for(var i = 0; i < h.length; i++) {
 							div +=
 								"<div class='search_list' data-id=" + h[i].id + " data-sort=" + h[i].sort + " data-url='" + h[i].url + "'>" +
@@ -53,14 +57,9 @@ $(function() {
 								"</div>" +
 								"</div>"
 						};
-						$('.search_lists').empty();
-						$('.search_lists').append(div);
-
+						$('.search_lists').empty().append(div);
 						$('.search_lists').on('tap', '.search_list', function() {
-							//					console.log($(this).attr('data-url'))
-							//					alert("11")
 							var url = $(this).attr('data-url');
-
 							mui.openWindow({
 								url: 'h5game.html',
 								id: 'h5game.html',
@@ -93,8 +92,13 @@ $(function() {
 						})
 
 					} else {
-
+                        var no_content = "<div class='no_content tac '>没有搜到任何内容</div>";
+						$('.search_lists').empty().append(no_content);
 					}
+				},
+				error:function(){
+					var errorHTML="<div style='margin-top:7rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	            $('.error').html(errorHTML);
 				}
 			});
 		})

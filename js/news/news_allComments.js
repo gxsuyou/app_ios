@@ -185,25 +185,25 @@ function up(){
 							portrait=com[i].portrait;
 						}
 						div +=
-							"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='"+ com[i].id +"' data-userId='"+ com[i].selfUserId +"' >"+
+							"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0px;border-bottom: 0;' data-id='"+ com[i].id +"' data-userId='"+ com[i].selfUserId +"' >"+
 								"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) +");'></div>"+
 								"<div class='news_post_commentContent_content fl'>"+
 									"<div class='comment_user font_12'>"+
 										"<span>"+ com[i].selfNickName +"</span>"+
-										"<span style='color: #7A7A7A;' class='"+ ifHidden +"'>回复</span>"+
-										"<span class='"+ ifHidden +"'>"+ ifHidden + "</span>"+
+//										"<span style='color: #7A7A7A;' class='"+ ifHidden +"'>回复</span>"+
+//										"<span class='"+ ifHidden +"'>"+ ifHidden + "</span>"+
 									"</div>"+
 									"<div class='comment_content font_14'>"+ com[i].content +"</div>"+
 									"<div class='comment_info ofh'>"+
 										"<div class='font_12 color_9e9e9e fl'>"+ com[i].add_time +"</div>"+
-									"</div>"+
-		
+									"</div>"+		
 								"</div>"+
 							"</div>"
 					}
 					
 					$('.news_post_secondcommentContents').append(div);
-					
+					 var nu=$(".news_post_commentContent").length
+					   $(".news_allReply").text("全部回复  ("+nu+")")
 					if(com.length < 10) {
 						$(".bottomInfo").text("没有更多的评论了");
 						loginToggle=true;

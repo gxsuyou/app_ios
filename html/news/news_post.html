@@ -15,7 +15,7 @@
     	<style type="text/css">
 			.mui-preview-image.mui-fullscreen {
 				position: fixed;
-				z-index: 102;
+				z-index: 9999;
 				background-color: #000;
 			}
 			.mui-preview-header,
@@ -24,6 +24,15 @@
 				width: 100%;
 				left: 0;
 				z-index: 101;
+				padding-top:25px;
+				padding-right:20px;
+			}
+			.mui-preview-header:after{
+				content:"保存";
+				color:#fff;
+				float:right;
+				position:relative;
+				top:-20px;
 			}
 			.mui-preview-header {
 				height: 44px;
@@ -184,7 +193,13 @@
 				<div class="notice">帖子</div>
 				<div class="share hidden"></div>
 			</header>
+			<div class="news_post_list backgroundColor_white ofh">
+				  <div class="news_post_listImg fl"></div>
+				  <div class="fl font_14  color_282828 news_post_listName">最终幻想15口袋版</div>
+				  <div class="fr color_white news_post_download backgroundColor_green tac">下 载</div>
+	        </div>
 		</div>
+		
 		<!--中间内容部分开始-->		
 		<div class="new_post_contents">
 		  <div>
@@ -206,7 +221,6 @@
 					<div class="cut_line">|</div>
 					<span class="fr font_12 color_green hot">热度</span>
 				</div>
-
 				<!--评论内容-->
 				<div class="news_post_commentContents ofh">
 					<!--<div class="news_post_commentContent ofh">
@@ -285,11 +299,6 @@
 				</div>
 			</div>
 			<!--底部回帖-->
-			<!--<div class="news_post_list backgroundColor_white ofh">
-				<div class="news_post_listImg fl"></div>
-				<div class="fl font_14  color_282828 news_post_listName">最终幻想15口袋版</div>
-				<div class="fr color_white news_post_download backgroundColor_green tac">下 载</div>
-			</div>-->
 		  </div>			
 		  <div class="bottomInfo">正在加载中 <span style="letter-spacing:0.2rem;">...</span></div>
 		</div>

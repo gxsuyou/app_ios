@@ -19,7 +19,7 @@
 				<div class="bell" id="bell"></div>
 				<div class="search"></div>
 			</header>
-		</div>
+		</div>	
 		<div class="strategy">
 			<div class="strategy_head">
 				<ul class="ui_flex_h ui_flex_wrapper strategy_headImgs" style="overflow: scroll;">
@@ -122,12 +122,15 @@
 				
 			</div>-->
 			
-			
-		</div>
 			<!--定位用的-->
-				<div class="pen"></div>
-			<!--真的是定位用的-->
+		    <div class="pen"></div>
+		    <!--真的是定位用的-->
+		</div>
+	</div>
+	<!-- strage结束 -->
+    <div class="error"></div>
 	</body>
+	   
 	<script type="text/javascript">
 			var soc = "3"
 	</script>
@@ -174,8 +177,9 @@
 						sort:sort
 					},
 					success:function(data){
-						if (data.state) {
-							
+						$(".strategy").css("display","block");
+						$(".error").css("display","none");
+						if (data.state) {						
 							var str = data.strategy,imgToggle,portrait;
 							var div = "",imgSrc;
 							for (var i = 0; i < str.length; i++) {
@@ -243,6 +247,13 @@
 						} else{
 							
 						}
+					},
+					error:function(){
+						$(".error").css("display","block");
+						var errorHTML="<div style='margin-top:12rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+						$(".strategy").css("display","none");
+						$(".error").html(errorHTML);
+						page=0;
 					}
 				});
 			}
@@ -256,8 +267,6 @@
 				setTimeout(function() {
 					mui('.strategy').pullRefresh().endPulldown(true);
 				}, 1000);
-
-				//				 mui('#news_content').pullRefresh().endPulldown(true);
 			}
 		</script>
 		

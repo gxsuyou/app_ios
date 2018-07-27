@@ -60,9 +60,7 @@
 				</div>
 			</div>
 		</div>
-
-		
-		
+		  <div class="error"></div>
 		<!--底部模块开始-->
 		<script src="../../js/play/play.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -71,15 +69,17 @@
 				swipeBack: true,
 				pullRefresh: {
 					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-//					down: {
-//						height: 50, //可选,默认50.触发下拉刷新拖动距离,
-//						auto: true, //可选,默认false.首次加载自动下拉刷新一次
-//						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-//						callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//					},
+					down: {
+						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+						height: 50, //可选,默认50.触发下拉刷新拖动距离,
+						auto: false, //可选,默认false.首次加载自动下拉刷新一次
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					},
 					up: {
+						
 						height: 50, //可选.默认50.触发上拉加载拖动距离
 						auto: true, //可选,默认false.自动上拉加载一次
 						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
@@ -132,6 +132,12 @@
 						} else {
 
 						}
+					},
+					error:function(){
+						var errorHTML="<div style='margin-top:12rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+						$(".list-t-wrap").css("display","none");
+						$(".error").html(errorHTML);
+						page=0;
 					}
 				});
 
@@ -141,7 +147,9 @@
 
 			}
 		
-			
+			function down(){
+				window.location.reload()
+			}
 		</script>
 
 	</body>

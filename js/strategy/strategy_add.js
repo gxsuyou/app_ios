@@ -74,12 +74,11 @@ $(function() {
 
    $("body").on("keyup","#strategy_textarea",function(){
 		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-		
-         console.log($(this).html())
 	});
 
-
-
+     $("body").on("tap","#strategy_textarea",function(){
+		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
+	});
 
 	
 	$('body').on("tap",".publish",function() {

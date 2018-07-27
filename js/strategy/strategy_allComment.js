@@ -184,16 +184,14 @@ function up() {
 						"<div class='news_post_commentContent_content fl'>" +
 						"<div class='comment_user font_12'>" +
 						"<span>" + c[i].selfNickName + "</span>" +
-						"<span class='" + ifHide + "' style='color: #7A7A7A;'>回复</span>" +
-						"<span class='" + ifHide + "'>" + c[i].targetUserNickName + "</span>" +
+//						"<span class='" + ifHide + "' style='color: #7A7A7A;'>回复</span>" +
+//						"<span class='" + ifHide + "'>" + c[i].targetUserNickName + "</span>" +
 						"</div>" +
 						"<div class='comment_content font_14'>" + c[i].content + "</div>" +
 						"<div class='comment_info ofh'>" +
 						"<div class='font_12 color_9e9e9e fl'>" + c[i].add_time + "</div>" +
 						"</div>" +
-
 						"</div>" +
-
 						"</div>"
 				}
 				$('.news_post_commentContentsecs').append(div);

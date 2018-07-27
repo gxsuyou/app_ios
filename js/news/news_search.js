@@ -1,6 +1,11 @@
 var val="";
+var show=true;
 $(function(){
-	
+	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
 	$('body').on("tap",".search_img",function(){
 		var id=$('.search_list:first').attr('data-id');
 		if(id){
@@ -18,12 +23,12 @@ $(function(){
 		}	
 	})
     $("body").on("input",".search_bar",function(){
-    	search(true);
+    	search();
     });
     
     
     
-	function search(show){
+	function search(){
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g,"");
 		$('.search_lists').children().remove();
 		if(val){
@@ -38,7 +43,8 @@ $(function(){
 					page:1
 				},
 				success:function(data){	
-					console.log(data.state)
+					
+					$('.error').html("");
 					if (data.state) {						
 						var  div = '';
 						var g = data.newsList;
@@ -52,16 +58,23 @@ $(function(){
 								"</div>"
 							}
 							$('.search_lists').empty().append(div)
+							
 						} else{
 							var no_content = "<div class='no_content tac'>没有搜到任何内容</div>";
 							$('.search_lists').append(no_content)
-						}						
+						}
 					} else{
 						if(show){
-                            var no_content = "<div class='no_content tac'>没有搜到任何内容</div>";
-							$('.search_lists').empty().append(no_content)
+
+	                        	var no_content = "<div class='no_content tac'>没有搜到任何内容</div>";
+							    $('.search_lists').empty().append(no_content);
+								
 						}					
 					}
+				},
+				error:function(){
+					var errorHTML="<div style='margin-top:11rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	            $('.error').html(errorHTML);
 				}
 			});
 		}

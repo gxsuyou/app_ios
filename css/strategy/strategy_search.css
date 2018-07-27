@@ -7,10 +7,16 @@ input[type=text]{
 	font-family: simhei;
 	font-size: 12px;
 }
+html,body{
+	height:100%;
+	overflow:hidden;
+}
 .search_lists{
 	margin-top:  2.375rem;;
 }
-
+.header_box{
+	position:absolute;
+}
 .searchTitle{
 	width:12rem;
 	white-space:nowrap;

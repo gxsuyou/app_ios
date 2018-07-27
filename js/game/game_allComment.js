@@ -10,7 +10,7 @@ var game_icon;
 $(function() {	
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
-                softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
         });
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
@@ -140,6 +140,7 @@ function up() {
 				var com = data.comment,portrait;
 				
 				var div = "";
+				
 				for(var i = 0; i < com.length; i++) {
 					var ifHidden = com[i].targetNickName || "hidden";
 					
@@ -169,7 +170,9 @@ function up() {
 						"</div>"
 				}
 				$('.news_post_commentContents').append(div);
-
+				
+               
+                
 				if(com.length < 10) {
 
 					mui('.game_post_commentContents').pullRefresh().endPullupToRefresh(true);

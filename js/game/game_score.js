@@ -10,10 +10,10 @@ $(function(){
 //	点击星星结束
 	
 	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
 		total_height = plus.navigator.getStatusbarHeight()+ 45;
-
-		
-		
 		var self = plus.webview.currentWebview();
 		var gameId = self.gameId;
 		var icon = self.icon;
@@ -27,9 +27,6 @@ $(function(){
 		$('.publish').click(function(){
 			var score = $('.staract').length * 2;
 			var content = $('#textarea').val();
-			
-//			alert(score);
-//			return false;
 			if(content == ''){
 				mui.toast('请输入内容')
 			}else{

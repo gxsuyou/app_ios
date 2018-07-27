@@ -36,15 +36,15 @@ body,html{
 	padding-bottom:4rem;
 }
 .news_post_commentContent_content{
-	margin-top: 1.3125rem;
+	margin-top: 0.6rem;
 	width: 76%;
-	margin-bottom: 1rem;
+	margin-bottom: 0.6rem;
 }
 .comment_content{
-	margin-top: 0.6rem;
+	margin-top:0.6rem;
 }
 .comment_info{
-	margin-top: 1.25rem;
+	margin-top:0.7rem;
 }
 
 .news_allReply{

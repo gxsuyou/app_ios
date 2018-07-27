@@ -1,10 +1,12 @@
 .header_box {
 	position: fixed;
 	top: 0;
-	width: 100%;
+	width:100%;
 	z-index: 99;
 }
-
+body,html{
+	height:100%;
+}
 #header {
 	background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 	/* Safari 5.1 - 6.0 */
@@ -26,7 +28,16 @@
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
 	/* 标准的语法 */
 }
-
+#news_content {
+	height:100%;
+	margin-top: 45px;
+}
+.errorContent{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:100%;
+}
 .header_title {
 	width: 1rem;
 	height: 1rem;
@@ -242,8 +253,18 @@ position: absolute;
 	margin-bottom: 0.375rem;
 }
 
-.news_newGame_content {
-	padding-right: 0.625rem;
+.news_newGame_contents {
+	overflow-x: scroll;
+	padding-left: 0.625rem;
+	flex-shrink:0 !important;
+    width:100%;
+}
+
+.news_newGame_content{
+	margin-right: 0.625rem;
+	width: 12.2rem;
+	height: 5.2rem;
+	flex-shrink:0 !important;
 }
 
 .news_newGame_contentImg {
@@ -280,10 +301,7 @@ position: absolute;
 	margin-right: 0.4rem;
 }
 
-.news_newGame_contents {
-	overflow: scroll;
-	padding-left: 0.625rem;
-}
+
 
 .h_name {
 	display: inline-block;

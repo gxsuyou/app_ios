@@ -74,9 +74,25 @@ $(function() {
 
 		})
 
-		//		长按保存图片
-		$('body').on('tap', 'img', function() {
+		//长按保存图片
+		$('body').on('longtap', 'img', function() {
 			var picurl = $(this).attr("src")
+			saveImg(picurl);
+
+		})
+		//长按保存图片结束
+		
+		$('body').on('tap','.mui-preview-header',function(){
+          var num=$(".mui-preview-indicator").text();        
+          num=num.substring(0,1)-1;
+          var  url=$(".mui-preview-image img:eq("+num+")").attr("src");
+          saveImg(url);
+		});
+		
+		
+		
+		
+		function saveImg(picurl){
 			var picname;
 			var btnArray = ['否', '是'];
 			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
@@ -94,10 +110,7 @@ $(function() {
 
 				}
 			})
-
-		})
-
-		//		长按保存图片结束
+		}
 
 		//	切换评论排序
 		$('.time').click(function() {
@@ -568,7 +581,8 @@ function detail() {
 				$('.news_userInfo_name').text(nickName);
 				$('.news_userInfo_date').text(str.add_time);
 				$('.news_post_content_detail').html(str.detail);
-				
+				$(".news_post_content_detail img").attr("data-preview-src","");
+                $(".news_post_content_detail img").attr("data-preview-group","1");  
 				$('.news_post_content_detail img').css("max-width", "100%");
 				target_img = str.top_img_src;
 				target_title = str.title;

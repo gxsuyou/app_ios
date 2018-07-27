@@ -31,8 +31,7 @@
 					<div class="fl" style="width: 86%;margin-left: 0.625rem;">
 						<div class="ofh">
 							<span class="font_14 simHei font_bold color_282828">用户名XXX 回复了你的回帖</span>
-	
-							
+						
 						</div>
 						<div class="font_14 color_9e9e9e simHei overflow_two" style="width: 12rem;">哈哈哈哈或或或或或或或或或或或或或或hhhhhhhh或或或或或或</div>
 						<div class=" font_12 simHei color_9e9e9e">8小时前</div>
@@ -41,12 +40,12 @@
 				</div>-->
 			</div>
 		</div>
-
 		<div class="nav tac font_14 color_282828">
 			<div class="active" data-sort="1">资讯</div>
 			<div data-sort="2">攻略</div>
 			<div data-sort="3">游戏</div>
 		</div>
+		<div class="error"></div>
 		<script type="text/javascript">
 			var page = 0;
 			var sort = 1;
@@ -139,6 +138,12 @@
 							} else {
 
 							}
+						},error:function(){
+							var errorHTML="<div style='margin-top:10rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	                    $('.error').html(errorHTML);
+       	                    $(".notice_lists").empty();
+       	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
+       	                    page = 0
 						}
 					});
 				} else {
@@ -200,6 +205,12 @@
 							} else {
 
 							}
+						},error:function(){
+							var errorHTML="<div style='margin-top:10rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	                    $('.error').html(errorHTML);
+       	                    $(".notice_lists").empty();
+       	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
+       	                    page = 0
 						}
 					});
 				}

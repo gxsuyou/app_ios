@@ -14,7 +14,7 @@
 		<style type="text/css">
 			.mui-preview-image.mui-fullscreen {
 				position: fixed;
-				z-index: 102;
+				z-index: 9999;
 				background-color: #000;
 			}
 			.mui-preview-header,
@@ -27,6 +27,7 @@
 			.mui-preview-header {
 				height: 44px;
 				top: 0;
+				padding-top:20px;
 			}
 			.mui-preview-footer {
 				height: 50px;
@@ -192,7 +193,6 @@
 			</header>
 		</div>
 		<div class="game_detailContent " id="game_detailContent">
-
 			<div class="game_detailTop ofh">
 				<div class="game_detailTopimg"></div>
 				<div class="game_detailTopinfo backgroundColor_white">
@@ -627,10 +627,9 @@
 						},
 						success: function(data) {
 							if(data.state) {
-
+                               
 								var com = data.comment;
 								var div = '';
-
 								for(var i = 0; i < com.length; i++) {
 									div +=
 										"<div class='news_post_commentContent ofh'>" +
@@ -675,6 +674,7 @@
 			function down() {
 				switch (pageIndex){
 	              case "detail":
+	                 detail_main()
 					break;
 					case "assess":
 					 detail_assess();

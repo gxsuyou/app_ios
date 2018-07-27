@@ -1,9 +1,13 @@
 $(function() {
-	$('body').on('input', 'input[type=text],.search_bar', function() {
+	mui.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+        });
+	});
+	$('body').on('input', 'input[type=text]', function() {
 		$('.search_lists').children().remove()
 		var content = $('.search_bar').val()
 		if(content) {
-			
 			$.ajax({
 				type: "get",
 				url: config.data + "strategy/getStrategyGameNameByMsg",
@@ -12,9 +16,16 @@ $(function() {
 					msg: content
 				},
 				success: function(data) {
+					$('.error').html("");
 					if(data.state) {
 						var gn = data.gameName;
 						var div = '';
+						console.log(JSON.stringify(gn));
+						if(gn.length==0){
+							var no_content = "<div class='no_content tac '>没有搜到任何内容</div>";
+						    $('.search_lists').empty().append(no_content);
+							return false;
+						}
 						for(var i = 0; i < gn.length; i++) {
 							div +=
 								"<div class='search_list' data-id='"+gn[i].id+"'>" 
@@ -23,9 +34,14 @@ $(function() {
 								"</div>"
 						}
 						$('.search_lists').empty().append(div);
-					} else {
-
+					} else {						
+                        var no_content = "<div class='no_content tac '>没有搜到任何内容</div>";
+						$('.search_lists').empty().append(no_content);
 					}
+				},
+				error:function(){
+					var errorHTML="<div style='margin-top:11rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+       	            $('.error').html(errorHTML);
 				}
 			});
 		}
@@ -41,21 +57,14 @@ $(function() {
 				strategyId:id
 			}
 		});
-		
-//			var msg = $(this).children('div').text();
-//		mui.openWindow({
-//			url:"strategy_search_result.html",
-//			id:"strategy_search_result.html",
-//			extras:{
-//				msg:msg
-//			}
-//		})
+
 	})
+	
+
+	
 	
 	$('body').on("tap",".search_img",function(){
 		var id = $('.search_list:first').attr("data-id");
-//		alert(msg);
-//		return false;
 		if (id) {
 			mui.openWindow({
 	url:"strategy_details.html",
@@ -65,7 +74,7 @@ $(function() {
 				}
 			})
 		} else{
-			mui.toast("内容不能为空")
+			mui.toast("请输入内容")
 		}
 	})
 	
