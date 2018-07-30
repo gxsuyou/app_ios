@@ -542,7 +542,7 @@ function detail_strategy(){
 						for(var i = 0; i < s.length; i++) {
 							num_total += s[i].num;
 						}
-                        //alert(num_total)
+  
 						for(var j = 0; j < s.length; j++) {	
 							if(s[j].score==10){
                                 var lan=10/num_total;         
