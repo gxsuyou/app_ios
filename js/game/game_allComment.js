@@ -171,7 +171,9 @@ function up() {
 				}
 				$('.news_post_commentContents').append(div);
 				
-               
+                var num =$(".news_post_commentContents>div").length;
+                
+                $(".news_allReply").text("全部回复 ( "+num+" )");
                 
 				if(com.length < 10) {
 

@@ -132,7 +132,7 @@ $(function() {
 		});
 		$('body').on('tap', '.more_secondComment,.comment_img', function() {
 			if(userId) {
-				var commentId = $(this).attr("data-id")
+				var commentId = $(this).attr("data-id");
 				mui.openWindow({
 					url: "news_allComments.html",
 					id: "news_allComments.html",
@@ -387,7 +387,6 @@ $(function() {
 	     var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
 		// 下载完成
 		  if(status == 200) {
-			//			alert("Download success: " + d.filename);
 			plus.gallery.save(d.filename, function() {
 				mui.toast('保存成功');
 			}, function() {
@@ -398,8 +397,8 @@ $(function() {
 		  }
 
 	   });
-	//dtask.addEventListener( "statechanged", onStateChanged, false );
-	  dtask.start();
+	   //dtask.addEventListener( "statechanged", onStateChanged, false );
+	    dtask.start();
 
     }
 
@@ -437,7 +436,6 @@ $(function() {
 			replyTog=true;
 			event.preventDefault();
 			if(userId) {
-
 				$.ajax({
 					type: "get",
 					url: config.data + "news/comment",

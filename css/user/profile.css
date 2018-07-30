@@ -21,13 +21,13 @@ html,body{
 	padding-top:1.8125rem;
 /*	position:absolute;*/
 	height:100%;
+	width:100%;
 	overflow:scroll;
 }
 
 .profile_header{
 	width:4.5rem;
 	height:4.5rem;
-	/*background-image: url(../../Public/image/morentouxiang.png);*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -43,19 +43,28 @@ html,body{
 	height: 0;
 }
 
-#profile_ul > .mui-table-view-cell{
-	width: 15.1875rem;
-	float: left;
-	height: 3.375rem;
-	margin-right: 2rem;
-	margin-left: 1rem;
+
+.profile-box{
+	display:flex;
 }
+
+#profile_ul > .mui-table-view-cell{
+	height: 3.375rem;
+}
+.mui-table-view{
+	background:none;
+} 
+
 .mui-table-view-cell>a:not(.mui-btn){
 	margin: 4px -15px;
 	padding-left: 2rem;
 }
+.key{
+	width:5rem;
+}
 .key > li{
 	height: 3.375rem;
+	width:5rem;
 	padding-top: 26px;
 	font-size: 14px;
 	margin-left: 2.3125rem;
@@ -73,8 +82,11 @@ html,body{
 	
 }
 #popover{
-	left: 50%;
-	margin-left: -140px;
+	/*left: 50%;
+	 * 
+	margin-left: -140px;*/
+	top:30%;
+	margin:0 auto;
 }
 input[type=date]{
 	padding: 0;

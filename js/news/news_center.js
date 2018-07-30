@@ -16,8 +16,7 @@ $(function(){
 			}
 		});
 		
-		$('.nav').css('top',total_height);
-		
+		$('.nav').css('top',total_height);	
 		$('body').on("tap",".nav > div",function(){
 			var selfSort = $(this).attr('data-sort');
 			$(this).addClass('active').siblings('div').removeClass('active');

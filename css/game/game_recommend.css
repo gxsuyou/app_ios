@@ -77,18 +77,22 @@ body{
 /*轮播部分结束*/
 
 .game_shows{
-	display: flex;
+	display:flex;
 	padding: 0.9375rem;
 	justify-content: space-between;
 }
 .game_shows > div{
 	width: 6.0625rem;
 	height: 8.875rem;
+	flex-shrink:1;
 	background-position: center;
 	background-repeat:no-repeat;
-	background-size: cover;
-	
+	background-size:cover;	
 }
+.game_shows>div:nth-child(2){
+	margin:0 0.6rem;
+}
+
 .game_recommend_topicImg{
 	width: 100%;
 	height: 44vw;

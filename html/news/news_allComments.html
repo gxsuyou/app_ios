@@ -46,7 +46,6 @@
 					全部回复  ( 3 )
 				</div>
 				<div class="news_post_secondcommentContents">
-			s
 				</div>
 				<!--底部回复模块-->		
 			  </div>
@@ -62,7 +61,7 @@
 		<script type="text/javascript">
 			mui.init({
 				beforeback: function() {　　　　 //获得父页面的webview
-					var list = plus.webview.getWebviewById('news_post.html');//触发父页面的自定义事件(refresh),从而进行刷新					
+					var list = plus.webview.getWebviewById('news_post.html');//触发父页面的自定义事件(refresh),从而进行刷新	
 					mui.fire(list, 'refresh');
 					//返回true,继续页面关闭逻辑
 					return true;

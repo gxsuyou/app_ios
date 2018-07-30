@@ -142,8 +142,55 @@ $(function() {
 	})
 	
 	
-
 	
+    $('body').on('longtap', 'img', function() {
+			var picurl = $(this).attr("src");
+		   saveImg(picurl);
+	});
+		
+		
+	$('body').on('tap','.mui-preview-header',function(){
+          var num=$(".mui-preview-indicator").text();        
+          num=num.substring(0,1)-1;
+          var url=$(".mui-preview-image img:eq("+num+")").attr("src");
+          saveImg(url);
+	})
+
+    function saveImg(picurl){
+			var picname;
+			var btnArray = ['否', '是'];
+			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
+				if(e.index == 1){
+
+					if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
+					{
+						picname = picurl.substring(picurl.lastIndexOf("/") + 1, picurl.length);
+					} else {
+						picname = picurl;
+					}
+					savePicture(picurl, picname)
+				}
+			});		
+		}
+
+
+	function savePicture(picurl){
+		var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
+		// 下载完成
+		  if(status == 200) {
+			plus.gallery.save(d.filename, function() {
+				mui.toast('保存成功');
+			}, function() {
+				mui.toast('保存失败，请重试！');
+			});
+		  } else {
+			  alert("Download failed: " + status);
+		  }
+
+	   });
+	   //dtask.addEventListener( "statechanged", onStateChanged, false );
+	    dtask.start();
+	}
 	
 
 	$('body').on("tap",".backImg",function() {
@@ -300,10 +347,6 @@ $(function() {
 
 
 function onStateChanged(download, status) {
-	//	if(download.state==5){
-	//		console.log(download.state)
-	//	}
-
 	downloding(download)
 	if(download.state == 4 && status == 200) {
 		// 下载完成 

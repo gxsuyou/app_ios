@@ -27,7 +27,7 @@ $(function() {
 				}
 				$('.personal_id').val(u.id);
 				$('.personal_name').val(u.nick_name);
-				$('.sexArt').text(sex_art);
+				$('.sexArt').val(sex_art);
 				$('.personal_bir').val(u.birthday);
 				if(u.portrait!=0){
 					$('.profile_header').css('background-image', 'url('+ u.portrait + ')');
@@ -71,41 +71,43 @@ $(function() {
 	//头像结束
 
 	//	填写性别
-	$('body').on("tap",".sex",function() {
-		mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
-		var list = document.querySelector('.mui-table-view.mui-table-view-radio');
-		var sexnum;
-		list.addEventListener('selected', function(e) {
-			//			console.log("当前选中的为：" + e.detail.el.innerText);
-			//			console.log(typeof(e.detail.el.innerText))
-
-			var sex = e.detail.el.innerText.replace(/[\r\n]/g, "")
-			if(sex == "保密") {
-				var sexnum = "0";
-			} else if(sex == "男") {
-				sexnum = "1";
-			} else if(sex == "女") {
-				sexnum = "2";
-			}
-			$('.sexArt').text(sex)
-			$.ajax({
-				type: "get",
-				url: config.data + "users/updateSex",
-				async: true,
-				data: {
-					"id": id,
-					"sex": sexnum
-				},
-				success: function(data) {
-					if(data.state) {
-						$('.sexArt').text(e.detail.el.innerText)
-					} else {
-
-					}
-				}
-			});
-		});
-	})
+//	$('body').on("tap",".sex",function() {
+//		mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
+//		var list = document.querySelector('.mui-table-view.mui-table-view-radio');
+//		var sexnum;
+//		
+//		list.addEventListener('selected', function(e) {
+//			//			console.log("当前选中的为：" + e.detail.el.innerText);
+//			//			console.log(typeof(e.detail.el.innerText))
+//         alert(1)
+//			var sex = e.detail.el.innerText.replace(/[\r\n]/g, "")
+//			if(sex == "保密") {
+//				var sexnum = "0";
+//			} else if(sex == "男") {
+//				sexnum = "1";
+//			} else if(sex == "女") {
+//				sexnum = "2";
+//			}
+//			
+//			$('.sexArt').text(sex)
+//			$.ajax({
+//				type: "get",
+//				url: config.data + "users/updateSex",
+//				async: true,
+//				data: {
+//					"id": id,
+//					"sex": sexnum
+//				},
+//				success: function(data) {
+//					if(data.state) {
+//						$('.sexArt').text(e.detail.el.innerText)
+//					} else {
+//
+//					}
+//				}
+//			});
+//		});
+//	})
 
 	//	填写性别结束
 

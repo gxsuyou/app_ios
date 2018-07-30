@@ -33,8 +33,7 @@
 					</div>
 				</div>
 				<!--轮播图结束-->
-				<div class="game_shows backgroundColor_white">				
-				</div>
+				<div class="game_shows backgroundColor_white"></div>
 				<div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBox">
 					<div style="border-radius: 5px;">
 						<div class="game_recommend_topicImg"></div>
@@ -79,8 +78,7 @@
 										</div>
 									</div>
 								</div>
-							</div>-->
-	
+							</div>-->	
 						<!--</div>-->
 					<!--</div>-->
 				</div>
@@ -355,6 +353,10 @@
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
+		        subpages:[{
+                    url:'game_recommend.html',
+                    id:'game_recommend.html',
+                }],
 				pullRefresh: {
 					container: ".nav_cls_contains", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {
@@ -456,8 +458,11 @@
 				setTimeout(function() {
 					mui('.nav_cls_contains').pullRefresh().endPulldown(true);
 				}, 1000);
-
+                
 			}
+			window.addEventListener('reload',function(event){
+			       location.reload();		    
+		     });
 		</script>
 
 	</body>

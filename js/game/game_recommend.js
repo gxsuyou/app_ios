@@ -1,5 +1,4 @@
 $(function() {
-
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		$('.header_box').next().css("margin-top", total_height + 43 + "px");

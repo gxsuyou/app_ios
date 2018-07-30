@@ -9,18 +9,14 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	position: absolute;
-	
+	position: absolute;	
 	left: 0.75rem;
 	
 }
 .about_us_header{
-	/*width: 5.875rem;*/
 	width: 100vw;
 	height: 5.875rem;
 	margin-top: 4.5rem;
-	
-	/*margin-left: 8.75rem;*/
 }
 #icon{
 	width: 5rem;
@@ -36,25 +32,36 @@
 	margin-top: 0.4rem;
 }
 .about_us_input{
-	height: 2.625rem;
-	line-height: 2.625rem;
+	display:flex;
+	-webkit-display:flex;
+	justify-content:flex-start;
+	height:2.625rem;
+	line-height:2.625rem;
 	font-size: 14px;
 	margin: 5rem 0.875rem;
 	background-color: rgb(220,220,220);
 	border-radius: 20px;
-	margin-bottom: 0;
+	margin-bottom:0;	
 }
+.about_us_input>div{
+	flex-shrink:1;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .icon{
 	width: 1.875rem;
 	height: 1.875rem;
-	float: left;
 	background: url(../../Public/image/e.png) center no-repeat;
 	background-size: contain;
 	margin-top: 0.375rem;
-	margin-left: 1rem;
-	margin-right: 1rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
 }
 .about_us_one{
+	display:flex;
 	height: 2.625rem;
 	line-height: 2.625rem;
 	font-size: 14px;

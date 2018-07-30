@@ -48,6 +48,9 @@ body{
 	border-radius: 50%;
 	
 }
+.strategy_content{
+	background:#fff;
+}
 .strategy_nav{
 	border-top: 1px solid #E7EAEC;
 	border-bottom: 1px solid #E7EAEC;

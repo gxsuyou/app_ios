@@ -86,7 +86,7 @@ body,html{
 	margin-top: 45px;
 }
 
-.game {
+.game{
 	width: 100%;
 	height: 75vw;
 	background-position: center;
@@ -95,7 +95,7 @@ body,html{
 	position: relative;
 }
 
-.game_header {
+.game_header{
 	width: 3.375rem;
 	height: 3.375rem;
 	background-position: center;
@@ -200,7 +200,6 @@ body,html{
 .news_art_view {
 	width: 1.125rem;
 	height: 1.125rem;
-	/*background-color: blue;*/
 	background-image: url(../../Public/image/whiteEye.png);
 	background-position: center;
 	background-repeat: no-repeat;

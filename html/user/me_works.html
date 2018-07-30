@@ -79,7 +79,6 @@
 					<div class="cut_line backgroundColor_gray"></div>
 					
 				</div>-->
-
 				<!--<div class="strategy_content">
 					<div class="strategy_content_head">
 						<div class="strategy_content_headImg fl"></div>
@@ -165,7 +164,6 @@
 
 			function up() {
 				page++;
-
 				$.ajax({
 					type: "get",
 					url: config.data + "users/getStrategyByUserId",
@@ -229,10 +227,8 @@
 															"<span class='comment_img' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'></span>"+
 															"<span class='comment_num font_14' style='margin-left:0.4rem;'>"+ str[i].comment_num +"</span>"+
 												"</div>"+
-											"</div>"+
-											
-											"<div class='cut_line backgroundColor_gray'></div>"+
-											
+											"</div>"+											
+											"<div class='cut_line backgroundColor_gray'></div>"+								
 										"</div>";
 
 							}

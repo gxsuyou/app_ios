@@ -1,12 +1,11 @@
+var ws=null;
 $(function() {
-
-	mui.plusReady(function() {
+	mui.plusReady(function() {	
 		$('.header_box').next().css("margin-top", 0);
 		$('.bell').css("top", total_height - 40 + "px");
 		$('.search').css("top", total_height - 40 + "px");
 		$('.one').css("top", total_height - 34 + "px");
 	})
-
 	getHeaderimg();
 	$.ajax({
 		type: "get",
@@ -18,7 +17,6 @@ $(function() {
 		success: function(data) {
 			if(data.state) {
 				var n = data.news;
-			
 				if(n[0].game_id) {
 					$('.news_artAlone > .news_art').attr(
 						"data-gameId", n[0].game_id
@@ -53,10 +51,8 @@ $(function() {
 				$('.news_art2  .new_art_name').text(n[1].game_name)
 				$('.news_art2  .news_art_art').text(n[1].title)
 				$('.news_art2  .news_art_time').text(n[1].add_time)
-
-				var div = "";
+				var div = "";			
 				for(var i = 2; i < n.length; i++) {
-						//alert(n[i].add_time);
 					if(n[i].game_id) {
 						div +=
 							"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '" + n[i].id + "' data-gameId = '" + n[i].game_id + "'>" +
@@ -73,15 +69,11 @@ $(function() {
 							"<div class='news_art_content'>" +
 							"<div class='news_art_art font_14 font_bold fl ofh'>" +
 							n[i].title +
-
 							"</div>" +
-
 							"</div>" +
-
 							"<div class='news_art_time font_12'>" +
 							n[i].add_time +
 							"</div>" +
-
 							"</div>"
 					} else {
 						div +=
@@ -89,8 +81,7 @@ $(function() {
 											"<div class='news_img' style='background-image:url("+config.img + encodeURI(n[i].img)+")'>"+
 												"<div class='news_img_content color_white'>"+
 													"<div class='news_img_header fl' style='background-image:url("+config.img + encodeURI(n[i].icon)+")'></div>"+
-													"<div class='fr font_12' style='margin-top: 1.75rem;'>"+
-														
+													"<div class='fr font_12' style='margin-top: 1.75rem;'>"+														
 														"<div class='fr news_art_viewNum' style='width: 1.8rem;'>"+ n[i].browse +"</div>"+
 														"<div class='fr news_art_view'></div>"+
 													"</div>"+
@@ -106,35 +97,8 @@ $(function() {
 						
 											"<div class='news_art_time font_12'>"+
 												n[i].add_time +
-											"</div>"+
-						
+											"</div>"+					
 										"</div>"
-							
-//							
-//							div +=
-//							"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '" + n[i].id + "' data-gameId = '" + n[i].game_id + "'>" +
-//							"<div class='news_img' style='background-image:url(" + config.img + encodeURI(n[i].img) + ")'>" +
-//							"<div class='news_img_content color_white'>" +
-//
-//							"<div class='fr font_12' style='margin-top: 1.75rem;'>" +
-//							"<div class='fr news_art_viewNum' style='width: 1.8rem;'>" + n[i].browse + "</div>" +
-//							"<div class='fr news_art_view'></div>" +
-//							"</div>" +
-//							"</div>" +
-//							"</div>" +
-//							"<div class='news_art_content'>" +
-//							"<div class='news_art_art font_14 font_bold fl ofh'>" +
-//							n[i].title +
-//
-//							"</div>" +
-//
-//							"</div>" +
-//
-//							"<div class='news_art_time font_12'>" +
-//							n[i].add_time +
-//							"</div>" +
-//
-//							"</div>"
 							
 					}
 
@@ -172,8 +136,6 @@ $(function() {
 						"</div>"
 				}
 				$('.news_newGame_contents').append(h);
-			} else {
-
 			}
 		}
 	});
@@ -188,7 +150,8 @@ $(function() {
        if(userId){
 		   mui.openWindow({
 			url: "news_center.html",
-			id: "news_center.html"
+			id: "news_center.html",
+            createNew:true
 		  });
        }else{
        	   mui.openWindow({
@@ -265,8 +228,6 @@ function getHeaderimg() {
 				$('.game_datail').text(g.game_recommend)
 				$('.new_score').text(g.grade)
 				$('.game').attr("data-id", g.id)
-			} else {
-
 			}
 		}
 	})

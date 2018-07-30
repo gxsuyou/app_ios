@@ -32,13 +32,14 @@
 		<div class="profile_contents">
 			<div class="profile_header" id="profile_header">
 			</div>
-			<ul class="fl key">
+			<div class="profile-box">
+			  <ul class="key">
 				<li>ID</li>
 				<li>昵称</li>
 				<li>性别</li>
 				<li>生日</li>
-			</ul>
-			<ul class="mui-table-view " id="profile_ul">
+			  </ul>
+			  <ul class="mui-table-view " id="profile_ul">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
 						<input type="" name="" id="" class="personal_id" disabled="disabled"/>
@@ -50,15 +51,18 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell sex">
-					<a class="mui-navigate-right sexArt"></a>
+					<!--<a class="mui-navigate-right sexArt"></a>-->
+					<a class="mui-navigate-right">
+					  <input type="text" class="sexArt">
+					 </a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
-						<input type="text" name="" id="" class="personal_bir"/>
+						<input type="text" class="personal_bir"/>
 					</a>
 				</li>
-			</ul>
-
+			  </ul>
+			</div>
 			<!--弹出框-->
 			<div id="popover" class="mui-popover">
 				<ul class="mui-table-view mui-table-view-radio">

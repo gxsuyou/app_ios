@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -17,9 +16,7 @@
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
-				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-
-				</div>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
 				<div class="notice">通 知</div>
 			</header>
 		</div>
@@ -53,6 +50,15 @@
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
+				beforeback:function(){
+					var list = plus.webview.getWebviewById("main.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+					mui.fire(list, 'reload');
+					var strategy = plus.webview.getWebviewById("strategy.html");//触发父页面的自定义事件(refresh),从而进行刷新
+					mui.fire(strategy, 'reload');
+					var game_recommend = plus.webview.getWebviewById("game_recommend.html");//触发父页面的自定义事件(refresh),从而进行刷新
+					mui.fire(game_recommend, 'reload');
+					return true;//返回true,继续页面关闭逻辑
+				},
 				pullRefresh: {
 					container: ".news_center", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {

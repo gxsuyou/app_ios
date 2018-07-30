@@ -202,14 +202,16 @@ function up(){
 					}
 					
 					$('.news_post_secondcommentContents').append(div);
-					 var nu=$(".news_post_commentContent").length
-					   $(".news_allReply").text("全部回复  ("+nu+")")
+					 var nu=$(".news_post_commentContent").length-1;
+					 
+					 //数据量
+					$(".news_allReply").text("全部回复  ( "+nu+" )");
 					if(com.length < 10) {
 						$(".bottomInfo").text("没有更多的评论了");
 						loginToggle=true;
-						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(true);	
+//						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(true);	
 					} else {							
-						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(false);				
+//						mui('.news_post_commentContents').pullRefresh().endPullupToRefresh(false);				
 					}
 				} else{
 					
