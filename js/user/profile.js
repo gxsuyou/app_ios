@@ -122,8 +122,30 @@ $(function() {
 
 	$('body').on("tap",".publish",function() {
 		var name = $('.personal_name').val().trim();
-		var bir = $('.personal_bir').val();
-		/* 先验证昵称 */
+		var bir = $('.personal_bir').val();/* 先验证昵称 */
+		var sex =$('.sexArt').val();
+		
+		if(sex == "保密") {
+				 sex = "0";
+			} else if(sex == "男") {
+				sex = "1";
+			} else if(sex == "女") {
+				sex = "2";
+			}else{
+				mui.toast('只能选男或女');
+				return false;
+			}
+			
+		$.ajax({
+				type: "get",
+				url: config.data + "users/updateSex",
+				async: true,
+				data: {
+					"id": id,
+					"sex":sex
+				},
+				success: function(data) {}
+		});
 		$.ajax({
 			type: "get",
 			url: config.data + "users/updateNickName",
@@ -144,15 +166,8 @@ $(function() {
 							id: id,
 							birthday: bir
 						},
-						success: function(data) {
-							if(data.state) {
-					
-							} else {
-					
-							}
-						}
-					});
-					
+						success: function(data) {}
+					});				
 					/*上传头图*/
 					if (dataURLup){
 			           uploadHead(id, dataURLup,function(){
@@ -161,10 +176,7 @@ $(function() {
 		            } else{		
 			            mui.back()
 		            }	
-		            
-		            
-		            
-		            
+		            	          	            
 				} else {
 				   mui.toast('昵称不能重名');
                    return false;

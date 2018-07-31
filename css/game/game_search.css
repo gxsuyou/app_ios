@@ -28,12 +28,12 @@ input[type=text]{
 	top: 0.78125rem;
 }
 .search_liastImg{
-	display: inline-block;
+/*	display: inline-block;*/
 	width: 1.9375rem;
 	height: 1.9375rem;
-	background-position: center;
+	background-position:center;
 	background-repeat:no-repeat;
-	background-size: contain;
+	background-size:contain;
 	margin-top: 1rem;
 	margin-left: 1.25rem;
 }

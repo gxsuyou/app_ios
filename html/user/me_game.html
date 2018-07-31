@@ -205,6 +205,8 @@
 					},
 					success:function(data){
 						var g=data.gameList;
+						mui('.me_gameContents').pullRefresh().endPullupToRefresh(true);
+						return false;
 						if (data.state) {
 							var list = '';
 							for (var i = 0; i < g.length; i++) {
@@ -215,8 +217,8 @@
 									}else{
 										var signs = '';
 									}
-//								alert(JSON.stringify(g[i]));
-							   if(result.length > 2) {
+								
+							   if(g.length > 2) {
 							          for(var j = 0; j < 3; j++) {
 								   signs +=
 									   "<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
@@ -278,10 +280,8 @@
 									$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 								}
 							})
-							if(g.length < 20) {
-		
+							if(g.length < 20) {	
 										mui('.me_gameContents').pullRefresh().endPullupToRefresh(true);
-		
 									} else {
 		
 										mui('.me_gameContents').pullRefresh().endPullupToRefresh(false);

@@ -51,7 +51,7 @@ $(function(){
 							for (var i = 0; i < g.length; i++) {
 								div+=				
 								"<div class='search_list font_12 simHei' data-id='"+ g[i].id +"'>"+
-									"<span class='search_liastImg fl' style='background-image: url("+ config.img + encodeURI(g[i].icon) +"'></span>"+
+									"<span class='search_liastImg fl' style='background-image:url("+ config.img + encodeURI(g[i].icon) +")'></span>"+
 									"<div class='fl' style='margin-left: 1rem;'>"+ g[i].game_name +"</div>"+
 								"</div>"
 							}

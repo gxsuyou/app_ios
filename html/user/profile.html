@@ -18,7 +18,6 @@
 		<script src="../../js/PhotoClip.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/qiniu.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-
 	<body>
 		<div class="header_box">
 			<div class="before_header"></div>
@@ -92,17 +91,12 @@
 				<div class="fr" id="clipBtn">完成</div>
 			</div>
 		</div>
-
 		<!--头像裁剪结束<-->
-		
 		<script>
 			mui.init({
 				swipeBack: true
-			});
-		
+			});	
 			mui.plusReady(function(){  
-//              var self=plus.webview.currentWebview();  
-//              console.log(JSON.stringify(self)) 
                 var old_back = mui.back;  
                 mui.back = function() {  
                     var wobj = plus.webview.getWebviewById("html/user/me.html");//注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，  
@@ -111,9 +105,6 @@
                 }     
             });  
 		</script>
-		<script src="../../js/user/profile.js" type="text/javascript" charset="utf-8"></script>
-		
-		
+		<script src="../../js/user/profile.js" type="text/javascript" charset="utf-8"></script>	
 	</body>
-
 </html>

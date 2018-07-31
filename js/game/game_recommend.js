@@ -99,9 +99,7 @@ $(function() {
 					active +=
 						"<div class='game_show' style='background-image: url(" + config.img + encodeURI(a[i].active_img) + ");' data-gameId='" + a[i].game_id + "'></div>"
 				}
-				$('.game_shows').append(active)
-			} else {
-
+				$('.game_shows').append(active);
 			}
 		}
 	});

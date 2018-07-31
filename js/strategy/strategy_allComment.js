@@ -52,10 +52,10 @@ $(function() {
 					firstUserid = com.user_id;
 					
 
-					if(com.strategy==0||com.strategy==null){
+					if(com.portrait==0||com.portrait==null){
 						portrait="../../Public/image/morentouxiang.png";
-					}else{
-					   portrait=com.strategy;
+					}else{						
+					   portrait=com.portrait;
 					}
 					
 					$('.comment_user').text(com.nick_name);
@@ -72,10 +72,11 @@ $(function() {
 						$('.comment_summary_img').css('background-image','url(../../Public/image/link.png)')
 					}
 					$('.comment_summary_art').text(com.target_title)
-					$('.date').text(com.add_time)
+					$('.date').text(com.add_time);
+					
 					$('.news_post_commentContent_head').css("background-image", "url(" + encodeURI(portrait) + ")")
 					/* 初始化执行一次 */
-					up()
+					up();
 					
 				} else {
 

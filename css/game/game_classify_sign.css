@@ -10,6 +10,11 @@ body{
 .game_list{
 	height: 6.0625rem;
 	border-bottom: 1px solid #E7EAEC;
+	display: flex;
+}
+.signs{
+/*	align-self:flex-end;*/
+    margin-left:1rem;
 }
 .game_listScore{
 	width: 1rem;
@@ -20,10 +25,7 @@ body{
 .game_listImg{
 	width: 3.5625rem;
 	height: 3.5625rem;
-	/*background-image: url(../../Public/image/tuijian1.png);*/
 	border-radius: 10px;
-	
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -36,15 +38,11 @@ body{
 	line-height: 1.5rem;
 	margin-top: 2.28125rem;
 	border-radius: 20px;
-	margin-right: 1.4rem;
 }
-.game_recommend_star{
-	
+.game_recommend_star{	
 	width: 0.8125rem;
 	height: 0.8125rem;
-	
-	background-image: url(../../Public/image/xing2.png);
-	
+	background-image: url(../../Public/image/xing2.png);	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -55,8 +53,7 @@ body{
 	height: 1.125rem;
 	line-height: 1.125rem;
 	padding: 0 0.6rem;
-	margin-right: 0.2rem;
-	
+	margin-right: 0.2rem;	
 }
 .game_list_star_active{
 	background-image: url(../../Public/image/xing1.png);
