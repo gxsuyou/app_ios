@@ -97,8 +97,9 @@
 							sort: sort
 						},
 						success: function(data) {
+							$('.error').html("");
 							if(data.state) {
-
+                               
 								var t = data.tip;
                                 var portrait;
 								var div = '';

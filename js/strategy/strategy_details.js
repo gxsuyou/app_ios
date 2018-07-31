@@ -351,13 +351,11 @@ $(function() {
 						strategyId: strategyId
 					},
 					success: function(data) {
-
+                       
 						if(data.state) {
-
 							var com = data.comment;
 							var div = "",
 								portrait;
-
 							for(var i = 0; i < com.length; i++) {
 								if(com[i].img) {
 									var img = "img"
@@ -447,10 +445,10 @@ $(function() {
 						sort: sort
 					},
 					success: function(data) {
-
+                        
 						if(data.state) {
 							var com = data.comment;
-							var div = ""
+							var div = "";
 							for(var i = 0; i < com.length; i++) {
 
 								if(com[i].img) {
@@ -460,9 +458,7 @@ $(function() {
 								}
 								var sec = "",portrait;
                                 
-								
-								
-									
+											
 								if(com[i].towCommentList.length > 0) {
 									for(var j = 0; j < com[i].towCommentList.length; j++) {
 										if(com[i].towCommentList[j].targetUserNickName) {

@@ -156,7 +156,7 @@ $(function() {
 
 		$('body').on('tap', '.hot', function() {
 			$('.news_post_commentContents').children().remove();
-			mui('.new_post_contents').pullRefresh().refresh(true);
+//			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'hot';
 			$(this).addClass('color_green')
 			$('.time').removeClass('color_green')
@@ -165,7 +165,7 @@ $(function() {
 		})
 		$('body').on('tap', '.time', function() {
 			$('.news_post_commentContents').children().remove();
-			mui('.new_post_contents').pullRefresh().refresh(true);
+//			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'time';
 			$(this).addClass('color_green')
 			$('.hot').removeClass('color_green')

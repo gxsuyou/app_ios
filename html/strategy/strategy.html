@@ -184,7 +184,8 @@
 					success:function(data){
 						$(".strategy").css("display","block");
 						$(".error").css("display","none");
-						if (data.state) {						
+						if (data.state) {	
+							
 							var str = data.strategy,imgToggle,portrait;
 							var div = "",imgSrc;
 							for (var i = 0; i < str.length; i++) {
@@ -237,12 +238,12 @@
 															"<span class='comment_num font_14' style='margin-left:0.4rem;'>"+ str[i].comment_num +"</span>"+
 												"</div>"+
 											"</div>"+			
-											"<div class='cut_line backgroundColor_gray'></div>"+
-											
+											"<div class='cut_line backgroundColor_gray'></div>"+					
 										"</div>"
 										
 							}
-							$('.strategy_contents').append(div)
+							
+							$('.strategy_contents').append(div);
 							if (str.length < 10) {
 								mui('.strategy').pullRefresh().endPullupToRefresh(true);
 							} else{
