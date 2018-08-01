@@ -32,6 +32,8 @@ $(function(){
 			var type = $(this).attr("data-type");
 			var commentId = $(this).attr("data-id");
 			var url;
+			alert(type);
+			return false;
 			if (type == 1) {
 				url = "news_allComments.html"
 			}

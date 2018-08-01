@@ -27,8 +27,10 @@ $(function() {
 				}
 				$('.personal_id').val(u.id);
 				$('.personal_name').val(u.nick_name);
-				$('.sexArt').val(sex_art);
-				$('.personal_bir').val(u.birthday);
+				$('.sexArt').text(sex_art);
+				$('.personal_bir').text(u.birthday);
+				
+				
 				if(u.portrait!=0){
 					$('.profile_header').css('background-image', 'url('+ u.portrait + ')');
 				}else{
@@ -39,6 +41,12 @@ $(function() {
 			}
 		}
 	});
+
+
+   
+
+ 
+
 
 	//	头像
 	var pc = new PhotoClip('#clipArea', {
@@ -68,74 +76,63 @@ $(function() {
 		}
 	});
 
+
+
+   $("body").on("tap",".personal_bir",function(){
+    var dDate = new Date();//设置当前日期（不设置默认当前日期）
+    
+    var oYear=dDate.getFullYear();
+     var oMonth=dDate.getMonth();
+     var oDate=dDate.getDate();
+    dDate.setFullYear(2018, 7, 16);
+    var minDate = new Date();
+    //最小时间
+    minDate.setFullYear(1970, 0, 1);
+    var maxDate = new Date();
+    //最大时间
+    maxDate.setFullYear(oYear,oMonth,oDate);
+    
+   	 plus.nativeUI.pickDate(function(e) {
+       var d = e.date;
+       var Month=d.getMonth() + 1;
+        
+        if(10>Month){
+        	Month="0"+Month;
+        }
+        
+       var brith=d.getFullYear() + "/" + Month + "/" + d.getDate();
+       
+       $('.personal_bir').text(brith);
+   
+    }, function(e) {
+        mui.toast("您没有选择日期");
+    }, {
+        title: '请选择日期',
+        date: dDate,
+        minDate: minDate,
+        maxDate: maxDate
+    });
+   })
+
+
+
+
+
 	//头像结束
+	$('body').on('tap','.mui-table-view.mui-table-view-radio a',function(){
 
-	//	填写性别
-//	$('body').on("tap",".sex",function() {
-//		mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
-//		var list = document.querySelector('.mui-table-view.mui-table-view-radio');
-//		var sexnum;
-//		
-//		list.addEventListener('selected', function(e) {
-//			//			console.log("当前选中的为：" + e.detail.el.innerText);
-//			//			console.log(typeof(e.detail.el.innerText))
-//         alert(1)
-//			var sex = e.detail.el.innerText.replace(/[\r\n]/g, "")
-//			if(sex == "保密") {
-//				var sexnum = "0";
-//			} else if(sex == "男") {
-//				sexnum = "1";
-//			} else if(sex == "女") {
-//				sexnum = "2";
-//			}
-//			
-//			$('.sexArt').text(sex)
-//			$.ajax({
-//				type: "get",
-//				url: config.data + "users/updateSex",
-//				async: true,
-//				data: {
-//					"id": id,
-//					"sex": sexnum
-//				},
-//				success: function(data) {
-//					if(data.state) {
-//						$('.sexArt').text(e.detail.el.innerText)
-//					} else {
-//
-//					}
-//				}
-//			});
-//		});
-//	})
-
-	//	填写性别结束
-
-	$('body').on("tap","#profile_header",function() {
-		$('#file').click();
-
-	});
-	
-	$('body').on("tap",".cancel_button",function() {
-		$('.head_cuts').addClass('hidden')
-	});
-
-	$('body').on("tap",".publish",function() {
-		var name = $('.personal_name').val().trim();
-		var bir = $('.personal_bir').val();/* 先验证昵称 */
-		var sex =$('.sexArt').val();
-		
-		if(sex == "保密") {
+          var sexnum = $(this).text();
+          var sex;
+          $('.sexArt').text(sexnum);
+          
+          if(sexnum == "保密") {
 				 sex = "0";
-			} else if(sex == "男") {
+			} else if(sexnum == "男") {
 				sex = "1";
-			} else if(sex == "女") {
+			} else if(sexnum == "女") {
 				sex = "2";
-			}else{
-				mui.toast('只能选男或女');
-				return false;
 			}
-			
+		
 		$.ajax({
 				type: "get",
 				url: config.data + "users/updateSex",
@@ -146,6 +143,35 @@ $(function() {
 				},
 				success: function(data) {}
 		});
+          
+        mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
+     });
+     
+	$('body').on("tap",".sex",function() {
+		mui('.mui-popover').popover('toggle', document.getElementById("Popover"));
+		var list = document.querySelector('.mui-table-view.mui-table-view-radio');
+		var sexnum;
+
+	})
+
+
+
+
+
+	//	填写性别结束
+
+	$('body').on("tap","#profile_header",function() {
+		$('#file').click();
+	});
+	
+	$('body').on("tap",".cancel_button",function() {
+		$('.head_cuts').addClass('hidden')
+	});
+
+	$('body').on("tap",".publish",function() {
+		var name = $('.personal_name').val().trim();
+		var bir = $('.personal_bir').text();/* 先验证昵称 */
+			
 		$.ajax({
 			type: "get",
 			url: config.data + "users/updateNickName",

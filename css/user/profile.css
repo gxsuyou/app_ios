@@ -81,19 +81,24 @@ html,body{
 .mui-navigate-right > input{
 	border: 0;
 	background-color: #E7EAEC;
-	
+}
+.personal_bir{
+	height:20px;
+	background:transparent;
 }
 #popover{
-	/*left: 50%;
-	 * 
-	margin-left: -140px;*/
 	top:30%;
+	left:20%;
 	margin:0 auto;
+	width:60%;
+}
+#popover>ul{
+	margin:0 auto;
+	width:100%;
 }
 input[type=date]{
 	padding: 0;
 	margin: 0;
-	/*padding-bottom: 2rem;*/
 	height: auto;
 }
 input[type=text]{

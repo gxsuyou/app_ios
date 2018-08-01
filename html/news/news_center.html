@@ -20,7 +20,6 @@
 				<div class="notice">通 知</div>
 			</header>
 		</div>
-
 		<div class="news_center">
 			<div class="notice_lists">
 				<!--<div class="notice_list ofh">
@@ -169,7 +168,7 @@
 								var t = data.tip;
                                 var portrait;
 								var div = '';
-
+                                
 								for(var i = 0; i < t.length; i++) {
 									if(t[i].series == 1) {
 										var commentId = t[i].id
@@ -187,7 +186,7 @@
 								    }else{
 									   portrait=t[i].portrait;
 								    }
-									
+									console.log(t[i].type)
 									div +=
 										"<div class='notice_list ofh' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +
@@ -232,5 +231,4 @@
 		</script>
 		<script src="../../js/news/news_center.js" type="text/javascript" charset="utf-8"></script>
 	</body>
-
 </html>

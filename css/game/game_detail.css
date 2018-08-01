@@ -250,8 +250,6 @@
 	margin-left: 0.625rem;
 	margin-right: 0.625rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	/*background-color: green;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -268,10 +266,8 @@
 	padding-left: 3.6rem;
 }
 .comment_info{
-/*	margin-top: 0.6rem;
-	padding-left: 3.6rem;*/
-	/*width:100%;
-    background:red;*/
+	margin:0.6rem 0rem;	
+/*	margin-bottom:2.5rem;*/
 }
 .thumb{
 	width: 1.0625rem;
@@ -281,7 +277,6 @@
 	background-repeat:no-repeat;
 	background-size: contain;
 	vertical-align: middle;
-/*	margin-top: -0.2rem;*/
 }
 .no_strategy{
 	position: absolute;
@@ -468,7 +463,11 @@
 	
 }
 .strategy_indent{
-/*	text-indent: 2em;*/
+   background:#fff;
+   margin-bottom:0.9375rem;
+}
+.news_post_commentContentstra{
+	background:#efeff4;
 }
 .news_post_commentContent_head{
 	width: 2.9375rem;
@@ -477,8 +476,6 @@
 	margin-left: 0.625rem;
 	margin-right: 0.75rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-/*	background-color: green;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

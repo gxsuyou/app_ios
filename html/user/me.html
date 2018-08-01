@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
-
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/me.css" />
@@ -111,7 +110,12 @@
 			mui.init();
 		</script>
 		<script type="text/javascript">
-			
+			mui.init({	 
+				subpages:[{
+                    url:'me.html',
+                    id:'me.html',
+                }],
+			})
 			function openShare() {
 				
 				shareWebview();
@@ -173,6 +177,9 @@
 					sharew = null;
 				}
 			}
+			window.addEventListener('reload',function(event){	
+			    location.reload();
+		    });
 		</script>
 	</body>
 

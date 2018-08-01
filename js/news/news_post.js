@@ -156,8 +156,8 @@ $(function() {
 
 		$('body').on('tap', '.hot', function() {
 			$('.news_post_commentContents').children().remove();
-//			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'hot';
+			closeAjax=false;
 			$(this).addClass('color_green')
 			$('.time').removeClass('color_green')
 			page = 0;
@@ -165,7 +165,7 @@ $(function() {
 		})
 		$('body').on('tap', '.time', function() {
 			$('.news_post_commentContents').children().remove();
-//			mui('.new_post_contents').pullRefresh().refresh(true);
+            closeAjax=false;
 			type = 'time';
 			$(this).addClass('color_green')
 			$('.hot').removeClass('color_green')
@@ -586,9 +586,11 @@ function up(){
 	if(closeAjax){
 		return false;
 	}
+	closeAjax=true;
+	$(".bottomInfo").html("正在加载 ...");
 	setTimeout(function(){
-	if(type = "hot") {
-		closeAjax=true;
+	if(type == "hot") {	
+		alert(1)
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
@@ -603,7 +605,6 @@ function up(){
 					var com = data.comment;
 					var comment = "";
 					var towLen,portrait;
-					$(".bottomInfo").html("正在加载<span>...</span>");
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -673,11 +674,10 @@ function up(){
 					}
 					closeAjax=false;
 					if(com.length < 5) {
-						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
                         closeAjax=true;
 						$(".bottomInfo").text("没有更多评论了");
 					} else {
-						//mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
+
 					}
 
 				} else {
@@ -686,6 +686,7 @@ function up(){
 			}
 		});
 	} else {
+		alert(2)
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getCommentByPage",
@@ -696,11 +697,12 @@ function up(){
 				"userId": userId
 			},
 			success: function(data) {
+//				alert(JSON.stringify(data));
 				if(data.state) {
-
-					var com = data.comment;
+					var com = data.comment;					
 					var comment = "";
-					var towLen
+					var towLen;
+//                  alert(JSON.stringify(com))
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -764,9 +766,10 @@ function up(){
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
 					if(com.length < 5) {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
+						closeAjax=true;
+						$(".bottomInfo").text("没有更多评论了");
 					} else {
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
+						
 					}
 				} else {
 				}

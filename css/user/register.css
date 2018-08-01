@@ -11,6 +11,7 @@ body{
 	position:absolute;
 	top:0;
 }
+
 .mui-input-group{
 	padding-top: 0.5rem;
 }
@@ -26,7 +27,9 @@ body{
 	color: #9E9E9E;
 	font-size: 14px;
 	padding-left: 3rem;
-	
+}
+input[type=text]{
+	height: 2.8125rem;
 }
 .disabled { pointer-events: none; }
 .mui-input-row >div{

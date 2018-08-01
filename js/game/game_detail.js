@@ -143,7 +143,7 @@ $(function() {
 	
 	
 	
-    $('body').on('longtap', 'img', function() {
+    $('body').on('longtap', '.mui-slider-item img', function() {
 			var picurl = $(this).attr("src");
 		   saveImg(picurl);
 	});
@@ -282,7 +282,7 @@ $(function() {
 		}
 	})
 
-	//	游戏点赞
+	//	游戏攻略点赞
 
 	$('body').on('tap', '.thumb,.thumb_num', function(e) {
 		e.stopPropagation();
@@ -405,6 +405,22 @@ function launchApp(pagename) {
 }
 
 /* 攻略按键 */
+
+$("body").on("tap",".strategy_indent",function(){
+	var strategy_id=$(this).attr("data-id");
+//	alert(strategy_id)
+    	mui.openWindow({
+				url: "../strategy/strategy_details.html",
+				id: "strategy_details.html",
+				createNew: true,  
+				extras: {
+					strategyId:strategy_id
+				}
+			});
+
+})
+
+
 function detail_strategy(){
 		   $('.news_post_commentContentstra').children().remove();
 			commentModule = false;
@@ -449,8 +465,8 @@ function detail_strategy(){
 								}else{
 									portrait=str[i].portrait;
 								}
-								div +=
-									"<div class='news_post_commentContent strategy_indent ofh'  data-id='" + str[i].id + "'>" +
+								div+=
+									"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
 									"<div class='ofh'>" +
 									  "<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 									   "<div  class='timeName'>"+
@@ -470,10 +486,10 @@ function detail_strategy(){
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +									
 									"<div class='fr color_9e9e9e comment_imgs'>" +
-									 "<div class='thumb'></div>" +
-									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+//									 "<div class='thumb'></div>" +
+//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
 									 "<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
-									 "<div  class='comment_num'>" + str[i].comment_num + "</div>" +
+									 "<div  class='comment_num' style='margin-right:0.5rem;'>" + str[i].comment_num + "</div>" +
 									"</div>" +
 									"</div>" +
 									"</div>" +
