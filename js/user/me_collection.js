@@ -39,7 +39,7 @@ $(function(){
 	$('body').on('tap','.strategy_content',function(){
 		mui.openWindow({
 			url:"../strategy/strategy_details.html",
-			id:"../strategy/strategy_details.html",
+			id:"strategy_details.html",
 			extras:{
 				strategyId: $(this).attr('data-id'),
 				anchor:true

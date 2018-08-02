@@ -18,13 +18,7 @@ $(function() {
 		strategyId = self.strategyId;
 		var anchor = self.anchor;
 		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";
-		window.addEventListener('reload', function() {
-			// mui.fire()传过来的额外的参数，在event.detail中；
-			window.location.reload();
-			// var param = detail.param;
-			// 执行相应的ajax或者操作DOM等操作
-		});
-
+	
 		mui.init({
 			swipeBack: true,
 			gestureConfig: {
@@ -56,6 +50,14 @@ $(function() {
 				}
 			}
 		})
+
+
+        window.addEventListener('reload', function() {
+			// mui.fire()传过来的额外的参数，在event.detail中；
+			window.location.reload();
+		});
+
+
 
 		detail();
 
@@ -295,6 +297,20 @@ $(function() {
 			}
 		});
 
+        
+        $("body").on('tap','.news_post_content_detail a',function(){
+             mui.openWindow({
+			   url:"../play/h5game.html",
+			   id:"h5game.html",
+			   extras:{
+				url:$(this).attr('href')
+			  }
+		   })
+        });
+
+
+
+
 		//滚动隐藏结束
 
 		$('body').on("tap",".news_userInfo_replyInput",function() {
@@ -317,7 +333,6 @@ $(function() {
 		
 
 		$('body').on('tap', '.news_post_commentContent', function() {
-
 		  if(userId !== 0) {
 			mui.openWindow({
 				url: "strategy_allComments.html",
@@ -335,6 +350,11 @@ $(function() {
 		  }
 		  
 		});
+
+        
+
+
+
 
 		//取消收藏结束
 		function up() {

@@ -174,7 +174,7 @@
 								var t = data.tip;
                                 var portrait;
 								var div = '';
-                                
+                               
 								for(var i = 0; i < t.length; i++) {
 									if(t[i].series == 1) {
 										var commentId = t[i].id
@@ -186,12 +186,13 @@
 									} else{
 										var img_title = t[i].title
 									}
-									
+									 
 									if(t[i].portrait==0||t[i].portrait==null){
 									   portrait="../../Public/image/morentouxiang.png";
 								    }else{
 									   portrait=t[i].portrait;
 								    }
+
 									div +=
 										"<div class='notice_list ofh' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +

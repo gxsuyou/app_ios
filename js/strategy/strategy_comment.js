@@ -30,21 +30,13 @@ $(function() {
 		var target_img = self.target_img;
 		var target_title = self.target_title;
 		mui.back = function() {
-			if(plus.webview.getWebviewById("strategy_details.html")) {
-				var wobj = plus.webview.getWebviewById("strategy_details.html");
-			} else {
-				var wobj = plus.webview.getWebviewById("me_works.html");
-			}
 
+		    var wobj = plus.webview.getWebviewById("strategy_details.html");
 			mui.fire(wobj,'reload',{});
 			old_back();
 		}
 
-//		document.getElementById('choose_img').addEventListener('tap', function() {
-//		
-//		}, false);
-//		
-		
+
 		$('body').on('tap','.choose_img',function(){
 			setTimeout(function(){
 			if(mui.os.plus) {
@@ -129,10 +121,7 @@ $(function() {
 function galleryImgs() {
 	// 从相册中选择图片  
 	plus.gallery.pick(function(path) {
-
-		console.log(path)
 		var token;
-
 		if($('.show_imgs > .show_imgcontent').length < 1) {
 			var div =
 				"<div class='show_imgcontent' data-src = '" + path + "'>" +

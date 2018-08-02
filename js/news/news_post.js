@@ -593,8 +593,7 @@ function up(){
 		return false;
 	}
 	page++;
-	closeAjax=true;
-	
+	closeAjax=true;	
 	$(".bottomInfo").html("正在加载 ...");
 	setTimeout(function(){
 	if(type == "hot") {	

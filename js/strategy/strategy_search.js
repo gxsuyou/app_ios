@@ -48,6 +48,7 @@ $(function() {
 	})
 
 	$("body").on('tap','.search_list',function(){
+		$(".search_bar").blur();
 		var msg = $(this).children('div').text();
 		var id=$(this).attr("data-id");
 		mui.openWindow({
@@ -64,8 +65,9 @@ $(function() {
 	
 	
 	$('body').on("tap",".search_img",function(){
+		$(".search_bar").blur();
 		var id = $('.search_list:first').attr("data-id");
-		if (id) {
+	if (id) {
 			mui.openWindow({
 	url:"strategy_details.html",
 			id:"strategy_details.html",

@@ -101,6 +101,7 @@ $(function() {
        
 	   
 		$("body").on("tap",".download",function(){
+//			alert(1)
            	if(game.game_download_ios!==null){
 				location.href=game.game_download_ios;
 			}else{
