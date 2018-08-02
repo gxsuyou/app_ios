@@ -10,7 +10,7 @@ body{
 .game_list{
 	height: 6.0625rem;
 	border-bottom: 1px solid #E7EAEC;
-	display: flex;
+	display:flex;
 }
 .signs{
 /*	align-self:flex-end;*/
@@ -38,6 +38,8 @@ body{
 	line-height: 1.5rem;
 	margin-top: 2.28125rem;
 	border-radius: 20px;
+	margin-left: auto;
+	margin-right: 1.4rem;
 }
 .game_recommend_star{	
 	width: 0.8125rem;
@@ -52,7 +54,7 @@ body{
 .tag{
 	height: 1.125rem;
 	line-height: 1.125rem;
-	padding: 0 0.6rem;
+	padding: 0 0.4rem;
 	margin-right: 0.2rem;	
 }
 .game_list_star_active{

@@ -630,8 +630,9 @@ function detail_strategy(){
 							     if(com[i].portrait==0||com[i].portrait==null){								  
 									  portrait="../../Public/image/morentouxiang.png";
 								  }else{
-								  	portrait=com[i].portrait;
+								  	  portrait=com[i].portrait;
 								  }
+								  
 								div +=
 									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 									"<div class='ofh'>" +
@@ -650,13 +651,10 @@ function detail_strategy(){
 									"</div>" +
 									"</div>" +
 									"</div>" +
-
 									"</div>"
 							}
 							$('.news_post_commentContents').empty().append(div);
-						} else {
-
-						}
+						} 
 					}
 				});
 			}
@@ -721,12 +719,17 @@ function detail_main(){
 					$('.gameScore').text(g.grade);
 					if(g.tagList) {
 						var t = g.tagList.split(',');
-						for(var i = 0; i < t.length - 1; i++) {
-							var sp = "<span class='color_green'>" + t[i] + "  |</span>"
-						}
-						$('.game_signs').empty().append(sp)
-						var spLast = "<span class='color_green'>" + t[t.length - 1] + "</span>"
-						$('.game_signs').empty().append(spLast)
+						var sp="";
+						if(t.length>3){
+							for(var i = 0; i < 3; i++) {
+							 sp += "<span class='color_green'>" + t[i] + "</span>"
+						   }
+						}else{
+							for(var i = 0; i < t.length ; i++) {
+							 sp += "<span class='color_green'>" + t[i] + "</span>"
+						   }
+						}					
+						$('.game_signs').empty().append(sp);
 
 					}
 					$('.game_simpleIntro_content').html(g.game_detail);

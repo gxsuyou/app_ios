@@ -568,8 +568,6 @@ function getComment(){
 						$(".bottomInfo").text("没有更多评论了");
 					} 
 
-				} else {
-
 				}
 			}
 		});

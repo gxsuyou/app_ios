@@ -48,7 +48,12 @@
 	background-size: cover;
 }
 .game_signs > span{
-	margin-right: 0.2rem;
+	padding-right: 0.3rem;
+	margin-left:0.3rem;
+	background:linear-gradient(#7fcadf,#7fcadf) no-repeat  right /1px 14px;	
+}
+.game_signs > span:last-child{
+	background: none;
 }
 .game_detailTopinfo{
 	width: 100%;

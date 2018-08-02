@@ -14,6 +14,7 @@ $(function() {
 		target_img = self.target_img;
 		target_title = self.target_title;
 		strategyId = self.strategyId;
+        
 		mui.init({
 			swipeBack: true,
 			pullRefresh: {
@@ -38,6 +39,8 @@ $(function() {
 
 		})
 
+
+        
 		$.ajax({
 			type: "get",
 			url: config.data + "strategy/getCommentById",
@@ -47,11 +50,8 @@ $(function() {
 			},
 			success: function(data) {
 				if(data.state) {
-
 					var com = data.comment,portrait;
 					firstUserid = com.user_id;
-					
-
 					if(com.portrait==0||com.portrait==null){
 						portrait="../../Public/image/morentouxiang.png";
 					}else{						
@@ -65,7 +65,9 @@ $(function() {
 					} else {
 						$('.allCom_img').addClass('hidden')
 					}
-					$('.comment_summary').attr('data-id',com.strategyid)
+
+					$('.comment_summary').attr('data-id',com.targetid);
+					
 					if (com.strategy_img) {
 						$('.comment_summary_img').css('background-image','url(' + config.img + encodeURI(strategy) + ')')
 					} else{
@@ -85,7 +87,7 @@ $(function() {
 		});
 		
 		$('body').on('tap','.comment_summary',function(){
-			var strategyId = $(this).attr('data-id');
+			var strategyId =$(this).attr('data-id');
 			mui.openWindow({
 				url:"strategy_details.html",
 				id:"strategy_details.html",

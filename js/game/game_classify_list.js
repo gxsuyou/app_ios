@@ -52,8 +52,7 @@ $(function(){
 
 		});
 			
-	
-	
+
 })
 			function up(){
 				$.ajax({
@@ -74,10 +73,20 @@ $(function(){
 								var signs = '';
 								var result= g[i].tagList.split(",");
 								var resultId = g[i].tagId.split(",");
-								for (var j = 0; j < result.length; j++) {
-										signs +=
-											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
+
+								if(result.length>3){
+									for (var j = 0; j < 3; j++) {
+									signs +=
+											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
+								    }
+								}else{
+									for (var j = 0; j < result.length; j++) {
+									signs +=
+											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
+								    }
 								}
+								
+															
 							var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
 					        if(downloadToggle){
 						      var buttonDown="打开";
