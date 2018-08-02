@@ -18,6 +18,11 @@ $(function(){
 		
 		$('.nav').css('top',total_height);	
 		$('body').on("tap",".nav > div",function(){
+			if(ajaxToggle){
+				return false;
+			}
+			
+			
 			var selfSort = $(this).attr('data-sort');
 			$(this).addClass('active').siblings('div').removeClass('active');
 			$('.notice_lists').children().remove();
@@ -32,8 +37,6 @@ $(function(){
 			var type = $(this).attr("data-type");
 			var commentId = $(this).attr("data-id");
 			var url;
-			alert(type);
-			return false;
 			if (type == 1) {
 				url = "news_allComments.html"
 			}
@@ -43,6 +46,7 @@ $(function(){
 			else{
 				url = "../game/game_allComments.html"
 			}
+			
 			mui.openWindow({
 				url:url,
 				id:url,

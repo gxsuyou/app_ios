@@ -45,6 +45,7 @@
 		<script type="text/javascript">
 			var page = 0;
 			var sort = 1;
+			var ajaxToggle=false;
 		</script>
 		<script type="text/javascript">
 			mui.init({
@@ -81,11 +82,13 @@
 
 			})
 
-			function up() {
-				page++;
-				
+			function up() {				
+				if(ajaxToggle){
+					return false;
+				}				
+				ajaxToggle=true;
+				page++;			
 				if(sort == 2) {
-					
 					$.ajax({
 						type: "get",
 						url: config.data + "users/newMessage",
@@ -120,6 +123,8 @@
 								    }else{
 									    portrait=t[i].portrait;
 								    }
+								    
+								    
 									div +=
 										"<div class='notice_list ofh' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +
@@ -135,7 +140,8 @@
 										"</div>" +
 										"</div>"
 								}
-								$('.notice_lists').append(div)
+								$('.notice_lists').append(div);
+								ajaxToggle=false;
 								if(t.length < 10) {
 									mui('.news_center').pullRefresh().endPullupToRefresh(true);
 								} else {
@@ -149,7 +155,8 @@
        	                    $('.error').html(errorHTML);
        	                    $(".notice_lists").empty();
        	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
-       	                    page = 0
+       	                    page = 0;
+       	                    ajaxToggle=false;
 						}
 					});
 				} else {
@@ -164,7 +171,6 @@
 						},
 						success: function(data) {
 							if(data.state) {
-
 								var t = data.tip;
                                 var portrait;
 								var div = '';
@@ -186,7 +192,6 @@
 								    }else{
 									   portrait=t[i].portrait;
 								    }
-									console.log(t[i].type)
 									div +=
 										"<div class='notice_list ofh' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +
@@ -202,7 +207,8 @@
 										"</div>" +
 										"</div>"
 								}
-								$('.notice_lists').append(div)
+								$('.notice_lists').append(div);
+								ajaxToggle=false;
 								if(t.length < 10) {
 									mui('.news_center').pullRefresh().endPullupToRefresh(true);
 								} else {
@@ -216,7 +222,8 @@
        	                    $('.error').html(errorHTML);
        	                    $(".notice_lists").empty();
        	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
-       	                    page = 0
+       	                    page = 0;
+       	                    ajaxToggle=false;
 						}
 					});
 				}

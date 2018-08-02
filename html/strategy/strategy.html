@@ -135,13 +135,14 @@
 	<script type="text/javascript">
 			var soc = "3"
 	</script>
-	<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>-->
 	<script>
 		var page = 0;
 		var sort = 'comment_num';
 	</script>
 	<script type="text/javascript">
+		    activeBell()//激活头部bell回复
 			mui.init({
 				swipeBack: true,
 			    subpages:[{
@@ -276,7 +277,7 @@
 			}
 					
 			 window.addEventListener('reload',function(event){
-			    location.reload();		    
+			    activeBell()
 		    });
 		</script>
 		
