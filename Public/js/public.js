@@ -54,9 +54,9 @@ var config = {
 //  data:"http://192.168.2.117:8877/",
 	// data:"http://182.61.26.179:8877/",
     //data:"http://www.oneyouxi.com.cn:8877/",
-//	data:"http://192.168.0.67:8877/",
+	data:"http://192.168.0.207:8877/",
 	//data:"http://182.61.26.179:8877/",
-    data:"http://www.oneyouxi.com.cn:8877/",
+//  data:"http://www.oneyouxi.com.cn:8877/",
 	base64: "http://base64.oneyouxi.com.cn/",
 	url_upload:"https://admin.oneyouxi.com.cn/",
   // url_upload:"http://192.168.2.117:8878/",
@@ -92,3 +92,25 @@ if(userInfojson) {
 //	}
 //});
 //console.log(config.data)
+
+
+function activeBell(){
+	if(userId){
+	    $.ajax({
+	       type:"get",
+	       url:config.data+"news/getTip",
+	       async:true,
+	       data: {
+               "userId": userId
+	       },
+	       success:function(data){
+	       	   if(data.state==1){
+	       	   	  $(".bell").addClass("bell_active");
+	       	   }else{
+	       	   	  $(".bell").removeClass("bell_active");
+	       	   }
+              
+	    }
+      });
+	}
+}

@@ -155,7 +155,8 @@
        	                    $('.error').html(errorHTML);
        	                    $(".notice_lists").empty();
        	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
-       	                    page = 0
+       	                    page = 0;
+       	                    ajaxToggle=false;
 						}
 					});
 				} else {
@@ -170,7 +171,6 @@
 						},
 						success: function(data) {
 							if(data.state) {
-
 								var t = data.tip;
                                 var portrait;
 								var div = '';
@@ -222,7 +222,8 @@
        	                    $('.error').html(errorHTML);
        	                    $(".notice_lists").empty();
        	                    mui('.news_center').pullRefresh().disablePullupToRefresh();      	                   
-       	                    page = 0
+       	                    page = 0;
+       	                    ajaxToggle=false;
 						}
 					});
 				}

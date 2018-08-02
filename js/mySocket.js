@@ -28,8 +28,6 @@ if(window.localStorage.getItem("userInfo")) {
 		});
 	}	
 	socket.on('newMessage', function (data) {
-		
-     	
        	document.getElementsByClassName("bell")[0].classList.add("bell_active")
        	
 
@@ -42,10 +40,9 @@ if(window.localStorage.getItem("userInfo")) {
 
     });
     socket.on('hsaNwsTip', function (data) {
-		
+		alert(JSON.stringify(data))
      	if (data.tip > 0) {
-     		
-     		document.getElementsByClassName("bell")[0].classList.add("bell_active")
+   		  document.getElementsByClassName("bell")[0].classList.add("bell_active")
      	} else{
      		
      	}

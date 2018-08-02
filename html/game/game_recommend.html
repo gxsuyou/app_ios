@@ -6,10 +6,12 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/game/game_recommend.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/game/game_recommend.css" />	
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
-		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
 	<body >
 		<div class="header_box" >
@@ -351,6 +353,7 @@
 			var up2 = 1;
 		</script>
 		<script type="text/javascript">
+			activeBell()//激活头部bell回复
 			mui.init({
 				swipeBack: true,
 		        subpages:[{
@@ -461,7 +464,7 @@
                 
 			}
 			window.addEventListener('reload',function(event){
-			       location.reload();		    
+			      activeBell()
 		     });
 		</script>
 

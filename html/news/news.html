@@ -154,13 +154,14 @@
 		<script type="text/javascript">
 			var soc = "1"
 		</script>
-		<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../../js/socket.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mySocket.js" type="text/javascript" charset="utf-8"></script>-->
 		<script type="text/javascript">
 			var page = 1
 		</script>	
 		<script src="../../js/news/news.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			activeBell()//激活头部bell回复
 			mui.init({
 				swipeBack: true,		 
 				subpages:[{
@@ -276,7 +277,7 @@
 				}, 1000);
 			}
 		    window.addEventListener('reload',function(event){	
-			    location.reload();
+			    activeBell()
 		    });
 		</script>
 	</body>

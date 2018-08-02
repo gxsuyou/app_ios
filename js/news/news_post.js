@@ -110,7 +110,7 @@ $(function() {
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
-					$('.news_reviewNum').text(n.comment)
+//					$('.news_reviewNum').text(n.comment)
 					up();
 					if(n.game_id) {
 						$('.new_post_contents').css("padding-top",  30 + "px")      
@@ -451,10 +451,11 @@ $(function() {
 					},
 					success: function(data) {
 						if(data.state == "1") {					
-						$('.news_secondComment_input').val(""); //不刷新							      						
-						 getComment();
+						 $('.news_secondComment_input').val(""); //不刷新							 
+						 $(".news_secondComment_input").blur();
+						 getComment();						 
 						 mui.toast("发送成功");	
-						 replyTog=false;
+						 replyTog=false;					 
 						} else {
 							mui.toast("发送失败，请重试")
 						}
@@ -479,14 +480,15 @@ $(function() {
 })
 
 function getComment(){
-	closeAjax=false;
+	$('.news_post_commentContents').children().remove();
+	closeAjax=true;//关掉up事件，等待getComment()结束再调用
 	 $.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
 			async: true,
 			data: {
 				"commentParentId": newsId,
-				"page": 0,
+				"page":1,
 				"userId": userId
 			},
 			success: function(data) {
@@ -528,7 +530,6 @@ function getComment(){
 								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
 								"全部回复" +
 								"</div>" +
-
 								"</div>";
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
@@ -557,8 +558,16 @@ function getComment(){
 							"</div>" +
 							"</div>"
 					};
+                     
 
-					$('.news_post_commentContents').empty().append(comment);
+					$('.news_post_commentContents').append(comment);
+//					console.log(comment)
+                    var reviewNum=$('.news_post_commentContent').length;				
+					$(".news_reviewNum").text(reviewNum);
+                    
+                    
+                    closeAjax=false;//up事件开启
+
 
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
@@ -580,15 +589,15 @@ function getComment(){
 
 
 function up(){
-	page++;
 	if(closeAjax){
 		return false;
 	}
+	page++;
 	closeAjax=true;
+	
 	$(".bottomInfo").html("正在加载 ...");
 	setTimeout(function(){
 	if(type == "hot") {	
-		alert(1)
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getHotNewsCommentByPage",
@@ -603,6 +612,7 @@ function up(){
 					var com = data.comment;
 					var comment = "";
 					var towLen,portrait;
+					
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -665,11 +675,20 @@ function up(){
 							"</div>"
 					};
 
-					$('.news_post_commentContents').append(comment)
+                   
+					$('.news_post_commentContents').append(comment);					
+					var reviewNum=$('.news_post_commentContent').length;	
+					if(reviewNum > 99) {
+						reviewNum = 99
+					}
+					$(".news_reviewNum").text(reviewNum);
+					
+					
 
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
+					
 					closeAjax=false;
 					if(com.length < 5) {
                         closeAjax=true;
@@ -683,8 +702,7 @@ function up(){
 				}
 			}
 		});
-	} else {
-		alert(2)
+	} else if(type=="time") {
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getCommentByPage",
@@ -695,12 +713,10 @@ function up(){
 				"userId": userId
 			},
 			success: function(data) {
-//				alert(JSON.stringify(data));
 				if(data.state) {
 					var com = data.comment;					
 					var comment = "";
 					var towLen;
-//                  alert(JSON.stringify(com))
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -754,17 +770,22 @@ function up(){
 							"</div>" +
 							secondComs +
 							"</div>" +
-
 							"</div>"
 					};
-
-					$('.news_post_commentContents').append(comment)
-
+                    
+					$('.news_post_commentContents').append(comment);
+					var reviewNum=$('.news_post_commentContent').length;
+					if(reviewNum > 99) {
+						reviewNum = 99
+					}
+					$(".news_reviewNum").text(reviewNum);
+					
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
 					}
+					closeAjax=false;
 					if(com.length < 5) {
-						closeAjax=true;
+						closeAjax= true;					
 						$(".bottomInfo").text("没有更多评论了");
 					} else {
 						

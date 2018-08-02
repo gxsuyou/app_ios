@@ -789,7 +789,7 @@ function detail_main(){
 							"<div class='game_relatedInfocontentTime font_12 simHei color_9e9e9e'>" + nl[i].add_time + "</div>" +
 							"</div>"
 					}
-					$('.game_relatedInfocontents').empty().append(div)
+					$('.game_relatedInfocontents').empty().append(div);
 				}
 			}
 		});
