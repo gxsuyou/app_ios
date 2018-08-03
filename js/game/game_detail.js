@@ -721,8 +721,8 @@ function detail_main(){
 					if(g.tagList) {
 						var t = g.tagList.split(',');
 						var sp="";
-						if(t.length>3){
-							for(var i = 0; i < 3; i++) {
+						if(t.length>2){
+							for(var i = 0; i < 2; i++) {
 							 sp += "<span class='color_green'>" + t[i] + "</span>"
 						   }
 						}else{
@@ -880,7 +880,7 @@ function detail_main(){
 							"</div>" +
 							"</div>"
 					}
-					$('.game_similarContents').empty().append(div)
+					$('.game_similarContents').empty().append(div);
 				} else {
 
 				}

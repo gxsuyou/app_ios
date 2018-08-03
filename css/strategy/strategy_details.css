@@ -17,6 +17,11 @@
 	background-repeat:no-repeat;
 	background-size: contain;
 }
+
+.news_post_content_detail p{
+	font-size:15px;
+}
+
 .news_post_list{
 	top: 45px;
 	width: 100%;
@@ -30,7 +35,6 @@
 .news_post_listImg{
 	width: 1.8125rem;
 	height: 1.8125rem;
-	/*background-image: url("../../Public/image/share.png");*/
 	background-color: yellow;
 	border-radius: 10px;
 	background-position: center;
@@ -194,8 +198,6 @@ h4{
 	margin-left: 0.9375rem;
 	margin-right: 0.75rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -224,29 +226,27 @@ h4{
 	background-size: contain;
 	vertical-align: middle
 }
-.comment_imgs{
-	    
-	   height: 2rem;
-	  
+.comment_imgs{	    
+	   height: 2rem;		    
 }
-.comment_img{
-	
+.comment_img{	
 	width: 1.0625rem;
 	height: 1.0625rem;
-	background-image: url("../../Public/image/liuyan.png");
-	
+	background-image: url("../../Public/image/liuyan.png");	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
 	vertical-align: middle;
 }
 
+.imgFirst{
+	margin:0.6rem 0rem;
+	max-height:10rem;
+	overflow: hidden;
+}
 
-.thumb_num,.comment_num{
-	
-	width: 1.8rem;
-	
-	
+.thumb_num,.comment_num{	
+	width: 1.8rem;	
 }
 .comment_imgs > span{
 	display: inline-block;

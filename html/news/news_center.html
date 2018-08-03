@@ -46,12 +46,10 @@
 			var page = 0;
 			var sort = 1;
 			var ajaxToggle=false;
-		</script>
-		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
 				beforeback:function(){
-					var list = plus.webview.getWebviewById("main.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+					var list = plus.webview.getWebviewById("news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
 					mui.fire(list, 'reload');
 					var strategy = plus.webview.getWebviewById("strategy.html");//触发父页面的自定义事件(refresh),从而进行刷新
 					mui.fire(strategy, 'reload');

@@ -15,17 +15,16 @@ $(function(){
 		page = 0;
 		game = 1;
 		mui('.me_gameContents').pullRefresh().refresh(true);
-		up();
-		
+		up();		
 	})
+	
 	$('.me_gameNav').children('span').eq(1).click(function(){
 		$('.now_game').removeClass('hidden');
 		$('.game_lists').addClass('hidden').children().remove();
 		page = 0;
 		game = 0;
 		mui('.me_gameContents').pullRefresh().refresh(true);
-		up();
-		
+		up();		
 	})
 	
 	$('body').on('tap','.game_list',function(){

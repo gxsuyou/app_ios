@@ -30,6 +30,13 @@ a{
     padding-bottom:7rem;
 }
 
+.detail p{
+	font-size:15px;
+}
+
+.detail strong{
+	font-size:15px;
+}
 
 
 .news_userInfo_reply{

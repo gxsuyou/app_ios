@@ -10,7 +10,6 @@ mui.plusReady(function() {
 	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 	var wgtVer = null;
 	function plusReady() {
-		// ......
 		// 获取本地应用资源版本号
 		plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 			wgtVer = inf.version;
@@ -131,44 +130,29 @@ mui.plusReady(function() {
 		}
 	);
 	self.append(sub);
-	//	for(var i = 0; i < 4; i++) {
-	//		//创建webview子页
-	//		var sub = plus.webview.create(
-	//			subpages[i], //子页url
-	//			subpages[i], //子页id
-	//			{
-	//				top: '0px', //设置距离顶部的距离
-	//				bottom: '50px' //设置距离底部的距离
-	//			}
-	//		);
-	//		//如不是我们设置的默认的子页则隐藏，否则添加到窗口中
-	//		if(i != Index) {
-	//			sub.hide();
-	//		}
-	//		//将webview对象填充到窗口
-	//		self.append(sub);
-	//	}
 
 	mui('.mui-bar-tab').on('tap', 'a', function(e) {
-
 		var index = $(this).index();
 
 		//获取目标子页的id
-		var h = plus.webview.getWebviewById(subpages[index])
-
+		var h = plus.webview.getWebviewById(subpages[index])//有东西后就不create了
+		
+		
+       console.log(plus.webview.getWebviewById(subpages[index]))
 		document.getElementsByClassName("mui-icon")[1].classList.remove('game_active');
 		document.getElementsByClassName("mui-icon")[0].classList.remove('news_active');
 		document.getElementsByClassName("mui-icon")[2].classList.remove('strategy_active');
 		document.getElementsByClassName("mui-icon")[3].classList.remove('play_active');
-		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');
+		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');		
 		this.children[0].classList.add(this.getAttribute('data-img'));
-		//			console.log(this.getAttribute('data-img'))
-		var targetTab = this.getAttribute('data-href');
-		//		console.log(targetTab);
-		if(targetTab == activeTab) {
+		var targetTab = this.getAttribute('data-href');		
 
+
+
+		if(targetTab == activeTab) {
 			return;
 		}
+
 		if(!h) {
 			var sub = plus.webview.create(
 				subpages[index], //子页url
@@ -188,6 +172,7 @@ mui.plusReady(function() {
 		plus.webview.hide(activeTab);
 		//更改当前活跃的选项卡
 		activeTab = targetTab;
+
 
 	});
 

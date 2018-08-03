@@ -102,6 +102,7 @@ $(function() {
 					firstImg = n.img
 					title = n.title
 					$('.detail').html(n.detail);
+//					alert(n.detail)
 					$(".detail img").attr("data-preview-src","");
                     $(".detail img").attr("data-preview-group","1");             
 					$('.news_post_content').attr("data-id", n.id);

@@ -17,8 +17,7 @@ $(function() {
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
 		var anchor = self.anchor;
-		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";
-	
+		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";	
 		mui.init({
 			swipeBack: true,
 			gestureConfig: {
@@ -52,9 +51,8 @@ $(function() {
 		})
 
 
-        window.addEventListener('reload', function() {
-			// mui.fire()传过来的额外的参数，在event.detail中；
-			window.location.reload();
+        window.addEventListener('reload', function() {		
+			window.location.reload();// mui.fire()传过来的额外的参数，在event.detail中；
 		});
 
 
@@ -374,8 +372,9 @@ $(function() {
                        
 						if(data.state) {
 							var com = data.comment;
-							var div = "",
-								portrait;
+							var div = "",portrait;
+								
+							
 							for(var i = 0; i < com.length; i++) {
 								if(com[i].img) {
 									var img = "img"
@@ -465,20 +464,19 @@ $(function() {
 						sort: sort
 					},
 					success: function(data) {
-                        
+                       
 						if(data.state) {
 							var com = data.comment;
 							var div = "";
 							for(var i = 0; i < com.length; i++) {
-
+                         
 								if(com[i].img) {
 									var img = "img"
 								} else {
 									var img = "hidden"
 								}
 								var sec = "",portrait;
-                                
-											
+                                											
 								if(com[i].towCommentList.length > 0) {
 									for(var j = 0; j < com[i].towCommentList.length; j++) {
 										if(com[i].towCommentList[j].targetUserNickName) {
@@ -490,7 +488,7 @@ $(function() {
 											"<div class='comment_secondComment'>" +
 											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
 											"<span class='" + ifHide + "'>回复</span>" +
-											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
 											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 											"</div>"
 									}
@@ -520,7 +518,9 @@ $(function() {
 									"<div class='news_post_commentContent_content fl'>" +
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
+									"<div class='imgFirst'>"+
 									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' width='100%' />" +
+									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 									"<div class='fr color_9e9e9e comment_imgs'>" +
@@ -534,7 +534,6 @@ $(function() {
 									sec +
 									"</div>" +
 									"</div>" +
-
 									"</div>"
 
 							}
