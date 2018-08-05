@@ -183,7 +183,6 @@ $(function() {
 						var aa = 2 * j;
 						var bb = 2 * j + 1;
 						content +=
-
 							"<div style='flex-shrink:0;padding-right:1.0625rem;'>" +
 							"<div class='game_detail_content' >" +
 							"<div class='game_signTop' data-gameId='" + act[i][aa].gameId + "'>" +

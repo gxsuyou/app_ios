@@ -199,11 +199,11 @@
 	margin: 0.75rem 0.625rem;
 	margin-right: 0;
 	margin-bottom: 0;
-	overflow: scroll;
-	
+	overflow: scroll;	
 }
 .game_relatedInfocontent{
 	padding-right: 0.75rem;
+	flex-shrink: 0;
 }
 .game_relatedInfocontentImg{
 	width: 11.125rem;

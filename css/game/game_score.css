@@ -76,7 +76,6 @@ html{
 #textarea{
 	position:absolute;
 	top:8rem;
-	height:60%;
-	overflow-y: hidden;
-	
+	height:65%;
+	overflow-y:scroll;
 }

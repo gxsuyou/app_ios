@@ -128,9 +128,9 @@ $(function() {
 					h +=
 						"<div class='news_newGame_content' data-id ='" + g[i].id + "'>" +
 						"<div class='news_newGame_contentImg' style='background-image:url(" + config.img + encodeURI(g[i].game_title_img) + ")'></div>" +
-						"<div class='news_newGame_contentArt font_12'>" +
+						"<div class='news_newGame_contentArt font_14'>" +
 						"<span class='h_name'>" + g[i].game_name + "</span>" +
-						"<span class='fr'>" + g[i].grade + "分</span>" +
+						"<span class='fr'>" + g[i].grade + "</span>" +
 						"<span class='news_newGame_contentArtstar fr'></span>" +
 						"</div>" +
 						"</div>"

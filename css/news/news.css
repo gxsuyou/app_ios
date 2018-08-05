@@ -279,25 +279,25 @@ position: absolute;
 	height: 2.125rem;
 	width: 12.2rem;
 	line-height: 2.125rem;
-	font-family: simHei;
+/*	font-family: simHei;*/
 	color: #282828;
 	padding-left: 0.625rem;
 	padding-right: 0.5rem;
 	background-color: white;
 }
-
+.news_newGame_contentArt>span:nth-child(2){
+	color:#7fcadf;
+}
 .news_newGame_contentArtstar {
 	display: inline-block;
-	width: 0.75rem;
-	height: 0.75rem;
+     width: 1rem;
+	height: 1rem;
 	background-image: url(../../Public/image/xing1.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	/* vertical-align: middle; */
-	/* margin-left: 4.6rem; */
-	/* margin-bottom: 0.1rem; */
-	margin-top: 0.6875rem;
+	/*margin-top: 0.6875rem;*/
+	margin-top: 0.5875rem;
 	margin-right: 0.4rem;
 }
 

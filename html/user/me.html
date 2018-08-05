@@ -108,14 +108,13 @@
 			mui.init();
 		</script>
 		<script type="text/javascript">
-//			mui.init({	 
-//				subpages:[{
-//                  url:'me.html',
-//                  id:'me.html',
-//              }],
-//			})
-			function openShare() {
-				
+			mui.init({	 
+				subpages:[{
+                    url:'me.html',
+                    id:'me.html',
+                }],
+			})
+			function openShare() {		
 				shareWebview();
 			}
 			mui.plusReady(function() {
@@ -175,7 +174,9 @@
 					sharew = null;
 				}
 			}
-
+            window.addEventListener('reload',function(event){	
+			   location.reload();
+		    });
 		</script>
 	</body>
 

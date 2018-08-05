@@ -135,7 +135,6 @@ body{
 
 
 .game_detail_contents{
-	/*height: 16.8125rem;*/
 	width:100%;
 	overflow-x:scroll;
 	padding-left: 0.9375rem;
@@ -143,21 +142,14 @@ body{
 .game_detail_content{
 	width: 9.625rem;
 	height: 14.75rem;
-	
-	
-
-	
 }
 .game_signTop,.game_signBottom{
 	width: 9.625rem;
 	height: 7.375rem;
-	
 }
 .game_signTopimg,.game_signBottomimg{
 	width: 9.625rem;
 	height: 4.8125rem;
-	
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
