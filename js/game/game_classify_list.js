@@ -80,12 +80,12 @@ $(function(){
 								if(result.length>3){
 									for (var j = 0; j < 3; j++) {
 									signs +=
-											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
+											"<div style='white-space:nowrap;' class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
 								    }
 								}else{
 									for (var j = 0; j < result.length; j++) {
 									signs +=
-											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
+											"<div style='white-space:nowrap;' class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>";
 								    }
 								}
 								
@@ -112,8 +112,8 @@ $(function(){
 														"<div class='game_recommend_starScore fl color_green'>"+ g[i].grade +"</div>"+
 													"</div>"+
 												"</div>"+
-												"<div class='font_12 color_green'>"+
-												signs +
+												"<div style='display:flex;width:11rem;' class='font_12 color_green'>"+
+												 signs +
 												"</div>"+
 											"</div>"+
 											"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>"+

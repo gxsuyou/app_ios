@@ -102,16 +102,14 @@ $(function() {
 					firstImg = n.img
 					title = n.title
 					$('.detail').html(n.detail);
-//					alert(n.detail)
 					$(".detail img").attr("data-preview-src","");
                     $(".detail img").attr("data-preview-group","1");             
 					$('.news_post_content').attr("data-id", n.id);
 					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")");
-					$('h4').text(n.title)
+					$('.news_post_content>h4').text(n.title)
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
-//					$('.news_reviewNum').text(n.comment)
 					up();
 					if(n.game_id) {
 						$('.new_post_contents').css("padding-top",  30 + "px")      

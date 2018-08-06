@@ -14,8 +14,7 @@ $(function() {
 		$('.me_share').click(function(){
 			openShare()
 		})
-		var userInfostr = window.localStorage.getItem("userInfo");
-		
+		var userInfostr = window.localStorage.getItem("userInfo");		
 		var userInfojson = eval('(' + userInfostr + ')');
 		$(".me_img").css("background-image", "url(" +userInfojson.portrait + ")")
 		var id = userInfojson.id;

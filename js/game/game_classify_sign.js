@@ -84,12 +84,12 @@ $(function(){
 									if (result.length <= 3) {
 										for (var j = 0; j < result.length; j++) {
 											signs +=
-												"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
+												"<div style='white-space:nowrap;'  class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
 										}
 									} else{
 										for (var j = 0; j < 3; j++) {
 											signs +=
-												"<div class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
+												"<div style='white-space:nowrap;' class='fl tag font_12 border_green border_radius_twenty' data-id='"+ resultId[j] +"'>"+ result[j] +"</div>"
 										}
 									}
 									
@@ -110,7 +110,7 @@ $(function(){
 														"<div class='game_recommend_starScore fl color_green'>"+ g[i].grade +"</div>"+
 													"</div>"+
 												"</div>"+
-												"<div style='display:flex;'  class='font_12 color_green'>"+
+												"<div style='display:flex;width:11rem;'  class='font_12 color_green'>"+
 												  signs +								
 												"</div>"+
 											"</div>"+
@@ -118,8 +118,7 @@ $(function(){
 										"</li>"
 							}
 							
-							$('.game_lists').append(li)
-							
+							$('.game_lists').append(li);
 							$('.game_recommend_stars').each(function(){
 				
 								var score =  $(this).find('.game_recommend_starScore').eq(0).text()

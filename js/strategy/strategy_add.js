@@ -64,7 +64,6 @@ $(function() {
 
 		
 	$("body").on("focus","#strategy_textarea",function(){
-		///$("#strategy_textarea span").css("-webkit-user-select","text");
 		setTimeout(function(){
 			var scrollY=$('#strategy_textarea')[0].scrollHeight;
            $('#strategy_textarea').animate({scrollTop:scrollY},200);        
@@ -74,6 +73,7 @@ $(function() {
 
    $("body").on("keyup","#strategy_textarea",function(){
 		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
+		
 	});
 
      $("body").on("tap","#strategy_textarea",function(){
@@ -137,22 +137,62 @@ function galleryImgs() {
 	// 从相册中选择图片 
 	$("#strategy_textarea").focus();
 	plus.gallery.pick(function(e) {
-    mui.toast("正在上传,请等待");
-		var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
+//  mui.toast("正在上传,请等待");
+        var rename=e.files[0]+Math.round(Math.random()*100);
+    
+    plus.zip.compressImage({
+			src:e.files[0],
+			dst:rename,
+			quality:50
+		},
+		function(k) {
+			    
+			    var size=k.size/1024;
+			    if(size>1024){
+			    	mui.toast("图片尺寸过大，请压缩后再上传");
+			    	return false;
+			    }
+			   
+			    mui.toast("正在上传,请等待");
+			    
+				var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
 					method: "post"
-		}, function(t, status) {				         
+				}, function(t, status) {
 					 var res =JSON.parse(t.responseText);
 					  if(res.errno==0){
 						  var src=res.data[0];
 							appendHtml(`<img style="width:98%;height:auto;" src="${src}"/>`);						
 					  }else{
 						  mui.toast("上传图片失败")
-					  }		
-			  });
-				uploader.addFile(e.files[0],{
+					  }
+		
+				});
+
+				uploader.addFile(k.target,{
 					"key": "file"
-				}); // 固定值，千万不要改！！！！！！		
+				}); // 固定值，千万不要改！！！！！！
+				
 				uploader.start();
+			
+            },function(error) {
+			    console.log("Compress error!");
+	    });
+    
+//		var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
+//					method: "post"
+//		}, function(t, status) {				         
+//					 var res =JSON.parse(t.responseText);
+//					  if(res.errno==0){
+//						  var src=res.data[0];
+//							appendHtml(`<img style="width:98%;height:auto;" src="${src}"/>`);						
+//					  }else{
+//						  mui.toast("上传图片失败")
+//					  }		
+//			  });
+//				uploader.addFile(e.files[0],{
+//					"key": "file"
+//				}); // 固定值，千万不要改！！！！！！		
+//				uploader.start();
 				
 	}, function(e) {
 		console.log("取消选择图片");
