@@ -138,7 +138,7 @@ function galleryImgs() {
 	$("#strategy_textarea").focus();
 	plus.gallery.pick(function(e) {
 //  mui.toast("正在上传,请等待");
-        var rename=e.files[0]+Math.round(Math.random()*100);
+        var rename=Math.round(Math.random()*100)+e.files[0];
     
     plus.zip.compressImage({
 			src:e.files[0],
@@ -146,22 +146,24 @@ function galleryImgs() {
 			quality:50
 		},
 		function(k) {
-			    
+			    console.log(JSON.stringify(k))
 			    var size=k.size/1024;
 			    if(size>1024){
 			    	mui.toast("图片尺寸过大，请压缩后再上传");
 			    	return false;
 			    }
-			   
+//			    return false;
 			    mui.toast("正在上传,请等待");
 			    
 				var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
 					method: "post"
 				}, function(t, status) {
 					 var res =JSON.parse(t.responseText);
+					 console.log(t.responseText);
 					  if(res.errno==0){
 						  var src=res.data[0];
-							appendHtml(`<img style="width:98%;height:auto;" src="${src}"/>`);						
+						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");			
+//						  $("#strategy_textarea").append("<img style='width:98%;height:auto;' src="+src+"/>")
 					  }else{
 						  mui.toast("上传图片失败")
 					  }
@@ -170,30 +172,14 @@ function galleryImgs() {
 
 				uploader.addFile(k.target,{
 					"key": "file"
-				}); // 固定值，千万不要改！！！！！！
-				
+				}); // 固定值，千万不要改！！！！！！				
 				uploader.start();
 			
             },function(error) {
 			    console.log("Compress error!");
 	    });
     
-//		var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
-//					method: "post"
-//		}, function(t, status) {				         
-//					 var res =JSON.parse(t.responseText);
-//					  if(res.errno==0){
-//						  var src=res.data[0];
-//							appendHtml(`<img style="width:98%;height:auto;" src="${src}"/>`);						
-//					  }else{
-//						  mui.toast("上传图片失败")
-//					  }		
-//			  });
-//				uploader.addFile(e.files[0],{
-//					"key": "file"
-//				}); // 固定值，千万不要改！！！！！！		
-//				uploader.start();
-				
+
 	}, function(e) {
 		console.log("取消选择图片");
 	}, {
@@ -210,18 +196,18 @@ function galleryImgs() {
 
 //插入图片
 function appendHtml(src){
- var sel, range;
- if(window.getSelection){
-	  var sel=window.getSelection();
-		if (sel.getRangeAt && sel.rangeCount) {
+   var sel,range;
+   if(window.getSelection){
+	 var sel=window.getSelection();
+	if (sel.getRangeAt && sel.rangeCount){
 			range = sel.getRangeAt(0);
-      range.deleteContents();
-      var el =document.createElement("div");
+            range.deleteContents();
+            var el =document.createElement("div");
 			el.innerHTML =src;
-			 var frag = window.parent.document.createDocumentFragment(), node, lastNode;
-        while ((node = el.firstChild)) {
-            lastNode = frag.appendChild(node);
-        }
+			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+            while ((node = el.firstChild)) {
+                lastNode = frag.appendChild(node);
+            }
         range.insertNode(frag);
 		    if(lastNode) {
             range = range.cloneRange();
@@ -231,7 +217,9 @@ function appendHtml(src){
             sel.addRange(range);
             }
 		}
- }
+   } else if (document.selection && document.selection.type != "Control") {
+            document.selection.createRange().pasteHTML(html);
+     }
 }
 
 

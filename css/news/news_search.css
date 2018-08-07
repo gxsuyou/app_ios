@@ -1,6 +1,7 @@
 input[type=text]{
 	width: 17.1875rem;
-	height: 1.5625rem;
+	height: 1.6rem;
+	border:none;
 	border-radius: 10px;
 	color: #9E9E9E;
 	font-family: simhei;

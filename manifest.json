@@ -3,7 +3,7 @@
 	"id": "H5BD8D7F0",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "ONE游戏",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.12",/*应用版本名称*/
+		"name": "1.0.13",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -114,7 +114,12 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"share":{"weixin":{"appid":"H5C62934A","appsecret":"6bb4455d150f0b2cff16c9ea4ce42547","description":"可选，微信分享"},"qq":{"appid":"1106717102","description":"QQ分享"}}},
+		"distribute": {"plugins":{"share":{
+			"weixin":{
+			"appid":"wxf14a568196301aa2",
+			"appsecret":"eb2341d2397f0baf58fb6ef805103b34",
+			"description":"可选，微信分享"
+			},"qq":{"appid":"1106717102","description":"QQ分享"}}},
 			"apple":{
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/

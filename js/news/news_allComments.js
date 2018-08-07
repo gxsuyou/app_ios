@@ -56,7 +56,7 @@ $(function() {
 					}else{
 						portrait=c.portrait;
 					}
-					$('.news_post_commentContent_head').css('background-image', "url(" + encodeURI(portrait) + ")")
+					$('.news_post_commentContent_head').eq(0).css('background-image', "url(" + encodeURI(portrait) + ")")
 					$('.news_post_commentContent').attr("data-id",c.id);
 					$('.news_post_commentContent').attr("data-userId",c.user_id);
 					$('.comment_userOne').text(c.nick_name);
@@ -162,6 +162,7 @@ function up(){
 			return false;
 		}
 		loginToggle=true;
+//		alert(commentId)
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getNewsCommentTowByPage",
@@ -184,6 +185,7 @@ function up(){
 					    }else{
 							portrait=com[i].portrait;
 						}
+					    console.log(com[i].portrait);
 						div +=
 							"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0px;border-bottom: 0;' data-id='"+ com[i].id +"' data-userId='"+ com[i].selfUserId +"' >"+
 								"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) +");'></div>"+

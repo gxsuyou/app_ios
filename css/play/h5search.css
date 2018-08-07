@@ -2,6 +2,15 @@ body,html{
 	height:100%;
 	overflow: hidden;
 }
+input[type=text]{
+	width: 17.1875rem;
+	height: 1.6rem;
+	border:none;
+	border-radius: 10px;
+	color: #9E9E9E;
+	font-family: simhei;
+	font-size: 12px;
+}
 .before_search{
 	background-color: #7fcadf;
 	height:2rem;
@@ -13,7 +22,6 @@ body,html{
 	margin: 0 0.625rem;
 	margin-top: 0.75rem;
 	background-color: white;
-	
 }
 .search_lists{
 	overflow-y:scroll;

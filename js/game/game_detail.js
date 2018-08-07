@@ -723,11 +723,11 @@ function detail_main(){
 						var sp="";
 						if(t.length>2){
 							for(var i = 0; i < 2; i++) {
-							 sp += "<span class='color_green'>" + t[i] + "</span>"
+							 sp += "<span class='color_green signs_box'>" + t[i] + "</span>"
 						   }
 						}else{
 							for(var i = 0; i < t.length ; i++) {
-							 sp += "<span class='color_green'>" + t[i] + "</span>"
+							 sp += "<span  class='color_green signs_box'>" + t[i] + "</span>"
 						   }
 						}					
 						$('.game_signs').empty().append(sp);
