@@ -2,6 +2,7 @@ var strategyId;
 var token;
 var userId = localStorage.getItem("userId") || 22;
 var imgNum = 0;
+
 //	发帖子
 var imgArray=[];
 $(function() {
@@ -73,12 +74,10 @@ $(function() {
 
    $("body").on("keyup","#strategy_textarea",function(){
 		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-		
+		 
 	});
 
-     $("body").on("tap","#strategy_textarea",function(){
-		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-	});
+  
 
 	
 	$('body').on("tap",".publish",function() {
@@ -162,7 +161,8 @@ function galleryImgs() {
 					 console.log(t.responseText);
 					  if(res.errno==0){
 						  var src=res.data[0];
-						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");			
+//						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");	
+						  insertTextAtSelection("<img style='width:98%;height:auto;' src="+src+"/>","html");
 //						  $("#strategy_textarea").append("<img style='width:98%;height:auto;' src="+src+"/>")
 					  }else{
 						  mui.toast("上传图片失败")
@@ -194,34 +194,78 @@ function galleryImgs() {
 }
 
 
-//插入图片
-function appendHtml(src){
-   var sel,range;
-   if(window.getSelection){
-	 var sel=window.getSelection();
-	if (sel.getRangeAt && sel.rangeCount){
-			range = sel.getRangeAt(0);
-            range.deleteContents();
-            var el =document.createElement("div");
-			el.innerHTML =src;
-			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
-            while ((node = el.firstChild)) {
-                lastNode = frag.appendChild(node);
-            }
-        range.insertNode(frag);
-		    if(lastNode) {
-            range = range.cloneRange();
-            range.setStartAfter(lastNode);
-            range.collapse(true);
-            sel.removeAllRanges();
-            sel.addRange(range);
-            }
-		}
-   } else if (document.selection && document.selection.type != "Control") {
-            document.selection.createRange().pasteHTML(html);
-     }
-}
 
+   $("body").on("tap","#strategy_textarea",function(){
+		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
+		var text = '';
+        insertTextAtSelection(text);
+	});
+	
+
+
+function insertTextAtSelection(text, mode) {
+    var _this = this;
+    var sel, range, node;
+    mode = mode || '';
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            // range.deleteContents();
+            var textNode = document.createTextNode(text);
+            if (mode == "html") {
+                var el = document.createElement("div");
+                el.innerHTML = text;
+                var frag = document.createDocumentFragment(),
+                    node, lastNode;
+                while ((node = el.firstChild)) {
+                    lastNode = frag.appendChild(node);
+                }
+                range.insertNode(frag);
+                sel.removeAllRanges();
+                range = range.cloneRange();
+                sel.addRange(range);
+            } else {
+                console.log(JSON.stringify(textNode));
+                
+                range.insertNode(textNode);
+                range.selectNode(textNode);
+            }
+        }
+    }
+}
+// });
+ 
+//插入图片
+//function appendHtml(src){
+// 
+// alert(1)
+// if(window.getSelection){
+//
+//   $("#strategy_textarea").focus()
+//	if (sel.getRangeAt && sel.rangeCount){	   
+//			range = sel.getRangeAt(0);
+//          range.deleteContents();
+//          var el =document.createElement("div");
+//			el.innerHTML =src;
+//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+//          while ((node = el.firstChild)) {
+//              lastNode = frag.appendChild(node);
+//          }
+//      range.insertNode(frag);
+//		    if(lastNode) {
+//          range = range.cloneRange();
+//          range.setStartAfter(lastNode);
+//          range.collapse(true);
+//          sel.removeAllRanges();
+//          sel.addRange(range);
+//          }
+//		}
+// } else if (document.selection && document.selection.type != "Control") {
+//          document.selection.createRange().pasteHTML(html);
+//   }
+//}
+//
 
 
 //	选择图片结束
@@ -264,21 +308,21 @@ function upLoad(strategyId, key, path) {
 	})
 }
 
-function getUpToken(scope, key, callback) {
-	$.ajax({
-		type: "get",
-		url: config.data + "users/getUptokenByMsg",
-		async: true,
-		data: {
-			scope: scope,
-			key: key
-		},
-		success: function(data) {
-			token = data.upToken;
-			return callback(token)
-		}
-	});
-}
+//function getUpToken(scope, key, callback) {
+//	$.ajax({
+//		type: "get",
+//		url: config.data + "users/getUptokenByMsg",
+//		async: true,
+//		data: {
+//			scope: scope,
+//			key: key
+//		},
+//		success: function(data) {
+//			token = data.upToken;
+//			return callback(token)
+//		}
+//	});
+//}
 
 //上传到七牛的function结束
 
