@@ -161,8 +161,9 @@ function galleryImgs() {
 					 console.log(t.responseText);
 					  if(res.errno==0){
 						  var src=res.data[0];
-//						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");	
-						  insertTextAtSelection("<img style='width:98%;height:auto;' src="+src+"/>","html");
+						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");	
+//                        appendHtml(src);
+//						  insertTextAtSelection("<img style='width:98%;height:auto;' src="+src+"/>","html");
 //						  $("#strategy_textarea").append("<img style='width:98%;height:auto;' src="+src+"/>")
 					  }else{
 						  mui.toast("上传图片失败")
@@ -176,6 +177,7 @@ function galleryImgs() {
 				uploader.start();
 			
             },function(error) {
+            	mui.toast("网络错误，请稍后重试!")
 			    console.log("Compress error!");
 	    });
     
@@ -195,77 +197,150 @@ function galleryImgs() {
 
 
 
-   $("body").on("tap","#strategy_textarea",function(){
-		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-		var text = '';
-        insertTextAtSelection(text);
-	});
-	
 
 
-function insertTextAtSelection(text, mode) {
-    var _this = this;
-    var sel, range, node;
-    mode = mode || '';
-    if (window.getSelection) {
-        sel = window.getSelection();
-        if (sel.getRangeAt && sel.rangeCount) {
-            range = sel.getRangeAt(0);
-            // range.deleteContents();
-            var textNode = document.createTextNode(text);
-            if (mode == "html") {
-                var el = document.createElement("div");
-                el.innerHTML = text;
-                var frag = document.createDocumentFragment(),
-                    node, lastNode;
-                while ((node = el.firstChild)) {
-                    lastNode = frag.appendChild(node);
-                }
-                range.insertNode(frag);
-                sel.removeAllRanges();
-                range = range.cloneRange();
-                sel.addRange(range);
-            } else {
-                console.log(JSON.stringify(textNode));
-                
-                range.insertNode(textNode);
-                range.selectNode(textNode);
-            }
-        }
-    }
-}
-// });
- 
-//插入图片
-//function appendHtml(src){
-// 
-// alert(1)
-// if(window.getSelection){
 //
-//   $("#strategy_textarea").focus()
-//	if (sel.getRangeAt && sel.rangeCount){	   
-//			range = sel.getRangeAt(0);
-//          range.deleteContents();
-//          var el =document.createElement("div");
-//			el.innerHTML =src;
-//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+//function insertTextAtSelection(text, mode) {
+//  var _this = this;
+//  var sel, range, node;
+//  mode = mode || '';
+//  if (window.getSelection) {
+//      sel = window.getSelection();
+//      if (sel.getRangeAt && sel.rangeCount) {
+//          range = sel.getRangeAt(0);
+//          var textNode = document.createTextNode(text);
+//          if (mode == "html") {
+//              var el = document.createElement("div");
+//              el.innerHTML = text;
+//              var frag = document.createDocumentFragment(),
+//                  node, lastNode;
+//              while ((node = el.firstChild)) {
+//                  lastNode = frag.appendChild(node);
+//              }
+//              range.insertNode(frag);
+//              sel.removeAllRanges();
+//              range = range.cloneRange();
+//              sel.addRange(range);
+//          } else {
+//              console.log(JSON.stringify(textNode));                
+//              range.insertNode(textNode);
+//              range.selectNode(textNode);
+//          }
+//      }
+//  }
+//}
+
+var sel,range,getRangeAt,rangeCount;
+
+$("body").on("tap","#strategy_textarea",function(){
+	$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
+//	var text = '';
+//  insertTextAtSelection(text);
+//if(window.getSelection){
+//   sel = window.getSelection();
+////   console.log(11+sel.getRangeAt,"22"+sel.rangeCount);
+//getRangeAt=sel.getRangeAt;
+//rangeCount=sel.rangeCount;
+//  if(getRangeAt && rangeCount){	  
+// 
+//   range = sel.getRangeAt(0);
+//   range.deleteContents();
+//   
+//   var el =document.createElement("span");
+//   	el.innerHTML ='<span></span>';
+//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;			
 //          while ((node = el.firstChild)) {
 //              lastNode = frag.appendChild(node);
 //          }
-//      range.insertNode(frag);
-//		    if(lastNode) {
-//          range = range.cloneRange();
-//          range.setStartAfter(lastNode);
-//          range.collapse(true);
-//          sel.removeAllRanges();
-//          sel.addRange(range);
+//   
+//     range.insertNode(frag);
+//  }
+// }    
+     
+     
+     console.log($("#strategy_textarea").html())
+     
+//   var str=$("#strategy_textarea").text();
+     
+//   for(i=0;i<str.length;i++){
+//        str2+="<span>"+str.substr(i,1)+"</span>";
+//   }
+//   $("#strategy_textarea").
+});
+	
+
+
+function appendHtml(src){
+ var sel, range;
+ if(window.getSelection){
+	var sel=window.getSelection();
+	if (sel.getRangeAt && sel.rangeCount) {
+			range = sel.getRangeAt(0);
+      range.deleteContents();
+      var el =document.createElement("div");
+			el.innerHTML =src;
+			 var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+        while ((node = el.firstChild)) {
+            lastNode = frag.appendChild(node);
+        }
+        range.insertNode(frag);
+				if (lastNode) {
+            range = range.cloneRange();
+            range.setStartAfter(lastNode);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+	}else{
+		$("#strategy_textarea").append(src);
+	}
+ }
+}
+
+
+
+
+//插入图片
+//function appendHtml(src){
+////	$('#strategy_textarea').focus()
+////	alert(document.execCommand('insertImage','false',src));
+////	document.execCommand('insertImage','false',src);
+////	alert($('#strategy_textarea').html())
+////	return false;
+// if(window.getSelection){
+//   //sel = window.getSelection();
+//   //console.log(11+sel.getRangeAt,"22"+sel.rangeCount);
+//	if (getRangeAt && rangeCount){	   
+////			range = sel.getRangeAt(0);
+////			console.log("33"+range.toString());
+//         
+//          var el =document.createElement("div");
+//			el.innerHTML =src;
+//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+//			
+//			
+//			alert(el.firstChild)
+//          while ((node = el.firstChild)) {
+//          	alert(1)
+//              lastNode = frag.appendChild(node);
 //          }
+//          
+//           console.log(666+lastNode);
+//          
+//          range.insertNode(frag);
+//		    if(lastNode) {
+//              range = range.cloneRange();
+//              range.setStartAfter(lastNode);
+//              range.collapse(true);
+//              sel.removeAllRanges();
+//              sel.addRange(range);
+//          }
+//		     alert($("#strategy_textarea").html())
 //		}
 // } else if (document.selection && document.selection.type != "Control") {
 //          document.selection.createRange().pasteHTML(html);
 //   }
 //}
-//
 
 
 //	选择图片结束

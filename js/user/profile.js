@@ -25,7 +25,7 @@ $(function() {
 				} else {
 					sex_art = "女"
 				}
-				$('.personal_id').val(u.id);
+				$('.personal_id').val(u.only_id);
 				$('.personal_name').val(u.nick_name);
 				$('.sexArt').text(sex_art);
 				$('.personal_bir').text(u.birthday);

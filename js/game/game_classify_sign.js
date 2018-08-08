@@ -94,6 +94,7 @@ $(function(){
 									}
 									
 								}
+								
 								li +=
 								 		"<li class='game_list ofh' data-id="+ g[i].id +">"+
 											"<div class='color_9e9e9e  game_listScore'>"+ ((page-1)*20 + i+1) +"</div>"+
@@ -110,14 +111,14 @@ $(function(){
 														"<div class='game_recommend_starScore fl color_green'>"+ g[i].grade +"</div>"+
 													"</div>"+
 												"</div>"+
-												"<div style='display:flex;width:11rem;'  class='font_12 color_green'>"+
+												"<div style='display:flex;'  class='font_12 color_green'>"+
 												  signs +								
 												"</div>"+
 											"</div>"+
 											"<div class='game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>"+
 										"</li>"
 							}
-							
+//							alert(3)
 							$('.game_lists').append(li);
 							$('.game_recommend_stars').each(function(){
 				

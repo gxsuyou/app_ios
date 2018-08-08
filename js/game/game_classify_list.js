@@ -112,8 +112,8 @@ $(function(){
 														"<div class='game_recommend_starScore fl color_green'>"+ g[i].grade +"</div>"+
 													"</div>"+
 												"</div>"+
-												"<div style='display:flex;width:11rem;' class='font_12 color_green'>"+
-												 signs +
+												"<div style='display:flex;' class='font_12 color_green'>"+
+                                                     signs+
 												"</div>"+
 											"</div>"+
 											"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>"+
