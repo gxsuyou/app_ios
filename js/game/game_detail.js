@@ -475,7 +475,7 @@ function detail_strategy(){
 									     "<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
 									   "</div>"+
 									"</div>" +
-									"<div class='game_comment_content'>" +									
+									"<div class='game_comment_content'style='margin-top:0.4rem;' >" +									
 									"<div class='font_14 overflow_two color_7a7a7a simHei'>" 
 									+ 
 									 "<img data-id='" + str[i].id + "'  style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
