@@ -1,5 +1,4 @@
 var id = userInfojson.id || 0;
-
 $(function() {
 	var dataURLup;
 	mui.plusReady(function(){
@@ -80,16 +79,14 @@ $(function() {
 
    $("body").on("tap",".personal_bir",function(){
     var dDate = new Date();//设置当前日期（不设置默认当前日期）
-    
     var oYear=dDate.getFullYear();
-     var oMonth=dDate.getMonth();
-     var oDate=dDate.getDate();
+    var oMonth=dDate.getMonth();
+    var oDate=dDate.getDate();
     dDate.setFullYear(2018, 7, 16);
-    var minDate = new Date();
-    //最小时间
+    var minDate = new Date();//最小时间  
     minDate.setFullYear(1970, 0, 1);
-    var maxDate = new Date();
-    //最大时间
+    var maxDate = new Date(); //最大时间
+   
     maxDate.setFullYear(oYear,oMonth,oDate);
     
    	 plus.nativeUI.pickDate(function(e) {
@@ -105,7 +102,7 @@ $(function() {
        $('.personal_bir').text(brith);
    
     }, function(e) {
-        mui.toast("您没有选择日期");
+//      mui.toast("您没有选择日期");
     }, {
         title: '请选择日期',
         date: dDate,
@@ -181,8 +178,7 @@ $(function() {
 				nickName: name
 			},
 			success: function(data) {
-				if(data.state) {
-					
+				if(data.state) {					
 					/* 修改生日  */
 					$.ajax({
 						type: "get",
@@ -209,9 +205,7 @@ $(function() {
 				}
 			}
 		});	
-	});
-	
-	
+	});	
 });
 
 function uploadHead(id, dataURL,callBack) {

@@ -58,9 +58,7 @@
         <input id="sharehref" style="display: none;" class="sharehref" type="url" value="http://www.oneyouxi.com.cn:8000/download?data=9" placeholder="请输入要分享的链接地址" />  
         <input id="sharehrefTitle" style="display: none;" class="sharehref" type="text" value="ONE游戏分享" placeholder="请输入要分享的链接标题" />  
         <input id="sharehrefDes" style="display: none;" class="sharehref" type="text" value="我正在使用ONE游戏平台，赶紧跟我一起来体验！" placeholder="请输入要分享的链接描述" />  
-    </body>  
-  
-  
+    </body> 
    <script type="text/javascript" charset="utf-8">  
         var shares=null,  
         Intent=null,
@@ -118,11 +116,6 @@
                 console.log("无效的分享服务！");  
                 return;  
             }  
-//          if (plus.os.name !== "Android") {  
-//                  plus.nativeUI.alert("此平台暂不支持系统分享功能!");  
-//                  return;  
-//          }  
-              
             var msg={content:sharehrefDes.value,extra:{scene:sb.x}};  
             if(bh){  
                 msg.href=sharehref.value;  
@@ -148,6 +141,9 @@
                 sb.s.authorize( function(){  
                         shareMessage(msg,sb.s);  
                     },function(e){  
+                    	  if(e.code==-8){
+                    		   mui.toast("客户端未安装")
+                    	   }
                         console.log("认证授权失败："+e.code+" - "+e.message );               
                 });  
             }  
@@ -170,15 +166,14 @@
         }  
         // 分析链接  
         function shareHref(index){  
-            var shareBts=[];  
-            // 更新分享列表  
+        	 // 更新分享列表  
+            var shareBts=[];        
             var ss=shares['weixin'];  
-            ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),  
+            ss&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),  
             shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));  
             ss=shares['qq'];  
-            ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});  
-           
-             shareAction(shareBts[index],true);  
+            ss&&shareBts.push({title:'QQ',s:ss});       
+            shareAction(shareBts[index],true);  
         }  
         mui.back = function() {  
             var sourcePage = plus.webview.getWebviewById(pageSourceId);  

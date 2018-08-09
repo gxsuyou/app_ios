@@ -29,34 +29,6 @@ $(function() {
 	});
 
 
-   $("body").on("tap","#choose_img",function(e){
-      setTimeout(function(){
-		if(mui.os.plus) {
-			var buttonTit = [
-				{
-					title: "从手机相册选择"
-				}
-			];
-			plus.nativeUI.actionSheet({
-				title: "上传图片",
-				cancel: "取消",
-				buttons: buttonTit
-			}, function(b) { /*actionSheet 按钮点击事件*/
-				
-				switch(b.index) {
-					case 0:
-						break;
-					case 1:				  
-						galleryImgs(); /*打开相册*/
-						break;
-					default:
-						break;
-				}
-			})
-		}
-		
-		 },500);
-	});
 
 	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
@@ -65,18 +37,33 @@ $(function() {
 
 		
 	$("body").on("focus","#strategy_textarea",function(){
+		$('#strategy_textarea').css("height","50%");
 		setTimeout(function(){
-			var scrollY=$('#strategy_textarea')[0].scrollHeight;
-           $('#strategy_textarea').animate({scrollTop:scrollY},200);        
-		},200);
+			var scrollY=$('#strategy_textarea')[0].scrollHeight-300;
+			console.log("滚动"+scrollY);
+           $('#strategy_textarea').animate({scrollTop:scrollY},0);        
+		},100);
+	});
+	
+	$("body").on("blur","#strategy_textarea",function(){
+		console.log(2);
+       $('#strategy_textarea').css("height","75vh");
+//		setTimeout(function(){
+//			var scrollY=$('#strategy_textarea')[0].scrollHeight;
+//         $('#strategy_textarea').animate({scrollTop:scrollY},200);        
+//		},100);
 	});
 	
 
    $("body").on("keyup","#strategy_textarea",function(){
-		$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-		 
+		$("#strategy_textarea span,#strategy_textarea div,#strategy_textarea p").css("-webkit-user-select","text");	 
 	});
 
+  
+  
+  
+  
+  
   
 
 	
@@ -131,10 +118,84 @@ $(function() {
 })
 
 
+
+
+
+
+
+
+$("body").on("tap","#strategy_textarea",function(){
+	$("#strategy_textarea span,#strategy_textarea div,#strategy_textarea p").css("-webkit-user-select","text"); 
+});
+	
+var insertNum=1,insertNode="insertNode1";
+	
+function appendHtml(){
+ var sel, range;
+ if(window.getSelection){
+	  var sel=window.getSelection();
+	if (sel.getRangeAt && sel.rangeCount) {
+		  range = sel.getRangeAt(0);
+          range.deleteContents();
+          var el =document.createElement("span");
+          insertNode ="insertNode"+insertNum;
+		  el.innerHTML ="<span  class='"+insertNode+"'></span>";
+          insertNum++;//编号加起来 
+		  var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+        while ((node = el.firstChild)) {
+            lastNode = frag.appendChild(node);
+        }
+        range.insertNode(frag);
+		    if (lastNode) {
+            range = range.cloneRange();
+            range.setStartAfter(lastNode);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            }
+	}
+    console.log($("#strategy_textarea").html())
+ }
+}	
+	
+	
+$("body").on("tap","#choose_img",function(e){
+	   appendHtml();//放入节点  	    
+      setTimeout(function(){
+		if(mui.os.plus) {
+			var buttonTit = [
+				{
+					title: "从手机相册选择"
+				}
+			];
+			plus.nativeUI.actionSheet({
+				title: "上传图片",
+				cancel: "取消",
+				buttons: buttonTit
+			}, function(b) { /*actionSheet 按钮点击事件*/
+				
+				switch(b.index) {
+					case 0:
+						break;
+					case 1:				  
+						galleryImgs(); /*打开相册*/
+						break;
+					default:
+						break;
+				}
+			})
+		}
+		
+		 },500);
+	});
+	
+	
+	
+	
 // 从相册中选择图片   
 function galleryImgs() {
 	// 从相册中选择图片 
-	$("#strategy_textarea").focus();
+
 	plus.gallery.pick(function(e) {
 //  mui.toast("正在上传,请等待");
         var rename=Math.round(Math.random()*100)+e.files[0];
@@ -142,7 +203,7 @@ function galleryImgs() {
     plus.zip.compressImage({
 			src:e.files[0],
 			dst:rename,
-			quality:50
+			quality:35
 		},
 		function(k) {
 			    console.log(JSON.stringify(k))
@@ -151,24 +212,20 @@ function galleryImgs() {
 			    	mui.toast("图片尺寸过大，请压缩后再上传");
 			    	return false;
 			    }
-//			    return false;
 			    mui.toast("正在上传,请等待");
 			    
 				var uploader = plus.uploader.createUpload(config.url_upload+"adminStrategy/img?title=strategy&url="+config.url_upload,{
 					method: "post"
-				}, function(t, status) {
+				}, function(t,status) {
 					 var res =JSON.parse(t.responseText);
-					 console.log(t.responseText);
+					 console.log("已上传成功"+t.responseText);
+					 $('#strategy_textarea').css("height","75vh"); //增加高度
 					  if(res.errno==0){
 						  var src=res.data[0];
-						  appendHtml("<img style='width:98%;height:auto;' src="+src+"/>");	
-//                        appendHtml(src);
-//						  insertTextAtSelection("<img style='width:98%;height:auto;' src="+src+"/>","html");
-//						  $("#strategy_textarea").append("<img style='width:98%;height:auto;' src="+src+"/>")
+						  $("."+insertNode).eq(0).append("<img style='width:98%;height:auto;border:none;' src="+src+"/>");
 					  }else{
 						  mui.toast("上传图片失败")
-					  }
-		
+					  }	
 				});
 
 				uploader.addFile(k.target,{
@@ -194,108 +251,43 @@ function galleryImgs() {
 		}
 	});
 }
-
-
-
-
-
-//
-//function insertTextAtSelection(text, mode) {
-//  var _this = this;
-//  var sel, range, node;
-//  mode = mode || '';
-//  if (window.getSelection) {
-//      sel = window.getSelection();
-//      if (sel.getRangeAt && sel.rangeCount) {
-//          range = sel.getRangeAt(0);
-//          var textNode = document.createTextNode(text);
-//          if (mode == "html") {
-//              var el = document.createElement("div");
-//              el.innerHTML = text;
-//              var frag = document.createDocumentFragment(),
-//                  node, lastNode;
-//              while ((node = el.firstChild)) {
-//                  lastNode = frag.appendChild(node);
-//              }
-//              range.insertNode(frag);
-//              sel.removeAllRanges();
-//              range = range.cloneRange();
-//              sel.addRange(range);
-//          } else {
-//              console.log(JSON.stringify(textNode));                
-//              range.insertNode(textNode);
-//              range.selectNode(textNode);
-//          }
-//      }
-//  }
-//}
-
-var sel,range,getRangeAt,rangeCount;
-
-$("body").on("tap","#strategy_textarea",function(){
-	$("#strategy_textarea span,#strategy_textarea div").css("-webkit-user-select","text");
-//	var text = '';
-//  insertTextAtSelection(text);
-//if(window.getSelection){
-//   sel = window.getSelection();
-////   console.log(11+sel.getRangeAt,"22"+sel.rangeCount);
-//getRangeAt=sel.getRangeAt;
-//rangeCount=sel.rangeCount;
-//  if(getRangeAt && rangeCount){	  
-// 
-//   range = sel.getRangeAt(0);
-//   range.deleteContents();
-//   
-//   var el =document.createElement("span");
-//   	el.innerHTML ='<span></span>';
-//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;			
-//          while ((node = el.firstChild)) {
-//              lastNode = frag.appendChild(node);
-//          }
-//   
-//     range.insertNode(frag);
-//  }
-// }    
-     
-     
-     console.log($("#strategy_textarea").html())
-     
-//   var str=$("#strategy_textarea").text();
-     
-//   for(i=0;i<str.length;i++){
-//        str2+="<span>"+str.substr(i,1)+"</span>";
-//   }
-//   $("#strategy_textarea").
-});
+	
+	
+	
+	
 	
 
 
-function appendHtml(src){
- var sel, range;
- if(window.getSelection){
-	var sel=window.getSelection();
-	if (sel.getRangeAt && sel.rangeCount) {
-			range = sel.getRangeAt(0);
-      range.deleteContents();
-      var el =document.createElement("div");
-			el.innerHTML =src;
-			 var frag = window.parent.document.createDocumentFragment(), node, lastNode;
-        while ((node = el.firstChild)) {
-            lastNode = frag.appendChild(node);
-        }
-        range.insertNode(frag);
-				if (lastNode) {
-            range = range.cloneRange();
-            range.setStartAfter(lastNode);
-            range.collapse(true);
-            sel.removeAllRanges();
-            sel.addRange(range);
-        }
-	}else{
-		$("#strategy_textarea").append(src);
-	}
- }
-}
+//function appendHtml(src){
+//	
+//	$("."+insertNode).eq(0).append(src);
+//	console.log($("#strategy_textarea").html())
+//	return false;
+// var sel, range;
+// if(window.getSelection){
+//	var sel=window.getSelection();
+//	if (sel.getRangeAt && sel.rangeCount) {
+//			range = sel.getRangeAt(0);
+//          range.deleteContents();
+//    var el =document.createElement("div");
+//			el.innerHTML =src;
+//			var frag = window.parent.document.createDocumentFragment(), node, lastNode;
+//      while ((node = el.firstChild)) {
+//          lastNode = frag.appendChild(node);
+//      }
+//      range.insertNode(frag);
+//		if (lastNode) {
+//          range = range.cloneRange();
+//          range.setStartAfter(lastNode);
+//          range.collapse(true);
+//          sel.removeAllRanges();
+//          sel.addRange(range);
+//      }
+//	}else{
+//		$("#strategy_textarea").append(src);
+//	}
+// }
+//}
 
 
 
