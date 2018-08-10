@@ -1,5 +1,4 @@
 $(function() {
-
 	var h = $(window).height()
 	$(window).resize(function() {
 		var changeHeight = $(window).height()
@@ -29,12 +28,6 @@ $(function() {
 		var old_back = mui.back;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-		mui.back = function() {
-
-		    var wobj = plus.webview.getWebviewById("strategy_details.html");
-			mui.fire(wobj,'reload',{});
-			old_back();
-		}
 
 
 		$('body').on('tap','.choose_img',function(){

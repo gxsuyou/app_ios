@@ -4,6 +4,7 @@ var target_img;
 var target_title;
 var strategyId;
 var ajaxToggle=false;
+var page = 0;
 $(function() {
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
@@ -13,10 +14,15 @@ $(function() {
 		commentId = self.commentId;
 		target_img = self.target_img;
 		target_title = self.target_title;
-		strategyId = self.strategyId;
-        
+		strategyId = self.strategyId;       
 		mui.init({
 			swipeBack: true,
+			beforeback:function(){
+			            var list = plus.webview.getWebviewById("strategy_details.html"); //对游戏首页
+			            mui.fire(list, 'refresh');
+				        return true;//返回true,继续页面关闭逻辑
+			        
+		    },
 			pullRefresh: {
 				container: ".strategy_all", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 //				up: {

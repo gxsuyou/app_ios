@@ -96,26 +96,51 @@ $(function() {
 					sys = n.sys;
 					var add_user = n.add_user || "one";
 					var browse = n.browse;
+					var detail="";
 					if(browse > 99) {
 						browse = 99
 					}
 					firstImg = n.img
 					title = n.title
-					$('.detail').html(n.detail);
+					
+					if(n.detail!=null){
+						detail=n.detail.replace(/<span> <\/span>/g,"&nbsp;");
+					}
+
+					$('.detail').html(detail);
 					$(".detail img").attr("data-preview-src","");
-                    $(".detail img").attr("data-preview-group","1");             
+                    $(".detail img").attr("data-preview-group","1");    
 					$('.news_post_content').attr("data-id", n.id);
 					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")");
 					$('.news_post_content>h4').text(n.title)
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
-					up();
-					if(n.game_id) {
+
+
+               //检查
+               $.ajax({
+			       type: "get",
+			       url: config.data + "game/checkGameSys",
+			       async: true,
+			        data: {
+				    gameName:n.game_name,
+				    sys:1
+			       },
+			      success: function(data) {
+			  	    gameId=data.id;
+			  	    if(gameId) {
 						$('.new_post_contents').css("padding-top",  30 + "px")      
 					} else {
 						$('.news_post_list').addClass('hidden')
 					}
+			  	   }
+			    })
+					
+					 
+					
+					up();
+					
 					if(n.collect) {
 						$('.news_collect').attr('data-collect', '1')
 						$('.news_collect').css("background-image", "url(../../Public/image/yishoucang.png)")
@@ -173,13 +198,19 @@ $(function() {
 		})
 
 		$('body').on("tap",".news_post_list",function() {
-			mui.openWindow({
+//			alert(gameId);
+
+       
+             
+
+	        mui.openWindow({
 				url: "../game/game_detail.html",
-				id: "../game/game_detail.html",
-				extras: {
-					gameId: gameId
+				    id: "../game/game_detail.html",
+				    extras: {
+					    gameId:gameId
 				}
-			})
+			 })
+		
 		})
 
 		//收藏部分	
@@ -370,16 +401,7 @@ $(function() {
 			
 		}
 		
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
+				
 		
 		function savePicture(picurl, picname) {
 	       // 创建下载任务

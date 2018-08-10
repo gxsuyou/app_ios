@@ -278,7 +278,7 @@
 							</div>
 						</div>
 						<div class="game_particular_value fl">
-							<div>1625421次下载</div>
+							<div id="game_msg_install">1625421次下载</div>
 							<div>1.1.1</div>
 							<div>50MB</div>
 							<div>2018-12-11</div>
@@ -306,9 +306,7 @@
 							</div>-->
 						</div>
 					</div>
-
 					<!--<div class="line_cut"></div>-->
-				
 					<div class="game_comments simHei">
 						<span class="game_simpleIntro  simHei color_282828 ofh" style="margin-bottom: 0.4rem;">评论</span>
 						<div class="news_post_commentContentshot ofh backgroundColor_white">
@@ -472,10 +470,8 @@
 							<span class="fr font_12">热度</span>
 
 						</div>-->
-
 						<!--评论内容-->
 						<div class="game_comments simHei">
-
 							<div class="news_post_commentContents backgroundColor_white">
 								<!--<div class="news_post_commentContent">
 	
@@ -590,15 +586,21 @@
 					</div>
 				</div>
 				<!--单页面父盒子2结束-->
-
 			</div>
-
 		</div>
-		
 		<script type="text/javascript">
 			var page = 1,pageIndex="detail";
-		</script>
-		<script type="text/javascript">
+			/*首页详情出来更新*/
+			window.addEventListener('indexRefresh',function(event){
+			    indexCommit();
+		    });
+		    /*评论出来更新*/
+		    window.addEventListener('accessRefresh',function(){
+		    	detail_assess();
+		    })
+		    
+		    
+		    
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
 			    gestureConfig: {

@@ -129,6 +129,12 @@ h4{
 .news_post_content_detail{
 	line-height: 1.5rem;
 }
+
+
+.news_post_content_detail p{
+	color:#282828;
+}
+
 .news_post_content_detail a{
 	color:blue;
 	text-decoration:underline;

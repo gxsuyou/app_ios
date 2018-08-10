@@ -101,7 +101,7 @@ $(function() {
        
 	   
 		$("body").on("tap",".download",function(){
-//			alert(1)
+			addDownNum()
            	if(game.game_download_ios!==null){
 				location.href=game.game_download_ios;
 			}else{
@@ -116,11 +116,12 @@ $(function() {
 			event = ev || window.event;
 			event.stopPropagation();
 			var t = $(this);
-			var isFile = false;			  
-			if(String(game.game_download_ios)!="null"){
-				location.href=game.game_download_ios;
-				return false;
-			}else{
+			var isFile = false;					
+			addDownNum()
+		    if(String(game.game_download_ios)!="null"){
+				    location.href=game.game_download_ios;
+				    return false;
+			 }else{
                 location.href=game.game_download_ios2;
                 setTimeout(function(){ 
                 	mui.toast("正在安装，请按Home键在桌面查看",{duration:"long"});
@@ -129,11 +130,31 @@ $(function() {
                 		$('.download_btn_text').text("刷新");
                 		$("#game_detail_download").attr("id","reload");
                 	},3800);
-                  },3000)
+                },3000)
 				return false;
 			}
-
        });
+       
+       
+       function addDownNum(){
+       	$.ajax({
+		        type: "get",
+		        url: config.data + "game/addDownloadNum",
+		        async: true,
+		        data: {
+			      id: self.gameId
+		     },
+		     success: function(data) {
+			    if(data.state) {
+				   $("#game_msg_install").text(parseInt($("#game_msg_install").text()) + 1+"次下载");
+				  				   			   
+			    }
+		     }
+	       });
+       }
+       
+       
+       
        
        
        $('body').on('tap','#reload',function(){
@@ -188,9 +209,8 @@ $(function() {
 			  alert("Download failed: " + status);
 		  }
 
-	   });
-	   //dtask.addEventListener( "statechanged", onStateChanged, false );
-	    dtask.start();
+	  });
+	  dtask.start();
 	}
 	
 
@@ -259,7 +279,7 @@ $(function() {
 	
     /* 打开评论详情 */
    
-	$('body').on('tap', '.news_post_commentContent,.comment_img', function(e) {
+	$('body').on('tap', '.news_post_commentContent', function(e) {
 		e.stopPropagation();
 		if(userId) {
 			mui.openWindow({
@@ -271,7 +291,8 @@ $(function() {
 					gameId: gameId,
 					uid: $(this).attr('data-uid'),
 					game_name:gameName,
-					game_icon:gameImg
+					game_icon:gameImg,
+					pageIndex:pageIndex
 				}
 			});
 		} else {
@@ -486,11 +507,11 @@ function detail_strategy(){
 									"</div>" +
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +									
-									"<div class='fr color_9e9e9e comment_imgs'>" +
+									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
 //									 "<div class='thumb'></div>" +
 //									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
 									 "<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
-									 "<div  class='comment_num' style='margin-right:0.5rem;'>" + str[i].comment_num + "</div>" +
+									 "<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 									"</div>" +
 									"</div>" +
 									"</div>" +
@@ -664,7 +685,6 @@ function detail_strategy(){
 		}
 		
 
-
 detail_main();
 function detail_main(){	
 	setTimeout(function(){	
@@ -796,7 +816,54 @@ function detail_main(){
 		});
 
 		 //游戏热评部分
+         indexCommit();
+		 //游戏热评部分结束
+
+		//相似游戏开始
 		 $.ajax({
+			type: "get",
+			url: config.data + "game/getGameLikeTag?sys=1",
+			async: true,
+			data: {
+				gameId: gameId
+			},
+			success: function(data) {
+				if(data.state) {
+					var gl = data.gameList;
+					var div = '';
+					for(var i = 0; i < gl.length; i++) {
+						div +=
+							"<div style='flex-shrink:0;'>" +
+							"<div class='game_similarContent backgroundColor_white ofh' data-id='" + gl[i].id + "'>" +
+							"<div class='game_similarContentimg' style='background-image: url(" + config.img + encodeURI(gl[i].icon) + ");' ></div>" +
+							"<div class='game_similarContentname font_12 font_bold color_282828'>" + gl[i].game_name + "</div>" +
+							"<div class='game_similarContentinfo ofh'>" +
+							"<div class='font_12 color_7a7a7a fl' style='margin-left: 0.4375rem;'>" + gl[i].tagList + "</div>" +
+							"<div class='fr font_12 color_7a7a7a' style='margin-right: 0.5rem;'>" + gl[i].grade + "分</div>" +
+							"<div class='game_star fr'></div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					}
+					$('.game_similarContents').empty().append(div);
+				} else {
+
+				}
+			}
+		});
+        //相似游戏结束
+        
+        
+        
+    },200)
+	//延迟时间
+	
+}
+
+
+
+function indexCommit(){
+		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameHotComment",
 			async: true,
@@ -852,45 +919,4 @@ function detail_main(){
 				}
 			}
 		});
-		 //游戏热评部分结束
-
-		//相似游戏开始
-		 $.ajax({
-			type: "get",
-			url: config.data + "game/getGameLikeTag?sys=1",
-			async: true,
-			data: {
-				gameId: gameId
-			},
-			success: function(data) {
-				if(data.state) {
-					var gl = data.gameList;
-					var div = '';
-					for(var i = 0; i < gl.length; i++) {
-						div +=
-							"<div style='flex-shrink:0;'>" +
-							"<div class='game_similarContent backgroundColor_white ofh' data-id='" + gl[i].id + "'>" +
-							"<div class='game_similarContentimg' style='background-image: url(" + config.img + encodeURI(gl[i].icon) + ");' ></div>" +
-							"<div class='game_similarContentname font_12 font_bold color_282828'>" + gl[i].game_name + "</div>" +
-							"<div class='game_similarContentinfo ofh'>" +
-							"<div class='font_12 color_7a7a7a fl' style='margin-left: 0.4375rem;'>" + gl[i].tagList + "</div>" +
-							"<div class='fr font_12 color_7a7a7a' style='margin-right: 0.5rem;'>" + gl[i].grade + "分</div>" +
-							"<div class='game_star fr'></div>" +
-							"</div>" +
-							"</div>" +
-							"</div>"
-					}
-					$('.game_similarContents').empty().append(div);
-				} else {
-
-				}
-			}
-		});
-        //相似游戏结束
-        
-        
-        
-    },200)
-	//延迟时间
-	
 }

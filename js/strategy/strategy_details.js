@@ -6,13 +6,11 @@ var sort = "add_time";
 var target_img;
 var target_title;
 $(function() {
-	
 	$('body').on("tap",".news_review",function() {
 		$('html, body').animate({
 			scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
 		}, 1000)
 	})
-
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
@@ -36,7 +34,7 @@ $(function() {
 					auto: true, //可选,默认false.自动上拉加载一次
 					contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 					contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-					callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				},
 				down: {
 					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -51,14 +49,7 @@ $(function() {
 		})
 
 
-        window.addEventListener('reload', function() {		
-			window.location.reload();// mui.fire()传过来的额外的参数，在event.detail中；
-		});
-
-
-
 		detail();
-
 		$('body').on("tap",".news_collect",function() {
 			if(userId !== 0) {
 				if($(this).attr('data-collect') == 1) {
@@ -348,14 +339,22 @@ $(function() {
 		  }
 		  
 		});
-
+        //取消收藏结束
         
 
 
 
 
-		//取消收藏结束
-		function up() {
+		
+		
+
+	})
+})
+
+
+
+
+function up() {
 			page++;
 			if(sort == "comment_num") {
 				$.ajax({
@@ -429,7 +428,7 @@ $(function() {
 									"<span class='thumb " + ifLike + "'></span>" +
 									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
 									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+									"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
 									"</div>" +
 									"</div>" +
 									"<div class='comment_secondComments font_14 ofh'>" +
@@ -441,7 +440,8 @@ $(function() {
 							}
 
 							$('.news_post_commentContents').append(div);
-
+							var commitNum=$(".news_post_commentContent").length;
+                            $(".news_reviewNum").text(commitNum)
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
 							} else {
@@ -527,7 +527,7 @@ $(function() {
 									"<span class='thumb " + ifLike + "'></span>" +
 									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
 									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+									"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
 									"</div>" +
 									"</div>" +
 									"<div class='comment_secondComments font_14 ofh'>" +
@@ -535,10 +535,11 @@ $(function() {
 									"</div>" +
 									"</div>" +
 									"</div>"
-
 							}
-
+							
 							$('.news_post_commentContents').append(div)
+							var commitNum=$(".news_post_commentContent").length
+                            $(".news_reviewNum").text(commitNum)
 
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
@@ -554,8 +555,8 @@ $(function() {
 
 		}
 
-	})
-})
+
+
 
 //获取详情ajax
 
@@ -571,7 +572,7 @@ function detail() {
 		success: function(data) {
 			if(data.state) {
 				var str = data.strategy,
-					portrait,nickName;
+					portrait,nickName,detail;
 
 				if(str.comment_num > 99) {
 					var comment_num = 99
@@ -589,13 +590,16 @@ function detail() {
                 }else{
                 	nickName=str.nick_name;
                 }              
-                
-				$('.news_reviewNum').text(comment_num);
+                if(str.detail!=null){
+                	detail=str.detail.replace(/<span> <\/span>/g,"&nbsp;");
+                }
+           
+                $('.news_post_content_detail').html(detail);
+//				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
-				$('.news_userInfo_date').text(str.add_time);
-				$('.news_post_content_detail').html(str.detail);
+				$('.news_userInfo_date').text(str.add_time);			
 				$(".news_post_content_detail img").attr("data-preview-src","");
                 $(".news_post_content_detail img").attr("data-preview-group","1");  
 				$('.news_post_content_detail img').css("max-width", "100%");
@@ -664,7 +668,6 @@ function unCollect(strategyId) {
 			targetId: strategyId,
 			userId: userId,
 			type: 2,
-
 		},
 		success: function(data) {
 			if(data.state) {

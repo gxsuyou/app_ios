@@ -273,10 +273,8 @@
 	
 					</div>
 				</div>-->
-			</div>
-	
-			<!--底部回帖-->
-	
+			</div>	
+			<!--底部回帖-->	
 			<div class="news_userInfo_reply backgroundColor_white ">
 				<div class="news_userInfo_replyInput  font_14 tac">
 					<div class="news_userInfo_replyImg fl"></div>
@@ -285,8 +283,7 @@
 				<div class="news_review"></div>
 				<div class="news_reviewNum backgroundColor_green tac color_white">2</div>
 				<div class="news_collect"></div>
-			</div>
-			
+			</div>		
 			<!--定位-->
 			<!--<div class="news_post_list backgroundColor_white ofh">
 				<div class="news_post_listImg fl"></div>
@@ -295,12 +292,16 @@
 			</div>-->
 			<!--定位结束-->
 		</div>
-
 	</body>
 	<script src="../../js/strategy/strategy_details.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.zoom.js"></script>
+    <script src="../../js/mui.zoom.js"></script>
 	<script src="../../js/mui.previewimage.js"></script>
 	<script>
-		mui.previewImage();		
+		mui.previewImage();
+		window.addEventListener('refresh',function(event){
+			$('.news_post_commentContents').empty();
+              page = 0
+              up();
+		 });
 	</script>
 </html>

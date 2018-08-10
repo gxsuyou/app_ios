@@ -7,6 +7,7 @@ var defaultName;
 var targetUserId;
 var game_name;
 var game_icon;
+var pageIndex; //用于返回更新评论
 $(function() {	
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
@@ -19,6 +20,7 @@ $(function() {
 		game_name = self.game_name;
 		game_icon = self.game_icon;
 		//	获取一级评论单条
+		pageIndex=self.pageIndex;
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getOneCommentByCommentId",
