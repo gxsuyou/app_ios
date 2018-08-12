@@ -237,7 +237,7 @@ function galleryImgs() {
             	mui.toast("网络错误，请稍后重试!")
 			    console.log("Compress error!");
 	    });
-    
+    []
 
 	}, function(e) {
 		console.log("取消选择图片");

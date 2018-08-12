@@ -20,8 +20,7 @@ $(function() {
 			beforeback:function(){
 			            var list = plus.webview.getWebviewById("strategy_details.html"); //对游戏首页
 			            mui.fire(list, 'refresh');
-				        return true;//返回true,继续页面关闭逻辑
-			        
+				        return true;//返回true,继续页面关闭逻辑			        
 		    },
 			pullRefresh: {
 				container: ".strategy_all", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等

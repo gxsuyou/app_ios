@@ -28,7 +28,7 @@ $(function(){
 	$('body').on('tap','.news_art',function(){
 		mui.openWindow({
 			url:"../news/news_post.html",
-			id:"../news/news_post.html",
+			id:"news_post.html",
 			extras:{
 				newsId:$(this).attr('data-id'),
 				gameId:$(this).attr('data-gameId')
