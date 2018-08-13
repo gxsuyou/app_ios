@@ -1,11 +1,5 @@
 var msg;
 $(function() {
-	//	$('body').click(function(){
-	//		mui.openWindow({
-	//			url:"strategy_add.html"
-	//		})
-	//	})
-
 	window.addEventListener('reload', function() {
 		// mui.fire()传过来的额外的参数，在event.detail中；
 		window.location.reload();
@@ -15,10 +9,9 @@ $(function() {
 
 	$('body').on('tap', '.strategy_content', function() {
 		var strategyId = $(this).attr('data-id');
-
 		mui.openWindow({
 			url: "../strategy/strategy_details.html",
-			id: "../strategy/strategy_details.html",
+			id: "strategy_details.html",
 			extras: {
 				strategyId: strategyId,
 				anchor: true

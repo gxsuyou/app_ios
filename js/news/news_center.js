@@ -21,8 +21,7 @@ $(function(){
 			if(ajaxToggle){
 				return false;
 			}
-			
-			
+					
 			var selfSort = $(this).attr('data-sort');
 			$(this).addClass('active').siblings('div').removeClass('active');
 			$('.notice_lists').children().remove();
@@ -36,6 +35,7 @@ $(function(){
 		$('body').on('tap','.notice_list',function(){
 			var type = $(this).attr("data-type");
 			var commentId = $(this).attr("data-id");
+			var gameId=$(this).attr("data-game");
 			var url;
 			if (type == 1) {
 				url = "news_allComments.html"
@@ -51,7 +51,8 @@ $(function(){
 				url:url,
 				id:url,
 				extras:{
-					commentId:commentId
+					commentId:commentId,
+					gameId:gameId
 				}
 			})
 		})

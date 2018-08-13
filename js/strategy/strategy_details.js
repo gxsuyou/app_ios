@@ -5,7 +5,7 @@ var page = 0;
 var sort = "add_time";
 var target_img;
 var target_title;
-$(function() {
+$(function(){
 	$('body').on("tap",".news_review",function() {
 		$('html, body').animate({
 			scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
@@ -367,8 +367,7 @@ function up() {
 						targetId: proId,
 						strategyId: strategyId
 					},
-					success: function(data) {
-                       
+					success: function(data) {                      
 						if(data.state) {
 							var com = data.comment;
 							var div = "",portrait;
@@ -440,6 +439,13 @@ function up() {
 							}
 
 							$('.news_post_commentContents').append(div);
+						    for(var n = 0; n < com.length;n++) {
+								if($(".img").eq(n).width()>$(".imgFirst").width()){
+								$(".img").eq(n).css("width","100%");
+							  }
+							}
+							
+							
 							var commitNum=$(".news_post_commentContent").length;
                             $(".news_reviewNum").text(commitNum)
 							if(com.length < 5) {
@@ -519,7 +525,7 @@ function up() {
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div class='imgFirst'>"+
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' width='100%' />" +
+									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' />" +
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
@@ -534,10 +540,17 @@ function up() {
 									sec +
 									"</div>" +
 									"</div>" +
-									"</div>"
+									"</div>";
+									
+						}							 
+							$('.news_post_commentContents').append(div);
+							for(var n = 0; n < com.length;n++) {
+								if($(".img").eq(n).width()>$(".imgFirst").width()){
+								$(".img").eq(n).css("width","100%");
+							  }
 							}
 							
-							$('.news_post_commentContents').append(div)
+							
 							var commitNum=$(".news_post_commentContent").length
                             $(".news_reviewNum").text(commitNum)
 

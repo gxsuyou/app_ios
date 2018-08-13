@@ -43,6 +43,10 @@ $(function() {
 	})
 	mui.init({
 		swipeBack: true, //启用右滑关闭功能
+//		subpages:[{
+//          url:'news_post.html',
+//          id:'news_post.html',
+//      }],
 		gestureConfig: {
 			tap: true, //默认为true
 			doubletap: true, //默认为false
