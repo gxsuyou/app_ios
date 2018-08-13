@@ -305,7 +305,7 @@ $(function() {
 	})
 
 	//	游戏攻略点赞
-
+	
 	$('body').on('tap', '.thumb,.thumb_num', function(e) {
 		e.stopPropagation();
 		if(userId) {
@@ -323,6 +323,7 @@ $(function() {
 						userId: userId
 					},
 					success: function(data) {
+						alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("取消点赞成功")
 						} else {
@@ -871,14 +872,13 @@ function indexCommit(){
 				gameId: gameId
 			},
 			success: function(data) {
-				
-//				var portrait;
 				if(data.state) {
 
 					var com = data.comment,portrait;
 					var div = '';
 
 					for(var i = 0; i < com.length; i++) {
+						
 						if(com[i].state) {
 							var ifGood = "good";
 						} else {
@@ -891,9 +891,9 @@ function indexCommit(){
 					    }else{
 						    portrait=com[i].portrait;
 						}
-								
-						
-						
+//								
+//						alert(com[i].agree)
+//						
 						div +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='ofh'>" +
@@ -912,7 +912,6 @@ function indexCommit(){
 							"</div>" +
 							"</div>" +
 							"</div>" +
-
 							"</div>"
 					}
 					$('.news_post_commentContentshot').empty().append(div);

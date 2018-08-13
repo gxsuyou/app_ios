@@ -86,8 +86,6 @@ a{
 .news_post_listImg{
 	width: 1.8125rem;
 	height: 1.8125rem;
-	/*background-image: url("../../Public/image/share.png");*/
-	
 	border-radius: 10px;
 	background-position: center;
 	background-repeat:no-repeat;
@@ -132,9 +130,8 @@ h4{
 	width: 2.0625rem;
 	height: 2.0625rem;
 	background-image: url(../../Public/image/touxiang.png);
-	/*background-color: red;*/
 	border-radius: 50%;
-	background-position: center;
+	background-position:center;
 	background-repeat:no-repeat;
 	background-size: cover;
 }
@@ -235,8 +232,7 @@ h4{
 	margin-left: 0.9375rem;
 	margin-right: 0.75rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	/*background-color: green;*/
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.1);
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

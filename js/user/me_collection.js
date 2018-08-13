@@ -28,7 +28,7 @@ $(function(){
 	$('body').on('tap','.news_art',function(){
 		mui.openWindow({
 			url:"../news/news_post.html",
-			id:"../news/news_post.html",
+			id:"news_post.html",
 			extras:{
 				newsId:$(this).attr('data-id'),
 				gameId:$(this).attr('data-gameId')
@@ -54,7 +54,6 @@ $(function(){
 		var btnarr = ["确定", "取消"];
 		mui.confirm("你确定删除吗？", "操作提示", btnarr, function(e) {
 			if(e.index == 0) {
-				//alert(1);
 				$.ajax({
 					type:"get",
 					url:config.data+"users/getDelCollect",

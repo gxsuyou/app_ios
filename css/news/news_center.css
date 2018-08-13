@@ -17,12 +17,10 @@
 	border-bottom: 4px solid #E7EAEC;
 }
 .notice_listImg{
-	
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.1);
 	display: inline-block;
 	width: 2rem;
 	height: 2rem;
-/*	background-image: url("../../Public/image/star.png");*/
-	
 	border-radius: 50%;
 	background-position: center;
 	background-repeat:no-repeat;

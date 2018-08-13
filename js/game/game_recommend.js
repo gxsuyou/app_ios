@@ -1,3 +1,5 @@
+
+var rankToggle=false;
 $(function() {
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
@@ -316,8 +318,7 @@ $(function() {
 						"</div>" +
 						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>" +
 						"</li>";
-						
-						//alert(list);
+
 					if(i < 3) {
 						$('.remommend_listFirst').append(list)
 					} else if(i < 6) {
@@ -400,21 +401,7 @@ $(function() {
 	sort = "sort";
 	getRank(sort);
 	
-	
-	$('.game_rank').children().click(function() {
-		
-		mui('.nav_cls_contains').pullRefresh().refresh(true);
-		page = 1;
-		sort = $(this).attr('data-sort')
-		var name = $(this).attr('data-name')
-		$(this).children().addClass('border_green color_green').css('background-color', 'white')
-		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
-		$('.game_lists').children().remove();
-	    $(".first_three").css("display","none");	
-		getRank(sort);
-	})
-	
+
 	$('.game_rank').children().eq(0).click(function() {
 		up2 = 1;
 
@@ -466,7 +453,7 @@ $(function() {
 
 	//	分类开始	
 
-	//		游戏分类
+	//  游戏分类
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameCls",
@@ -571,7 +558,45 @@ $(function() {
 
 })
 
+
+	/*排行榜 热门 下载 ONE 切换 */
+	$('.game_rank').children().click(function() {	
+		if(rankToggle){
+			return false;
+		}
+		$('.comingsoon').remove();
+		mui('.nav_cls_contains').pullRefresh().enablePullupToRefresh();
+		mui('.nav_cls_contains').pullRefresh().refresh(true);	
+		$(".hot_rank").css("display","block");
+		page = 1;
+		sort = $(this).attr('data-sort')
+//		alert(sort);
+		var name = $(this).attr('data-name')
+		$(this).children().addClass('border_green color_green').css('background-color', 'white')
+		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
+		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+		$('.game_lists').children().remove();
+	    $(".first_three").css("display","none");	
+		getRank(sort);
+	})
+	
+
+
+
 function getRank(sort) {
+//	alert(sort)
+	rankToggle=true;
+     /*阻挡掉one模块*/
+	if(sort=="sort2"){
+		$('.comingsoon').remove();
+		$(".hot_rank").css("display","none");
+		$('.comingsoon').css("display","block");
+		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
+		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
+        rankToggle=false;
+		return false;		
+	}
+	
   mui.plusReady(function(){
 	$.ajax({
 		type: "get",
@@ -586,10 +611,10 @@ function getRank(sort) {
 		success: function(data) {
 			var g = data.game;
 			if(data.state) {
+
 				var list = '';
 				for(var i = 0; i < g.length; i++) {
-					if(i < 3) {
-						
+					if(i < 3) {						
 						$('.first').attr('data-id', g[0].id)
 						$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
 						$('.first .y_listName').text(g[0].game_name)
@@ -674,11 +699,13 @@ function getRank(sort) {
 					}
 				})
 			}
+		    rankToggle=false;
 		},
 		error:function(){
 			$(".nav_cls_contains").css("display","none");
 			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
        	    $('.error').html(errorHTML);
+       	    rankToggle=false;
 		}
 	});
   });

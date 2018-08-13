@@ -34,7 +34,6 @@ $(function() {
 			setTimeout(function(){
 			if(mui.os.plus) {
 				var buttonTit = [
-
 					{
 						title: "从手机相册选择"
 					}

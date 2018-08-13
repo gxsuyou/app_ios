@@ -341,16 +341,13 @@
 			
 		</div>
 		<!-- 错误结束 -->
-		<script type="text/javascript">
-			var soc = "2"
-		</script>
 		<script src="../../js/game/game_recommend.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var soc = "2"
 			var page = 1;
 			var up3 = 1;
 			var up2 = 1;
-		</script>
-		<script type="text/javascript">
+			var sort="sort";
 			activeBell()//激活头部bell回复
 			mui.init({
 				swipeBack: true,
@@ -386,15 +383,13 @@
 				getRankup(page, sort)
 			}
 
-			function down() {
-				
+			function down() {			
 				switch(up3) {
 					case 1:
 						
 						window.location.reload();
 						break;
 					case 2:
-
 						mui('.nav_cls_contains').pullRefresh().refresh(true);
 						page = 1;
 						$('.game_lists').children().remove()
