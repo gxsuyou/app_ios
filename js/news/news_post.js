@@ -43,18 +43,10 @@ $(function() {
 	})
 	mui.init({
 		swipeBack: true, //启用右滑关闭功能
-//		subpages:[{
-//          url:'news_post.html',
-//          id:'news_post.html',
-//      }],
 		gestureConfig: {
 			tap: true, //默认为true
 			doubletap: true, //默认为false
 		    longtap: true, //默认为false
-		    swipe: true, //默认为true
-			drag: true, //默认为true
-			hold: false, //默认为false，不监听
-			release: false //默认为false，不监听
 		},
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -120,7 +112,7 @@ $(function() {
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
-
+                    $('.news_reviewNum').text(n.comment)
 
                //检查
                $.ajax({
@@ -141,8 +133,7 @@ $(function() {
 			  	   }
 			    })
 					
-					 
-					
+					 					
 					up();
 					
 					if(n.collect) {
@@ -182,31 +173,9 @@ $(function() {
 
 		})
 
-		$('body').on('tap', '.hot', function() {
-			$('.news_post_commentContents').children().remove();
-			type = 'hot';
-			closeAjax=false;
-			$(this).addClass('color_green')
-			$('.time').removeClass('color_green')
-			page = 0;
-			up();
-		})
-		$('body').on('tap', '.time', function() {
-			$('.news_post_commentContents').children().remove();
-            closeAjax=false;
-			type = 'time';
-			$(this).addClass('color_green')
-			$('.hot').removeClass('color_green')
-			page = 0;
-			up();
-		})
+
 
 		$('body').on("tap",".news_post_list",function() {
-//			alert(gameId);
-
-       
-             
-
 	        mui.openWindow({
 				url: "../game/game_detail.html",
 				    id: "../game/game_detail.html",
@@ -429,9 +398,7 @@ $(function() {
 
 		$("body").on('tap','.news_userInfo_replyInput',function(){
 	
-//			$('.news_userInfo_reply').addClass('hidden')
-//			$('.news_secondComment').removeClass('hidden')
- 
+
             $('.news_userInfo_reply').css("display","none")
 			$('.news_secondComment').css("display","block")
  
@@ -439,8 +406,6 @@ $(function() {
 			
 			$('.news_secondComment_input').blur(function(){
 				setTimeout(function() {
-//					$('.news_secondComment').addClass('hidden');
-//					$('.news_userInfo_reply').removeClass('hidden');	
                     $('.news_secondComment').css("display","none");
 					$('.news_userInfo_reply').css("display","block");
 				},250);
@@ -478,7 +443,28 @@ $(function() {
 						if(data.state == "1") {					
 						 $('.news_secondComment_input').val(""); //不刷新							 
 						 $(".news_secondComment_input").blur();
-						 getComment();						 
+						 
+						 /*更新*/
+						
+						var reviewNum=$('.news_reviewNum').text()
+			            reviewNum=Number(reviewNum)
+			            if(reviewNum>99){
+			            	reviewNum=reviewNum;
+			            }else{
+			            	reviewNum=reviewNum+1;
+			            }                      
+			            $('.news_reviewNum').text(reviewNum);
+						
+						
+						
+						 $(".bottomInfo").text("正在加载 ...");
+						 closeAjax=false;
+			             $(".news_post_commentContents").empty();			             
+			             page=0;
+						 up();
+								
+						 
+						 						 
 						 mui.toast("发送成功");	
 						 replyTog=false;					 
 						} else {
@@ -504,111 +490,34 @@ $(function() {
 	})
 })
 
-function getComment(){
+var hotTime=false;
+$('body').on('tap','.hot', function(){
+	if(hotTime){
+		return false;
+	}
 	$('.news_post_commentContents').children().remove();
-	closeAjax=true;//关掉up事件，等待getComment()结束再调用
-	 $.ajax({
-			type: "get",
-			url: config.data + "news/getHotNewsCommentByPage",
-			async: true,
-			data: {
-				"commentParentId": newsId,
-				"page":1,
-				"userId": userId
-			},
-			success: function(data) {
-				if(data.state) {
-					page=0;
-					var com = data.comment;
-					var comment = "";
-					var towLen,portrait;
-					for(var i = 0; i < com.length; i++) {
-						var tow = com[i].towCommentList;
-						var secondCom = "";
-						if(com[i].state) {
-							var ifGood = "good";
-						} else {
-							var ifGood = "noGood";
-						}
-						
-						if(com[i].portrait==0||com[i].portrait==null){
-							portrait="../../Public/image/morentouxiang.png";
-						}else{
-							portrait=com[i].portrait;
-						}
-						
-						
-						for(var j = 0; j < tow.length; j++) {
-							var ifHide = tow[j].targetUserNickName || "hidden";
-							secondCom +=
-								"<div class='comment_secondComment '>" +
-								"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
-								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
-								"<span class='color_282828'>：" + tow[j].content + "</span>" +
-								"</div>";
-						}
+	type = 'hot';
+	hotTime=true
+    closeAjax=false
+	$(this).addClass('color_green')
+	$('.time').removeClass('color_green')
+	page = 0;
+	up();
+})
 
-						if(tow.length >= 2) {
-							var secondComs =
-								"<div class='comment_secondComments font_14 ofh'>" + secondCom +
-								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
-								"全部回复" +
-								"</div>" +
-								"</div>";
-						} else {
-							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
-						}
-
-						comment +=
-							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-							"<div class='news_post_commentContent_content fl'>" +
-							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-							"<div class='comment_info ofh'>" +
-							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-							"<div class='fr color_9e9e9e comment_imgs'>" +
-							"<div class='thumbs fl'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
-							"<span  class='thumb_num font_14'>" + com[i].agree + "</span>" +
-							"</div>" +
-							"<div class='comment_nums fl'>" +
-							"<span class='comment_img' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment + "</span>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							secondComs +
-							"</div>" +
-							"</div>"
-					};
-                     
-
-					$('.news_post_commentContents').append(comment);
-//					console.log(comment)
-                    var reviewNum=$('.news_post_commentContent').length;				
-					$(".news_reviewNum").text(reviewNum);
-                    
-                    
-                    closeAjax=false;//up事件开启
-
-
-					if($('.thumb').attr('data-state')) {
-						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
-					}
-					if(com.length < 5) {         
-						closeAjax=true;
-						$(".bottomInfo").text("没有更多评论了");
-					} 
-
-				}
-			}
-		});
-		
-}
-
-
+$('body').on('tap','.time', function() {
+	if(hotTime){
+		return false;
+	}
+	$('.news_post_commentContents').children().remove();
+	hotTime=true
+    closeAjax=false
+	type = 'time';
+	$(this).addClass('color_green')
+	$('.hot').removeClass('color_green')
+	page = 0;
+	up();
+})
 
 
 
@@ -632,6 +541,7 @@ function up(){
 				"userId": userId
 			},
 			success: function(data) {
+				hotTime=false;
 				if(data.state) {
 					var com = data.comment;
 					var comment = "";
@@ -701,12 +611,6 @@ function up(){
 
                    
 					$('.news_post_commentContents').append(comment);					
-					var reviewNum=$('.news_post_commentContent').length;	
-					if(reviewNum > 99) {
-						reviewNum = 99
-					}
-					$(".news_reviewNum").text(reviewNum);
-					
 					
 
 					if($('.thumb').attr('data-state')) {
@@ -727,6 +631,7 @@ function up(){
 			}
 		});
 	} else if(type=="time") {
+		
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getCommentByPage",
@@ -737,11 +642,13 @@ function up(){
 				"userId": userId
 			},
 			success: function(data) {
+                hotTime=false;
 				if(data.state) {
-					var com = data.comment;					
+					var com = data.comment;	
 					var comment = "";
 					var towLen;
 					for(var i = 0; i < com.length; i++) {
+						
 						var tow = com[i].towCommentList;
 						var secondCom = "";
 						if(com[i].state) {
@@ -798,11 +705,6 @@ function up(){
 					};
                     
 					$('.news_post_commentContents').append(comment);
-					var reviewNum=$('.news_post_commentContent').length;
-					if(reviewNum > 99) {
-						reviewNum = 99
-					}
-					$(".news_reviewNum").text(reviewNum);
 					
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
@@ -811,10 +713,7 @@ function up(){
 					if(com.length < 5) {
 						closeAjax= true;					
 						$(".bottomInfo").text("没有更多评论了");
-					} else {
-						
 					}
-				} else {
 				}
 			}
 		});

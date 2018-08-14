@@ -70,28 +70,6 @@ if(userInfojson) {
 	var userId = 0
 }
 
-//开发环境
-//var config ={
-//	img:"http://testimg.oneyouxi.com.cn/",
-//	apk:"http://testapk.oneyouxi.com.cn/",
-//	data:"http://192.168.2.155:8877/"
-//}
-//$.ajax({
-//	type:"get",
-//	url:"http://www.oneyouxi.com.cn:8878/users/serverAddress",
-//	async:false,
-//	success:function(data){
-//		if (data.state) {
-//			for(var i = 0 ; i<data.address.length;i++ ){
-//				
-//				config[data.address[i].type] = data.address[i].addr
-//			}
-//		} else{
-//			
-//		}
-//	}
-//});
-//console.log(config.data)
 
 
 function activeBell(){

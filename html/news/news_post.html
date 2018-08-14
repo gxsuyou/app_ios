@@ -321,9 +321,13 @@
 	<script src="../../js/mui.zoom.js"></script>
 	<script src="../../js/mui.previewimage.js"></script>
 	<script>
-		window.addEventListener('refresh',function(event){
-			getComment();			
-		});
 		mui.previewImage();
+	    window.addEventListener('refresh',function(event){
+			  $(".bottomInfo").text("正在加载 ...");
+			  closeAjax=false;
+			  $(".news_post_commentContents").empty();			             
+			  page=0;
+			  up();
+		});
 	</script>
 </html>

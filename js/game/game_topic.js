@@ -16,9 +16,7 @@ $(function() {
 				if(data.state) {
 					var sub = data.subject;
 					$('.game_topicsHeadimg').css('background-image', 'url(' + config.img + encodeURI(sub.img) + ')');			
-					$('.game_topicsHeadart').text(sub.detail);				
-				} else {
-
+//					$('.game_topicsHeadart').text(sub.detail);				
 				}
 			}
 		});

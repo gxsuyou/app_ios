@@ -71,9 +71,10 @@ $(function() {
 		
 		
 		
-		//详情页
+		//详情页 点击
 
 		$('body').on("tap",".game_detail_detail",function() {
+			detail_main()
 			pageIndex="detail";
 			commentModule = false;
 			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
@@ -82,9 +83,9 @@ $(function() {
 
 		})
 
-		//		详情页结束
+		//详情页结束
 
-		//		评论页开始
+		//评论页开始
 
 		$('body').on("tap",".game_detail_assess",function() {		
 		    detail_assess();
@@ -319,11 +320,10 @@ $(function() {
 					url: config.data + "game/unLikeComment",
 					async: true,
 					data: {
-						commentId: ts.siblings('.comment_img').attr('data-id'),
+						commentId:ts.siblings('.comment_img').attr('data-id'),
 						userId: userId
 					},
 					success: function(data) {
-						alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("取消点赞成功")
 						} else {
@@ -431,7 +431,6 @@ function launchApp(pagename) {
 
 $("body").on("tap",".strategy_indent",function(){
 	var strategy_id=$(this).attr("data-id");
-//	alert(strategy_id)
     	mui.openWindow({
 				url: "../strategy/strategy_details.html",
 				id: "strategy_details.html",
@@ -637,6 +636,7 @@ function detail_strategy(){
 					data: {
 						gameId: gameId,
 						page: 1,
+						userId:userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -797,7 +797,8 @@ function detail_main(){
 			url: config.data + "game/getNewsByGameId",
 			async: true,
 			data: {
-				gameId: gameId
+				gameId: gameId,
+				userId:userId
 			},
 			success: function(data) {
 				if(data.state) {
@@ -869,7 +870,8 @@ function indexCommit(){
 			url: config.data + "game/getGameHotComment",
 			async: true,
 			data: {
-				gameId: gameId
+				gameId:gameId,
+				userId:userId
 			},
 			success: function(data) {
 				if(data.state) {
@@ -890,10 +892,7 @@ function indexCommit(){
 						    portrait="../../Public/image/morentouxiang.png";
 					    }else{
 						    portrait=com[i].portrait;
-						}
-//								
-//						alert(com[i].agree)
-//						
+						}	
 						div +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='ofh'>" +

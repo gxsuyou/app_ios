@@ -22,10 +22,6 @@ $(function(){
 				tap: true, //默认为true
 				doubletap: true, //默认为false
 				longtap: true, //默认为false
-				swipe: true, //默认为true
-				drag: true, //默认为true
-				hold: true, //默认为false，不监听
-				release: false //默认为false，不监听
 			},
 			pullRefresh: {
 				container: ".strategy_details", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -439,15 +435,7 @@ function up() {
 							}
 
 							$('.news_post_commentContents').append(div);
-						    for(var n = 0; n < com.length;n++) {
-								if($(".img").eq(n).width()>$(".imgFirst").width()){
-								$(".img").eq(n).css("width","100%");
-							  }
-							}
-							
-							
-							var commitNum=$(".news_post_commentContent").length;
-                            $(".news_reviewNum").text(commitNum)
+
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
 							} else {
@@ -525,7 +513,7 @@ function up() {
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div class='imgFirst'>"+
-									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' />" +
+									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='width:100%;' />" +
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
@@ -544,16 +532,7 @@ function up() {
 									
 						}							 
 							$('.news_post_commentContents').append(div);
-							for(var n = 0; n < com.length;n++) {
-								if($(".img").eq(n).width()>$(".imgFirst").width()){
-								$(".img").eq(n).css("width","100%");
-							  }
-							}
-							
-							
-							var commitNum=$(".news_post_commentContent").length
-                            $(".news_reviewNum").text(commitNum)
-
+	
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
 							} else {
@@ -608,7 +587,7 @@ function detail() {
                 }
            
                 $('.news_post_content_detail').html(detail);
-//				$('.news_reviewNum').text(comment_num);
+				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
