@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>我的游戏</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
@@ -12,24 +11,20 @@
 		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-
 	<body>
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
 				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-
 				</div>
 				<div class="notice">我的游戏</div>
-
 			</header>
 		</div>
 		<div class="me_gameContents">
 			<div class="me_gameNav ofh">
 				<span class="color_green" data-class="game_lists">游戏</span>
 				<span data-class="now_game">即玩小游戏</span>
-			</div>
-			
+			</div>		
 			<!--我的游戏模块-->
 			<ul class="game_lists ">
 				
@@ -125,21 +120,14 @@
 			</ul>
 			<!--小游戏模块 结束-->
 		</div>
-		<script>
-			var page = 0,indexPage="getGame";
-			
-		</script>
 		<script type="text/javascript">
+			var page = 0,indexPage="getGame";
 			mui.init({
 				swipeBack: true,
 			    gestureConfig: {
 					tap: true, //默认为true
 					doubletap: true, //默认为false
 					longtap: true, //默认为false
-					swipe: true, //默认为true
-					drag: true, //默认为true
-					hold: false, //默认为false，不监听
-					release: false //默认为false，不监听
 				},
 				pullRefresh: {
 					container: ".me_gameContents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
