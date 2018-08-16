@@ -263,7 +263,6 @@ $(function(){
 				    scrollHeight=document.body.scrollHeight,
 				    windowHeight=$(window).height();
 				 /*到底部*/
-				//console.log(scrollHeight,windowHeight+afterScrollTop+20)
 				if(scrollHeight<=windowHeight+afterScrollTop+20){
 					fn('up');
 					return ;
@@ -276,9 +275,9 @@ $(function(){
 
 		scroll(function(direction) {
 			if(direction == "down") {
-				$('.news_userInfo_reply').addClass('hidden')
+				$('.news_userInfo_reply').css("display","none")
 			} else {
-				$('.news_userInfo_reply').removeClass('hidden')
+				$('.news_userInfo_reply').css("display","block")
 			}
 		});
 
@@ -416,7 +415,7 @@ function up() {
 									"<div class='news_post_commentContent_content fl'>" +
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' width='100%' />" +
+									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 									"<div class='fr color_9e9e9e comment_imgs'>" +
@@ -430,7 +429,7 @@ function up() {
 									sec +
 									"</div>" +
 									"</div>" +
-									"</div>";
+									"</div>"
 
 							}
 
@@ -513,7 +512,7 @@ function up() {
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div class='imgFirst'>"+
-									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='width:100%;' />" +
+									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
@@ -528,7 +527,7 @@ function up() {
 									sec +
 									"</div>" +
 									"</div>" +
-									"</div>";
+									"</div>"
 									
 						}							 
 							$('.news_post_commentContents').append(div);

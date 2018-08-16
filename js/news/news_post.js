@@ -331,11 +331,11 @@ $(function() {
 			});
 		}
 	
-		scroll(function(direction){      
+		scroll(function(direction){    
 			if(direction == "down"){
-				$('.news_userInfo_reply').addClass('hidden');
+				$('.news_userInfo_reply').css("display","none")
 			} else {
-                 $('.news_userInfo_reply').removeClass('hidden');
+                 $('.news_userInfo_reply').css("display","block");
 			}
 		});
 		//滚动隐藏结束
@@ -457,7 +457,7 @@ $(function() {
 						
 						
 						
-						 $(".bottomInfo").text("正在加载 ...");
+						 $(".bottomInfo").text("正在加载...");
 						 closeAjax=false;
 			             $(".news_post_commentContents").empty();			             
 			             page=0;
@@ -528,7 +528,7 @@ function up(){
 	}
 	page++;
 	closeAjax=true;	
-	$(".bottomInfo").html("正在加载 ...");
+	$(".bottomInfo").html("正在加载...");
 	setTimeout(function(){
 	if(type == "hot") {	
 		$.ajax({
