@@ -9,38 +9,6 @@ $(function() {
 		});
 		$('.header_box').next().css("margin-top", total_height + "px");
 		
-//		过渡动画1
-//		var w = plus.nativeUI.showWaiting("", {
-//
-//			loading: {
-//
-//				icon: "../../Public/image/maotiao.png", //加载动画地址
-//
-//				interval: '1000ms',
-//
-//				height: '50px'
-//
-//			},
-//			height: "80%",
-//			width: "100%",
-//			
-//			size: "200px",
-//			modal: false,
-//			textalign: "left",
-//
-//			background: "rgba(0,0,0,0.5)"
-//
-//		});
-//		setTimeout(function(){
-//			w.close();
-//			
-//		},3000)
-
-		
-
-
-		
-
 	})
 
 });

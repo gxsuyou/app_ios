@@ -584,10 +584,9 @@ $(function() {
 
 
 function getRank(sort) {
-//	alert(sort)
 	rankToggle=true;
      /*阻挡掉one模块*/
-	if(sort=="sort2"){
+	if(sort=="game_download_num"){
 		$('.comingsoon').remove();
 		$(".hot_rank").css("display","none");
 		$('.comingsoon').css("display","block");

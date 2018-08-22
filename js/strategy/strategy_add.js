@@ -40,31 +40,23 @@ $(function() {
 		$('#strategy_textarea').css("height","50%");
 		setTimeout(function(){
 			var scrollY=$('#strategy_textarea')[0].scrollHeight-300;
-			console.log("滚动"+scrollY);
+//			console.log("滚动"+scrollY);
            $('#strategy_textarea').animate({scrollTop:scrollY},0);        
 		},100);
 	});
 	
 	$("body").on("blur","#strategy_textarea",function(){
-		console.log(2);
        $('#strategy_textarea').css("height","75vh");
-//		setTimeout(function(){
-//			var scrollY=$('#strategy_textarea')[0].scrollHeight;
-//         $('#strategy_textarea').animate({scrollTop:scrollY},200);        
-//		},100);
 	});
 	
 
    $("body").on("keyup","#strategy_textarea",function(){
+   	    console.log($(this).html())
 		$("#strategy_textarea span,#strategy_textarea div,#strategy_textarea p").css("-webkit-user-select","text");	 
 	});
 
   
-  
-  
-  
-  
-  
+ 
 
 	
 	$('body').on("tap",".publish",function() {

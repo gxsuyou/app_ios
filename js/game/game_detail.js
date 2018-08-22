@@ -158,7 +158,7 @@ $(function() {
        
        
        
-       $('body').on('tap','#reload',function(){
+    $('body').on('tap','#reload',function(){
        	  window.location.reload();
        });
 
@@ -757,7 +757,7 @@ function detail_main(){
 					$('.game_simpleIntro_content').html(g.game_detail);
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载");
 					$('.game_particular_value').children().eq(1).text(g.game_version);
-					$('.game_particular_value').children().eq(2).text(g.game_size + "MB");
+					$('.game_particular_value').children().eq(2).text(g.game_size);
 					$('.game_particular_value').children().eq(3).text(g.game_update_date);
 					$('.game_particular_value').children().eq(4).text(g.game_company);
 					$.ajax({
