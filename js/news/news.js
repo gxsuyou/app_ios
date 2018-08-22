@@ -24,8 +24,14 @@ $(function() {
 				} else {
 					$('.news_artAlone > .news_art .news_img_content .news_img_header').addClass('hidden')
 				}
+				//$('.news_artAlone > .news_art > .news_img').css("background-color", "red")
 				$('.news_artAlone > .news_art').attr("data-id", n[0].id)
-				$('.news_artAlone > .news_art > .news_img').css("background-image", "url(" + config.img + encodeURI(n[0].img) + ")")
+				var news_img_1=new Image();
+				
+				news_img_1.onload=function(){		
+					$('.news_artAlone > .news_art > .news_img').css("background-image", "url(" + config.img + encodeURI(n[0].img) + ")")
+				}				
+				news_img_1.src=config.img + encodeURI(n[0].img)
 				$('.news_artAlone > .news_art  .news_img_header').css("background-image", "url(" + config.img + encodeURI(n[0].icon) + ")")
 				$('.news_artAlone > .news_art  .news_art_viewNum').text(n[0].browse)
 				$('.news_artAlone > .news_art  .news_art_praisePoint').text(n[0].agree)
@@ -44,7 +50,11 @@ $(function() {
 				
 				
 				$('.news_art2').attr('data-id', n[1].id)
-				$('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
+				var news_img_2=new Image()
+				news_img_2.onload=function(){
+				  $('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
+				}
+				news_img_2.src=config.img + encodeURI(n[1].img)
 				$('.news_art2  .news_img_header').css("background-image", "url(" + config.img + encodeURI(n[1].icon) + ")")
 				$('.news_art2  .news_art_viewNum').text(n[1].browse)
 				$('.news_art2  .news_art_praisePoint').text(n[1].agree)
@@ -56,7 +66,7 @@ $(function() {
 					if(n[i].game_id) {
 						div +=
 							"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '" + n[i].id + "' data-gameId = '" + n[i].game_id + "'>" +
-							"<div class='news_img' style='background-image:url(" + config.img + encodeURI(n[i].img) + ")'>" +
+							"<div class='news_img' style='background-image:url(" + config.img + encodeURI(n[i].img) + ")'>"+
 							"<div class='news_img_content color_white'>" +
 							"<div class='news_img_header fl' style='background-image:url(" + config.img + encodeURI(n[i].icon) + ")'></div>" +
 							"<div class='fl  new_art_name font_14 overflow'>" + n[i].game_name + "</div>" +
@@ -135,7 +145,7 @@ $(function() {
 						"</div>" +
 						"</div>"
 				}
-				$('.news_newGame_contents').append(h);
+				$('.news_newGame_contents').append(h)
 			}
 		}
 	});
@@ -222,7 +232,11 @@ function getHeaderimg() {
 		success: function(data) {
 			var g = data.game;
 			if(data.state) {
-				$('.game').css("background-image", "url(" + config.img + encodeURI(g.img) + ")")
+				var img=new Image();
+				img.onload=function(){
+					$('.game').css("background-image", "url(" + config.img + encodeURI(g.img) + ")")
+				}
+				img.src=config.img + encodeURI(g.img)
 				$('.game_header').css("background-image", "url(" + config.img + encodeURI(g.icon) + ")")
 				$('.game_name').text(g.game_name)
 				$('.game_datail').text(g.game_recommend)

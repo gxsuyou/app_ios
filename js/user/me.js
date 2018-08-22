@@ -23,7 +23,7 @@ $(function() {
 			url: config.data + "users/getUserMsgById",
 			async: true,
 			data: {
-				"id": userInfojson.id
+				"id":id
 			},
 			success: function(data) {
 				

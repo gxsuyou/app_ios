@@ -7,13 +7,15 @@ var commentModule = false;
 var userId = localStorage.getItem("userId");
 var game;
 var gameImg;
-$(function() {
+$(function(){
+	
 	mui.plusReady(function() {
 		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
 		gameId = self.gameId;
+		
 		
 		
      $('body').on('tap', '.game_relatedInfocontent', function() {
@@ -113,12 +115,23 @@ $(function() {
 		
 	
 		//		攻略页结束
-		$("body").on("tap","#game_detail_download",function(ev) {
+		$("body").on("tap","#game_detail_download",function(ev){
 			event = ev || window.event;
 			event.stopPropagation();
 			var t = $(this);
-			var isFile = false;					
-			addDownNum()
+			var isFile = false;			
+//			console.log(game.game_download_ios)
+//			console.log(5)
+//			alert(plus.runtime.isApplicationExist({action:"netease.frxy://"}))
+//			return false;
+
+
+
+
+            addMyGame() //添加首席收藏
+            //return false;
+			addDownNum() //增加下载量
+			
 		    if(String(game.game_download_ios)!="null"){
 				    location.href=game.game_download_ios;
 				    return false;
@@ -137,6 +150,31 @@ $(function() {
        });
        
        
+       function addMyGame(){
+//     	  alert(userId);
+       	    if(userId){
+     	    	
+					$.ajax({
+						type: "get",
+						url: config.data + "game/addMyGameIos",
+						async: true,
+						data: {
+							gameId: gameId,
+							userId: userId,
+							sys:1
+						},
+						success: function(data) {
+							if(data.state) {
+
+							} else {
+
+							}
+						}
+					});
+		    }
+       }
+       
+       /* 增加下载数量 */
        function addDownNum(){
        	$.ajax({
 		        type: "get",
