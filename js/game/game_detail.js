@@ -842,7 +842,7 @@ function detail_main(){
 				if(data.state) {
 					var nl = data.newsList;
 					var div = '';
-					for(var i = 0; i < nl.length; i++) {
+					for(var i = 0; i < nl.length; i++){
 						div +=
 							"<div class='game_relatedInfocontent' data-id='" + nl[i].id + "'>" +
 							"<div class='game_relatedInfocontentImg' style='background-image: url(" + config.img + encodeURI(nl[i].img) + ");'></div>" +

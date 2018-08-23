@@ -334,14 +334,7 @@ $(function(){
 		  }
 		  
 		});
-        //取消收藏结束
-        
-
-
-
-
-		
-		
+        //取消收藏结束	
 
 	})
 })
@@ -694,4 +687,20 @@ function savePicture(picurl, picname) {
 
 	});
 	dtask.start();
+}
+
+
+//获得评论数
+function getNum(){
+	$.ajax({
+		type:"get",
+		url:config.data+"strategy/getStrategyNum",
+		async:true,
+		data:{
+			strategyId:strategyId
+		},
+		success:function(data){
+			$('.news_reviewNum').text(data.strategy.comment_num);
+		}
+	})
 }

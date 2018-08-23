@@ -146,7 +146,7 @@
 		<script src="../../js/news/news.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var soc = "1"
-			var page = 0
+			var page = 1
 			activeBell()//激活头部bell回复
 			mui.init({
 				swipeBack: true,		 
@@ -190,7 +190,6 @@
 							var n = data.news;
 							var div = "";	
 							for(var i = 0; i < n.length; i++) {
-								//console.log(i+(page*5)-5);
 								imgArray.push({src:config.img+encodeURI(n[i].img),img:new Image()})
 								if (n[i].game_id){				
 										div +=
@@ -239,19 +238,14 @@
 								}	
 							}
 							//console.log(JSON.stringify(imgArray))
-							
+//							return false;
 							$('.news_art_list').append(div)
 							
 							imgArray.forEach(function(item,value){
-//								console.log(value,item.src)
 								item.img.onload=function(){
-									//console.log(2)
-									 $(".news_art_list .news_img").eq(value).css("background-image","url("+ item.src +")")
-									 console.log( $(".news_art_list .news_img").eq(value).html())
+									 $(".news_art_list .news_img").eq(value+3).css("background-image","url("+ item.src +")")
 								}
 								item.img.src=item.src
-//								return ;
-                               
 							})
 							
 							

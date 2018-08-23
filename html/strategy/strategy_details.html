@@ -127,16 +127,9 @@
 	<script>
 		mui.previewImage();
 		window.addEventListener('refresh',function(event){
-			var reviewNum=$('.news_reviewNum').text()
-			reviewNum=Number(reviewNum)
-			if(reviewNum>99){
-			    reviewNum=99
-			}else{
-			    reviewNum=reviewNum+1
-			}                      
-			$('.news_reviewNum').text(reviewNum)		
-			$('.news_post_commentContents').empty()
-            page = 0
+			page = 0
+            $('.news_post_commentContents').empty()
+            getNum()          
             up()
 		 });
 	</script>
