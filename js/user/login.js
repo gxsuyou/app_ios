@@ -41,26 +41,9 @@ $(function() {
                            plus.webview.close("html/game/game_recommend.html");
                            plus.webview.close("html/strategy/strategy.html");
                            plus.webview.close("html/play/play.html");
-                           
-                           
-
-                           
+     
                            $(".mui-input-clear,.mui-input-password").blur();
-                           
-                           
 
-//                         	self = plus.webview.currentWebview();
-//	                        var sub = plus.webview.create(
-//		                        "../../index.html", //子页url
-//		                        "../../index.html", //子页id
-//		                        {
-//			                       top: '0px', //设置距离顶部的距离
-//			                       bottom: '0px' //设置距离底部的距离
-//		                         }
-//	                        );
-//	                        self.append(sub);
-                           
-                           
                            
 							mui.openWindow({
 								url:'../../index.html',

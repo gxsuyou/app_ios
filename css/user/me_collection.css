@@ -85,8 +85,6 @@ body{
   -webkit-box-orient: vertical;
 }
 .strategy_content_classify{
-	/*width: 4rem;*/
-	max-width: 8rem;
 	padding: 0 0.4rem;
 	height: 1.25rem;
 	line-height: 1.25rem;
@@ -96,12 +94,10 @@ body{
 	   height: 2rem;
 	   margin-right: 0.9375rem;	  
 }
-.comment_img{
-	
+.comment_img{	
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/liuyan.png");
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

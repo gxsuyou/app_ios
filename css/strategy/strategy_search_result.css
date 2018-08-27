@@ -98,15 +98,14 @@ body{
 	margin-bottom: 0.9375rem;
 }
 .strategy_content_classify{
-	max-width: 8rem;
 	padding: 0 0.4rem;
-	height: 1.25rem;
+	height:1.25rem;
 	line-height: 1.25rem;
 	margin-left: 0.9375rem;
 }
 .comment_imgs{ 
-	   height: 2rem;
-	   margin-right: 0.9375rem;  
+	height:2rem;
+	margin-right: 0.9375rem;  
 }
 .comment_img{
 	width: 1.0625rem;

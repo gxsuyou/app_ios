@@ -7,17 +7,20 @@ $(function(){
 		tagId = self.tagId;
 		tagName = self.tagName;
 		$('.game_nameHeader').text(tagName);
-	});
+	})
 	
 	$('body').on('tap','.tag',function(e){
 		e.stopPropagation()
-		$('.game_lists').children().remove();
-		tagId = $(this).attr('data-id');
-		tagName = $(this).text();
-		$('.game_nameHeader').text(tagName);
-        page = 1
-        up();
-	});
+		var ran=Math.round(Math.random()*1000);
+		mui.openWindow({
+			url: "game_classify_list.html",
+			id: ran+"game_classify_list.html",
+			extras: {
+				tagId: $(this).attr('data-id'),
+				tagName: $(this).text()
+			}
+		})
+	})
 	
 	
 	$('body').on('tap','.game_list',function(){
@@ -28,7 +31,7 @@ $(function(){
 				gameId:$(this).attr('data-id')
 			}
 		})
-	});
+	})
 	
 	mui.init({
 				swipeBack: true,

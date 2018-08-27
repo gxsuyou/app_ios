@@ -8,7 +8,6 @@ var userId = localStorage.getItem("userId");
 var game;
 var gameImg;
 $(function(){
-	
 	mui.plusReady(function() {
 		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 		$('.header_box').next().css("margin-top", 0 + "px");
@@ -656,7 +655,8 @@ function detail_strategy(){
 
                         var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                    
                         if(!Object.is(total,NaN)){
-                        	$(".gameScore,.game_infoScore").text(total.toFixed(1));
+                        	$(".game_infoScore").text(total.toFixed(1)+"分")
+                        	$(".gameScore").text(total.toFixed(1))
                         }
 						
 					}
