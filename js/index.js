@@ -69,7 +69,7 @@ mui.plusReady(function() {
 //		}
 
 	// 下载wgt文件
-	var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5C62934A.wgt";
+	var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5BD8D7F0.wgt";
 
 	function downWgt(){
 		plus.nativeUI.showWaiting("正在更新中");

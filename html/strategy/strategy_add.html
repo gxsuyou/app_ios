@@ -16,7 +16,7 @@
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
-				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<div class="strategy-back mui-icon mui-icon-left-nav mui-pull-left">
 				</div>
 				<div class="add_comment">攻略发布</div>
 				<div class="publish font_14">发表</div>			
@@ -25,9 +25,7 @@
 		</div>
 		<!--header_box结束-->
 		<!--输入内容开始-->
-        <div contenteditable="true" id="strategy_textarea" placeholder="输入分享你和游戏的故事">
-           <div>&nbsp;</div><span class='insertNode1' style='-webkit-user-select:text'></span>
-        </div>
+        <div contenteditable="true" id="strategy_textarea" placeholder="输入分享你和游戏的故事"><div>&nbsp;</div><span class='insertNode1' style='-webkit-user-select:text'></span></div>
 		<!--输入内容结束-->
 		<!--选择开始-->
 		<div class="imgBox">
@@ -40,12 +38,80 @@
 		<script src="../../js/strategy/strategy_add.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
-			    swipeBack:true, //启用右滑关闭功能
-			    beforeback:function(){
-			    var my_yue = plus.webview.getWebviewById('html/strategy/strategy.html');
-			    mui.fire(my_yue,'refresh');
-			    return true;
-			    }
+			    swipeBack:true,
+//			    beforeback:function(){
+//			    	
+//			    	
+//			    	
+//			    	
+//			    	var title=$(".strategy_title").val()
+//			    	var game=$(".choose_game").val()
+//			    	var content=$("#strategy_textarea").html()
+//			    	
+//			    	if(content=='<div>&nbsp;</div><span class="insertNode1" style="-webkit-user-select:text"></span>'){
+//			    		content=""
+//			    	}
+//			    	
+//			    	
+//			       plus.nativeUI.confirm( "保存攻略", function(e){
+////		            console.log("Close confirm: "+e.index);
+//		            if(e.index==0){
+//		            	console.log("您要保存攻略")
+//		            	
+//		            	
+//		            	
+//		            }else{
+//		            	console.log("您不要保存攻略")
+////		            	mui.back()
+//		            	return true
+//		            }
+//	               })
+//			    	
+//			    	
+//			    	
+//			    	return false;
+			    	
+//			    	  if(title!==""||game!==""||content!==""){
+//			    	  	console.log("草稿箱启动")
+//			    	  	
+//			    	  
+//			    	  	
+//			    	  	
+//			    	  	
+//			    	  }else{
+//			    	  	console.log("草稿箱失去")
+//			    	  	
+//			    	  }
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  return false;
+////			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  
+//			    	  return false;
+//			    
+//			    
+//			    
+//			    
+//			    
+//			    
+//			    
+//			    
+//			    
+//			    
+//			         var my_yue = plus.webview.getWebviewById('html/strategy/strategy.html');
+//			         mui.fire(my_yue,'refresh');  //刷新攻略首页
+//			   
+//			         return true;
+//			    }
 			});
 		</script>		
 	</body>

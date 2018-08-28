@@ -125,29 +125,4 @@ $(function() {
 			id:'agreement.html'
 		})
 	})
-
-//	$("#qd1,#qd2,#qd3,#qd4").on("tap", function() {
-//		$.ajax({
-//			type: "get", // 用get方式传输
-//			url: config.data + "users/getChannel", // 目标地址
-//			data: {
-//				"id": $(this).id,
-//				"channel": $(this).channel
-//			},
-//			success: function(data) {
-//				if(data.state == "1") {
-//					mui.toast("可以传递");
-//					mui.openWindow({
-//						url: "login.html"
-//					})
-//
-//				} else if(data.state == "0") {
-//					mui.toast("传递失败");
-//
-//					return false
-//				}
-//			}
-//		});
-//	})
-
 })

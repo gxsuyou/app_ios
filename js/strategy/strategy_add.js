@@ -28,6 +28,32 @@ $(function() {
 		}
 	});
 
+    $("body").on("tap",".strategy-back",function(){
+      	var title=$(".strategy_title").val()
+	    var game=$(".choose_game").val()
+	    var content=$("#strategy_textarea").html()
+			    	
+	    if(content=='<div>&nbsp;</div><span class="insertNode1" style="-webkit-user-select:text"></span>'){
+			 content=""
+	    }
+			    	
+			    	
+	    plus.nativeUI.confirm( "保存攻略", function(e){
+//		            console.log("Close confirm: "+e.index);
+		    if(e.index==0){
+		            	console.log("您要保存攻略")
+		            	
+		            	
+		            	
+		    }else{
+		            	console.log("您不要保存攻略")
+		            	mui.back()
+		            	return true
+		    }
+	    })
+    
+//	    mui.back()
+    })
 
 
 	$('body').on('tap', '.delete_img', function() {
@@ -366,22 +392,4 @@ function upLoad(strategyId, key, path) {
 		uploader.start();
 	})
 }
-
-//function getUpToken(scope, key, callback) {
-//	$.ajax({
-//		type: "get",
-//		url: config.data + "users/getUptokenByMsg",
-//		async: true,
-//		data: {
-//			scope: scope,
-//			key: key
-//		},
-//		success: function(data) {
-//			token = data.upToken;
-//			return callback(token)
-//		}
-//	});
-//}
-
-//上传到七牛的function结束
 

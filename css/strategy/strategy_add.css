@@ -4,11 +4,27 @@
 	top:0;
 	width:100%;
 }
+
+
+
+
+
+
+
 body,html{
 	background-color: white;  
     height:100%;
     overflow:hidden;
 }
+
+.strategy-back{
+	line-height: 45px;
+    width:3rem;
+   color:white;
+   position: absolute;
+}
+
+
 .add_comment{
 	position:absolute;
 	left: 50%;
