@@ -54,7 +54,7 @@ body::-webkit-scrollbar{
 	width: 100%;
 }
 header{
-	background-color: #7fcadf;
+	background-color:#7fcadf;
     z-index: 10;
     right: 0;
     left: 0;
@@ -82,6 +82,10 @@ header{
 .color_7a7a7a{
 	color: #7A7A7A;
 }
+.color_7fcadf{
+	color:#7fcadf;
+}
+
 .ui_flex_wrapper.ui_flex_h {
     /*横向布局*/
     -webkit-box-orient: horizontal;

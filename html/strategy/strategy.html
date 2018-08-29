@@ -37,8 +37,7 @@
 			<div class="strategy_nav ui_flex_h ui_flex_wrapper">
 				<div class="ui_flex_wide tac font_14 color_green border_bottom" style="height: 2.0625rem;line-height: 2.0625rem;">热门</div>
 				<div class="ui_flex_wide tac font_14" style="height: 2.0625rem;line-height: 2.0625rem;">全部</div>
-				<!--<div class="ui_flex_wide tac font_14" style="height: 2.0625rem;line-height: 2.0625rem;">精华</div>-->
-				
+				<div class="ui_flex_wide tac font_14" style="height: 2.0625rem;line-height: 2.0625rem;">精华</div>				
 			</div>
 			<div class="strategy_contents">
 				<!--<div class="strategy_content">
@@ -161,6 +160,7 @@
 			
 			function up(){
 				page++;
+				console.log(sort)
 				$.ajax({
 					type:"get",
 					url:config.data + "strategy/getStrategyByMsg",
@@ -170,8 +170,9 @@
 						sort:sort
 					},
 					success:function(data){
-						$(".strategy").css("display","block");
-						$(".error").css("display","none");
+						$(".strategy").css("display","block")
+						$(".error").css("display","none")
+						console.log(JSON.stringify(data.strategy))
 						if (data.state) {	
 							
 							var str = data.strategy,imgToggle,portrait;
@@ -196,6 +197,11 @@
 									portrait=str[i].portrait;
 								}
                         
+                               console.log(str[i].essence)
+                               if(str[i].essence==1){
+                               	var essence_image="<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
+                               	}else{var essence_image="&nbsp;"}
+                              
 								div +=
 										"<div class='strategy_content' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'>"+
 											"<div class='strategy_content_head'>"+							
@@ -215,6 +221,7 @@
 											    "<img style='width:100%;display:"+imgToggle+"' src="+imgSrc+" />"+
 											    "</div>"+
 											    "<div class='strategy_content_titles'>"+
+											      essence_image+
 												  "<div class='strategy_content_title font_bold color_282828'>" + str[i].title + "</div>"+											
 											    "</div>"+
 												"<div class='strategy_content_z'>"+detail+"</div>"+							

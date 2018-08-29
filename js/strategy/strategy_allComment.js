@@ -116,7 +116,40 @@ $(function() {
 			if(scrollTop/(scrollHeight-height)>=0.65){
 				up();
 			}
-		});
+		})
+		
+		
+		
+		
+    $("body").on("tap",".comment_dele",function(){
+       	   	var id=$(this).attr("data-id")
+	    plus.nativeUI.confirm("删除评论", function(e){	 	
+		   if(e.index==0){
+              $.ajax({
+           	    type: "get",
+			    url: config.data + "strategy/delMyComment",
+			    async: true,
+			    data:{
+			      uid:userId,
+			      id:id
+			    },
+			    success:function(data){
+				  if(data.state==1){
+					mui.toast("删除成功")
+                    window.location.reload()
+				   }else{
+					   mui.toast("删除失败")
+				   }
+			      }
+                })	            	
+	        }
+	    })
+    })
+		
+		
+		
+		
+		
 		
          //发表评论       
 		$('body').on("tap",".publish",function() {
@@ -186,6 +219,15 @@ function up() {
 					portrait=c[i].portrait;
 					}
 					
+
+					if(c[i].user_id==userId){
+                        var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + c[i].id + "'>删除</div>"
+                    }else{
+                        var comment_dele="&nbsp;"
+                    }
+					    
+					console.log(c[i].user_id)			
+					
 					div +=
 						"<div class='news_post_commentContentsec ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='" + c[i].id + "'>" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
@@ -197,7 +239,8 @@ function up() {
 						"</div>" +
 						"<div class='comment_content font_14'>" + c[i].content + "</div>" +
 						"<div class='comment_info ofh'>" +
-						"<div class='font_12 color_9e9e9e fl'>" + c[i].add_time + "</div>" +
+						   "<div class='font_12 color_9e9e9e fl'>" + c[i].add_time + "</div>" +
+						   comment_dele+
 						"</div>" +
 						"</div>" +
 						"</div>"

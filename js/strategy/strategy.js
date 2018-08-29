@@ -57,6 +57,7 @@ $(function(){
 	$('.strategy_nav').children().eq(2).click(function(){
 		sort = "essence"
 	})
+	
 	$('.strategy_nav').children().click(function(){
 		$('.strategy_contents').children().remove();
 		$(this).addClass('color_green border_bottom').siblings().removeClass('color_green border_bottom');

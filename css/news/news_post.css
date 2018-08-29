@@ -10,6 +10,9 @@ a{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
+.news_dele_com{
+	margin-left:0.4rem;
+}
 .header_box{
 	position:absolute;
 	z-index:9999;
@@ -17,7 +20,7 @@ a{
 	height:5rem;
 }
 .news_secondComment{
-	height: 3rem;
+	height:3rem;
 	width: 100%;
 	position:absolute;
 	bottom:0;

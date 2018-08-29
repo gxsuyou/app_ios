@@ -4,6 +4,20 @@
 	margin-left: -1rem;
 	font-size: 18px;
 }
+.comment_dele{
+	margin-left:0.3rem;
+}
+
+
+.lord_image{
+	width:2rem;
+	height:auto;
+	margin-top:0.15rem;
+	margin-right:0.1rem;
+}
+
+
+
 .share{	
 	position: absolute;
 	right: 1rem;

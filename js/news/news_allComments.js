@@ -102,15 +102,39 @@ $(function() {
 		})
 		
 
-	 
-		
-       //获取一级评论结束	
-  
-		$('body').on('tap','.news_post_commentContent',function(){
-			$('.news_secondComment_input').focus();
-			targetUserId = $(this).attr("data-userId");
-		})
-		
+
+
+    $("body").on("tap",".comment_dele",function(){
+       	   	var id=$(this).attr("data-id")
+	    plus.nativeUI.confirm("删除评论", function(e){	 	
+		   if(e.index==0){
+              $.ajax({
+           	    type: "get",
+			    url: config.data + "news/delMyComment",
+			    async: true,
+			    data:{
+			      uid:userId,
+			      id:id
+			    },
+			    success:function(data){
+				  if(data.state==1){
+					mui.toast("删除成功")
+//				    $(".bottomInfo").text("正在加载 ...");
+//			        closeAjax=false;
+//			        $(".news_post_commentContents").empty();			             
+//			        page=0;
+//			        up();
+                    window.location.reload()
+				   }else{
+					   mui.toast("删除失败")
+				   }
+			      }
+                })	            	
+	        }
+	    })
+    })
+
+
         //点击发布
 		$('body').on("tap",".publish",function(){	
 			var content = $(this).prev().val();
@@ -162,7 +186,6 @@ function up(){
 			return false;
 		}
 		loginToggle=true;
-//		alert(commentId)
 		$.ajax({
 			type:"get",
 			url:config.data + "news/getNewsCommentTowByPage",
@@ -185,20 +208,27 @@ function up(){
 					    }else{
 							portrait=com[i].portrait;
 						}
-					    console.log(com[i].portrait);
+					    
+					    
+					    if(com[i].user_id==userId){
+                        	var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+                        }else{
+                        	var comment_dele="&nbsp;"
+                        }
+					    
+					    
 						div +=
 							"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0px;border-bottom: 0;' data-id='"+ com[i].id +"' data-userId='"+ com[i].selfUserId +"' >"+
 								"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) +");'></div>"+
 								"<div class='news_post_commentContent_content fl'>"+
 									"<div class='comment_user font_12'>"+
 										"<span>"+ com[i].selfNickName +"</span>"+
-//										"<span style='color: #7A7A7A;' class='"+ ifHidden +"'>回复</span>"+
-//										"<span class='"+ ifHidden +"'>"+ ifHidden + "</span>"+
 									"</div>"+
 									"<div class='comment_content font_14'>"+ com[i].content +"</div>"+
 									"<div class='comment_info ofh'>"+
 										"<div class='font_12 color_9e9e9e fl'>"+ com[i].add_time +"</div>"+
-									"</div>"+		
+										comment_dele+
+									"</div>"+									
 								"</div>"+
 							"</div>"
 					}

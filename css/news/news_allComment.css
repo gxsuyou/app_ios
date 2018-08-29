@@ -7,7 +7,9 @@ html,body{
     overflow:hidden;
 }
 
-
+.comment_dele{
+	margin-left:0.2rem;
+}
 .header_box{
 	position:absolute;
 	top:0px;

@@ -28,14 +28,6 @@ $(function() {
 
 	$('body').on("tap",".loginout",function() {
 		window.localStorage.clear();
-//		         alert(1)
-//		         return false;
-//		plus.webview.close(plus.webview.getWebviewById("H5C62934A"), "none");
-		//		plus.webview.close(plus.webview.getWebviewById("HBuilder"),"none");
-
-		//							plus.webview.getWebviewById("html/game/game.html").close();
-		//							plus.webview.getWebviewById("html/store/store.html").close();
-		//							H5D2B2392 plus.webview.getWebviewById("html/user/me.html").close(); 
 	    plus.webview.close("html/user/me.html");
         plus.webview.close("html/news/news.html");
         plus.webview.close("html/game/game_recommend.html");

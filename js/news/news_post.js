@@ -505,6 +505,8 @@ $('body').on('tap','.hot', function(){
 	up();
 })
 
+
+
 $('body').on('tap','.time', function() {
 	if(hotTime){
 		return false;
@@ -519,7 +521,35 @@ $('body').on('tap','.time', function() {
 	up();
 })
 
-
+$("body").on("tap",".news_dele_com",function(){
+	var id=$(this).attr("data-id")
+	console.log(id)
+	plus.nativeUI.confirm("删除评论", function(e){	 	
+		if(e.index==0){
+           $.ajax({
+           	type: "get",
+			url: config.data + "news/delMyComment",
+			async: true,
+			data:{
+			   uid:userId,
+			   id:id
+			},
+			success:function(data){
+				if(data.state==1){
+					mui.toast("删除成功")
+				    $(".bottomInfo").text("正在加载 ...");
+			        closeAjax=false;
+			        $(".news_post_commentContents").empty();			             
+			        page=0;
+			        up();
+				}else{
+					mui.toast("删除失败")
+				}
+			 }
+           })	            	
+	    }
+	})
+})
 
 
 function up(){
@@ -538,7 +568,7 @@ function up(){
 			data: {
 				"commentParentId": newsId,
 				"page": page,
-				"userId": userId
+				"userId":userId
 			},
 			success: function(data) {
 				hotTime=false;
@@ -584,7 +614,16 @@ function up(){
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
 						}
+                        
 
+                        if(com[i].user_id==userId){
+                        	var comment_dele="<div class='font_12 fl color_7fcadf news_dele_com' data-id='" + com[i].id + "'>删除</div>"
+                        }else{
+                        	var comment_dele="&nbsp;"
+                        }
+                       
+                       
+                       
 						comment +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
@@ -593,6 +632,7 @@ function up(){
 							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 							"<div class='comment_info ofh'>" +
 							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele+
 							"<div class='fr color_9e9e9e comment_imgs'>" +
 							"<div class='thumbs fl'>" +
 							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
@@ -651,7 +691,7 @@ function up(){
 						
 						var tow = com[i].towCommentList;
 						var secondCom = "";
-						if(com[i].state) {
+						if(com[i].state){
 							var ifGood = "good";
 						} else {
 							var ifGood = "noGood";
@@ -679,7 +719,14 @@ function up(){
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
 						}
-          
+						
+						if(com[i].user_id==userId){
+                        	var comment_dele="<div class='font_12 fl color_7fcadf news_dele_com' data-id='" + com[i].id + "'>删除</div>"
+                        }else{
+                        	var comment_dele="&nbsp;"
+                        }
+                       
+                     
 						comment +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(com[i].portrait) + ");'></div>" +
@@ -688,14 +735,15 @@ function up(){
 							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 							"<div class='comment_info ofh'>" +
 							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele+
 							"<div class='fr color_9e9e9e comment_imgs'>" +
 							"<div class='thumbs fl'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
-							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+							   "<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
+							   "<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
 							"</div>" +
 							"<div class='comment_nums fl'>" +
-							"<span class='comment_img' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment + "</span>" +
+							   "<span class='comment_img' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'></span>" +
+							   "<span class='comment_num font_14'>" + com[i].comment + "</span>" +
 							"</div>" +
 							"</div>" +
 							"</div>" +

@@ -5,6 +5,7 @@ var page = 0;
 var sort = "add_time";
 var target_img;
 var target_title;
+var lord_id;
 $(function(){
 	$('body').on("tap",".news_review",function() {
 		$('html, body').animate({
@@ -295,8 +296,41 @@ $(function(){
 
 
 
-		//滚动隐藏结束
+       
+    $("body").on("tap",".comment_dele",function(e){
+    	e.stopPropagation()
+       	var id=$(this).attr("data-id")
+	    plus.nativeUI.confirm("删除评论", function(e){	 	
+		   if(e.index==0){
+              $.ajax({
+           	    type: "get",
+			    url: config.data + "strategy/delMyComment",
+			    async: true,
+			    data:{
+			      uid:userId,
+			      id:id
+			    },
+			    success:function(data){
+				  if(data.state==1){
+					mui.toast("删除成功")
+                    page = 0
+                    $('.news_post_commentContents').empty()
+                    getNum()          
+                    up()
+				   }else{
+					   mui.toast("删除失败")
+				   }
+			      }
+                })	            	
+	        }
+	    })
+       	
+    })
 
+
+
+
+		//滚动隐藏结束
 		$('body').on("tap",".news_userInfo_replyInput",function() {
 			if(userId !== 0) {
 				mui.openWindow({
@@ -337,6 +371,10 @@ $(function(){
         //取消收藏结束	
 
 	})
+	
+	
+	
+	
 })
 
 
@@ -402,15 +440,25 @@ function up() {
 								    portrait=com[i].portrait;
 								}
 								
+								
+								 if(com[i].user_id==userId){
+                        	        var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+                                }else{
+                        	        var comment_dele="&nbsp;"
+                                }
+								
+	
 								div +=
 									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
 									"<div class='news_post_commentContent_content fl'>" +
+									"<img class='fl lord_image' src='../../Public/image/lord.png' >"+
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+									comment_dele+
 									"<div class='fr color_9e9e9e comment_imgs'>" +
 									"<span class='thumb " + ifLike + "'></span>" +
 									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
@@ -449,8 +497,7 @@ function up() {
 						userId: userId,
 						sort: sort
 					},
-					success: function(data) {
-                       
+					success: function(data) {                      
 						if(data.state) {
 							var com = data.comment;
 							var div = "";
@@ -458,11 +505,12 @@ function up() {
                          
 								if(com[i].img) {
 									var img = "img"
-								} else {
+								} else {									
 									var img = "hidden"
 								}
 								var sec = "",portrait;
-                                											
+                                console.log(lord_id)	
+                                
 								if(com[i].towCommentList.length > 0) {
 									for(var j = 0; j < com[i].towCommentList.length; j++) {
 										if(com[i].towCommentList[j].targetUserNickName) {
@@ -497,11 +545,26 @@ function up() {
 									portrait=com[i].portrait;
 								}
 								
+								  
+					            if(com[i].user_id==userId){
+                        	        var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+                                }else{
+                        	        var comment_dele="&nbsp;"
+                                }
+								
+								if(com[i].user_id==lord_id){									
+									var lord_image="<img class='fl lord_image' src='../../Public/image/lord.png' >"
+									
+								}else{
+									var lord_image="<img class='fl lord_image hidden'  src='../../Public/image/lord.png' >"
+								}
+								
 
 								div +=
 									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
 									"<div class='news_post_commentContent_content fl'>" +
+									lord_image+
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div class='imgFirst'>"+
@@ -509,6 +572,7 @@ function up() {
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+									comment_dele+
 									"<div class='fr color_9e9e9e comment_imgs'>" +
 									"<span class='thumb " + ifLike + "'></span>" +
 									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
@@ -554,10 +618,11 @@ function detail() {
 			userId: userId
 		},
 		success: function(data) {
+//			console.log(JSON.stringify(data))
 			if(data.state) {
 				var str = data.strategy,
 					portrait,nickName,detail;
-
+                lord_id = str.user_id;
 				if(str.comment_num > 99) {
 					var comment_num = 99
 				} else {

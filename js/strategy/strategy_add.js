@@ -27,30 +27,70 @@ $(function() {
 			$('.choose_game').css('bottom','13.25rem')
 		}
 	});
+	
+	
+
+	getStrategy()
+	function getStrategy(){
+		var strategy_title = window.localStorage.getItem("strategy_title");  
+		var strategy_game = window.localStorage.getItem("strategy_game"); 
+		var strategy_content = window.localStorage.getItem("strategy_content"); 
+		console.log(strategy_title,strategy_game,strategy_content);
+		
+		if(strategy_title!=""||strategy_game!="",strategy_content!=""){
+			console.log(2)
+			$(".strategy_title").val(strategy_title)
+			$(".choose_game").val(strategy_game)
+			$("#strategy_textarea").html(strategy_content)
+		}
+		
+		
+	}
 
     $("body").on("tap",".strategy-back",function(){
       	var title=$(".strategy_title").val()
 	    var game=$(".choose_game").val()
 	    var content=$("#strategy_textarea").html()
-			    	
+		
+		
 	    if(content=='<div>&nbsp;</div><span class="insertNode1" style="-webkit-user-select:text"></span>'){
 			 content=""
 	    }
+	    
+			    	
+		console.log(title)	    	
+		if(title!=""||game!=""||content!=""){
+			
+			
+		   plus.nativeUI.confirm( "保存攻略", function(e){
+		      if(e.index==0){
+		        console.log("您要保存攻略")	            	
+		        window.localStorage.setItem("strategy_title",title)
+		    	window.localStorage.setItem("strategy_game",game) 
+		        window.localStorage.setItem("strategy_content",content)	        
+		      
+		          
+		      }else{	  	
+		      	window.localStorage.setItem("strategy_title","")
+		    	window.localStorage.setItem("strategy_game","")
+		        window.localStorage.setItem("strategy_content","")	     
+		        console.log("您不要保存攻略")
+		      }
+		      var my_yue = plus.webview.getWebviewById('html/strategy/strategy.html');
+  			  mui.fire(my_yue,'refresh'); //刷新攻略首页
+		      mui.back()
+	      })
+			
+			
+			
+			
+		}else{
+			mui.back()
+		}
 			    	
 			    	
-	    plus.nativeUI.confirm( "保存攻略", function(e){
-//		            console.log("Close confirm: "+e.index);
-		    if(e.index==0){
-		            	console.log("您要保存攻略")
-		            	
-		            	
-		            	
-		    }else{
-		            	console.log("您不要保存攻略")
-		            	mui.back()
-		            	return true
-		    }
-	    })
+			    	
+	  
     
 //	    mui.back()
     })
