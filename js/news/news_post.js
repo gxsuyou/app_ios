@@ -48,6 +48,13 @@ $(function() {
 			doubletap: true, //默认为false
 		    longtap: true, //默认为false
 		},
+		beforeback:function(){
+			var input_val=$(".news_secondComment_input").val();			
+			if(input_val!=""){
+				var id="strategy_title_"+newsId
+				window.localStorage.setItem(id,input_val)
+			}
+		},
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 //			up: {
@@ -77,6 +84,14 @@ $(function() {
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		gameId = self.gameId;
+		
+		
+		var id="strategy_title_"+newsId;
+		var input_val=localStorage.getItem(id);
+		if(input_val){
+			$(".news_secondComment_input").val(input_val)
+		}
+		
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",

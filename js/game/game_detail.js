@@ -780,14 +780,14 @@ function detail_main() {
 					$('.game_infoImg').css('background-image', 'url(' + config.img + encodeURI(g.icon) + ')');
 					$('.game_call').text(g.game_name);
 					$('.game_nameHeader').text(g.game_name);
-					$('.game_company').text(g.game_company);
+					$('.game_company').text(g.gam');
+						var Id=g.tagId.split(",")
+						var sp = "";
+						if(t.length > 6) {e_company);
 					$('.game_infoScore').text(g.grade + "分");
 					$('.gameScore').text(g.grade);
 					if(g.tagList) {
-						var t = g.tagList.split(',');
-						var Id=g.tagId.split(",")
-						var sp = "";
-						if(t.length > 6) {
+						var t = g.tagList.split(',
 							for(var i = 0; i < 6; i++) {
 								sp += "<span class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
 							}
