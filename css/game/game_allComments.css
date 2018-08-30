@@ -19,6 +19,13 @@ body,html{
 	border-bottom: 0.75rem solid #e6ebec;
 }
 
+
+.game_allComm_dele_com{
+	margin-left:0.2rem;
+}
+
+
+
 .news_post_commentContent_head{
 	width: 2.9375rem;
 	height: 2.9375rem;

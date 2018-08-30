@@ -2,25 +2,25 @@ var page = 0;
 var userId = localStorage.getItem("userId") || 22;
 var commentId;
 var gameId;
-var uid; 
-var defaultName; 
+var uid;
+var defaultName;
 var targetUserId;
 var game_name;
 var game_icon;
 var pageIndex; //用于返回更新评论
-$(function() {	
+$(function() {
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
-            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-        });
+			softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+		});
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
 		gameId = self.gameId;
-		uid =self.uid;
+		uid = self.uid;
 		game_name = self.game_name;
 		game_icon = self.game_icon;
 		//	获取一级评论单条
-		pageIndex=self.pageIndex;
+		pageIndex = self.pageIndex;
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getOneCommentByCommentId",
@@ -31,62 +31,92 @@ $(function() {
 			success: function(data) {
 
 				if(data.state) {
-					var com = data.comment,portrait;
-					
-					    if(com.portrait==0||com.portrait==null){								  
-						     portrait="../../Public/image/morentouxiang.png";
-						    }else{
-							  portrait=com.portrait;
-						}
-						    
+					var com = data.comment,
+						portrait;
+
+					if(com.portrait == 0 || com.portrait == null) {
+						portrait = "../../Public/image/morentouxiang.png";
+					} else {
+						portrait = com.portrait;
+					}
+
 					$('.news_post_commentContent_head').css("background-image", "url(" + portrait + ")")
 					$('.comment_user ').text(com.nick_name)
 					$('.comment_content').text(com.content)
-					$('.comment_summary').attr('data-id',com.game_id);
+					$('.comment_summary').attr('data-id', com.game_id);
 
-					if (com.game_icon) {
-						$('.comment_summary_img').css('background-image','url(' + config.img + encodeURI(com.game_icon) + ')');
-					} else{
-						$('.comment_summary_img').css('background-image','url(../../Public/image/link.png)');
+					if(com.game_icon) {
+						$('.comment_summary_img').css('background-image', 'url(' + config.img + encodeURI(com.game_icon) + ')');
+					} else {
+						$('.comment_summary_img').css('background-image', 'url(../../Public/image/link.png)');
 					}
 					$('.comment_summary_art').text(com.game_name)
 					$('.game_commentDay').text(com.add_time)
 					defaultName = com.nick_name
-					$('.news_secondComment_input').attr('placeholder',"@" + defaultName)
-					
+					$('.news_secondComment_input').attr('placeholder', "@" + defaultName)
+
 				} else {
 
 				}
 			}
 		});
-		
-		$('body').on('tap','.comment_summary',function(){
+
+		$('body').on('tap', '.comment_summary', function() {
 			var gameId = $(this).attr('data-id');
 			mui.openWindow({
-				url:"game_detail.html",
-				id:"game_detail.html",
-				createNew: true,  
-				extras:{
-					gameId:gameId,
+				url: "game_detail.html",
+				id: "game_detail.html",
+				createNew: true,
+				extras: {
+					gameId: gameId,
 				}
 			})
 		})
-		
+
 	})
 
 	//	获取一级评论单条结束
-	$('body').on('tap','.news_post_commentContent',function(){
+	$('body').on('tap', '.news_post_commentContent', function() {
 		defaultName = $(this).find('.nickName').text()
-		$('.news_secondComment_input').attr('placeholder',"@" + defaultName)
+		$('.news_secondComment_input').attr('placeholder', "@" + defaultName)
 		targetUserId = $(this).attr('data-userId')
 	})
-
+	
+	
+	
+	$("body").on("tap",".game_allComm_dele_com",function(){
+		var id = $(this).attr("data-id")
+		plus.nativeUI.confirm("删除评论", function(e) {
+		if(e.index == 0) {
+			$.ajax({
+				type: "get",
+				url: config.data + "game/delMyComment",
+				async: true,
+				data: {
+					uid: userId,
+					id: id
+				},
+				success: function(data) {
+					if(data.state == 1) {
+						mui.toast("删除成功")
+						location.reload()
+					} else {
+						mui.toast("删除失败")
+					}
+				}
+			})
+		}
+	})
+	})
+	
+	
+	
 
 	//点击发布
-	$('body').on("tap",".publish",function() {
-		
+	$('body').on("tap", ".publish", function() {
+
 		var content = $(this).prev().val();
-	
+
 		if(content) {
 			$.ajax({
 				type: "get",
@@ -99,8 +129,8 @@ $(function() {
 					"series": 2,
 					"content": content,
 					"targetUserId": targetUserId || null,
-					"game_name":game_name,
-					"game_icon":game_icon
+					"game_name": game_name,
+					"game_icon": game_icon
 				},
 				success: function(data) {
 					if(data.state == "1") {
@@ -120,13 +150,11 @@ $(function() {
 
 	//		点击发布结束
 
-	
-
 })
 
 function up() {
 	//		获取二级评论
-	
+
 	page++;
 	$.ajax({
 		type: "get",
@@ -138,49 +166,54 @@ function up() {
 		},
 		success: function(data) {
 			if(data.state) {
-				
-				var com = data.comment,portrait;
-				
+
+				var com = data.comment,
+					portrait;
+
 				var div = "";
-				
+
 				for(var i = 0; i < com.length; i++) {
 					var ifHidden = com[i].targetNickName || "hidden";
-					
-					   if(com[i].portrait==0||com[i].portrait==null){								  
-						     portrait="../../Public/image/morentouxiang.png";
-						    }else{
-							  portrait=com[i].portrait;
-						}
-					
-					
+
+					if(com[i].portrait == 0 || com[i].portrait == null) {
+						portrait = "../../Public/image/morentouxiang.png";
+					} else {
+						portrait = com[i].portrait;
+					}
+
+					if(com[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_allComm_dele_com' data-id='" + com[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
+					}
+
 					div +=
 						"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='" + com[i].id + "' data-userId='" + com[i].uid + "' >" +
-						"<div class='news_post_commentContent_head fl' style='background-image: url("+ portrait +");'></div>" +
+						"<div class='news_post_commentContent_head fl' style='background-image: url(" + portrait + ");'></div>" +
 						"<div class='news_post_commentContent_content fl'>" +
 						"<div class='comment_user font_12'>" +
 						"<span class='nickName'>" + com[i].selfNickName + "</span>" +
-						"<span style='color: #7A7A7A;' class='" + ifHidden + "'>回复</span>" +
+//						"<span style='color: #7A7A7A;' class='" + ifHidden + "'>回复</span>" +
 						"<span class='" + ifHidden + "'>" + ifHidden + "</span>" +
 						"</div>" +
 						"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-						
 						"<div class='comment_info ofh'>" +
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+						comment_dele +
 						"</div>" +
 
 						"</div>" +
 						"</div>"
 				}
 				$('.news_post_commentContents').append(div);
-				
-                var num =$(".news_post_commentContents>div").length;
-                
-                $(".news_allReply").text("全部回复 ( "+num+" )");
-                
+
+				var num = $(".news_post_commentContents>div").length;
+
+				$(".news_allReply").text("全部回复 ( " + num + " )");
+
 				if(com.length < 10) {
 
 					mui('.game_post_commentContents').pullRefresh().endPullupToRefresh(true);
-					
 
 				} else {
 
@@ -188,7 +221,7 @@ function up() {
 
 				}
 			} else {
-				
+
 			}
 		}
 	});

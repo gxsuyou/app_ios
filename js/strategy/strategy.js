@@ -42,10 +42,21 @@ $(function(){
 		})
 	})
 	
-	
-	
-	
 //	获取顶部搜索结束
+
+  $('body').on('tap','.strategy_content_classify',function(e){
+  	e.stopPropagation()
+  	var msg = $(this).text();
+  	mui.openWindow({
+			url:"strategy_search_result.html",
+			id:"strategy_search_result.html",
+			extras:{
+				msg:msg	
+			}
+		})
+  })
+
+
 
 //	d导航栏点击
 	$('.strategy_nav').children().eq(0).click(function(){

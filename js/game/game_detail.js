@@ -7,17 +7,15 @@ var commentModule = false;
 var userId = localStorage.getItem("userId");
 var game;
 var gameImg;
-$(function(){
+$(function() {
 	mui.plusReady(function() {
 		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
 		gameId = self.gameId;
-		
-		
-		
-     $('body').on('tap', '.game_relatedInfocontent', function() {
+
+		$('body').on('tap', '.game_relatedInfocontent', function() {
 			mui.openWindow({
 				url: "../news/news_post.html",
 				id: "../news/news_post.html",
@@ -28,11 +26,9 @@ $(function(){
 			})
 		})
 
-	//相关资讯结束
+		//相关资讯结束
 
-
-
-    //相关评论结束
+		//相关评论结束
 
 		$('body').on('tap', '.game_similarContent', function() {
 
@@ -48,7 +44,7 @@ $(function(){
 
 		//		相关游戏结束
 
-		$('body').on("tap",".goToscore",function() {
+		$('body').on("tap", ".goToscore", function() {
 			if(localStorage.getItem("userId")) {
 				mui.openWindow({
 					url: "game_score.html",
@@ -57,7 +53,7 @@ $(function(){
 						gameId: gameId,
 						icon: icon,
 						gameName: gameName,
-						game_icon:gameImg
+						game_icon: gameImg
 					}
 				})
 			} else {
@@ -69,14 +65,11 @@ $(function(){
 
 		})
 
-		
-		
-		
 		//详情页 点击
 
-		$('body').on("tap",".game_detail_detail",function() {
+		$('body').on("tap", ".game_detail_detail", function() {
 			detail_main()
-			pageIndex="detail";
+			pageIndex = "detail";
 			commentModule = false;
 			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 			$(this).addClass('game_detail_detail_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_assess_active').removeClass('game_detail_strategy_active')
@@ -88,174 +81,158 @@ $(function(){
 
 		//评论页开始
 
-		$('body').on("tap",".game_detail_assess",function() {		
-		    detail_assess();
+		$('body').on("tap", ".game_detail_assess", function() {
+			detail_assess();
 		});
-	
 
 		//		评论页结束		
 
 		//		攻略页开始
 
-		$('body').on("tap",".game_detail_strategy",function() {				    
-			 detail_strategy();
+		$('body').on("tap", ".game_detail_strategy", function() {
+			detail_strategy();
 		});
-       
-	   
-		$("body").on("tap",".download",function(){
+
+		$("body").on("tap", ".download", function() {
 			addDownNum()
-           	if(game.game_download_ios!==null){
-				location.href=game.game_download_ios;
-			}else{
-				 location.href=game.game_download_ios2;
+			if(game.game_download_ios !== null) {
+				location.href = game.game_download_ios;
+			} else {
+				location.href = game.game_download_ios2;
 			}
 		})
-		
-		
-	
+
 		//		攻略页结束
-		$("body").on("tap","#game_detail_download",function(ev){
+		$("body").on("tap", "#game_detail_download", function(ev) {
 			event = ev || window.event;
 			event.stopPropagation();
 			var t = $(this);
-			var isFile = false;			
-//			console.log(game.game_download_ios)
-//			console.log(5)
-//			alert(plus.runtime.isApplicationExist({action:"netease.frxy://"}))
-//			return false;
+			var isFile = false;
 
-
-
-
-            addMyGame() //添加首席收藏
-            //return false;
+			addMyGame() //添加首席收藏
+			//return false;
 			addDownNum() //增加下载量
-			
-		    if(String(game.game_download_ios)!="null"){
-				    location.href=game.game_download_ios;
-				    return false;
-			 }else{
-                location.href=game.game_download_ios2;
-                setTimeout(function(){ 
-                	mui.toast("正在安装，请按Home键在桌面查看",{duration:"long"});
-                	setTimeout(function(){
-                		$('.download_btn').css({"border":"1px solid #8ed8ed","color":"#8ed8ed","background":"#fff"});
-                		$('.download_btn_text').text("刷新");
-                		$("#game_detail_download").attr("id","reload");
-                	},3800);
-                },3000)
+
+			if(String(game.game_download_ios) != "null") {
+				location.href = game.game_download_ios;
+				return false;
+			} else {
+				location.href = game.game_download_ios2;
+				setTimeout(function() {
+					mui.toast("正在安装，请按Home键在桌面查看", {
+						duration: "long"
+					});
+					setTimeout(function() {
+						$('.download_btn').css({
+							"border": "1px solid #8ed8ed",
+							"color": "#8ed8ed",
+							"background": "#fff"
+						});
+						$('.download_btn_text').text("刷新");
+						$("#game_detail_download").attr("id", "reload");
+					}, 3800);
+				}, 3000)
 				return false;
 			}
-       });
-       
-       
-       function addMyGame(){
-//     	  alert(userId);
-       	    if(userId){
-     	    	
-					$.ajax({
-						type: "get",
-						url: config.data + "game/addMyGameIos",
-						async: true,
-						data: {
-							gameId: gameId,
-							userId: userId,
-							sys:1
-						},
-						success: function(data) {
-							if(data.state) {
+		});
 
-							} else {
+		function addMyGame() {
+			if(userId) {
 
-							}
+				$.ajax({
+					type: "get",
+					url: config.data + "game/addMyGameIos",
+					async: true,
+					data: {
+						gameId: gameId,
+						userId: userId,
+						sys: 1
+					},
+					success: function(data) {
+						if(data.state) {
+
+						} else {
+
 						}
-					});
-		    }
-       }
-       
-       /* 增加下载数量 */
-       function addDownNum(){
-       	$.ajax({
-		        type: "get",
-		        url: config.data + "game/addDownloadNum",
-		        async: true,
-		        data: {
-			      id: self.gameId
-		     },
-		     success: function(data) {
-			    if(data.state) {
-				   $("#game_msg_install").text(parseInt($("#game_msg_install").text()) + 1+"次下载");
-				  				   			   
-			    }
-		     }
-	       });
-       }
-       
-       
-       
-       
-       
-    $('body').on('tap','#reload',function(){
-       	  window.location.reload();
-       });
-
-	})
-	
-	
-	
-    $('body').on('longtap', '.mui-slider-item img', function() {
-			var picurl = $(this).attr("src");
-		   saveImg(picurl);
-	});
-		
-		
-	$('body').on('tap','.mui-preview-header',function(){
-          var num=$(".mui-preview-indicator").text();        
-          num=num.substring(0,1)-1;
-          var url=$(".mui-preview-image img:eq("+num+")").attr("src");
-          saveImg(url);
-	})
-
-    function saveImg(picurl){
-			var picname;
-			var btnArray = ['否', '是'];
-			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
-				if(e.index == 1){
-
-					if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
-					{
-						picname = picurl.substring(picurl.lastIndexOf("/") + 1, picurl.length);
-					} else {
-						picname = picurl;
 					}
-					savePicture(picurl, picname)
-				}
-			});		
+				});
+			}
 		}
 
+		/* 增加下载数量 */
+		function addDownNum() {
+			$.ajax({
+				type: "get",
+				url: config.data + "game/addDownloadNum",
+				async: true,
+				data: {
+					id: self.gameId
+				},
+				success: function(data) {
+					if(data.state) {
+						$("#game_msg_install").text(parseInt($("#game_msg_install").text()) + 1 + "次下载");
 
-	function savePicture(picurl){
-		var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
-		// 下载完成
-		  if(status == 200) {
-			plus.gallery.save(d.filename, function() {
-				mui.toast('保存成功');
-			}, function() {
-				mui.toast('保存失败，请重试！');
+					}
+				}
 			});
-		  } else {
-			  alert("Download failed: " + status);
-		  }
+		}
 
-	  });
-	  dtask.start();
+		$('body').on('tap', '#reload', function() {
+			window.location.reload();
+		});
+
+	})
+
+	$('body').on('longtap', '.mui-slider-item img', function() {
+		var picurl = $(this).attr("src");
+		saveImg(picurl);
+	});
+
+	$('body').on('tap', '.mui-preview-header', function() {
+		var num = $(".mui-preview-indicator").text();
+		num = num.substring(0, 1) - 1;
+		var url = $(".mui-preview-image img:eq(" + num + ")").attr("src");
+		saveImg(url);
+	})
+
+	function saveImg(picurl) {
+		var picname;
+		var btnArray = ['否', '是'];
+		mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
+			if(e.index == 1) {
+
+				if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
+				{
+					picname = picurl.substring(picurl.lastIndexOf("/") + 1, picurl.length);
+				} else {
+					picname = picurl;
+				}
+				savePicture(picurl, picname)
+			}
+		});
 	}
-	
 
-	$('body').on("tap",".backImg",function() {
+	function savePicture(picurl) {
+		var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
+			// 下载完成
+			if(status == 200) {
+				plus.gallery.save(d.filename, function() {
+					mui.toast('保存成功');
+				}, function() {
+					mui.toast('保存失败，请重试！');
+				});
+			} else {
+				alert("Download failed: " + status);
+			}
+
+		});
+		dtask.start();
+	}
+
+	$('body').on("tap", ".backImg", function() {
 		mui.back();
 	})
-	
+
 	$('.comment_content').each(function() {
 		var maxWidth = 10;
 		if($(this).text().length > maxWidth) {
@@ -290,7 +267,7 @@ $(function(){
 				"position": "fixed",
 				"top": total_height,
 				"border-bottom": "1px solid #E7EAEC",
-				"z-index":9999
+				"z-index": 9999
 			});
 
 		} else {
@@ -302,35 +279,35 @@ $(function(){
 			})
 		}
 	})
-    var tog=1;
+	var tog = 1;
 	$('.show_all').click(function() {
-		if(tog==1){
-		   $('.game_simpleIntro_content').removeClass('overflow_two');
-		   $(this).text("收回");	
-		   tog=2;
-		}else{
-		   $('.game_simpleIntro_content').addClass('overflow_two');
-		   $(this).text("显示全部");	
-		   tog=1;
-		}	
+		if(tog == 1) {
+			$('.game_simpleIntro_content').removeClass('overflow_two');
+			$(this).text("收回");
+			tog = 2;
+		} else {
+			$('.game_simpleIntro_content').addClass('overflow_two');
+			$(this).text("显示全部");
+			tog = 1;
+		}
 	});
-	
-    /* 打开评论详情 */
-   
+
+	/* 打开评论详情 */
+
 	$('body').on('tap', '.news_post_commentContent', function(e) {
 		e.stopPropagation();
 		if(userId) {
 			mui.openWindow({
 				url: "game_allComments.html",
 				id: "game_allComments.html",
-				createNew: true,  
+				createNew: true,
 				extras: {
 					commentId: $(this).attr('data-id'),
 					gameId: gameId,
 					uid: $(this).attr('data-uid'),
-					game_name:gameName,
-					game_icon:gameImg,
-					pageIndex:pageIndex
+					game_name: gameName,
+					game_icon: gameImg,
+					pageIndex: pageIndex
 				}
 			});
 		} else {
@@ -343,7 +320,7 @@ $(function(){
 	})
 
 	//	游戏攻略点赞
-	
+
 	$('body').on('tap', '.thumb,.thumb_num', function(e) {
 		e.stopPropagation();
 		if(userId) {
@@ -357,7 +334,7 @@ $(function(){
 					url: config.data + "game/unLikeComment",
 					async: true,
 					data: {
-						commentId:ts.siblings('.comment_img').attr('data-id'),
+						commentId: ts.siblings('.comment_img').attr('data-id'),
 						userId: userId
 					},
 					success: function(data) {
@@ -405,7 +382,6 @@ $(function(){
 
 })
 
-
 function onStateChanged(download, status) {
 	downloding(download)
 	if(download.state == 4 && status == 200) {
@@ -443,8 +419,6 @@ function loading(num) {
 	$(".download_loading").css("width", num + "%");
 }
 
-
-
 function launchApp(pagename) {
 	if(plus.os.name == "Android") {
 		plus.runtime.launchApplication({
@@ -466,268 +440,300 @@ function launchApp(pagename) {
 
 /* 攻略按键 */
 
-$("body").on("tap",".strategy_indent",function(){
-	var strategy_id=$(this).attr("data-id");
-    	mui.openWindow({
-				url: "../strategy/strategy_details.html",
-				id: "strategy_details.html",
-				createNew: true,  
-				extras: {
-					strategyId:strategy_id
-				}
-			});
+$("body").on("tap", ".strategy_indent", function() {
+	var strategy_id = $(this).attr("data-id");
+	mui.openWindow({
+		url: "../strategy/strategy_details.html",
+		id: "strategy_details.html",
+		createNew: true,
+		extras: {
+			strategyId: strategy_id
+		}
+	});
 
 })
 
-
-function detail_strategy(){
-		   $('.news_post_commentContentstra').children().remove();
-			commentModule = false;
-			pageIndex="strategy";
-			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
-		    $(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
-			$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden');
-			//		获取游戏攻略
-			$.ajax({
-				type: "get",
-				url: config.data + "game/getStrategyByGameName",
-				async: true,
-				data: {
-					gameName: gameName,
-					page: 1
-				},
-				success: function(data) {
-			    mui('#game_detailContent').pullRefresh().endPulldown(true);
-					if(data.state) {
-						var str = data.strategy;
-						var div = '';
-						if(str.length > 0) {
-							for(var i = 0; i < str.length; i++) {
-								if(str[i].src) {
-									var src = "src"
-								} else {
-									var src = "hidden"
-								}
-								
-								
-								if(str[i].top_img_src==""||str[i].top_img_src==null){									
-									imgSrc="";
-									imgToggle="none";	
-								}else{
-									imgSrc=str[i].top_img_src;
-									imgToggle="block";						
-								}
-								var detail=$(str[i].detail).text();
-								portrait="../../Public/image/morentouxiang.png";
-								if(str[i].portrait==0||str[i].portrait==null){
-									
-								}else{
-									portrait=str[i].portrait;
-								}
-								div+=
-									"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
-									"<div class='ofh'>" +
-									  "<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-									   "<div  class='timeName'>"+
-									    "<div class='comment_user font_14 font_bold fl'>" + str[i].nick_name + "</div>" +
-									     "<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
-									   "</div>"+
-									"</div>" +
-									"<div class='game_comment_content'style='margin-top:0.4rem;' >" +									
-									"<div class='font_14 overflow_two color_7a7a7a simHei'>" 
-									+ 
-									 "<img data-id='" + str[i].id + "'  style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
-									 "<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
-									   "<span>" + str[i].title + "</span>" +								  
-									 "</div>" +
-									  "<div  class='strategy_content'>"+detail+"</div>"+	
-									"</div>" +
-									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
-									"<div class='comment_info'>" +									
-									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-//									 "<div class='thumb'></div>" +
-//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
-									 "<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
-									 "<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
-									"</div>" +
-									"</div>" +
-									"</div>" +
-									"</div>"
-
-							}
-							$('.news_post_commentContentstra').append(div);
+function detail_strategy() {
+	$('.news_post_commentContentstra').children().remove();
+	commentModule = false;
+	pageIndex = "strategy";
+	mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+	$(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
+	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden');
+	//		获取游戏攻略
+	$.ajax({
+		type: "get",
+		url: config.data + "game/getStrategyByGameName",
+		async: true,
+		data: {
+			gameName: gameName,
+			page: 1
+		},
+		success: function(data) {
+			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			if(data.state) {
+				var str = data.strategy;
+				var div = '';
+				if(str.length > 0) {
+					for(var i = 0; i < str.length; i++) {
+						if(str[i].src) {
+							var src = "src"
 						} else {
-							$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
-
+							var src = "hidden"
 						}
 
-					} else {
+						if(str[i].top_img_src == "" || str[i].top_img_src == null) {
+							imgSrc = "";
+							imgToggle = "none";
+						} else {
+							imgSrc = str[i].top_img_src;
+							imgToggle = "block";
+						}
+						var detail = $(str[i].detail).text();
+						portrait = "../../Public/image/morentouxiang.png";
+						if(str[i].portrait == 0 || str[i].portrait == null) {
+
+						} else {
+							portrait = str[i].portrait;
+						}
+						div +=
+							"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
+							"<div class='ofh'>" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+							"<div  class='timeName'>" +
+							"<div class='comment_user font_14 font_bold fl'>" + str[i].nick_name + "</div>" +
+							"<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
+							"</div>" +
+							"</div>" +
+							"<div class='game_comment_content'style='margin-top:0.4rem;' >" +
+							"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
+							"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
+							"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
+							"<span>" + str[i].title + "</span>" +
+							"</div>" +
+							"<div  class='strategy_content'>" + detail + "</div>" +
+							"</div>" +
+							//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+							"<div class='comment_info'>" +
+							"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
+							//									 "<div class='thumb'></div>" +
+							//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+							"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
+							"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
 
 					}
+					$('.news_post_commentContentstra').append(div);
+				} else {
+					$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
+
 				}
-			});
-			//		获取游戏攻略结束
-	    }
-		
-        
-        function check_assess(){   
-        	if(userId){
-        		/*登录下执行*/
-                $.ajax({
-				   type: "get",
-				   url: config.data + "game/getCommentUserById",
-				   async: true,
-				   data: {
-					  game_id:gameId,
-					  user_id:userId
-				    },
-				    success: function(data) {
-					  if(data.state!=1){
-						$(".goToscore").css("display","none");
-					}
-			    }
-		        });
-        	}
-		    
-        }
-    
-    
-	    /* 评论按键 */
-		function detail_assess(){	
-			check_assess();
-			commentModule=true;
-			pageIndex="assess";
-			$(".game_detail_assess").addClass('game_detail_assess_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_strategy_active');
-			$('.game_detail_comments').removeClass('hidden').siblings('div').addClass('hidden');
-			$.ajax({
-				type: "get",
-				url: config.data + "game/getGameCommentScore",
-				async: true,
-				data: {
-					gameId: gameId
-				},
-				success: function(data) {
-					
-					 mui('#game_detailContent').pullRefresh().endPulldown(true);
-					if(data.state) {
-						var s = data.scoreList;
-						var total_10=0,total_8=0,total_6=0,total_4=0,total_2=0
-						var num_total=0;
-						var arr = [];
-						for(var i = 0; i < s.length; i++) {
-							num_total += s[i].num;
-						}
-  
-						for(var j = 0; j < s.length; j++) {	
-							if(s[j].score==10){
-                                var lan=10/num_total;         
-							    $(".bar4").css('width', lan + "rem");
-							    
-							    total_10 += 10*s[j].num;
-							    
-							}else if(s[j].score==8){
-								
-								 var lan=10/num_total;
-								$(".bar3").css('width', lan + "rem");
-								 total_8 += 8*s[j].num;
-								
-								
-							}else if(s[j].score==6){								
-								var lan=10/num_total;
-								$(".bar2").css('width', lan + "rem");
-								total_6 += 6*s[j].num;
-								
-							}else if(s[j].score==4){
-								
-								var lan=10/num_total;
-								$(".bar1").css('width', lan + "rem");
-								total_4 += 4*s[j].num;
-								
-							}else if(s[j].score==2){
-								
-								var lan=10/num_total;
-								$(".bar0").css('width', lan + "rem");
-								total_2 += 2*s[j].num;
-								
-							}	
-											
-						}
 
-                        var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                    
-                        if(!Object.is(total,NaN)){
-                        	$(".game_infoScore").text(total.toFixed(1)+"分")
-                        	$(".gameScore").text(total.toFixed(1))
-                        }
-						
-					}
-				}
-			});
+			} else {
 
-			//		获取游戏评论
-			//!gameComment
-			if(1){
-				gameComment = true;
-				$.ajax({
-					type: "get",
-					url: config.data + "game/getGameCommentById",
-					async: true,
-					data: {
-						gameId: gameId,
-						page: 1,
-						userId:userId
-					},
-					success: function(data) {
-						if(data.state) {
-							var com = data.comment;
-							var div = '';
-							var portrait="../../Public/image/morentouxiang.png";
-							
-							for(var i = 0; i < com.length; i++) {
-								if(com[i].state) {
-									var ifGood = "good";
-								} else {
-									var ifGood = "noGood";
-								}
-							     if(com[i].portrait==0||com[i].portrait==null){								  
-									  portrait="../../Public/image/morentouxiang.png";
-								  }else{
-								  	  portrait=com[i].portrait;
-								  }
-								  
-								div +=
-									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-									"<div class='ofh'>" +
-									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-									"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-									"</div>" +
-									"<div class='game_comment_content' >" +
-									"<div class='comment_content font_14' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'>" + com[i].content + "</div>" +
-									"<div class='comment_info ofh'>" +
-									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-									"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
-									"<span class='comment_img' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'></span>" +
-									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-									"</div>" +
-									"</div>" +
-									"</div>" +
-									"</div>"
-							}
-							$('.news_post_commentContents').empty().append(div);
-						} 
-					}
-				});
 			}
-
-			//		获取游戏评论结束
 		}
-		
+	});
+	//		获取游戏攻略结束
+}
+
+/* 检查我要评价接口的button是否打开 */
+function check_assess() {
+	if(userId) {
+		/*登录下执行*/
+		$.ajax({
+			type: "get",
+			url: config.data + "game/getCommentUserById",
+			async: true,
+			data: {
+				game_id: gameId,
+				user_id: userId
+			},
+			success: function(data) {
+				if(data.state != 1) {
+					$(".goToscore").css("display", "none");
+				} else {
+					$(".goToscore").css("display", "block");
+				}
+			}
+		});
+	}
+
+}
+
+/* 评论按键 */
+function detail_assess() {
+	check_assess();
+	commentModule = true;
+	pageIndex = "assess";
+	$(".game_detail_assess").addClass('game_detail_assess_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_strategy_active');
+	$('.game_detail_comments').removeClass('hidden').siblings('div').addClass('hidden');
+	$.ajax({
+		type: "get",
+		url: config.data + "game/getGameCommentScore",
+		async: true,
+		data: {
+			gameId: gameId
+		},
+		success: function(data) {
+
+			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			if(data.state) {
+				var s = data.scoreList;
+				var total_10 = 0,
+					total_8 = 0,
+					total_6 = 0,
+					total_4 = 0,
+					total_2 = 0
+				var num_total = 0;
+				var arr = [];
+				for(var i = 0; i < s.length; i++) {
+					num_total += s[i].num;
+				}
+
+				for(var j = 0; j < s.length; j++) {
+					if(s[j].score == 10) {
+						var lan = 10 / num_total;
+						$(".bar4").css('width', lan + "rem");
+
+						total_10 += 10 * s[j].num;
+
+					} else if(s[j].score == 8) {
+
+						var lan = 10 / num_total;
+						$(".bar3").css('width', lan + "rem");
+						total_8 += 8 * s[j].num;
+
+					} else if(s[j].score == 6) {
+						var lan = 10 / num_total;
+						$(".bar2").css('width', lan + "rem");
+						total_6 += 6 * s[j].num;
+
+					} else if(s[j].score == 4) {
+
+						var lan = 10 / num_total;
+						$(".bar1").css('width', lan + "rem");
+						total_4 += 4 * s[j].num;
+
+					} else if(s[j].score == 2) {
+
+						var lan = 10 / num_total;
+						$(".bar0").css('width', lan + "rem");
+						total_2 += 2 * s[j].num;
+
+					}
+
+				}
+
+				var total = (total_10 + total_8 + total_6 + total_4 + total_2) / num_total;
+				if(!Object.is(total, NaN)) {
+					$(".game_infoScore").text(total.toFixed(1) + "分")
+					$(".gameScore").text(total.toFixed(1))
+				}
+
+			}
+		}
+	});
+
+	//获取游戏评论
+	getAccess()
+
+}
+
+/* 评论下的 评论 */
+function getAccess() {
+	$.ajax({
+		type: "get",
+		url: config.data + "game/getGameCommentById",
+		async: true,
+		data: {
+			gameId: gameId,
+			page: 1,
+			userId: userId
+		},
+		success: function(data) {
+			if(data.state) {
+				var com = data.comment;
+				var div = '';
+				var portrait = "../../Public/image/morentouxiang.png";
+
+				for(var i = 0; i < com.length; i++) {
+					if(com[i].state) {
+						var ifGood = "good";
+					} else {
+						var ifGood = "noGood";
+					}
+					if(com[i].portrait == 0 || com[i].portrait == null) {
+						portrait = "../../Public/image/morentouxiang.png";
+					} else {
+						portrait = com[i].portrait;
+					}
+
+					if(com[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com' data-id='" + com[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
+					}
+
+					var score = Number(com[i].score) / 2
+					var scoreStar = ""
+
+					for(var n = 0; n < score; n++) {
+						scoreStar += "<div class='game_list_star_active'></div>"
+					}
+					for(var m = 0; m < 5 - score; m++) {
+						scoreStar += "<div></div>"
+					}
+
+					var star = "<div class='stars'>" +scoreStar + "</div>"
+
+					div +=
+						"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+						"<div class='ofh'>" +
+						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+						"<div class='fl'>"+
+						"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +
+						star+
+						"</div>"+
+						"</div>" +
+						"<div class='game_comment_content' >" +
+						"<div class='comment_content font_14' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'>" + com[i].content + "</div>" +
+						"<div class='comment_info ofh'>" +
+						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+						comment_dele +
+						"<div class='fr color_9e9e9e comment_imgs'>" +
+						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='comment_img' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'></span>" +
+						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+						"</div>" +
+						"</div>" +
+						"</div>" +
+						"</div>"
+				}
+				$('.news_post_commentContents').empty().append(div);
+			}
+		}
+	});
+
+}
+
+
+
+
+$("body").on("tap",".sign_more",function(){
+	alert(1)
+})
+
+
 
 detail_main();
-function detail_main(){	
-	setTimeout(function(){	
-		 $.ajax({
+function detail_main() {
+	setTimeout(function() {
+		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameById",
 			async: true,
@@ -736,7 +742,7 @@ function detail_main(){
 			},
 			success: function(data) {
 				if(data.state) {
-					game = data.gameDetail;//这个已经把全部数据放进去					
+					game = data.gameDetail; //这个已经把全部数据放进去					
 					var g = data.gameDetail;
 					var icon_img = g.game_title_img;
 					icon = icon_img;
@@ -747,8 +753,8 @@ function detail_main(){
 					if(plus.runtime.isApplicationExist({
 							pname: game.game_packagename,
 							action: ''
-					})) {
-					$("#game_detail_download").find(".download_btn_text").text("打开");
+						})) {
+						$("#game_detail_download").find(".download_btn_text").text("打开");
 					} else {
 						plus.downloader.enumerate(function(tasks) {
 							var state = false;
@@ -779,18 +785,24 @@ function detail_main(){
 					$('.gameScore').text(g.grade);
 					if(g.tagList) {
 						var t = g.tagList.split(',');
-						var sp="";
-						if(t.length>2){
-							for(var i = 0; i < 2; i++) {
-							 sp += "<span class='color_green signs_box'>" + t[i] + "</span>"
-						   }
-						}else{
-							for(var i = 0; i < t.length ; i++) {
-							 sp += "<span  class='color_green signs_box'>" + t[i] + "</span>"
-						   }
-						}					
+						var Id=g.tagId.split(",")
+						var sp = "";
+						if(t.length > 6) {
+							for(var i = 0; i < 6; i++) {
+								sp += "<span class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
+							}
+						} else {
+							for(var i = 0; i < t.length; i++) {
+								sp += "<span  class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
+							}
+						}
 						$('.game_signs').empty().append(sp);
-
+						$('.game_signs').append("<img style='height:1.3rem;margin-left:0.3rem' class='sign_more'  src='../../Public/image/sign_more_btn.png' >")
+//						../../Public/image/morentouxiang.png
+ 
+//                     <span>
+//							fwfwf
+//						</span>
 					}
 					$('.game_simpleIntro_content').html(g.game_detail);
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载");
@@ -813,12 +825,9 @@ function detail_main(){
 									div +=
 										"<div style='margin:0.625rem 0.625rem;margin-left:0;margin-top:0.125rem;flex-shrink:0;'>" +
 										"<img class='game_detail_content' src='" + config.img + encodeURI(gl[i].img_src) + "' data-preview-src='' data-preview-group='2' />" +
-										//"<img class='game_detail_content' style='background-image: url(" + config.img + encodeURI(gl[i].img_src) + ");'></img>" +
 										"</div>"
 								}
 								$('.game_detail_contents').empty().append(div);
-							} else {
-
 							}
 						}
 					});
@@ -829,20 +838,20 @@ function detail_main(){
 
 		});
 
-		 //相关资讯
-		 $.ajax({
+		//相关资讯
+		$.ajax({
 			type: "get",
 			url: config.data + "game/getNewsByGameId",
 			async: true,
 			data: {
 				gameId: gameId,
-				userId:userId
+				userId: userId
 			},
 			success: function(data) {
 				if(data.state) {
 					var nl = data.newsList;
 					var div = '';
-					for(var i = 0; i < nl.length; i++){
+					for(var i = 0; i < nl.length; i++) {
 						div +=
 							"<div class='game_relatedInfocontent' data-id='" + nl[i].id + "'>" +
 							"<div class='game_relatedInfocontentImg' style='background-image: url(" + config.img + encodeURI(nl[i].img) + ");'></div>" +
@@ -855,12 +864,12 @@ function detail_main(){
 			}
 		});
 
-		 //游戏热评部分
-         indexCommit();
-		 //游戏热评部分结束
+		//游戏热评部分
+		indexCommit();
+		//游戏热评部分结束
 
 		//相似游戏开始
-		 $.ajax({
+		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameLikeTag?sys=1",
 			async: true,
@@ -891,68 +900,138 @@ function detail_main(){
 				}
 			}
 		});
-        //相似游戏结束
-        
-        
-        
-    },200)
+		//相似游戏结束
+
+	}, 200)
 	//延迟时间
-	
+
 }
 
 
-
-function indexCommit(){
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getGameHotComment",
-			async: true,
-			data: {
-				gameId:gameId,
-				userId:userId
-			},
-			success: function(data) {
-				if(data.state) {
-
-					var com = data.comment,portrait;
-					var div = '';
-
-					for(var i = 0; i < com.length; i++) {
-						
-						if(com[i].state) {
-							var ifGood = "good";
-						} else {
-							var ifGood = "noGood";
-						}
-						
-						
-				        if(com[i].portrait==0||com[i].portrait==null){
-						    portrait="../../Public/image/morentouxiang.png";
-					    }else{
-						    portrait=com[i].portrait;
-						}	
-						div +=
-							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-							"<div class='ofh'>" +
-							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-							"</div>" +
-							"<div class='game_comment_content'>" +
-							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
-							"<div class='comment_info ofh'>" +
-							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-							"<div class='fr color_9e9e9e comment_imgs'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
-							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>"
-					}
-					$('.news_post_commentContentshot').empty().append(div);
-				}
+/* 点击标签 */
+$("body").on("tap",".game_signs > span",function(){
+		var tagId = $(this).attr("data-tagid");
+		var tagName = $(this).text();
+		mui.openWindow({
+			url: "game_classify_list.html",
+			id: "game_classify_list.html",
+			extras: {
+				tagId: tagId,
+				tagName: tagName
 			}
-		});
+		})
+})
+
+
+
+
+
+/*
+ 点击删除游戏评论
+ */
+$("body").on("tap", ".game_dele_com", function(e) {
+	e.stopPropagation()
+	var id = $(this).attr("data-id")
+	plus.nativeUI.confirm("删除评论", function(e) {
+		if(e.index == 0) {
+			$.ajax({
+				type: "get",
+				url: config.data + "game/delMyComment",
+				async: true,
+				data: {
+					uid: userId,
+					id: id
+				},
+				success: function(data) {
+					if(data.state == 1) {
+						mui.toast("删除成功")
+						indexCommit()
+						getAccess()
+						check_assess()
+					} else {
+						mui.toast("删除失败")
+					}
+				}
+			})
+		}
+	})
+})
+
+function indexCommit() {
+	$.ajax({
+		type: "get",
+		url: config.data + "game/getGameHotComment",
+		async: true,
+		data: {
+			gameId: gameId,
+			userId: userId
+		},
+		success: function(data) {
+			if(data.state) {
+
+				var com = data.comment,
+					portrait;
+				var div = '';
+
+				for(var i = 0; i < com.length; i++) {
+					console.log(com[i])
+					if(com[i].state) {
+						var ifGood = "good";
+					} else {
+						var ifGood = "noGood";
+					}
+
+					if(com[i].portrait == 0 || com[i].portrait == null) {
+						portrait = "../../Public/image/morentouxiang.png";
+					} else {
+						portrait = com[i].portrait;
+					}
+
+					if(com[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com' data-id='" + com[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
+					}
+					var score = Number(com[i].score) / 2
+					var scoreStar = ""
+
+					for(var n = 0; n < score; n++) {
+						scoreStar += "<div class='game_list_star_active'></div>"
+					}
+					for(var m = 0; m < 5 - score; m++) {
+						scoreStar += "<div></div>"
+					}
+
+					var star = "<div class='stars'>" +
+						scoreStar +
+						"</div>"
+
+					div +=
+						"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+						"<div class='ofh'>" +
+						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+						"<div class='fl'>" +
+						"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +
+						star +
+						"</div>" +
+						"</div>" +
+						"<div class='game_comment_content'>" +
+						"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
+						"<div class='comment_info ofh'>" +
+						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+						comment_dele +
+						"<div class='fr color_9e9e9e comment_imgs'>" +
+						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+						"</div>" +
+						"</div>" +
+						"</div>" +
+						"</div>"
+				}
+				$('.news_post_commentContentshot').empty().append(div);
+			}
+		}
+	});
 }

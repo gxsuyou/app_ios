@@ -119,11 +119,6 @@ $(function() {
 			    success:function(data){
 				  if(data.state==1){
 					mui.toast("删除成功")
-//				    $(".bottomInfo").text("正在加载 ...");
-//			        closeAjax=false;
-//			        $(".news_post_commentContents").empty();			             
-//			        page=0;
-//			        up();
                     window.location.reload()
 				   }else{
 					   mui.toast("删除失败")

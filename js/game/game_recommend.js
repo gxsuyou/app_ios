@@ -570,7 +570,6 @@ $(function() {
 		$(".hot_rank").css("display","block");
 		page = 1;
 		sort = $(this).attr('data-sort')
-//		alert(sort);
 		var name = $(this).attr('data-name')
 		$(this).children().addClass('border_green color_green').css('background-color', 'white')
 		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
@@ -581,18 +580,25 @@ $(function() {
 	})
 	
 
-
+/* one排行榜 */
+function oneRank(){
+	$(".hot_rank").css("display","none")
+//	$(".game_lists").css({"background":"url(../../Public/image/onerank_bg.png) no-repeat top center /100% 100%"},
+//	{"width":"100%"},{"height":"7rem"})
+}
 
 function getRank(sort) {
 	rankToggle=true;
      /*阻挡掉one模块*/
-	if(sort=="game_download_num"){
-		$('.comingsoon').remove();
-		$(".hot_rank").css("display","none");
-		$('.comingsoon').css("display","block");
-		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
-		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
-        rankToggle=false;
+	if(sort=="sort3"){
+		oneRank()
+//		$('.comingsoon').remove();
+//		$(".hot_rank").css("display","none");
+//		$('.comingsoon').css("display","block");
+//		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
+//		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
+//      rankToggle=false;
+
 		return false;		
 	}
 	
@@ -610,7 +616,6 @@ function getRank(sort) {
 		success: function(data) {
 			var g = data.game;
 			if(data.state) {
-
 				var list = '';
 				for(var i = 0; i < g.length; i++) {
 					if(i < 3) {						
@@ -770,9 +775,7 @@ function getRankup(page, sort) {
 						"</li>"
 
 				}
-			   //$('.game_lists').append("<div>dwedwedwe</div>");
 				$('.game_lists').append(list);
-//				alert($('.game_lists').html());
 				$('.game_recommend_stars').each(function() {
 					var score = $(this).find('.game_recommend_starScore').eq(0).text()
 					var starNum = Math.round(score);

@@ -196,7 +196,10 @@
 								  }else{
 									  portrait=str[i].portrait;
 								  }                    
-								  		
+								  
+								if(str[i].essence==1){
+                               	   var essence_image="<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
+                               	}else{var essence_image="&nbsp;"}
 								  		
 									div +=
 											"<div class='strategy_content' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'>"+
@@ -215,6 +218,7 @@
 												"<div class='strategy_content_art font_14 color_7a7a7a' >"												
 												  +"<img style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
 												  "<div class='strategy_content_titles'>"+
+												    essence_image+
 													"<div class='strategy_content_title color_282828'>" + str[i].title + "</div>"+								
 												  "</div>"+
 												 "<div class='strategy_content' >"+detail+"</div>"+

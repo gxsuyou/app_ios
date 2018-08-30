@@ -362,8 +362,6 @@ body{
 .game_classify_nameImg{
 	width: 2.4375rem;
 	height: 2.4375rem;
-	/*background-image: url(../../Public/image/xing1.png);*/
-	/*background-color: red;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -384,12 +382,18 @@ body{
 .game_list_star_half{
 	background-image: url(../../Public/image/xing3.png);
 }
-.remommend_imgFirst,.remommend_imgSecond{
-	
+.remommend_imgFirst,.remommend_imgSecond{	
 	height: 50vw;
 	margin: 0 auto;
 	background-position: center;
 	background-repeat:no-repeat;
-	background-size: cover;
-	
+	background-size: cover;	
+}
+
+.oneRank{
+	background:url(../../Public/image/onerank_bg.png) no-repeat top /100% 16rem;
+	width:100%;
+	min-height: 16rem;
+	margin-top:-21.6vw;
+	display:none;
 }

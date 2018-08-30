@@ -7,9 +7,10 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/strategy/strategy_allComments.css" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/overImage.css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
-		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>		
 	</head>
 	<body class="backgroundColor_white">
 		<div class="header_box">
@@ -59,12 +60,17 @@
 			</div>
 			<!--底部回复模块-->
 			</div>
-			<div class="bottomInfo">正在加载中 <span style="letter-spacing:0.2rem;">...</span></div>
+			<div class="bottomInfo">正在加载中...</div>
 		</div>	
 	    <div class="news_secondComment backgroundColor_white">
 			<input class="news_secondComment_input" type="text" placeholder="输入回复内容"/>
 			<div class="color_green publish font_14">发表</div>
 		</div>		
-		<script src="../../js/strategy/strategy_allComment.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="../../js/strategy/strategy_allComment.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="../../js/mui.zoom.js"></script>
+	    <script src="../../js/mui.previewimage.js"></script>
+	    <script type="text/javascript">
+	    	mui.previewImage();
+	    </script>
 	</body>
 </html>

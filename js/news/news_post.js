@@ -523,7 +523,6 @@ $('body').on('tap','.time', function() {
 
 $("body").on("tap",".news_dele_com",function(){
 	var id=$(this).attr("data-id")
-	console.log(id)
 	plus.nativeUI.confirm("删除评论", function(e){	 	
 		if(e.index==0){
            $.ajax({
@@ -714,7 +713,6 @@ function up(){
 								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
 								"全部回复" +
 								"</div>" +
-
 								"</div>";
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";

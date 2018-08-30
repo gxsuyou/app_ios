@@ -41,7 +41,7 @@
 	background-size: cover;
 }
 .game_signs > span{
-	margin-right:0.3rem;
+	margin-right:0.4rem;
 }
 
 .signs_box{
@@ -59,7 +59,6 @@
 
 .game_detailTopinfo{
 	width: 100%;
-	height: 6.625rem;
 	padding: 0 1.25rem;
 	border-top: 1px solid #E6EBEC;
 	border-bottom: 1px solid #E6EBEC;
@@ -340,17 +339,30 @@
 	align-content: center;  
 }
 
-.comment_imgs > div{
-/*	float:left;*/
-	/*display: inline-block;
-	margin-left: 0.1rem;*/
+.game_dele_com{
+	margin-left:0.2rem;
 }
-
 
 .game_comment_content{
-	padding: 0 0.625rem;
-	margin-top:-1rem;
+	padding:0 0.625rem;
+	margin-top:-0.2rem;
 }
+
+.stars > div {
+float: left;
+width: 0.9rem;
+height: 0.9rem;
+background-image: url("../../Public/image/xing2.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+}
+.game_list_star_active{
+   background-image:url("../../Public/image/xing1.png")!important;
+}
+
+
+
 .game_similarContents{
 	overflow: scroll;
 	margin: 0 0.5rem;
@@ -440,6 +452,7 @@
 	border-radius: 5px;
 	margin: 0 auto;
 	margin-top: 1.25rem;
+	display: none;
 }
 
 .game_detail_type{
@@ -452,8 +465,6 @@
 	width: 100%;
 	height: 1.6875rem;
 	line-height: 1.6875rem;
-	
-	
 	padding-right: 0.625rem;
 }
 .cut_line{
