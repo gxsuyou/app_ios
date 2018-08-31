@@ -12,11 +12,12 @@ $(function() {
 		})
 	} else {
 		$('.me_share').click(function(){
+//			return false;
 			openShare()
+			
 		})
 		var userInfostr = window.localStorage.getItem("userInfo");		
 		var userInfojson = eval('(' + userInfostr + ')');
-//		$(".me_img").css("background-image", "url(" +userInfojson.portrait + ")")
 		var id = userInfojson.id;
 		$.ajax({
 			type: "get",

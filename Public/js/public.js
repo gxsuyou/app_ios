@@ -1,6 +1,5 @@
 var total_height;
 $(function() {
-	
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		$('.before_header').css({
@@ -23,8 +22,8 @@ var config = {
 	// data:"http://182.61.26.179:8877/",
     //data:"http://www.oneyouxi.com.cn:8877/",	
 //	data:"http://127.0.0.1:8877/",
-    data:"http://www.oneyouxi.com.cn:8877/",
-//  data:"http://192.168.0.207:8877/",
+//  data:"http://www.oneyouxi.com.cn:8877/",
+    data:"http://192.168.0.207:8877/",
 	base64: "http://base64.oneyouxi.com.cn/",
 	url_upload:"https://admin.oneyouxi.com.cn/",
   // url_upload:"http://192.168.2.117:8878/",

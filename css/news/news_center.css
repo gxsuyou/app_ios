@@ -4,15 +4,15 @@
 	padding-top: 2rem;
 }
 .notice{
-	position: absolute;
+	/*position: absolute;
 	left: 50%;
 	margin-left: -1rem;
-	font-size: 18px;
+	font-size: 18px;*/
+	margin:0 auto;
 }
 .notice_list{
 	position: relative;
-	padding: 0.625rem;
-	
+	padding: 0.625rem;	
 	background-color: white;
 	border-bottom: 4px solid #E7EAEC;
 }
@@ -63,4 +63,17 @@
 }
 .nav > div{
 	flex: 1;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.sign_num{
+	background:red;
+	width:1rem;
+	height:1rem;
+	line-height:1rem;
+	color:#fff;
+	border-radius:100%;
+	margin-left: 0.15rem;
+	font-size: 12px;
 }

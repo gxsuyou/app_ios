@@ -16,7 +16,7 @@
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
 				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
-				<div class="notice">通 知</div>
+				<div class="notice">消息中心</div>
 			</header>
 		</div>
 		<div class="news_center">
@@ -35,15 +35,25 @@
 				</div>-->
 			</div>
 		</div>
-		<div class="nav tac font_14 color_282828">
-			<div class="active" data-sort="1">资讯</div>
-			<div data-sort="2">攻略</div>
-			<div data-sort="3">游戏</div>
+		<div class="nav tac font_14 color_282828">	
+			<div data-sort="4"  class="active">通知</div>
+			<div data-sort="1">资讯
+			  <!--<div class="sign_num" >
+			 	2
+			  </div>-->
+			</div>
+			<div data-sort="2">
+				攻略
+			  <!--<div class="sign_num" >
+			 	2
+			  </div>-->
+			</div>
+			<div data-sort="3">游戏</div>				
 		</div>
 		<div class="error"></div>
 		<script type="text/javascript">
 			var page = 0;
-			var sort = 1;
+			var sort = 4;
 			var ajaxToggle=false;
 			mui.init({
 				swipeBack: true,
@@ -79,7 +89,11 @@
 
 			})
 
-			function up() {				
+			function up() {	
+				if(sort==4){
+					mui('.news_center').pullRefresh().endPullupToRefresh(true);
+					return false				
+				}
 				if(ajaxToggle){
 					return false;
 				}				

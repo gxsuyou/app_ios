@@ -28,6 +28,11 @@ $(function(){
     });
     
     
+    $("body").on("tap",".search_close",function(){
+    	$(".search_bar").val("");
+    })
+    
+    
     
 	function search(){
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g,"");

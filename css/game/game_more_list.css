@@ -1,0 +1,21 @@
+.game_nameHeader {
+  /*position: absolute;
+  left: 50%;
+  margin-left: -2rem;*/
+  font-size: 18px;
+  margin:0 auto;
+}
+body{
+	background:#fff !important;
+}
+.game_list{
+	height:3.4rem;
+	padding: 0 0.5rem 0 1.5rem;
+	display: flex;
+	align-items:center;
+	justify-content:space-between;
+	border-bottom:1px solid #ececec;
+}
+.game_list>div:last-child{
+	font-size:25px;
+}

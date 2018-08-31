@@ -25,6 +25,9 @@ $(function(){
     	search();
     });
     
+    $("body").on("tap",".search_close",function(){
+    	$(".search_bar").val("");
+    })
 	
 	
 	

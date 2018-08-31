@@ -62,6 +62,9 @@ $(function() {
 	})
 	
 
+     $("body").on("tap",".search_close",function(){
+    	$(".search_bar").val("");
+    })
 	
 	
 	$('body').on("tap",".search_img",function(){

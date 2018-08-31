@@ -413,6 +413,7 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+			mui.previewImage();
 			var page = 1,pageIndex="detail";
 			/*首页详情出来更新*/
 			window.addEventListener('indexRefresh',function(event){
@@ -423,8 +424,7 @@
 		    	detail_assess();
 		    })
 		    
-		    
-		    
+		 		    
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
 			    gestureConfig: {
@@ -529,14 +529,10 @@
 
           window.addEventListener('assess',function(event){        
              detail_assess();
-          });
+          });          
 		</script>
 		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.zoom.js"></script>
 		<script src="../../js/mui.previewimage.js"></script>
-		<script>
-			mui.previewImage();
-		</script>
 	</body>
-
 </html>

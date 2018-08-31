@@ -50,3 +50,17 @@ body,html{
 	color: #9E9E9E;
 	margin-top: 8.5rem;
 }
+.search_close{
+	position:relative;
+	width:1.5rem;
+	height:1.4rem;
+	line-height:1.3rem;
+	text-align:center;
+	background:#9E9E9E;
+	color:#fff;
+	right:1.6rem;
+	top:0.1rem;
+	border-radius:50%;
+	font-size:20px;
+	opacity:0.8;
+}

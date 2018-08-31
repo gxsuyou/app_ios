@@ -9,7 +9,7 @@ var game;
 var gameImg;
 $(function() {
 	mui.plusReady(function() {
-		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+//		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
@@ -19,7 +19,7 @@ $(function() {
 			mui.openWindow({
 				url: "../news/news_post.html",
 				id: "../news/news_post.html",
-				extras: {
+				extras:{
 					newsId: $(this).attr('data-id'),
 					gameId: gameId
 				}
@@ -457,7 +457,7 @@ function detail_strategy() {
 	$('.news_post_commentContentstra').children().remove();
 	commentModule = false;
 	pageIndex = "strategy";
-	mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+//	mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 	$(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
 	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden');
 	//		获取游戏攻略
@@ -470,7 +470,7 @@ function detail_strategy() {
 			page: 1
 		},
 		success: function(data) {
-			mui('#game_detailContent').pullRefresh().endPulldown(true);
+//			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -580,7 +580,7 @@ function detail_assess() {
 		},
 		success: function(data) {
 
-			mui('#game_detailContent').pullRefresh().endPulldown(true);
+//			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;
 				var total_10 = 0,
@@ -723,9 +723,16 @@ function getAccess() {
 
 
 
-
+/*去到更多标签*/
 $("body").on("tap",".sign_more",function(){
-	alert(1)
+	mui.openWindow({
+			url: "game_more_list.html",
+			id: "game_more_list.html",
+			extras: {
+				gameId:gameId,
+				gameName:gameName
+			}
+		})
 })
 
 
@@ -780,30 +787,26 @@ function detail_main() {
 					$('.game_infoImg').css('background-image', 'url(' + config.img + encodeURI(g.icon) + ')');
 					$('.game_call').text(g.game_name);
 					$('.game_nameHeader').text(g.game_name);
-					$('.game_company').text(g.gam');
-						var Id=g.tagId.split(",")
-						var sp = "";
-						if(t.length > 6) {e_company);
+					$('.game_company').text(g.game_company);				
+					var sp = "";
 					$('.game_infoScore').text(g.grade + "分");
 					$('.gameScore').text(g.grade);
 					if(g.tagList) {
-						var t = g.tagList.split(',
-							for(var i = 0; i < 6; i++) {
+						var t = g.tagList.split(',')
+						var Id=g.tagId.split(",")
+						if(t.length>6){
+						   for(var i = 0; i < 6; i++) {
 								sp += "<span class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
-							}
-						} else {
+							  }
+					    } else {
 							for(var i = 0; i < t.length; i++) {
 								sp += "<span  class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
 							}
-						}
-						$('.game_signs').empty().append(sp);
-						$('.game_signs').append("<img style='height:1.3rem;margin-left:0.3rem' class='sign_more'  src='../../Public/image/sign_more_btn.png' >")
-//						../../Public/image/morentouxiang.png
- 
-//                     <span>
-//							fwfwf
-//						</span>
+					    }
 					}
+					$('.game_signs').empty().append(sp);
+					$('.game_signs').append("<img style='height:1.3rem;margin-left:0.3rem' class='sign_more'  src='../../Public/image/sign_more_btn.png' >")
+					
 					$('.game_simpleIntro_content').html(g.game_detail);
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载");
 					$('.game_particular_value').children().eq(1).text(g.game_version);

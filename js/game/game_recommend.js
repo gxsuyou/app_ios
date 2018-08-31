@@ -580,27 +580,21 @@ $(function() {
 	})
 	
 
-/* one排行榜 */
-function oneRank(){
-	$(".hot_rank").css("display","none")
-//	$(".game_lists").css({"background":"url(../../Public/image/onerank_bg.png) no-repeat top center /100% 100%"},
-//	{"width":"100%"},{"height":"7rem"})
-}
+
 
 function getRank(sort) {
 	rankToggle=true;
      /*阻挡掉one模块*/
-	if(sort=="sort3"){
-		oneRank()
+//	if(sort=="sort3"){
+//		oneRank()
 //		$('.comingsoon').remove();
 //		$(".hot_rank").css("display","none");
 //		$('.comingsoon').css("display","block");
 //		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
 //		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
 //      rankToggle=false;
-
-		return false;		
-	}
+//		return false;		
+//	}
 	
   mui.plusReady(function(){
 	$.ajax({
