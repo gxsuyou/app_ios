@@ -42,8 +42,20 @@
 }
 .game_signs > span{
 	margin-right:0.4rem;
+	word-break:keep-all;      /* 不换行 */
+    white-space:nowrap;       /* 不换行 */
+    overflow:hidden;          /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;   
 }
-
+.game_signs {
+	clear:both;
+	margin:1rem 0;
+	padding-top:1rem;
+	height:1.3rem;
+	display: flex;
+	align-items: center;
+	width:100%;
+}
 .signs_box{
 	font-size:12px;
 	display: inline-block;

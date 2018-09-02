@@ -11,12 +11,11 @@ $(function() {
 			})
 		})
 	} else {
-		$('.me_share').click(function(){
-//			return false;
+		$('.me_share').click(function() {
 			openShare()
-			
+
 		})
-		var userInfostr = window.localStorage.getItem("userInfo");		
+		var userInfostr = window.localStorage.getItem("userInfo");
 		var userInfojson = eval('(' + userInfostr + ')');
 		var id = userInfojson.id;
 		$.ajax({
@@ -24,29 +23,29 @@ $(function() {
 			url: config.data + "users/getUserMsgById",
 			async: true,
 			data: {
-				"id":id
+				"id": id
 			},
 			success: function(data) {
-				
+
 				if(data.state) {
-					
+
 					$('.onlyId').text("ID:" + data.user.only_id);
-					if(data.user.portrait!=0) {
+					if(data.user.portrait != 0) {
 						img = data.user.portrait;
 						alert
 					} else {
 						img = "../../Public/image/morentouxiang.png";
 					}
-					
+
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
 				} else {
-					
+
 				}
 			}
 		});
 
-		$('body').on("tap",".me_img",function() {
+		$('body').on("tap", ".me_img", function() {
 			mui.openWindow({
 				url: 'profile.html',
 				id: 'profile.html'
@@ -57,7 +56,7 @@ $(function() {
 			mui.openWindow({
 				url: "../news/news_center.html",
 				id: "../news/news_center.html",
-				
+
 			})
 		})
 		$('.me_play').children("li").eq(0).click(function() {
@@ -92,6 +91,10 @@ $(function() {
 			})
 		})
 		$('.me_headerset').click(function() {
+			$(this).addClass("move")
+			setTimeout(function() {
+				$(".me_headerset").removeClass("move")
+			}, 400)
 			mui.openWindow({
 				url: "set_list.html",
 				id: "set_list.html"
@@ -100,6 +103,17 @@ $(function() {
 
 	}
 
-
+})
+$('.me_share').click(function() {
+	$(this).addClass("move")
+	setTimeout(function() {
+		$(".me_share").removeClass("move")
+	}, 400)
 })
 
+$('.me_headerset').click(function() {
+	$(this).addClass("move")
+	setTimeout(function() {
+		$(".me_headerset").removeClass("move")
+	}, 400)
+})

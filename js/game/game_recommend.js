@@ -1,5 +1,4 @@
-
-var rankToggle=false;
+var rankToggle = false;
 $(function() {
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
@@ -31,7 +30,7 @@ $(function() {
 			sys: 1
 		},
 		success: function(data) {
-            
+
 			var c = data.carousel;
 			var divlast = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[(c.length - 1)].id + "' data-gameId='" + c[(c.length - 1)].game_id + "'>" +
 				"<div class='slider_item  home" + (c.length - 1) + " '></div>" +
@@ -150,7 +149,7 @@ $(function() {
 		}
 	});
 
-	$('body').on("tap",".game_topicBox,.game_topicBoxbot",function() {
+	$('body').on("tap", ".game_topicBox,.game_topicBoxbot", function() {
 		mui.openWindow({
 			url: 'game_topic.html',
 			id: 'game_topic.html',
@@ -220,8 +219,8 @@ $(function() {
 						"<div class='font_14 color_282828 fl'>" + i + "</div>" +
 						"<div class='font_12 color_green fr check_more' style='margin-right: 0.9375rem;' data-tagId='" + act[i][0].tagId + "'>查看更多</div>" +
 						"</div>" +
-						"<div  class='game_detail_contents  ui_flex_wrapper ui_flex_h'  data-tagId='" + act[i][0].tagId + "'>" 
-						+content+
+						"<div  class='game_detail_contents  ui_flex_wrapper ui_flex_h'  data-tagId='" + act[i][0].tagId + "'>" +
+						content +
 						"</div>" +
 						"</div>"
 				}
@@ -242,6 +241,23 @@ $(function() {
 		})
 	})
 
+	//	$(".game_topicBox").on("swipeleft", function() {
+	//		alert(1)
+	//	});
+	//	$(".game_topicBox").on("swiperight", function() {
+	//		alert(2)
+	//	});
+//	window.addEventListener("swiperight", function(e) {
+//		//默认滑动角度在-45度到45度之间，都会触发右滑菜单，为避免误操作，可自定义限制滑动角度；
+//		console.log(e.detail.angle)
+//		if(Math.abs(e.detail.angle) < 4) {
+//			alert(1)
+//		}
+//	});
+  $("body").on("touchmove",function (e) {
+  	console.log(1)
+  });
+
 	$('body').on('tap', '.check_more', function() {
 		var tagId = $(this).attr("data-tagid");
 		var tagName = $(this).prev().text();
@@ -260,105 +276,97 @@ $(function() {
 	//底下新加部分
 
 	//列表部分下载部分
-	mui.plusReady(function(){
+	mui.plusReady(function() {
 		$.ajax({
-		type: "get",
-		url: config.data + "game/getActiveLenOfTen?sys=1",
-		async: true,
-		success: function(data) {
-			if(data.state) {
-				var g = data.game;
-				var list = '';
-				for(var i = 0; i < g.length; i++) {				
-					var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
-					if(downloadToggle){
-						var buttonDown="打开";
-					}else{
-						var buttonDown="下载";
-					}
-					
-					var signs = '';					
-					if(g[i].tagList && g[i].tagList !== "null") {
-						var result = g[i].tagList.split(",");
-						var tagId = g[i].tagIdList.split(",");
-						if(result.length > 2) {
-							for(var j = 0; j < 3; j++) {
-								signs +=
-									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+			type: "get",
+			url: config.data + "game/getActiveLenOfTen?sys=1",
+			async: true,
+			success: function(data) {
+				if(data.state) {
+					var g = data.game;
+					var list = '';
+					for(var i = 0; i < g.length; i++) {
+
+						var signs = '';
+						if(g[i].tagList && g[i].tagList !== "null") {
+							var result = g[i].tagList.split(",");
+							var tagId = g[i].tagIdList.split(",");
+							if(result.length > 2) {
+								for(var j = 0; j < 3; j++) {
+									signs +=
+										"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+								}
+							} else {
+								for(var j = 0; j < result.length; j++) {
+									signs +=
+										"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+								}
 							}
+
 						} else {
-							for(var j = 0; j < result.length; j++) {
-								signs +=
-									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
-							}
+
 						}
 
-					} else {
+						list =
+							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
+							"<div class='game_listImg fl' style='background-image: url(" + config.img + encodeURI(g[i].icon) + ");'></div>" +
+							"<div class='fl' style='margin-top: 1.25rem;margin-left: 0.875rem;'>" +
+							"<div class='font_14'>" + g[i].game_name + "</div>" +
+							"<div class='font_12'>" +
+							"<div class='ofh game_recommend_stars'>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_starScore fl color_green'>" + g[i].grade + "</div>" +
+							"</div>" +
+							"</div>" +
+							"<div class='font_12 color_green'>" +
+							signs +
+							"</div>" +
+							"</div>" +
+							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>" +
+							"</li>";
+
+						if(i < 3) {
+							$('.remommend_listFirst').append(list)
+						} else if(i < 6) {
+							$('.remommend_listSecond').append(list)
+						} else {
+							$('.remommend_listThird').append(list)
+						}
 
 					}
-					list =
-						"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
-						"<div class='game_listImg fl' style='background-image: url(" + config.img + encodeURI(g[i].icon) + ");'></div>" +
-						"<div class='fl' style='margin-top: 1.25rem;margin-left: 0.875rem;'>" +
-						"<div class='font_14'>" + g[i].game_name + "</div>" +
-						"<div class='font_12'>" +
-						"<div class='ofh game_recommend_stars'>" +
-						"<div class='game_recommend_star fl'></div>" +
-						"<div class='game_recommend_star fl'></div>" +
-						"<div class='game_recommend_star fl'></div>" +
-						"<div class='game_recommend_star fl'></div>" +
-						"<div class='game_recommend_star fl'></div>" +
-						"<div class='game_recommend_starScore fl color_green'>" + g[i].grade + "</div>" +
-						"</div>" +
-						"</div>" +
-						"<div class='font_12 color_green'>" +
-						signs +
 
-						"</div>" +
-						"</div>" +
-						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>" +
-						"</li>";
+					$('.game_recommend_stars').each(function() {
 
-					if(i < 3) {
-						$('.remommend_listFirst').append(list)
-					} else if(i < 6) {
-						$('.remommend_listSecond').append(list)
-					} else {
-						$('.remommend_listThird').append(list)
-					}
+						var score = $(this).find('.game_recommend_starScore').eq(0).text()
+						var starNum = Math.round(score)
+
+						if(starNum % 2 == 0) {
+
+							var starFinal = (starNum / 2 - 1);
+							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
+							$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
+						} else {
+							var starFinal = ((starNum - 1) / 2)
+							$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
+							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
+						}
+					})
+
+				} else {
 
 				}
-
-				$('.game_recommend_stars').each(function() {
-
-					var score = $(this).find('.game_recommend_starScore').eq(0).text()
-					var starNum = Math.round(score)
-
-					if(starNum % 2 == 0) {
-
-						var starFinal = (starNum / 2 - 1);
-						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
-						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
-					} else {
-						var starFinal = ((starNum - 1) / 2)
-						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
-						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
-					}
-				})
-
-			} else {
-
+			},
+			error: function() {
+				$(".nav_cls_contains").css("display", "none");
+				var errorHTML = "<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+				$('.error').html(errorHTML);
 			}
-		},
-		error:function(){
-			$(".nav_cls_contains").css("display","none");
-			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
-       	    $('.error').html(errorHTML);
-		}
-	});
+		});
 	})
-
-	
 
 	//		图片部分
 
@@ -367,7 +375,7 @@ $(function() {
 		url: config.data + "game/getActiveLenOfTow?sys=1",
 		async: true,
 		success: function(data) {
-//			alert(JSON.stringify(data));
+			//			alert(JSON.stringify(data));
 			if(data.state) {
 				var g = data.game;
 				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
@@ -379,7 +387,7 @@ $(function() {
 
 	});
 
-	$('body').on("tap",".remommend_imgFirst,.remommend_imgSecond",function() {
+	$('body').on("tap", ".remommend_imgFirst,.remommend_imgSecond", function() {
 		var gameId = $(this).attr('data-id')
 		mui.openWindow({
 			url: "game_detail.html",
@@ -400,7 +408,6 @@ $(function() {
 	$('.game_rank').children().eq(0).children().css('background-color', 'white')
 	sort = "sort";
 	getRank(sort);
-	
 
 	$('.game_rank').children().eq(0).click(function() {
 		up2 = 1;
@@ -429,7 +436,7 @@ $(function() {
 		})
 	})
 
-	$('body').on("tap",".first, .second, .third",function() {
+	$('body').on("tap", ".first, .second, .third", function() {
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html",
@@ -517,30 +524,28 @@ $(function() {
 
 	//	分类结束
 
-	$('body').on("tap",".search",function() {
+	$('body').on("tap", ".search", function() {
 		mui.openWindow({
 			url: "game_search.html",
 			id: "game_search.html"
 		})
 	});
-	
-	
-  	$('body').on("tap",".bell",function() {
-       if(userId){
-		   mui.openWindow({
-			url: "../news/news_center.html",
-			id: "../news/news_center.html"
-		  });
-       }else{
-       	   mui.openWindow({
-			url:"../user/login.html",
-			id:"../user/login.html"
-		  });
-       }
+
+	$('body').on("tap", ".bell", function() {
+		if(userId) {
+			mui.openWindow({
+				url: "../news/news_center.html",
+				id: "../news/news_center.html"
+			});
+		} else {
+			mui.openWindow({
+				url: "../user/login.html",
+				id: "../user/login.html"
+			});
+		}
 	})
 
-
-	$("body").on("tap",".game_nav>div",function() {
+	$("body").on("tap", ".game_nav>div", function() {
 		$(this).addClass("color_green border_bottom").siblings().removeClass("color_green border_bottom");
 		$("." + $(this).attr("data-page")).removeClass("hidden").siblings("").addClass("hidden")
 		$('html, body').animate({
@@ -548,8 +553,7 @@ $(function() {
 		}, 'normal');
 	});
 
-
-	$('body').on("tap",".game_detail_contents > div",function() {
+	$('body').on("tap", ".game_detail_contents > div", function() {
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html"
@@ -558,155 +562,161 @@ $(function() {
 
 })
 
-
-	/*排行榜 热门 下载 ONE 切换 */
-	$('.game_rank').children().click(function() {	
-		if(rankToggle){
-			return false;
-		}
-		$('.comingsoon').remove();
-		mui('.nav_cls_contains').pullRefresh().enablePullupToRefresh();
-		mui('.nav_cls_contains').pullRefresh().refresh(true);	
-		$(".hot_rank").css("display","block");
-		page = 1;
-		sort = $(this).attr('data-sort')
-		var name = $(this).attr('data-name')
-		$(this).children().addClass('border_green color_green').css('background-color', 'white')
-		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
-		$('.game_lists').children().remove();
-	    $(".first_three").css("display","none");	
-		getRank(sort);
-	})
-	
-
-
+/*排行榜 热门 下载 ONE 切换 */
+$('.game_rank').children().click(function() {
+	if(rankToggle) {
+		return false;
+	}
+	$('.comingsoon').remove();
+	mui('.nav_cls_contains').pullRefresh().enablePullupToRefresh();
+	mui('.nav_cls_contains').pullRefresh().refresh(true);
+	$(".hot_rank").css("display", "block");
+	page = 1;
+	sort = $(this).attr('data-sort')
+	var name = $(this).attr('data-name')
+	$(this).children().addClass('border_green color_green').css('background-color', 'white')
+	$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
+	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+	$('.game_lists').children().remove();
+	$(".first_three").css("display", "none");
+	getRank(sort);
+})
+var le = document.getElementById("game_container")
+//le.addEventListener("swipeleft",function(){
+//   alert("你正在向左滑动");
+//});
+//le.addEventListener("swiperight",function(){
+//   alert("你正在向右边滑动");
+//});
+//$("body").on("swipeleft","body",function(){
+//	alert("你正在向左滑动");
+//})
 
 function getRank(sort) {
-	rankToggle=true;
-     /*阻挡掉one模块*/
-//	if(sort=="sort3"){
-//		oneRank()
-//		$('.comingsoon').remove();
-//		$(".hot_rank").css("display","none");
-//		$('.comingsoon').css("display","block");
-//		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
-//		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
-//      rankToggle=false;
-//		return false;		
-//	}
-	
-  mui.plusReady(function(){
-	$.ajax({
-		type: "get",
-		url: config.data + "game/getGameByMsg",
-		async: true,
-		data: {
-			sys: 1,
-			page: 1,
-			type: '',
-			sort: sort,
-		},
-		success: function(data) {
-			var g = data.game;
-			if(data.state) {
-				var list = '';
-				for(var i = 0; i < g.length; i++) {
-					if(i < 3) {						
-						$('.first').attr('data-id', g[0].id)
-						$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
-						$('.first .y_listName').text(g[0].game_name)
-						$('.first .game_recommend_starScore').text(g[0].grade)
-						$('.second').attr('data-id', g[1].id)
-						$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
-						$('.second .y_listName').text(g[1].game_name)
-						$('.second .game_recommend_starScore').text(g[1].grade)
-						$('.third ').attr('data-id', g[2].id)
-						$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
-						$('.third  .y_listName').text(g[2].game_name)
-						$('.third  .game_recommend_starScore').text(g[2].grade)
-						$(".first_three").css("display","flex");
-					} else {
-						var signs = '';
-						if(g[i].tagList && g[i].tagList !== "null") {
-							var result = g[i].tagList.split(",");
-							var tagId = g[i].tagId.split(",");
-							if(result.length > 2) {
-								for(var j = 0; j < 3; j++) {
-									signs +=
-										"<div  class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+	rankToggle = true;
+	/*阻挡掉one模块*/
+	//	if(sort=="sort3"){
+	//		oneRank()
+	//		$('.comingsoon').remove();
+	//		$(".hot_rank").css("display","none");
+	//		$('.comingsoon').css("display","block");
+	//		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
+	//		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
+	//      rankToggle=false;
+	//		return false;		
+	//	}
+
+	mui.plusReady(function() {
+		$.ajax({
+			type: "get",
+			url: config.data + "game/getGameByMsg",
+			async: true,
+			data: {
+				sys: 1,
+				page: 1,
+				type: '',
+				sort: sort,
+			},
+			success: function(data) {
+				var g = data.game;
+				if(data.state) {
+					var list = '';
+					for(var i = 0; i < g.length; i++) {
+						if(i < 3) {
+							$('.first').attr('data-id', g[0].id)
+							$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
+							$('.first .y_listName').text(g[0].game_name)
+							$('.first .game_recommend_starScore').text(g[0].grade)
+							$('.second').attr('data-id', g[1].id)
+							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
+							$('.second .y_listName').text(g[1].game_name)
+							$('.second .game_recommend_starScore').text(g[1].grade)
+							$('.third ').attr('data-id', g[2].id)
+							$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
+							$('.third  .y_listName').text(g[2].game_name)
+							$('.third  .game_recommend_starScore').text(g[2].grade)
+							$(".first_three").css("display", "flex");
+						} else {
+							var signs = '';
+							if(g[i].tagList && g[i].tagList !== "null") {
+								var result = g[i].tagList.split(",");
+								var tagId = g[i].tagId.split(",");
+								if(result.length > 2) {
+									for(var j = 0; j < 3; j++) {
+										signs +=
+											"<div  class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+									}
+								} else {
+									for(var j = 0; j < result.length; j++) {
+										signs +=
+											"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
+									}
 								}
+
 							} else {
-								for(var j = 0; j < result.length; j++) {
-									signs +=
-										"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
-								}
+
 							}
 
-						} else {
+							var downloadToggle = plus.runtime.isApplicationExist({
+								pname: g[i].game_packagename,
+								action: ''
+							});
+							if(downloadToggle) {
+								var buttonDown = "打开";
+							} else {
+								var buttonDown = "下载";
+							}
 
+							list +=
+								"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
+								"<div class='color_9e9e9e fl game_listScore'>" + (i + 1) + "</div>" +
+								"<div class='game_listImg fl' style='background-image: url(" + config.img + encodeURI(g[i].icon) + ");'></div>" +
+								"<div class='fl' style='margin-top: 1.25rem;margin-left: 0.875rem;'>" +
+								"<div class='font_14 overflow'>" + g[i].game_name + "</div>" +
+								"<div class='font_12'>" +
+								"<div class='ofh game_recommend_stars'>" +
+								"<div class='game_recommend_star fl'></div>" +
+								"<div class='game_recommend_star fl'></div>" +
+								"<div class='game_recommend_star fl'></div>" +
+								"<div class='game_recommend_star fl'></div>" +
+								"<div class='game_recommend_star fl'></div>" +
+								"<div class='game_recommend_starScore fl color_green' >" + g[i].grade + "</div>" +
+								"</div>" +
+								"</div>" +
+								"<div class='font_12 color_green all_signs'>" +
+								signs +
+								"</div>" +
+								"</div>" +
+								"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>" + buttonDown + "</div>" +
+								"</li>"
 						}
-                         
-
-                       var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
-					    if(downloadToggle){
-						    var buttonDown="打开";
-					   }else{
-						   var buttonDown="下载";
-					   }
-					
-                        
-                        
-						list +=
-							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
-							"<div class='color_9e9e9e fl game_listScore'>" + (i + 1) + "</div>" +
-							"<div class='game_listImg fl' style='background-image: url(" + config.img + encodeURI(g[i].icon) + ");'></div>" +
-							"<div class='fl' style='margin-top: 1.25rem;margin-left: 0.875rem;'>" +
-							"<div class='font_14 overflow'>" + g[i].game_name + "</div>" +
-							"<div class='font_12'>" +
-							"<div class='ofh game_recommend_stars'>" +
-							"<div class='game_recommend_star fl'></div>" +
-							"<div class='game_recommend_star fl'></div>" +
-							"<div class='game_recommend_star fl'></div>" +
-							"<div class='game_recommend_star fl'></div>" +
-							"<div class='game_recommend_star fl'></div>" +
-							"<div class='game_recommend_starScore fl color_green' >" + g[i].grade + "</div>" +
-							"</div>" +
-							"</div>" +
-							"<div class='font_12 color_green all_signs'>" +
-							   signs +
-							"</div>" +
-							"</div>" +
-							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>"+buttonDown+"</div>" +
-							"</li>"
 					}
+
+					$('.game_lists').append(list);
+					$('.game_recommend_stars').each(function() {
+						var score = $(this).find('.game_recommend_starScore').eq(0).text()
+						var starNum = Math.round(score)
+						if(starNum % 2 == 0) {
+							var starFinal = (starNum / 2 - 1);
+							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
+							$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
+						} else {
+							var starFinal = ((starNum - 1) / 2)
+							$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
+							$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
+						}
+					})
 				}
-
-			    $('.game_lists').append(list);
-				$('.game_recommend_stars').each(function() {
-					var score = $(this).find('.game_recommend_starScore').eq(0).text()
-					var starNum = Math.round(score)
-					if(starNum % 2 == 0) {
-						var starFinal = (starNum/ 2 - 1);
-						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_active')
-						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
-					} else {
-						var starFinal = ((starNum - 1) / 2)
-						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
-						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
-					}
-				})
+				rankToggle = false;
+			},
+			error: function() {
+				$(".nav_cls_contains").css("display", "none");
+				var errorHTML = "<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+				$('.error').html(errorHTML);
+				rankToggle = false;
 			}
-		    rankToggle=false;
-		},
-		error:function(){
-			$(".nav_cls_contains").css("display","none");
-			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
-       	    $('.error').html(errorHTML);
-       	    rankToggle=false;
-		}
+		});
 	});
-  });
 }
 
 function getRankup(page, sort) {
@@ -730,21 +740,21 @@ function getRankup(page, sort) {
 						var result = g[i].tagList.split(",");
 						var tagId = g[i].tagId.split(",");
 
-						if (result.length > 2) {
+						if(result.length > 2) {
 							for(var j = 0; j < 3; j++) {
 								signs +=
 									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
 							}
-						} else{
+						} else {
 							for(var j = 0; j < result.length; j++) {
 								signs +=
 									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
 							}
 						}
 					} else {
-      
+
 					}
-					
+
 					list +=
 						"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
 						"<div class='color_9e9e9e fl game_listScore'>" + (i + 1 + (page - 1) * 20) + "</div>" +
@@ -797,10 +807,10 @@ function getRankup(page, sort) {
 
 			}
 		},
-		error:function(){
-			$(".nav_cls_contains").css("display","none");
-			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
-       	    $('.error').html(errorHTML);
+		error: function() {
+			$(".nav_cls_contains").css("display", "none");
+			var errorHTML = "<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
+			$('.error').html(errorHTML);
 		}
 	});
 }

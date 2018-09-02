@@ -11,7 +11,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-	<body >
+	<body id="game_container" >
 		<div class="header_box" >
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green" id='header'>
@@ -345,119 +345,125 @@
 		</div>
 		<!-- 错误结束 -->
 		<script src="../../js/game/game_recommend.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			var soc = "2"
-			var page = 1;
-			var up3 = 1;
-			var up2 = 1;
-			var sort="sort";
-			activeBell()//激活头部bell回复
-			mui.init({
-				swipeBack:true,
-				pullRefresh: {
-					container: ".nav_cls_contains", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-					up: {
-						height: 50, //可选.默认50.触发上拉加载拖动距离
-						auto: false, //可选,默认false.自动上拉加载一次
-						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-						callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-					},
-					down: {
-						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-						height: '50px', //可选,默认50px.下拉刷新控件的高度,
-						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-						auto: false, //可选,默认false.首次加载自动上拉刷新一次
-						callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		<script type="text/javascript">var soc = "2"
+var page = 1;
+var up3 = 1;
+var up2 = 1;
+var sort = "sort";
+activeBell() //激活头部bell回复
+mui.init({
+	gestureConfig: {
+		tap: true, //默认为true
+		doubletap: true, //默认为false
+		longtap: true, //默认为false
+		swipe: true, //默认为true
+		drag: true, //默认为true
+		hold: false, //默认为false，不监听
+		release: false //默认为false，不监听
+	},
+	pullRefresh: {
+		container: ".nav_cls_contains", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		up: {
+			height: 50, //可选.默认50.触发上拉加载拖动距离
+			auto: false, //可选,默认false.自动上拉加载一次
+			contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+			contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+			callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		},
+		down: {
+			style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+			color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+			height: '50px', //可选,默认50px.下拉刷新控件的高度,
+			range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+			offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+			auto: false, //可选,默认false.首次加载自动上拉刷新一次
+			callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		}
+
+	}
+
+})
+
+function up() {
+	page++;
+	getRankup(page, sort)
+}
+
+function down() {
+	switch(up3) {
+		case 1:
+
+			window.location.reload();
+			break;
+		case 2:
+			mui('.nav_cls_contains').pullRefresh().refresh(true);
+			page = 1;
+			$('.game_lists').children().remove()
+			getRank(sort);
+
+			break;
+		case 3:
+			$('.game_classify_names').children().remove();
+			$('.apply_classify_names').children().remove();
+			//		游戏分类
+			$.ajax({
+				type: "get",
+				url: config.data + "game/getGameCls",
+				async: true,
+				success: function(data) {
+					if(data.state) {
+						var cls = data.cls;
+						var div = '';
+						for(var i = 0; i < cls.length; i++) {
+							div +=
+								"<div class='game_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
+								"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
+								"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
+								"</div>"
+						}
+						$('.game_classify_names').append(div)
+					} else {
+
 					}
-
 				}
+			});
 
-			})
+			//		游戏分类结束
 
-			function up() {
-				page++;
-				getRankup(page, sort)
-			}
+			//		应用分类
 
-			function down() {			
-				switch(up3) {
-					case 1:
-						
-						window.location.reload();
-						break;
-					case 2:
-						mui('.nav_cls_contains').pullRefresh().refresh(true);
-						page = 1;
-						$('.game_lists').children().remove()
-						getRank(sort);
+			$.ajax({
+				type: "get",
+				url: config.data + "game/getAppCls",
+				async: true,
+				success: function(data) {
+					if(data.state) {
+						var cls = data.cls;
+						var div = '';
+						for(var i = 0; i < cls.length; i++) {
+							div +=
+								"<div class='apply_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
+								"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
+								"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
+								"</div>"
+						}
+						$('.apply_classify_names').append(div);
+					} else {
 
-						break;
-					case 3:
-						$('.game_classify_names').children().remove();
-						$('.apply_classify_names').children().remove();
-						//		游戏分类
-						$.ajax({
-							type: "get",
-							url: config.data + "game/getGameCls",
-							async: true,
-							success: function(data) {
-								if(data.state) {
-									var cls = data.cls;
-									var div = '';
-									for(var i = 0; i < cls.length; i++) {
-										div +=
-											"<div class='game_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
-											"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
-											"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
-											"</div>"
-									}
-									$('.game_classify_names').append(div)
-								} else {
-
-								}
-							}
-						});
-
-						//		游戏分类结束
-
-						//		应用分类
-
-						$.ajax({
-							type: "get",
-							url: config.data + "game/getAppCls",
-							async: true,
-							success: function(data) {
-								if(data.state) {
-									var cls = data.cls;
-									var div = '';
-									for(var i = 0; i < cls.length; i++) {
-										div +=
-											"<div class='apply_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
-											"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
-											"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
-											"</div>"
-									}
-									$('.apply_classify_names').append(div);
-								} else {
-
-								}
-							}
-						});
-						break;
-					default:
-						break;
+					}
 				}
-				setTimeout(function() {
-					mui('.nav_cls_contains').pullRefresh().endPulldown(true);
-				}, 1000);
-                
-			}
-			window.addEventListener('reload',function(event){
-			      activeBell()
-		     });
-		</script>
+			});
+			break;
+		default:
+			break;
+	}
+	setTimeout(function() {
+		mui('.nav_cls_contains').pullRefresh().endPulldown(true);
+	}, 1000);
+
+}
+window.addEventListener('reload', function(event) {
+	activeBell()
+});</script>
 	</body>
 </html>

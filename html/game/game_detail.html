@@ -48,7 +48,7 @@
 							</div>	
 		    			</div>
 					</div>
-				    <div class="simHei color_7a7a7a font_14 game_signs" style="clear:both;margin:1rem 0;padding-top:1rem;height:1.3rem;display: flex;align-items: center;;">
+				    <div class="simHei color_7a7a7a font_14 game_signs">
 							<!--<span>标签 |</span>
 						<span>标签 |</span>
 						<span>标签</span>-->
@@ -412,6 +412,9 @@
 				<!--单页面父盒子2结束-->
 			</div>
 		</div>
+	    <script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
 			mui.previewImage();
 			var page = 1,pageIndex="detail";
@@ -454,6 +457,20 @@
 			});
 
 			function up() {			
+				if(pageIndex=="assess"){
+					assess_up()
+				}else{
+					strategy_up()
+				}
+
+			}
+			
+			function strategy_up(){
+				mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+			}
+			
+			function assess_up(){
+//				alert(commentModule)
 				if(!commentModule) {
 					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
 				} else {
@@ -508,7 +525,6 @@
 						}
 					});
 				}
-
 			}
 			function down() {
 				switch (pageIndex){
@@ -531,8 +547,6 @@
              detail_assess();
           });          
 		</script>
-		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.zoom.js"></script>
-		<script src="../../js/mui.previewimage.js"></script>
+
 	</body>
 </html>

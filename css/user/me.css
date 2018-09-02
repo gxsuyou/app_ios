@@ -1,6 +1,5 @@
 body{
 	background-color: rgb(245,245,245);
-	 /*background-image: url(../../Public/image/userhead.png);*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -10,8 +9,7 @@ input{
    outline:none;  
    border:0px;  
 }  
-.me_header{
-	
+.me_header{	
 	width: 100%;
 	height: 10.75rem;
 	padding-top: 3rem;
@@ -28,10 +26,14 @@ input{
 	right: 1rem;
 	width: 1.6rem;
 	height: 1.6rem;
+	padding-top:0.5rem;
 	background-image:  url(../../Public/image/shezhi.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 .me_share{
 	right: 4rem;
@@ -79,43 +81,6 @@ input{
 .mui-table-view{
 	margin-top: 1rem;
 }
-/*.me_name > input{
-	height: 0.8rem;
-	width: 3rem;
-	margin-left: 1rem;
-	line-height: 0.8rem;
-	border-radius: 10px;
-	background-color: black;
-}*/
-
-/*.me_money > div{
-	width: 5.4rem;
-}*/
-/*.me_input1{
-	background-image: url(../../Public/image/coin.png);
-	background-repeat:no-repeat;
-	background-position: left;
-	background-size: 1rem 1rem;
-}
-.me_input2{
-	margin-left: 1rem;
-	background-image: url(../../Public/image/ticket.png);
-	background-repeat:no-repeat;
-	background-position: left;
-	background-size: 1rem 1rem;
-}*/
-/*.me_scorenum{
-	margin-right: 0.6rem;
-}*/
-/*.mui-content>.mui-table-view:first-child{
-	margin-top: 0;
-}
-.mui-grid-view.mui-grid-9{
-	background-color: white;
-}
-.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
-	color: rgb(170,170,170);
-}*/
 
 .mui-table-view:before{
 	height: 0;
@@ -169,70 +134,5 @@ input{
 .mui-table-view-cell>a:not(.mui-btn){
 	margin:-0.875rem -0.6rem ;
 }
-/*.mui-navigate-right::before{
-	content: "";
-	width: 26px;
-	height: 26px;
-	left: 10px;
-	background-color: red;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}*/
 
 
-
-
-.content{
-	width: 748px;
-	height:618px;
-	position: absolute;
-	left: 410px;
-	top: 60px;
-}
-
-.content div {
-	background: #ffffff;
-	width: 4px;
-	height: 4px;
-	border: 6px #009FD9 solid;
-	border-radius: 50%;
-	position: relative;
-}
-
-.content p,
-.content span {
-	position: absolute;
-	width: 4px;
-	height: 4px;
-	border-radius: 50%;
-	animation: myfirst 1.5s infinite;
-	box-shadow: 0px 0px 1px #009FD9;
-	margin: 0px;
-}
-
-.content span {
-	animation-delay: 0.8s;
-}
-
-.content .one {
-	position: absolute;
-	left: 600px;
-	top: 100px;
-}
-
-.content .ten {
-	background: #A2A9B4;
-	position: absolute;
-	left: 300px;
-	top: 350px;
-}
-
-@keyframes myfirst {
-	10% {
-		transform: scale(100);
-	}
-	100% {
-		transform: scale(800);
-	}
-}

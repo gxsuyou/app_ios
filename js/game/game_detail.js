@@ -31,7 +31,6 @@ $(function() {
 		//相关评论结束
 
 		$('body').on('tap', '.game_similarContent', function() {
-
 			mui.openWindow({
 				url: 'game_detail.html',
 				id: 'game_detail.html',
@@ -71,7 +70,7 @@ $(function() {
 			detail_main()
 			pageIndex = "detail";
 			commentModule = false;
-			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+//			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 			$(this).addClass('game_detail_detail_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_assess_active').removeClass('game_detail_strategy_active')
 			$('.game_detail_details').removeClass('hidden').siblings('div').addClass('hidden');
 
@@ -82,6 +81,8 @@ $(function() {
 		//评论页开始
 
 		$('body').on("tap", ".game_detail_assess", function() {
+//			alert(pageIndex)
+			mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 			detail_assess();
 		});
 
@@ -90,6 +91,8 @@ $(function() {
 		//		攻略页开始
 
 		$('body').on("tap", ".game_detail_strategy", function() {
+//			alert(pageIndex)
+			mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 			detail_strategy();
 		});
 
@@ -528,6 +531,7 @@ function detail_strategy() {
 					}
 					$('.news_post_commentContentstra').append(div);
 				} else {
+					mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 					$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
 
 				}
@@ -580,7 +584,7 @@ function detail_assess() {
 		},
 		success: function(data) {
 
-//			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;
 				var total_10 = 0,

@@ -1,16 +1,15 @@
 $(function() {
-	mui.plusReady(function(){
+	mui.plusReady(function() {
 		var backHeight = plus.navigator.getStatusbarHeight();
 		var finalHeight = parseInt(backHeight) + 11 + "px";
-		$('.back').css('top',finalHeight)
+		$('.back').css('top', finalHeight)
 		plus.webview.currentWebview().setStyle({
-            softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
-        });
+			softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
+		});
 	});
-	$('body').on("tap",".back",function(){
+	$('body').on("tap", ".back", function() {
 		mui.back();
 	})
-	
 
 	$('.login_login').on("tap", function() {
 		var username = $.trim($('#user-name').val());
@@ -33,28 +32,29 @@ $(function() {
 						} else {
 							var userInfo = JSON.stringify(data.user);
 							var userId = data.user.id;
-							window.localStorage.setItem("rememberUser","true");
+							window.localStorage.setItem("rememberUser", "true");
 							window.localStorage.setItem("userInfo", userInfo);
 							window.localStorage.setItem("userId", userId);
-                           plus.webview.close("html/user/me.html");
-                           plus.webview.close("html/news/news.html");
-                           plus.webview.close("html/game/game_recommend.html");
-                           plus.webview.close("html/strategy/strategy.html");
-                           plus.webview.close("html/play/play.html");
-     
-                           $(".mui-input-clear,.mui-input-password").blur();
+							var all = plus.webview.all();
+							var current = plus.webview.currentWebview().id;
+							for(var i = 0, len = all.length; i < len; i++) {
+								if(all[i].id !== current) {
+									all[i].close();
+								}
+							}
 
-                           
+							$(".mui-input-clear,.mui-input-password").blur();
+
 							mui.openWindow({
-								url:'../../index.html',
-								id:'index.html',
-								id:'H5BD8D7F0',
-								createNew:true,
-								show:{
-      								autoShow:true,//页面loaded事件发生后自动显示，默认为true
-      								aniShow:"none"//页面显示动画，默认为”slide-in-right“；
-      
-    						    }								
+								url: '../../index.html',
+								id: 'index.html',
+								id: 'H5BD8D7F0',
+								createNew: true,
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									aniShow: "none" //页面显示动画，默认为”slide-in-right“；
+
+								}
 							})
 
 						}
@@ -71,17 +71,17 @@ $(function() {
 		}
 	})
 
-	$('.forget').click(function(){
+	$('.forget').click(function() {
 		mui.openWindow({
-			url:'find_password.html',
-			id:'find_password.html'
+			url: 'find_password.html',
+			id: 'find_password.html'
 		})
 	})
 
 	$('.register').on("click", function() {
 		mui.openWindow({
 			url: 'register.html',
-			id:'register.html'
+			id: 'register.html'
 		})
 	})
 	/*记住用户名和密码*/
