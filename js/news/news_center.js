@@ -60,7 +60,7 @@ function getSigns() {
 					data.num1 = 99
 				}
 				$(".nav").children("div:nth-child(2)").html("资讯<div class='sign_num' >" + data.num1 + "</div>");
-			}else{
+			} else {
 				$(".nav").children("div:nth-child(2)").html("资讯");
 			}
 
@@ -69,7 +69,7 @@ function getSigns() {
 					data.num2 = 99
 				}
 				$(".nav").children("div:nth-child(3)").html("攻略<div class='sign_num' >" + data.num2 + "</div>");
-			}else{
+			} else {
 				$(".nav").children("div:nth-child(3)").html("攻略");
 			}
 
@@ -78,7 +78,7 @@ function getSigns() {
 					data.num3 = 99
 				}
 				$(".nav").children("div:nth-child(4)").html("游戏<div class='sign_num' >" + data.num3 + "</div>");
-			}else{
+			} else {
 				$(".nav").children("div:nth-child(4)").html("游戏");
 			}
 
@@ -87,17 +87,75 @@ function getSigns() {
 }
 
 /* 已读 */
-function readed(sort){
+function readed(sort) {
 	$.ajax({
 		type: "get",
 		url: config.data + "users/getReading",
 		async: true,
 		data: {
-			uid:userId,
-			type:sort
+			uid: userId,
+			type: sort
 		},
-		success: function(data){
+		success: function(data) {
 			getSigns()
 		}
 	})
 }
+
+function center_info() {
+
+	for(n = 4; n < 8; n++) {
+//		$.ajax({
+//			type: "get",
+//			url: config.data + "users/noticeAdd",
+//			async: true,
+//			data: {
+//				uid: userId,
+//				type:n
+//			},
+//			success: function(data) {
+//				alert(JSON.stringify(data))
+//			}
+//		})
+	}
+
+	//	$.ajax({
+	//		type: "get",
+	//		url: config.data + "users/noticeAdd",
+	//		async: true,
+	//		data: {
+	//			uid: userId,
+	//			type: sort
+	//		},
+	//		success: function(data) {
+	//			getSigns()
+	//		}
+	//	})
+	//	
+
+	var content = "<div class='centerInfo ofh'>" +
+		"<div class='center_icon' style='background-image:url(../../Public/image/center_info_fuli.png)'></div>" +
+		"<div class='center_info'>" +
+		"<div>ONE福利</div>" +
+		"<div>颜值超高的月饼你pick了【中秋佳节】</div>" +
+		"</div>" +
+		"<div class='center_time'>" +
+		"<div>9月20日</div>" +
+		"<div class='sign_num'>11</div>" +
+		"</div>" +
+		"</div>";
+	$('.notice_lists').append(content);
+	mui('.news_center').pullRefresh().endPullupToRefresh(true);
+}
+
+$("body").on("tap", ".centerInfo", function() {
+	mui.openWindow({
+		url: "new_center_info.html",
+		id: "new_center_info.html",
+		extras: {
+			//			infoName:infoName,
+			//			infoId:infoId
+			infoName: "ONE福利"
+		}
+	})
+})

@@ -9,7 +9,7 @@ var game;
 var gameImg;
 $(function() {
 	mui.plusReady(function() {
-//		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+		mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
@@ -19,7 +19,7 @@ $(function() {
 			mui.openWindow({
 				url: "../news/news_post.html",
 				id: "../news/news_post.html",
-				extras:{
+				extras: {
 					newsId: $(this).attr('data-id'),
 					gameId: gameId
 				}
@@ -70,7 +70,7 @@ $(function() {
 			detail_main()
 			pageIndex = "detail";
 			commentModule = false;
-//			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+			//			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 			$(this).addClass('game_detail_detail_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_assess_active').removeClass('game_detail_strategy_active')
 			$('.game_detail_details').removeClass('hidden').siblings('div').addClass('hidden');
 
@@ -81,7 +81,7 @@ $(function() {
 		//评论页开始
 
 		$('body').on("tap", ".game_detail_assess", function() {
-//			alert(pageIndex)
+			//			alert(pageIndex)
 			mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 			detail_assess();
 		});
@@ -89,10 +89,8 @@ $(function() {
 		//		评论页结束		
 
 		//		攻略页开始
-
 		$('body').on("tap", ".game_detail_strategy", function() {
-//			alert(pageIndex)
-			mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
+			
 			detail_strategy();
 		});
 
@@ -457,13 +455,13 @@ $("body").on("tap", ".strategy_indent", function() {
 })
 
 function detail_strategy() {
+	strategyPage = 1;
 	$('.news_post_commentContentstra').children().remove();
 	commentModule = false;
 	pageIndex = "strategy";
-//	mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+	mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 	$(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
-	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden');
-	//		获取游戏攻略
+	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden'); //获取游戏攻略	
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getStrategyByGameName",
@@ -473,7 +471,7 @@ function detail_strategy() {
 			page: 1
 		},
 		success: function(data) {
-//			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			//			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -530,14 +528,17 @@ function detail_strategy() {
 
 					}
 					$('.news_post_commentContentstra').append(div);
+
+					if(str.length < 6) {
+						mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+					} else {
+						mui('#game_detailContent').pullRefresh().endPullupToRefresh(false);
+					}
+
 				} else {
 					mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 					$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
-
 				}
-
-			} else {
-
 			}
 		}
 	});
@@ -692,16 +693,16 @@ function getAccess() {
 						scoreStar += "<div></div>"
 					}
 
-					var star = "<div class='stars'>" +scoreStar + "</div>"
+					var star = "<div class='stars'>" + scoreStar + "</div>"
 
 					div +=
 						"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 						"<div class='ofh'>" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-						"<div class='fl'>"+
+						"<div class='fl'>" +
 						"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +
-						star+
-						"</div>"+
+						star +
+						"</div>" +
 						"</div>" +
 						"<div class='game_comment_content' >" +
 						"<div class='comment_content font_14' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'>" + com[i].content + "</div>" +
@@ -719,29 +720,32 @@ function getAccess() {
 						"</div>"
 				}
 				$('.news_post_commentContents').empty().append(div);
+				if(com.length < 10) {
+					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+				} else {
+					mui('#game_detailContent').pullRefresh().endPullupToRefresh(false);
+
+				}
 			}
 		}
 	});
 
 }
 
-
-
 /*去到更多标签*/
-$("body").on("tap",".sign_more",function(){
+$("body").on("tap", ".sign_more", function() {
 	mui.openWindow({
-			url: "game_more_list.html",
-			id: "game_more_list.html",
-			extras: {
-				gameId:gameId,
-				gameName:gameName
-			}
-		})
+		url: "game_more_list.html",
+		id: "game_more_list.html",
+		extras: {
+			gameId: gameId,
+			gameName: gameName
+		}
+	})
 })
 
-
-
 detail_main();
+
 function detail_main() {
 	setTimeout(function() {
 		$.ajax({
@@ -791,26 +795,26 @@ function detail_main() {
 					$('.game_infoImg').css('background-image', 'url(' + config.img + encodeURI(g.icon) + ')');
 					$('.game_call').text(g.game_name);
 					$('.game_nameHeader').text(g.game_name);
-					$('.game_company').text(g.game_company);				
+					$('.game_company').text(g.game_company);
 					var sp = "";
 					$('.game_infoScore').text(g.grade + "分");
 					$('.gameScore').text(g.grade);
 					if(g.tagList) {
 						var t = g.tagList.split(',')
-						var Id=g.tagId.split(",")
-						if(t.length>6){
-						   for(var i = 0; i < 6; i++) {
-								sp += "<span class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
-							  }
-					    } else {
-							for(var i = 0; i < t.length; i++) {
-								sp += "<span  class='color_green signs_box' data-tagid='"+Id[i]+"'>" + t[i] + "</span>"
+						var Id = g.tagId.split(",")
+						if(t.length > 6) {
+							for(var i = 0; i < 6; i++) {
+								sp += "<span class='color_green signs_box' data-tagid='" + Id[i] + "'>" + t[i] + "</span>"
 							}
-					    }
+						} else {
+							for(var i = 0; i < t.length; i++) {
+								sp += "<span  class='color_green signs_box' data-tagid='" + Id[i] + "'>" + t[i] + "</span>"
+							}
+						}
 					}
 					$('.game_signs').empty().append(sp);
 					$('.game_signs').append("<img style='height:1.3rem;margin-left:0.3rem' class='sign_more'  src='../../Public/image/sign_more_btn.png' >")
-					
+
 					$('.game_simpleIntro_content').html(g.game_detail);
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载");
 					$('.game_particular_value').children().eq(1).text(g.game_version);
@@ -914,24 +918,19 @@ function detail_main() {
 
 }
 
-
 /* 点击标签 */
-$("body").on("tap",".game_signs > span",function(){
-		var tagId = $(this).attr("data-tagid");
-		var tagName = $(this).text();
-		mui.openWindow({
-			url: "game_classify_list.html",
-			id: "game_classify_list.html",
-			extras: {
-				tagId: tagId,
-				tagName: tagName
-			}
-		})
+$("body").on("tap", ".game_signs > span", function() {
+	var tagId = $(this).attr("data-tagid");
+	var tagName = $(this).text();
+	mui.openWindow({
+		url: "game_classify_list.html",
+		id: "game_classify_list.html",
+		extras: {
+			tagId: tagId,
+			tagName: tagName
+		}
+	})
 })
-
-
-
-
 
 /*
  点击删除游戏评论

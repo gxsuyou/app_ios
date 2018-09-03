@@ -247,16 +247,16 @@ $(function() {
 	//	$(".game_topicBox").on("swiperight", function() {
 	//		alert(2)
 	//	});
-//	window.addEventListener("swiperight", function(e) {
-//		//默认滑动角度在-45度到45度之间，都会触发右滑菜单，为避免误操作，可自定义限制滑动角度；
-//		console.log(e.detail.angle)
-//		if(Math.abs(e.detail.angle) < 4) {
-//			alert(1)
-//		}
-//	});
-  $("body").on("touchmove",function (e) {
-  	console.log(1)
-  });
+	//	window.addEventListener("swiperight", function(e) {
+	//		//默认滑动角度在-45度到45度之间，都会触发右滑菜单，为避免误操作，可自定义限制滑动角度；
+	//		console.log(e.detail.angle)
+	//		if(Math.abs(e.detail.angle) < 4) {
+	//			alert(1)
+	//		}
+	//	});
+	$("body").on("touchmove", function(e) {
+		console.log(1)
+	});
 
 	$('body').on('tap', '.check_more', function() {
 		var tagId = $(this).attr("data-tagid");
@@ -378,8 +378,8 @@ $(function() {
 			//			alert(JSON.stringify(data));
 			if(data.state) {
 				var g = data.game;
-				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
-				$('.remommend_imgSecond').css('background-image', 'url(' + config.img + encodeURI(g[1].game_title_img) + ')').attr("data-id", g[1].id)
+				//				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
+				$('.remommend_imgSecond').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[1].id)
 			} else {
 
 			}
@@ -591,6 +591,13 @@ var le = document.getElementById("game_container")
 //$("body").on("swipeleft","body",function(){
 //	alert("你正在向左滑动");
 //})
+
+$("body").on("tap", ".oneRank_index", function() {
+	mui.openWindow({
+		url: "game_one_rank.html",
+		id: "game_one_rank.html"
+	})
+})
 
 function getRank(sort) {
 	rankToggle = true;

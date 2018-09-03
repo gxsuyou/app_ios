@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>游戏详情</title>
@@ -7,11 +8,12 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/game/game_detail.css" />
-		<link rel="stylesheet" type="text/css" href="../../Public/css/overImage.css"/>
+		<link rel="stylesheet" type="text/css" href="../../Public/css/overImage.css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+
 	<body>
 		<!--重写back-->
 		<div class="backImg"></div>
@@ -32,24 +34,24 @@
 					<div class="game_infoImg fl"></div>
 					<div class="game_infoArt fl">
 						<div class="simHei color_282828 game_call overflow">游戏名称</div>
-						<div class="font_12 simHei color_9e9e9e game_company">游戏厂商</div>	
-						
-					</div>	
+						<div class="font_12 simHei color_9e9e9e game_company">游戏厂商</div>
+
+					</div>
 					<div class="fr game_infoScores">
 						<div class="ofh">
 							<div class="green_star fl"></div>
 							<div class="fl game_infoScore"></div>
 						</div>
 						<!--<div class="download_button color_white tac backgroundColor_green font_12 fr">下载</div>-->
-						<div >
-			    			<div class="download_btn download_button color_white tac  font_12 fr game_detail_download" id="game_detail_download">
-									<div class="download_loading" id="loading" ></div>
-									<div class="download_btn_text">下载</div>	
-							</div>	
-		    			</div>
+						<div>
+							<div class="download_btn download_button color_white tac  font_12 fr game_detail_download" id="game_detail_download">
+								<div class="download_loading" id="loading"></div>
+								<div class="download_btn_text">下载</div>
+							</div>
+						</div>
 					</div>
-				    <div class="simHei color_7a7a7a font_14 game_signs">
-							<!--<span>标签 |</span>
+					<div class="simHei color_7a7a7a font_14 game_signs">
+						<!--<span>标签 |</span>
 						<span>标签 |</span>
 						<span>标签</span>-->
 					</div>
@@ -67,7 +69,7 @@
 				<div class="game_detail_details ">
 					<!--游戏详情的详情页面-->
 					<div class="game_detail_contents ui_flex_wrapper ui_flex_h mui-content-padded">
-						
+
 						<!--<div style="margin:0.625rem 0.625rem;margin-left: 0;margin-top: 0.125rem;">
 							<div class="game_detail_content"></div>
 						</div>
@@ -112,7 +114,7 @@
 
 					<div class="game_relatedInfo backgroundColor_white" style="margin-bottom:0.6rem;">
 						<span class="game_simpleIntro  simHei color_282828 ofh" style="margin-bottom: 0.4rem;">相关资讯</span>
-						<div class="game_relatedInfocontents ui_flex_wrapper ui_flex_h" >
+						<div class="game_relatedInfocontents ui_flex_wrapper ui_flex_h">
 							<!--<div class="game_relatedInfocontent">
 								<div class="game_relatedInfocontentImg"></div>
 								<div class="game_relatedInfocontentArt font_14 simHei color_282828">文章标题kkk</div>
@@ -178,8 +180,8 @@
 
 						</div>-->
 						</div>
-					</div>				
-					<div class="line_cut"></div>					
+					</div>
+					<div class="line_cut"></div>
 					<div class="game_similar simHei">
 						<span class="game_simpleIntro  simHei color_282828 ofh" style="margin-bottom: 0.4rem;">相似游戏</span>
 						<div class="game_similarContents  ui_flex_wrapper ui_flex_h">
@@ -351,10 +353,9 @@
 				<!--单页面父盒子2-->
 				<div class="game_detail_walkThroughs hidden">
 					<div class="game_comments simHei">
-						
-						
+
 						<div class="news_post_commentContentstra ofh backgroundColor_white">
-							
+
 							<!--<div class="news_post_commentContent ofh">
 
 								<div class="ofh">
@@ -412,29 +413,30 @@
 				<!--单页面父盒子2结束-->
 			</div>
 		</div>
-	    <script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.zoom.js"></script>
 		<script src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
 			mui.previewImage();
-			var page = 1,pageIndex="detail";
+			var page = 1,
+				pageIndex = "detail",
+				strategyPage = 1;
 			/*首页详情出来更新*/
-			window.addEventListener('indexRefresh',function(event){
-			    indexCommit();
-		    });
-		    /*评论出来更新*/
-		    window.addEventListener('accessRefresh',function(){
-		    	detail_assess();
-		    })
-		    
-		 		    
+			window.addEventListener('indexRefresh', function(event) {
+				indexCommit();
+			});
+			/*评论出来更新*/
+			window.addEventListener('accessRefresh', function() {
+				detail_assess();
+			})
+
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
-			    gestureConfig: {
-			        tap: true, //默认为true
-			        doubletap: true, //默认为false
-		            longtap: true, //默认为false
-		        },
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {
@@ -456,21 +458,94 @@
 				}
 			});
 
-			function up() {			
-				if(pageIndex=="assess"){
+			function up() {
+				if(pageIndex == "assess") {
 					assess_up()
-				}else{
+				} else {
 					strategy_up()
 				}
 
 			}
-			
-			function strategy_up(){
-				mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+
+			function strategy_up() {
+				strategyPage++
+				$.ajax({
+					type: "get",
+					url: config.data + "game/getStrategyByGameName",
+					async: true,
+					data: {
+						gameName: gameName,
+						page:strategyPage
+					},
+					success: function(data) {
+						if(data.state) {
+							var str = data.strategy;
+							var div = '';
+								for(var i = 0; i < str.length; i++) {
+									if(str[i].src) {
+										var src = "src"
+									} else {
+										var src = "hidden"
+									}
+
+									if(str[i].top_img_src == "" || str[i].top_img_src == null) {
+										imgSrc = "";
+										imgToggle = "none";
+									} else {
+										imgSrc = str[i].top_img_src;
+										imgToggle = "block";
+									}
+									var detail = $(str[i].detail).text();
+									portrait = "../../Public/image/morentouxiang.png";
+									if(str[i].portrait == 0 || str[i].portrait == null) {
+
+									} else {
+										portrait = str[i].portrait;
+									}
+									div +=
+										"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
+										"<div class='ofh'>" +
+										"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+										"<div  class='timeName'>" +
+										"<div class='comment_user font_14 font_bold fl'>" + str[i].nick_name + "</div>" +
+										"<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
+										"</div>" +
+										"</div>" +
+										"<div class='game_comment_content'style='margin-top:0.4rem;' >" +
+										"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
+										"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
+										"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
+										"<span>" + str[i].title + "</span>" +
+										"</div>" +
+										"<div  class='strategy_content'>" + detail + "</div>" +
+										"</div>" +
+										//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+										"<div class='comment_info'>" +
+										"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
+										//									 "<div class='thumb'></div>" +
+										//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+										"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
+										"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
+										"</div>" +
+										"</div>" +
+										"</div>" +
+										"</div>"
+
+								}
+								$('.news_post_commentContentstra').append(div);
+
+								if(str.length < 6) {
+									mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+								} else {
+									mui('#game_detailContent').pullRefresh().endPullupToRefresh(false);
+								}
+
+						}
+					}
+				});
 			}
-			
-			function assess_up(){
-//				alert(commentModule)
+
+			function assess_up() {
 				if(!commentModule) {
 					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
 				} else {
@@ -485,7 +560,7 @@
 						},
 						success: function(data) {
 							if(data.state) {
-                               
+
 								var com = data.comment;
 								var div = '';
 								for(var i = 0; i < com.length; i++) {
@@ -526,27 +601,29 @@
 					});
 				}
 			}
+
 			function down() {
-				switch (pageIndex){
-	              case "detail":
-	                 detail_main()
-					break;
+				switch(pageIndex) {
+					case "detail":
+						detail_main()
+						break;
 					case "assess":
-					 detail_assess();
-					break;
+						detail_assess();
+						break;
 					case "strategy":
-					 detail_strategy();
-					break;
-				}				
+						detail_strategy();
+						break;
+				}
 				setTimeout(function() {
 					mui('#game_detailContent').pullRefresh().endPulldown(true);
 				}, 1000);
 			}
 
-          window.addEventListener('assess',function(event){        
-             detail_assess();
-          });          
+			window.addEventListener('assess', function(event) {
+				detail_assess();
+			});
 		</script>
 
 	</body>
+
 </html>

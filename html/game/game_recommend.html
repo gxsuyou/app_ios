@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>游戏推荐页面</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/game/game_recommend.css" />	
+		<link rel="stylesheet" type="text/css" href="../../css/game/game_recommend.css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-	<body id="game_container" >
-		<div class="header_box" >
+
+	<body id="game_container">
+		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green" id='header'>
 				<div class="header_title"></div>
@@ -34,7 +36,7 @@
 				</div>
 				<!--轮播图结束-->
 				<div class="game_shows backgroundColor_white"></div>
-				<div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBox">
+				<!--<div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBox">
 					<div style="border-radius: 5px;">
 						<div class="game_recommend_topicImg"></div>
 						<div class="game_recommend_topicArts backgroundColor_white font_14 ofh">
@@ -42,16 +44,19 @@
 							<div class="fl game_recommend_topicArtsart color_282828"></div>
 						</div>
 					</div>
+				</div>-->
+				<div style="width:100%;margin:0.5rem 0rem" class="oneRank_index">
+				   <img  src="../../Public/image/one_rank.png" style="width:96%;height:auto;display:block;margin:0 auto;">
 				</div>
 				<!--标签开始-->
-				<div class="game_signsContent" >
+				<div class="game_signsContent">
 					<!--<div class=game_signsContent"backgroundColor_white game_signsAll">-->
-						<!--<div class="ofh" style="height: 2.5rem;line-height: 2.5rem;">
+					<!--<div class="ofh" style="height: 2.5rem;line-height: 2.5rem;">
 							<div class="font_14 color_282828 fl">标签名</div>
 							<div class="font_12 color_green fr check_more" style="margin-right: 0.9375rem;">查看更多</div>
 						</div>
 						<div class="game_detail_contents ui_flex_wrapper ui_flex_h">-->
-							<!--<div style="margin-right: 1.0625rem;">
+					<!--<div style="margin-right: 1.0625rem;">
 								<div class="game_detail_content">
 									<div class="game_signTop">
 										<div class="game_signTopimg">
@@ -78,12 +83,26 @@
 										</div>
 									</div>
 								</div>
-							</div>-->	
-						<!--</div>-->
+							</div>-->
+					<!--</div>-->
 					<!--</div>-->
 				</div>
 				<!--标签结束-->
-				<div style="padding:0.4375rem;" class="backgroundColor_gray game_topicBoxbot" >
+
+                <div style="padding: 0.4375rem;" class="backgroundColor_gray game_topicBox">
+					<div style="border-radius: 5px;">
+						<div class="game_recommend_topicImg"></div>
+						<div class="game_recommend_topicArts backgroundColor_white font_14 ofh">
+							<div class="fl game_recommend_topicArtstitle color_green"></div>
+							<div class="fl game_recommend_topicArtsart color_282828"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="remommend_listFirst">
+
+				</div>
+				<div style="padding:0.4375rem;" class="backgroundColor_gray game_topicBoxbot">
 					<div style="border-radius: 5px;">
 						<div class="game_recommend_topicImg"></div>
 						<div class="game_recommend_topicArts backgroundColor_white font_14">
@@ -93,20 +112,17 @@
 					</div>
 				</div>
 				
-				<div class="remommend_listFirst">
-					
-				</div>
-				<div class="remommend_imgFirst">
-					
-				</div>
+				<!--<div class="remommend_imgFirst">
+
+				</div>-->
 				<div class="remommend_listSecond">
-					
+
 				</div>
 				<div class="remommend_imgSecond">
-					
+
 				</div>
 				<div class="remommend_listThird">
-					
+
 				</div>
 			</div>
 
@@ -155,7 +171,7 @@
 					<!--可复用竖向list end-->
 					<div class="ui_flex_wide second">
 
-	     				<div class="y_list">
+						<div class="y_list">
 							<div class="y_listImg"></div>
 							<div class="font_14 color_282828 y_listName tac">孤岛先锋</div>
 							<div class="color_green tac font_12" style="margin: 0 auto;">
@@ -195,9 +211,9 @@
 					</div>
 				</div>
 				<div class="oneRank">
-				  
+
 				</div>
-                <ul class="game_lists">
+				<ul class="game_lists">
 					<!--<li class="game_list ofh">
 						<div class="color_9e9e9e fl game_listScore">4</div>
 						<div class="game_listImg fl"></div>
@@ -272,8 +288,7 @@
 				</ul>
 			</div>
 			<!--排行榜切换结束-->
-			
-			
+
 			<!--分类开始-->
 			<div class="game_classifys hidden">
 				<div class="game_classify">
@@ -341,129 +356,132 @@
 		<!--定位结束-->
 		<!-- 错误开始 -->
 		<div class="error">
-			
+
 		</div>
 		<!-- 错误结束 -->
 		<script src="../../js/game/game_recommend.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">var soc = "2"
-var page = 1;
-var up3 = 1;
-var up2 = 1;
-var sort = "sort";
-activeBell() //激活头部bell回复
-mui.init({
-	gestureConfig: {
-		tap: true, //默认为true
-		doubletap: true, //默认为false
-		longtap: true, //默认为false
-		swipe: true, //默认为true
-		drag: true, //默认为true
-		hold: false, //默认为false，不监听
-		release: false //默认为false，不监听
-	},
-	pullRefresh: {
-		container: ".nav_cls_contains", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-		up: {
-			height: 50, //可选.默认50.触发上拉加载拖动距离
-			auto: false, //可选,默认false.自动上拉加载一次
-			contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-			contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-			callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		},
-		down: {
-			style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-			color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-			height: '50px', //可选,默认50px.下拉刷新控件的高度,
-			range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-			offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-			auto: false, //可选,默认false.首次加载自动上拉刷新一次
-			callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		}
-
-	}
-
-})
-
-function up() {
-	page++;
-	getRankup(page, sort)
-}
-
-function down() {
-	switch(up3) {
-		case 1:
-
-			window.location.reload();
-			break;
-		case 2:
-			mui('.nav_cls_contains').pullRefresh().refresh(true);
-			page = 1;
-			$('.game_lists').children().remove()
-			getRank(sort);
-
-			break;
-		case 3:
-			$('.game_classify_names').children().remove();
-			$('.apply_classify_names').children().remove();
-			//		游戏分类
-			$.ajax({
-				type: "get",
-				url: config.data + "game/getGameCls",
-				async: true,
-				success: function(data) {
-					if(data.state) {
-						var cls = data.cls;
-						var div = '';
-						for(var i = 0; i < cls.length; i++) {
-							div +=
-								"<div class='game_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
-								"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
-								"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
-								"</div>"
-						}
-						$('.game_classify_names').append(div)
-					} else {
-
+		<script type="text/javascript">
+			var soc = "2"
+			var page = 1;
+			var up3 = 1;
+			var up2 = 1;
+			var sort = "sort";
+			activeBell() //激活头部bell回复
+			mui.init({
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: false, //默认为false，不监听
+					release: false //默认为false，不监听
+				},
+				pullRefresh: {
+					container: ".nav_cls_contains", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					},
+					down: {
+						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 					}
+
 				}
-			});
 
-			//		游戏分类结束
+			})
 
-			//		应用分类
+			function up() {
+				page++;
+				getRankup(page, sort)
+			}
 
-			$.ajax({
-				type: "get",
-				url: config.data + "game/getAppCls",
-				async: true,
-				success: function(data) {
-					if(data.state) {
-						var cls = data.cls;
-						var div = '';
-						for(var i = 0; i < cls.length; i++) {
-							div +=
-								"<div class='apply_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
-								"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
-								"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
-								"</div>"
-						}
-						$('.apply_classify_names').append(div);
-					} else {
+			function down() {
+				switch(up3) {
+					case 1:
 
-					}
+						window.location.reload();
+						break;
+					case 2:
+						mui('.nav_cls_contains').pullRefresh().refresh(true);
+						page = 1;
+						$('.game_lists').children().remove()
+						getRank(sort);
+
+						break;
+					case 3:
+						$('.game_classify_names').children().remove();
+						$('.apply_classify_names').children().remove();
+						//		游戏分类
+						$.ajax({
+							type: "get",
+							url: config.data + "game/getGameCls",
+							async: true,
+							success: function(data) {
+								if(data.state) {
+									var cls = data.cls;
+									var div = '';
+									for(var i = 0; i < cls.length; i++) {
+										div +=
+											"<div class='game_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
+											"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
+											"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
+											"</div>"
+									}
+									$('.game_classify_names').append(div)
+								} else {
+
+								}
+							}
+						});
+
+						//		游戏分类结束
+
+						//		应用分类
+
+						$.ajax({
+							type: "get",
+							url: config.data + "game/getAppCls",
+							async: true,
+							success: function(data) {
+								if(data.state) {
+									var cls = data.cls;
+									var div = '';
+									for(var i = 0; i < cls.length; i++) {
+										div +=
+											"<div class='apply_classify_name ofh fl' data-id='" + cls[i].id + "' data-type='" + cls[i].type + "'>" +
+											"<div class='game_classify_nameImg fl' style='background-image: url(" + config.img + encodeURI(cls[i].icon) + ");'></div>" +
+											"<div class='game_classify_nameArt fl font_14 color_282828'>" + cls[i].cls_name + "</div>" +
+											"</div>"
+									}
+									$('.apply_classify_names').append(div);
+								} else {
+
+								}
+							}
+						});
+						break;
+					default:
+						break;
 				}
-			});
-			break;
-		default:
-			break;
-	}
-	setTimeout(function() {
-		mui('.nav_cls_contains').pullRefresh().endPulldown(true);
-	}, 1000);
+				setTimeout(function() {
+					mui('.nav_cls_contains').pullRefresh().endPulldown(true);
+				}, 1000);
 
-}
-window.addEventListener('reload', function(event) {
-	activeBell()
-});</script>
+			}
+			window.addEventListener('reload', function(event) {
+				activeBell()
+			});
+		</script>
 	</body>
+
 </html>

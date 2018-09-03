@@ -66,6 +66,7 @@ $(function() {
 					newArray.push({src:config.img+encodeURI(n[i].img),img:new Image()});
 					if(n[i].game_id) {
 						//style='background-image:url(" + config.img + encodeURI(n[i].img) + ")'
+	
 						div +=
 							"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '" + n[i].id + "' data-gameId = '" + n[i].game_id + "'>" +
 							"<div class='news_img' >"+
@@ -137,6 +138,7 @@ $(function() {
 				var h = "";
 				var g = data.gameList;
 				for(var i = 0; i < g.length; i++) {
+					
 					h +=
 						"<div class='news_newGame_content' data-id ='" + g[i].id + "'>" +
 						"<div class='news_newGame_contentImg' style='background-image:url(" + config.img + encodeURI(g[i].game_title_img) + ")'></div>" +

@@ -1,0 +1,49 @@
+.newinfor_nameHeader {
+	margin: 0 auto;
+}
+
+.new_list {
+	margin: 1.25rem 0;
+}
+
+.new_time {
+	width: 100%;
+	text-align:center;
+	color: #7a7a7a;
+	font-size:14px;
+}
+
+.new_contents {
+	display: flex;
+}
+
+.new_contents {
+	color: #282828;
+	padding: 0.9rem 0.65rem 0 0.65rem;
+}
+
+.new_icon {
+	width: 3.75rem;
+	height: 3.75rem;
+	border-radius: 50%;
+	background-size: 100% 100%;
+}
+
+.new_content {
+	margin-left:0.9rem;
+	width: 18.5rem;
+	background: #fff;
+	padding: 0.9rem;
+	border-radius: 0.8rem;
+	position:relative;
+}
+
+.new_content:before {
+	content: "";
+	position:absolute;
+	left:-1.15rem;
+	top:1rem;
+	border-width:0.6rem;
+	border-style:solid;
+	border-color:transparent #fff transparent transparent;
+}
