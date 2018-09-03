@@ -103,35 +103,43 @@ function readed(sort) {
 }
 
 function center_info() {
-
+	var info_arr = [];
 	for(n = 4; n < 8; n++) {
-//		$.ajax({
-//			type: "get",
-//			url: config.data + "users/noticeAdd",
-//			async: true,
-//			data: {
-//				uid: userId,
-//				type:n
-//			},
-//			success: function(data) {
+		$.ajax({
+			type: "get",
+			url: config.data + "users/notice",
+			async: true,
+			data: {
+				uid: userId,
+				type: n
+			},
+			success: function(data) {
 //				alert(JSON.stringify(data))
-//			}
-//		})
+//				return false;
+				info_arr.push({
+					type: n,
+					time: data.last.add_time,
+					content: data.last.detail,
+					state: data.last.state,
+					id:data.last.tip_id,
+					num:data.num,
+				})
+			}
+		})
 	}
 
-	//	$.ajax({
-	//		type: "get",
-	//		url: config.data + "users/noticeAdd",
-	//		async: true,
-	//		data: {
-	//			uid: userId,
-	//			type: sort
-	//		},
-	//		success: function(data) {
-	//			getSigns()
-	//		}
-	//	})
-	//	
+	//		$.ajax({
+	//			type: "get",
+	//			url: config.data + "users/noticeAdd",
+	//			async: true,
+	//			data: {
+	//				uid: userId,
+	//				type: sort
+	//			},
+	//			success: function(data) {
+	//				getSigns()
+	//			}
+	//		})
 
 	var content = "<div class='centerInfo ofh'>" +
 		"<div class='center_icon' style='background-image:url(../../Public/image/center_info_fuli.png)'></div>" +
