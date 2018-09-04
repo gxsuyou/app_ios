@@ -71,15 +71,21 @@ mui.plusReady(function() {
 
 	// 下载wgt文件
 	var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5BD8D7F0.wgt";
+	downWgt()
 
 	function downWgt() {
 		plus.nativeUI.showWaiting("正在更新中");
 		var dtask = plus.downloader.createDownload(wgtUrl, {
-			filename: "_doc/update/"
+			method: 'GET',
+			data: '',
+			filename: "_doc/update/",
+			timeout: '3000',
+			retry: 0,
+			retryInterval: 0
 		}, function(d, status) {
 			if(status == 200) {
 				console.log("下载wgt成功：" + d.filename);
-				installWgt(d.filename); // 安装wgt包
+				//				installWgt(d.filename); // 安装wgt包
 			} else {
 				console.log("下载wgt失败！");
 				plus.nativeUI.alert("下载wgt失败！");
@@ -102,10 +108,35 @@ mui.plusReady(function() {
 		//	}
 	}
 
-    
+	function downloding(download) {
+		switch(download.state) {
+			case 0:
+				//			$(".ldownload_btn_text").text('等待');
+				break;
+			case 1:
+				//			$(".ldownload_btn_text").text('等待');
+				break;
+			case 2:
+				//			$(".ldownload_btn_text").text('等待');
+				break;
+			case 3:
+//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
+				loading((download.downloadedSize / 150994944)*1000)
+				
+//				console.log(JSON.stringify(download))
+//				console.log("哈哈" + download.downloadedSize,download.totalSize)
+				break;
+			case 4:
+				//			$(".ldownload_btn_text").text("打开");
+				loading(0)
+				break;
+		}
+	}
 
-
-
+	function loading(num) {
+				console.log("啊哈哈"+num)
+		//		$(".download_loading").css("width", num + "%");
+	}
 
 	var h1 = plus.webview.getLaunchWebview()
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
