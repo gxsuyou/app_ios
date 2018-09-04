@@ -36,7 +36,6 @@
 	right: 0.875rem;
 	width: 3.75rem;
 	height: 3.75rem;
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -89,18 +88,36 @@
 	align-items:center;
 	padding:0 0.83rem;
 	font-size:14px;
+	position:relative;
+	margin-bottom:0.2rem;
 }
 .center_info{
-	margin-left:1rem;
+	margin-left:1rem;	
 }
 .center_info>div:last-child{
+	width:12.5rem;
 	color:#7a7a7a;
+	word-break:keep-all;      /* 不换行 */
+    white-space:nowrap;       /* 不换行 */
+    overflow:hidden;          /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;   
 }
 .center_time{
 	height:3.375rem;
 	color:#7a7a7a;
 }
 .center_time>div:last-child{
-	margin-top:0.5rem;
+	margin-top:0.2rem;
 	margin-left:2.2rem;
+}
+.center_info{
+	height:3.3rem;
+}
+.center_time{
+	height:3.3rem;
+	position:absolute;
+	top:1rem;
+	right:1.5rem;
+	color:#7a7a7a;
+	font-size:12px;
 }

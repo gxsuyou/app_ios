@@ -243,24 +243,19 @@ body{
 .y_listName{
 	margin: 0 auto;
 	margin-top: 0.8rem;
-	/*margin-left: 2.2rem;*/
 	width: 6rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.game_recommend_star{
-	
+.game_recommend_star{	
 	width: 0.8125rem;
 	height: 0.8125rem;
-	
-	background-image: url(../../Public/image/xing2.png);
-	
+	background-image: url(../../Public/image/xing2.png);	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
-	margin-top: 0.2rem;
-	
+	margin-top: 0.2rem;	
 }
 .game_recommend_starScore{
 	margin-left: 0.2rem;

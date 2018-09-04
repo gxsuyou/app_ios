@@ -7,21 +7,40 @@ $(function(){
         });
 	});
 	$('body').on("tap",".search_img",function(){
-		$(".search_bar").blur();
-		var id=$('.search_list:first').attr('data-id');
-		if(id){
+		
+		var val=$(".search_bar").val()
+		if(val!=""){
+			$(".search_bar").blur();
 			mui.openWindow({
-			   url:"news_post.html",
-			   id:"news_post.html",
+			   url:"new_search_result_list.html",
+			   id:"new_search_result_list.html",
 			   extras:{
-				newsId:id
+				val:val
 			   }
 		    })
 		}else{
-			if(val==""){
-				mui.toast("请输入搜索内容")
-			}		
-		}	
+//			$(".search_bar").blur();
+		}
+		
+		
+		
+//		$(".search_bar").blur();
+//		var id=$('.search_list:first').attr('data-id');
+//		if(id){
+//			mui.openWindow({
+//			   url:"news_post.html",
+//			   id:"news_post.html",
+//			   extras:{
+//				newsId:id
+//			   }
+//		    })
+//		}else{
+//			if(val==""){
+//				mui.toast("请输入搜索内容")
+//			}		
+//		}	
+       
+
 	})
     $("body").on("input",".search_bar",function(){
     	search();
@@ -48,8 +67,7 @@ $(function(){
 					msg:val,
 					page:1
 				},
-				success:function(data){	
-					
+				success:function(data){						
 					$('.error').html("");
 					if (data.state) {						
 						var  div = '';

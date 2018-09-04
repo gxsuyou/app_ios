@@ -1,0 +1,110 @@
+.strategy_nameHeader {
+	margin: 0 auto;
+}
+
+.strategy_content_head {
+	margin: 0.4rem 0.9375rem 0.2rem 0.9375rem;
+	height: 2.9375rem;
+}
+
+.strategy_content_headImg {
+	width: 2.0625rem;
+	height: 2.0625rem;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	border-radius: 50%;
+	margin-top: 0.4375rem;
+	box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.icon_read {
+	display: inline-block;
+	width: 0.9rem;
+	height: 0.9rem;
+	margin-right: 0.4rem;
+	background-image: url(../../Public/image/39D9371F-FB20-48E6-8801-EEBF4765BF46.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.strategy_content_img {
+	height: 11rem;
+	width: 22rem;
+	margin: 0 auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.strategy_content_art {
+	padding: 0 0.9375rem;
+}
+
+.strategy_content_titles {
+	margin: 0.5rem 0;
+	font-size: 14px;
+}
+
+.strategy_content_title {
+	word-break: break-all;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	/** 对象作为伸缩盒子模型显示 **/
+	-webkit-box-orient: vertical;
+	/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 4;
+	/** 显示的行数 **/
+	overflow: hidden;
+	/** 隐藏超出的内容 **/
+}
+
+.strategy_content_z {
+	margin-top: 0.5rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.strategy_content_classifys {
+	margin-top: 0.5rem;
+}
+
+.cut_line {
+	width: 100%;
+	height: 0.75rem;
+}
+
+.strategy_content_classify {
+	padding: 0 0.4rem;
+	height: 1.25rem;
+	line-height: 1.25rem;
+	margin-left: 0.9375rem;
+}
+
+.comment_imgs {
+	height: 2rem;
+	margin-right: 0.9375rem;
+}
+
+.comment_img {
+	width: 1.0625rem;
+	height: 1.0625rem;
+	background-image: url("../../Public/image/liuyan.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	vertical-align: middle;
+}
+
+.comment_imgs>span {
+	display: inline-block;
+	margin-left: 0.1rem;
+}
+
+.strategy_content {
+	background: #fff;
+}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>游戏详情更多标签</title>
@@ -12,7 +11,6 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-
 	<body>
 		<div class="header_box">
 			<div class="before_header"></div>
@@ -20,27 +18,14 @@
 				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
 				</div>
 				<div class="game_nameHeader">one榜排行</div>
-				<div class="border hidden"></div>
 			</header>
 		</div>
 		<div class="list_game">
-			<ul class="game_lists">
-				<!--<li class="game_list color_7a7a7a">
-	      	<div>
-	      		多人
-	      	</div>
-	      	<div class="mui-icon mui-icon-forward mui-pull-right">
-	      		
-	      	</div>
-	      </li>
-	       <li class="game_list color_7a7a7a">
-	      	<div>
-	      		多人
-	      	</div>
-	      	<div class="mui-icon mui-icon-forward mui-pull-right"></div>
-	      </li>-->
+			<img src="../../Public/image/one_ranktopimg.jpg" style="width:100%;height:auto;"/>
+			
+			<ul class="game_lists" style="margin-top:-0.3rem">
+
 			</ul>
-			<!--game_lists-->
 		</div>
 		<script src="../../js/game/game_one_rank.js" type="text/javascript" charset="utf-8"></script>
 	</body>
@@ -50,10 +35,6 @@
 				tap: true, //默认为true
 				doubletap: true, //默认为false
 				longtap: true, //默认为false
-				swipe: true, //默认为true
-				drag: true, //默认为true
-				hold: false, //默认为false，不监听
-				release: false //默认为false，不监听
 			},
 			pullRefresh: {
 				container: ".list_game", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -78,5 +59,4 @@
 
 		})
 	</script>
-
 </html>

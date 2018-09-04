@@ -7,7 +7,6 @@ $(function() {
 			if(ajaxToggle) {
 				return false;
 			}
-
 			var selfSort = $(this).attr('data-sort');
 			$(this).addClass('active').siblings('div').removeClass('active');
 			$('.notice_lists').children().remove();
@@ -104,29 +103,39 @@ function readed(sort) {
 
 function center_info() {
 	var info_arr = [];
-	for(n = 4; n < 8; n++) {
-		$.ajax({
-			type: "get",
-			url: config.data + "users/notice",
-			async: true,
-			data: {
-				uid: userId,
-				type: n
-			},
-			success: function(data) {
-//				alert(JSON.stringify(data))
-//				return false;
-				info_arr.push({
-					type: n,
-					time: data.last.add_time,
-					content: data.last.detail,
-					state: data.last.state,
-					id:data.last.tip_id,
-					num:data.num,
-				})
+	var content = ""
+	var numContent = ""
+	$.ajax({
+		type: "get",
+		url: config.data + "users/notice",
+		async: true,
+		data: {
+			uid: userId,
+		},
+		success: function(data) {
+			for(i = 0; i < data.length; i++) {
+				if(data[i].num == 0) {
+					numContent = "&nbsp"
+				} else {
+					numContent = "<div class='sign_num'>" + data[i].num + "</div>"
+				}
+				content += "<div class='centerInfo ofh'>" +
+					"<div class='center_icon' style='background-image:url(" + data[i].img + ")'></div>" +
+					"<div class='center_info'>" +
+					"<div>" + data[i].name + "</div>" +
+					"<div>" + data[i].detail + "</div>" +
+					"</div>" +
+					"<div class='center_time'>" +
+					"<div>" + data[i].add_time + "</div>" +
+					numContent +
+					"</div>" +
+					"</div>";
+
 			}
-		})
-	}
+			$('.notice_lists').empty().append(content);
+
+		}
+	})
 
 	//		$.ajax({
 	//			type: "get",
@@ -141,17 +150,17 @@ function center_info() {
 	//			}
 	//		})
 
-	var content = "<div class='centerInfo ofh'>" +
-		"<div class='center_icon' style='background-image:url(../../Public/image/center_info_fuli.png)'></div>" +
-		"<div class='center_info'>" +
-		"<div>ONE福利</div>" +
-		"<div>颜值超高的月饼你pick了【中秋佳节】</div>" +
-		"</div>" +
-		"<div class='center_time'>" +
-		"<div>9月20日</div>" +
-		"<div class='sign_num'>11</div>" +
-		"</div>" +
-		"</div>";
+	//	var content = "<div class='centerInfo ofh'>" +
+	//		"<div class='center_icon' style='background-image:url(../../Public/image/center_info_fuli.png)'></div>" +
+	//		"<div class='center_info'>" +
+	//		"<div>ONE福利</div>" +
+	//		"<div>颜值超高的月饼你pick了【中秋佳节】</div>" +
+	//		"</div>" +
+	//		"<div class='center_time'>" +
+	//		"<div>9月20日</div>" +
+	//		"<div class='sign_num'>11</div>" +
+	//		"</div>" +
+	//		"</div>";
 	$('.notice_lists').append(content);
 	mui('.news_center').pullRefresh().endPullupToRefresh(true);
 }

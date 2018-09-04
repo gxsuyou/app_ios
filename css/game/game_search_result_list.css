@@ -1,5 +1,5 @@
 .game_nameHeader{
-	margin:0 auto ;
+	margin:0 auto;
 }
 .game_list{
 	height: 6.0625rem;
@@ -30,12 +30,6 @@
 }
 .game_list_star_half{
 	background-image: url(../../Public/image/xing3.png);
-}
-.game_listScore{
-	width: 1rem;
-	height: 1rem;
-	margin-top: 2.5125rem;
-	margin-left: 1rem;
 }
 .tag{
 	height: 1.125rem;
