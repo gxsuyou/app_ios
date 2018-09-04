@@ -254,9 +254,6 @@ $(function() {
 	//			alert(1)
 	//		}
 	//	});
-	$("body").on("touchmove", function(e) {
-		console.log(1)
-	});
 
 	$('body').on('tap', '.check_more', function() {
 		var tagId = $(this).attr("data-tagid");
@@ -581,7 +578,7 @@ $('.game_rank').children().click(function() {
 	$(".first_three").css("display", "none");
 	getRank(sort);
 })
-var le = document.getElementById("game_container")
+//var le = document.getElementById("game_container")
 //le.addEventListener("swipeleft",function(){
 //   alert("你正在向左滑动");
 //});
@@ -602,16 +599,6 @@ $("body").on("tap", ".oneRank_index", function() {
 function getRank(sort) {
 	rankToggle = true;
 	/*阻挡掉one模块*/
-	//	if(sort=="sort3"){
-	//		oneRank()
-	//		$('.comingsoon').remove();
-	//		$(".hot_rank").css("display","none");
-	//		$('.comingsoon').css("display","block");
-	//		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
-	//		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1.5rem;' />");
-	//      rankToggle=false;
-	//		return false;		
-	//	}
 
 	mui.plusReady(function() {
 		$.ajax({

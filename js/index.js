@@ -9,11 +9,12 @@ var self;
 mui.plusReady(function() {
 	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 	var wgtVer = null;
+
 	function plusReady() {
 		// 获取本地应用资源版本号
 		plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 			wgtVer = inf.version;
-			
+
 			console.log("当前应用版本：" + wgtVer);
 			//	检测更新
 			$.ajax({
@@ -25,7 +26,7 @@ mui.plusReady(function() {
 						newVer = data.mark;
 						console.log(newVer);
 						if(wgtVer && newVer && (wgtVer != newVer)) {
-							
+
 							downWgt(); // 下载升级包
 						} else {
 							//plus.nativeUI.alert("无新版本可更新！");
@@ -45,35 +46,35 @@ mui.plusReady(function() {
 	}
 
 	// 检测更新
-//		checkUpdate();
-//		function checkUpdate() {
-//			plus.nativeUI.showWaiting("检测更新...");
-//			var xhr = new XMLHttpRequest();
-//			xhr.onreadystatechange = function() {
-//				switch(xhr.readyState) {
-//					case 4:
-//						plus.nativeUI.closeWaiting();
-//						alert(xhr.status)
-//						if(xhr.status == 200) {
-//							console.log("检测更新成功");
-//							var newVer = JSON.parse(xhr.responseText);
-//	
-//						} else {
-//							
-//						}
-//						break;
-//					default:
-//						break;
-//				}
-//			}	
-//		}
+	//		checkUpdate();
+	//		function checkUpdate() {
+	//			plus.nativeUI.showWaiting("检测更新...");
+	//			var xhr = new XMLHttpRequest();
+	//			xhr.onreadystatechange = function() {
+	//				switch(xhr.readyState) {
+	//					case 4:
+	//						plus.nativeUI.closeWaiting();
+	//						alert(xhr.status)
+	//						if(xhr.status == 200) {
+	//							console.log("检测更新成功");
+	//							var newVer = JSON.parse(xhr.responseText);
+	//	
+	//						} else {
+	//							
+	//						}
+	//						break;
+	//					default:
+	//						break;
+	//				}
+	//			}	
+	//		}
 
 	// 下载wgt文件
 	var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5BD8D7F0.wgt";
 
-	function downWgt(){
+	function downWgt() {
 		plus.nativeUI.showWaiting("正在更新中");
-		plus.downloader.createDownload(wgtUrl,{
+		var dtask = plus.downloader.createDownload(wgtUrl, {
 			filename: "_doc/update/"
 		}, function(d, status) {
 			if(status == 200) {
@@ -84,8 +85,27 @@ mui.plusReady(function() {
 				plus.nativeUI.alert("下载wgt失败！");
 			}
 			plus.nativeUI.closeWaiting();
-		}).start();
+		})
+		dtask.addEventListener("statechanged", onStateChanged, false);
+		dtask.start();
 	}
+
+	function onStateChanged(download, status) {
+
+		downloding(download)
+		//	if(download.state == 4 && status == 200) {
+		//		// 下载完成 
+		//		$("#game_detail_download").removeClass("download_btn_active");
+		//		$(".download_btn_text").text("安装");
+		//		console.log("Download success: " + download.filename);
+		//
+		//	}
+	}
+
+    
+
+
+
 
 	var h1 = plus.webview.getLaunchWebview()
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -135,19 +155,16 @@ mui.plusReady(function() {
 		var index = $(this).index();
 
 		//获取目标子页的id
-		var h = plus.webview.getWebviewById(subpages[index])//有东西后就不create了
-		
-		
-       console.log(plus.webview.getWebviewById(subpages[index]))
+		var h = plus.webview.getWebviewById(subpages[index]) //有东西后就不create了
+
+		console.log(plus.webview.getWebviewById(subpages[index]))
 		document.getElementsByClassName("mui-icon")[1].classList.remove('game_active');
 		document.getElementsByClassName("mui-icon")[0].classList.remove('news_active');
 		document.getElementsByClassName("mui-icon")[2].classList.remove('strategy_active');
 		document.getElementsByClassName("mui-icon")[3].classList.remove('play_active');
-		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');		
+		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');
 		this.children[0].classList.add(this.getAttribute('data-img'));
-		var targetTab = this.getAttribute('data-href');		
-
-
+		var targetTab = this.getAttribute('data-href');
 
 		if(targetTab == activeTab) {
 			return;
@@ -173,27 +190,12 @@ mui.plusReady(function() {
 		//更改当前活跃的选项卡
 		activeTab = targetTab;
 
-
 	});
 
 	mui.back = function() {
-		//首次按键，提示‘再按一次退出应用’
-		//  var first;
-		//  if(!first){
-		//  	
-		//      first = new Date().getTime();
-		//      mui.toast('再按一次退出应用');
-		//      setTimeout(function(){
-		//          first = null;
-		//      },1000);
-		//  }else{
-		//      if(new Date().getTime()-first<1000){
-		//         plus.runtime.quit();
-		//     }
-		//}
-		//  alert(e.keyType+"\n"+e.keyCode);
 		return false;
 	}
+
 });
 
 // 更新应用资源
