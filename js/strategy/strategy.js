@@ -118,7 +118,7 @@ $(function() {
 		if(userId) {
 			mui.openWindow({
 				url: "../news/news_center.html",
-				id: "../news/news_center.html"
+				id: "news_center.html"
 			});
 		} else {
 			mui.openWindow({

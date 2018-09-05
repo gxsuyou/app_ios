@@ -149,7 +149,7 @@ ul{
     -webkit-margin-after: 0;
 }
 .hidden{
-	display: none;
+	display: none !important;
 }
 .overflow{
 	width: 6em;

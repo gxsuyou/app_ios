@@ -44,5 +44,13 @@
 		</div>
 		<script src="../../js/news/new_center_info.js" type="text/javascript" charset="utf-8"></script>
 	</body>
-
+    <script type="text/javascript">
+    	mui.init({
+    		beforeback:function(){
+					var list = plus.webview.getWebviewById("news_center.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+					mui.fire(list,'reload_info');
+					return true;//返回true,继续页面关闭逻辑
+				}
+    	})
+    </script>
 </html>
