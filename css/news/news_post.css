@@ -20,7 +20,7 @@ a{
 	height:5rem;
 }
 .news_secondComment{
-	height:3rem;
+/*	height:3rem;*/
 	width: 100%;
 	position:absolute;
 	bottom:0;
@@ -309,7 +309,7 @@ h4{
 .news_secondComment_input,input[type=text]{
 	position: absolute;
 	background-color: #E7EAEC;
-	width: 75%;
+	width: 68%;
 	height: 2rem;
 	left: 1rem;
 	top: 50%;
@@ -319,6 +319,26 @@ h4{
 	border: 0;
 	color: #7A7A7A;
 	font-size: 14px;
+}
+.face{
+	width:1.8rem;
+	height:1.8rem;
+	background:url(../../Public/image/face.png) no-repeat center /100% auto;
+	position: absolute;
+	top: 50%;
+	margin-top: -1rem;
+	right:4.6rem;
+}
+.faceContent{
+    border-top:1.5px solid #E7EAEC;
+    padding:0.5rem 1rem 0.5rem 1rem;
+	bottom: 0;
+	width:100%;
+	display:none;
+}
+.faceContent img{
+	width:1.8rem;
+	margin-right:0.8rem;
 }
 /*.news_secondComment_input{
 	width:80%;

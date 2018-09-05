@@ -415,8 +415,8 @@ function up() {
 										}
 										sec +=
 											"<div class='comment_secondComment'>" +
-											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
-											"<span class='" + ifHide + "'>回复</span>" +
+//											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
+//											"<span class='" + ifHide + "'>回复</span>" +
 											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
 											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 											"</div>"
@@ -509,7 +509,7 @@ function up() {
 									var img = "hidden"
 								}
 								var sec = "",portrait;
-                                console.log(lord_id)	
+ 
                                 
 								if(com[i].towCommentList.length > 0) {
 									for(var j = 0; j < com[i].towCommentList.length; j++) {
@@ -520,8 +520,8 @@ function up() {
 										}
 										sec +=
 											"<div class='comment_secondComment'>" +
-											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
-											"<span class='" + ifHide + "'>回复</span>" +
+//											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
+//											"<span class='" + ifHide + "'>回复</span>" +
 											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
 											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 											"</div>"
