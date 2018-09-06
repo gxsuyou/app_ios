@@ -7,20 +7,18 @@ input[type=text]{
 	font-family: simhei;
 	font-size: 12px;
 }
-.search_lists{
-	margin-top:2.375rem;
-	padding:0 1.5rem;
-}
-
-
-
-
 
 body,html{
 	height:100%;
 	overflow: hidden;
 	background-color:#fff;
 }
+.search_lists{
+	margin-top:2.375rem;
+	padding:0 1.5rem;
+}
+
+
 .header_box{
 	position:absolute;
 }
@@ -54,10 +52,6 @@ body,html{
 	border-bottom: 1.5px solid #efefef;
 	color:#282828;
 }
-
-
-
-
 
 
 .no_content{

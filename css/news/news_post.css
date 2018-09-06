@@ -20,7 +20,6 @@ a{
 	height:5rem;
 }
 .news_secondComment{
-/*	height:3rem;*/
 	width: 100%;
 	position:absolute;
 	bottom:0;
@@ -83,8 +82,6 @@ a{
 	padding: 0 1rem;
 	position:absolute;
 	z-index: 9999;
-/*	top:5rem;*/
-/*	background:red;*/
 }
 .news_post_listImg{
 	width: 1.8125rem;
@@ -149,7 +146,6 @@ h4{
 
 
 .news_userInfo_replyInput{
-	/*width: 15.3125rem;*/
 	width:65%;
 	height: 2rem;
 	line-height: 2rem;
@@ -247,6 +243,7 @@ h4{
 .comment_content{
 	margin-top: 0.6rem;
 }
+
 .comment_info{
 	margin-top: 0.4rem;
 }
@@ -255,28 +252,20 @@ h4{
 	
 }
 .thumb{
-	
-	/*width: 1.0625rem;
-	height: 1.0625rem;*/
 	background-image: url("../../Public/image/good.png");
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
 	vertical-align: middle;
 	margin-bottom: 0.2rem;
 }
-.comment_imgs{
-	    
-	   height: 2rem;
-	  
+.comment_imgs{    
+	   height: 2rem;	  
 }
-.comment_img{
-	
+.comment_img{	
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/liuyan.png");
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -331,20 +320,21 @@ h4{
 }
 .faceContent{
     border-top:1.5px solid #E7EAEC;
-    padding:0.5rem 1rem 0.5rem 1rem;
+    padding:0.5rem 0rem 0.5rem 1.2rem;
 	bottom: 0;
 	width:100%;
 	display:none;
+	height:8.2rem;
+	overflow-y:scroll;
 }
 .faceContent img{
 	width:1.8rem;
-	margin-right:0.8rem;
+	margin:0 0.8rem;
 }
-/*.news_secondComment_input{
-	width:80%;
-	background:blue;
-}*/
-
+.comment_content img{
+	width:1.8rem;
+	margin:0 0.1rem;
+}
 
 
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -359,9 +349,7 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
 input:-ms-input-placeholder { /* Internet Explorer 10-11 */
    font-size: 14px;
 }
-.detail{
-	
-}
+
 .publish{
 	position: absolute;
 	right: 6%;
@@ -385,5 +373,4 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	font-size:14px;
 	font-weight:600;
 	margin-top:1rem;
-	
 }

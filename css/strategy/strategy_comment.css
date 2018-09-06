@@ -1,60 +1,69 @@
-body,html{
+body,
+html {
 	background-color: white;
-    height:100%;
-    overflow:hidden;
+	height: 100%;
+	overflow: hidden;
 }
-.header_box{
+
+.header_box {
 	z-index: 10;
-	position:absolute;
-	top:0;
+	position: absolute;
+	top: 0;
 }
-.add_comment{
+
+.add_comment {
 	position: absolute;
 	left: 50%;
 	margin-left: -2rem;
 }
-.publish{
+
+.publish {
 	position: absolute;
 	right: 1rem;
-	
 }
-textarea{
- 	width: 90%;
- 	height: 30rem;
- 	border: 0;
- 	margin-left: 1rem;
- 	padding: 0;
- 	font-size: 16px;
- 	line-height: 1.6rem;
- 	padding-top:1.2rem;
- 	font-family: simhei;	
- 	overflow-y: scroll;
- }
 
-/*#strategy_textarea{
-	margin-top: 45px;
-	height: 12rem;
+textarea {
+	width: 90%;
+	height: 30rem;
+	border: 0;
+	margin-left: 1rem;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1.6rem;
+	padding-top: 1.2rem;
+	font-family: simhei;
+	overflow-y: scroll;
+}
 
-}*/
+
+
 .choose_img{
-	height: 2.625rem;
 	width: 100%;
-	border-top: 1px solid #E7EAEC;
-	border-bottom: 1px solid #E7EAEC;
+	
 	position: absolute;
 	bottom: 10.625rem;
+	
 }
-.choose{
+.chooseContent{
+	display: flex;
+	height: 2.625rem;
+	border-top: 1px solid #E7EAEC;
+	border-bottom: 1px solid #E7EAEC;
+}
+
+.choose {
 	width: 1.5625rem;
 	height: 1.5625rem;
 	margin-left: 1.125rem;
 	background-image: url("../../Public/image/tupian.png");
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	margin-top: 0.5rem;
 }
-.show_imgs{
+
+
+.show_imgs {
 	position: absolute;
 	bottom: 0;
 	height: 10.625rem;
@@ -63,40 +72,71 @@ textarea{
 	overflow: scroll;
 	width: 100%;
 }
-.show_img{
+
+.img_box {
+	position:relative;
+	width: 6.25rem;
+}
+
+
+.show_img {
 	display: block;
 	width: 6.25rem;
 	height: 6.25rem;
-	
 	background-position: center;
-	background-repeat:no-repeat;
-	background-size: cover;
+	background-repeat: no-repeat;
+	background-size: 6.25rem auto;
 	margin-right: 0.875rem;
 	position: relative;
 }
-.delete_img{
-	position: absolute;
+
+.delete_img {
+	position:absolute;
 	width: 1.4rem;
 	height: 1.4rem;
 	background-image: url(../../Public/image/16FA1BF1-80EC-4EE0-878C-514B5E507970.png);
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 50%;
-	right: 1rem;
-	top: 0.4rem;
+	right: -0.5rem;
+	top: -0.4rem;
 }
-.add_img{
+
+.add_img {
 	width: 6.25rem;
 	height: 6.25rem;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
 	background-color: peachpuff;
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	margin-right: 0.875rem;
 	position: relative;
 }
-.img_box{
-	position: relative;
+
+
+
+.face {
+	width: 1.5625rem;
+	height: 1.5625rem;
+	margin-left: 1.125rem;
+	background-image: url("../../Public/image/face.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-top: 0.5rem;
+}
+
+.faceContent {
+	padding: 0.5rem 0rem 0.5rem 0.8rem;
+	bottom: 0;
+	width: 100%;
+	height: 8.2rem;
+	overflow-y: scroll;
+	display: none;
+}
+
+.faceContent img{
+	width: 1.8rem;
+	margin: 0 0.3rem;
 }

@@ -60,7 +60,7 @@ $(function() {
 					$('.news_post_commentContent').attr("data-id",c.id);
 					$('.news_post_commentContent').attr("data-userId",c.user_id);
 					$('.comment_userOne').text(c.nick_name);
-					$('.comment_contentOne').text(c.content);
+					$('.comment_contentOne').html(c.content);
 					$('.timeOne').text(c.add_time);
 					$('.comment_summary').attr('data-id',c.newsid);					
 					if (c.news_img) {

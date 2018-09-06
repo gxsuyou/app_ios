@@ -28,7 +28,7 @@ $(function() {
 	});
 
 	$("body").on("tap", ".search_close", function() {
-		$(".search_bar").val("");
+		$(".search_bar").val("")
 		$('.search_lists').empty()
 	})
 
@@ -111,7 +111,6 @@ $(function() {
 	}
 
 	LogInit("part")
-
 	function LogInit(val) {
 		if(userId) {
 			var content = ""
@@ -159,9 +158,7 @@ $(function() {
          var val=$(this).text()
          val=val.replace(/×/g,"")
          $(".search_bar").val(val)
-         search(val)
-         
-         
+         search(val) 
 	})
 
 	$("body").on("tap", ".more_log", function() {
