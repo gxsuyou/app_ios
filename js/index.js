@@ -8,8 +8,6 @@ var activeTab = subpages[Index];
 var self;
 mui.plusReady(function() {
 	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
-	
-
 
 	var h1 = plus.webview.getLaunchWebview()
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -101,4 +99,3 @@ mui.plusReady(function() {
 	}
 
 });
-

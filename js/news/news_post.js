@@ -742,8 +742,8 @@ function up() {
 								var ifHide = tow[j].targetUserNickName || "hidden";
 								secondCom +=
 									"<div class='comment_secondComment '>" +
-									"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
-									"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+//									"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
+//									"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
 									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 									"<span class='color_282828'>：" + tow[j].content + "</span>" +
 									"</div>"

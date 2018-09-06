@@ -94,7 +94,7 @@ html,body{
 }
 
 .news_secondComment{
-	height: 3rem;
+/*	height: 3rem;*/
 	width: 100%;
 	position:absolute;
 	bottom:0;
@@ -103,7 +103,7 @@ html,body{
 .news_secondComment_input,input[type=text]{
 	position: absolute;
 	background-color: #E7EAEC;
-	width: 80%;
+	width: 70%;
 	height: 2rem;
 	left: 1rem;
 	top: 50%;
@@ -113,6 +113,15 @@ html,body{
 	border: 0;
 	color: #7A7A7A;
 	font-size: 14px;
+}
+.face{
+	width:1.8rem;
+	height:1.8rem;
+	background:url(../../Public/image/face.png) no-repeat center /100% auto;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.9rem;
+	right:3.8rem;
 }
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     font-size: 14px;
@@ -134,4 +143,17 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	padding: 0;
 	height: 3rem;
 	line-height: 3rem;
+}
+.faceContent{
+    border-top:1.5px solid #E7EAEC;
+    padding:0.5rem 0rem 0.5rem 1.2rem;
+	bottom: 0;
+	width:100%;
+	display:none;
+	height:8.2rem;
+	overflow-y:scroll;
+}
+.faceContent img{
+	width:1.8rem;
+	margin:0 0.8rem;
 }
