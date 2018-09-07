@@ -331,7 +331,7 @@ h4{
 	width:1.8rem;
 	margin:0 0.8rem;
 }
-.comment_content img{
+.comment_content img,.comment_secondComment img{
 	width:1.8rem;
 	margin:0 0.1rem;
 }

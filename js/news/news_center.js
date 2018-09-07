@@ -113,6 +113,7 @@ function center_info() {
 			uid: userId,
 		},
 		success: function(data) {
+//			alert(JSON.stringify(data))
 			for(i = 0; i < data.length; i++) {
 				if(data[i].num == 0) {
 					numContent = "&nbsp"

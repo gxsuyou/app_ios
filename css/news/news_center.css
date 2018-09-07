@@ -3,6 +3,11 @@
 	margin-top: 45px;
 	padding-top: 2rem;
 }
+.commentContent img{
+	width:1.8rem;
+	margin:0 0.1rem;
+}
+
 .notice{
 	margin:0 auto;
 }

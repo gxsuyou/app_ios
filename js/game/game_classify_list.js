@@ -33,6 +33,12 @@ $(function() {
 		})
 	})
 
+	$("body").on("tap", ".game_listDownload", function(e) {
+		e.stopPropagation()
+		var downloadUrl = $(this).attr("data-url")
+		location.href = downloadUrl
+	})
+
 	mui.init({
 		swipeBack: true,
 		pullRefresh: {
@@ -92,15 +98,13 @@ function up() {
 						}
 					}
 
-					var downloadToggle = plus.runtime.isApplicationExist({
-						pname: g[i].game_packagename,
-						action: ''
-					});
-					if(downloadToggle) {
-						var buttonDown = "打开";
+
+					if(g[i].game_download_ios2) {
+						var urlDownload = g[i].game_download_ios2
 					} else {
-						var buttonDown = "下载";
+						var urlDownload = g[i].game_download_ios
 					}
+
 					li +=
 						"<li class='game_list ofh' data-id=" + g[i].id + ">" +
 						"<div class='color_9e9e9e fl game_listScore'>" + ((page - 1) * 20 + i + 1) + "</div>" +
@@ -121,7 +125,7 @@ function up() {
 						signs +
 						"</div>" +
 						"</div>" +
-						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>" + buttonDown + "</div>" +
+						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='"+urlDownload+"'>下载</div>" +
 						"</li>"
 				}
 

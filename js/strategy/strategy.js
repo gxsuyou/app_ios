@@ -42,6 +42,39 @@ $(function() {
 		})
 	})
 
+	var startX, startY;
+	$("body").on("touchstart", function(e) {
+//		e.preventDefault();
+		startX = e.originalEvent.changedTouches[0].pageX,
+			startY = e.originalEvent.changedTouches[0].pageY;
+		//		alert(startX)
+	});
+
+	$("body").on("touchmove", function(e) {
+//		e.preventDefault();
+		moveEndX = e.originalEvent.changedTouches[0].pageX,
+			moveEndY = e.originalEvent.changedTouches[0].pageY,
+			X = moveEndX - startX,
+			Y = moveEndY - startY;
+
+
+		if(X > 0&&X>150) {
+			alert(X)
+			alert("left 2 right");
+		} else if(X < 0&&150<-(X)) {
+//			alert(moveEndY)
+//			alert(startY
+	alert(X)
+			alert("right 2 left");
+		} else if(Y > 0) {
+//			alert("top 2 bottom");
+		} else if(Y < 0) {
+//			alert("bottom 2 top");
+		} else {
+//			alert("just touch");
+		}
+	});
+
 	//	获取顶部搜索结束
 
 	$('body').on('tap', '.strategy_content_classify', function(e) {
@@ -76,7 +109,7 @@ $(function() {
 
 	})
 
-    /* 进入攻略详情 */
+	/* 进入攻略详情 */
 	$('body').on('tap', '.strategy_content', function() {
 		var strategyId = $(this).attr('data-id');
 		var browseNum = $(this).find('.browseNum').eq(0).text();

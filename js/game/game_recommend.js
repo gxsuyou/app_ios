@@ -269,16 +269,27 @@ $(function() {
 	})
 
 	//标签结束
+	
+	$("body").on("tap",".game_listDownload",function(e){
+		e.stopPropagation()
+		var downloadUrl=$(this).attr("data-url")
+		location.href=downloadUrl
+	})
+	
+	
+	
+	
 
 	//底下新加部分
 
-	//列表部分下载部分
+	//列表部分下载部分 16个
 	mui.plusReady(function() {
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getActiveLenOfTen?sys=1",
 			async: true,
 			success: function(data) {
+//				alert(JSON.stringify(data))
 				if(data.state) {
 					var g = data.game;
 					var list = '';
@@ -300,9 +311,17 @@ $(function() {
 								}
 							}
 
-						} else {
-
 						}
+						
+						if(g[i].game_download_ios2){
+							
+							var urlDownload=g[i].game_download_ios2
+						}else{
+//							alert(1)
+							var urlDownload=g[i].game_download_ios
+						}
+						
+						
 
 						list =
 							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
@@ -323,7 +342,7 @@ $(function() {
 							signs +
 							"</div>" +
 							"</div>" +
-							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>" +
+							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='"+urlDownload+"'>下载</div>" +
 							"</li>";
 
 						if(i < 3) {

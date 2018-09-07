@@ -415,9 +415,9 @@ function up() {
 										}
 										sec +=
 											"<div class='comment_secondComment'>" +
-//											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
+											"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
 //											"<span class='" + ifHide + "'>回复</span>" +
-											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+//											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
 											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 											"</div>"
 									}
@@ -520,9 +520,9 @@ function up() {
 										}
 										sec +=
 											"<div class='comment_secondComment'>" +
-//											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
+											"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
 //											"<span class='" + ifHide + "'>回复</span>" +
-											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+//											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
 											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 											"</div>"
 									}

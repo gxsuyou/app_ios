@@ -128,7 +128,7 @@ $(function() {
 
 		//点击发布
 		$('body').on("tap", ".publish", function() {
-			var content = $(this).prev().val();
+			var content = $(this).prev().prev().val();
 			if(content) {
 				$.ajax({
 					type: "get",
@@ -146,7 +146,7 @@ $(function() {
 					},
 					success: function(data) {
 						if(data.state == "1") {
-							mui.toast("发送成功")
+							mui.toast("评论成功")
 							$('.news_secondComment_input').val("")
 							window.location.reload()
 						} else {
@@ -353,8 +353,16 @@ $("body").on("tap", ".face", function(e) {
 		face_to = 1
 		$(".faceContent").css("display", "none")
 	}
-
 })
+
+//$("body").on("focus", ".news_secondComment_input", function() {
+//	setTimeout(function() {
+//		var scrollY = $('.news_post_commentContents').height()
+//		$('.news_post_commentContents').animate({
+//			scrollTop: scrollY
+//		}, 0)
+//	}, 400);
+//})
 
 $("body").on("tap", ".faceContent>img", function(e) {
 	e.stopPropagation()
@@ -369,9 +377,8 @@ $("body").on("tap", ".faceContent>img", function(e) {
 	}
 })
 
+//获取二级评论
 function up() {
-	//获取二级评论
-	//setTimeout(()=>{
 	if(loginToggle) {
 		return false;
 	}
@@ -440,7 +447,6 @@ function up() {
 	});
 
 	//		获取二级评论结束
-	//},400);
 }
 
 function down() {

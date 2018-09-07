@@ -114,7 +114,7 @@ $(function() {
 					title = n.title
 
 					if(n.detail != null) {
-						detail = n.detail.replace(/<span> <\/span>/g, "&nbsp;");
+						detail = n.detail.replace(/<span> <\/span>/g, "&nbsp;")
 					}
 
 					$('.detail').html(detail);
@@ -445,14 +445,23 @@ $(function() {
 				}, 250);
 			});
 
-		});
+		})
+		
+		
 
+         var  face_to=1
 		$("body").on("tap", ".face", function() {
 			$(".news_secondComment_input").blur()
-			setTimeout(function() {
+			setTimeout(function(){
 				$(".news_secondComment").css("display", "block")
 				$(".news_userInfo_reply").css("display", "none")
+			 if(face_to == 1) {
+			 	face_to = 0				
 				$(".faceContent").css("display", "block")
+			  }else{
+			  	face_to = 1
+			  	$(".faceContent").css("display", "none")
+			  }
 			}, 300)
 
 		})
@@ -515,8 +524,7 @@ $(function() {
 							$(".news_post_commentContents").empty();
 							page = 0;
 							up();
-
-							mui.toast("发送成功");
+							mui.toast("评论成功")
 							replyTog = false;
 						} else {
 							mui.toast("发送失败，请重试")
@@ -641,11 +649,12 @@ function up() {
 
 							for(var j = 0; j < tow.length; j++) {
 								var ifHide = tow[j].targetUserNickName || "hidden";
+					
 								secondCom +=
-									"<div class='comment_secondComment '>" +
-									//								"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
+									"<div class='comment_secondComment'>" +
+									"<span >" + tow[j].selfNickName + "</span>" +
 									//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 									"<span class='color_282828'>：" + tow[j].content + "</span>" +
 									"</div>";
 							}
@@ -706,8 +715,6 @@ function up() {
 
 						}
 
-					} else {
-
 					}
 				}
 			});
@@ -728,6 +735,7 @@ function up() {
 						var com = data.comment;
 						var comment = "";
 						var towLen;
+						
 						for(var i = 0; i < com.length; i++) {
 
 							var tow = com[i].towCommentList;
@@ -738,13 +746,14 @@ function up() {
 								var ifGood = "noGood";
 							}
 							for(var j = 0; j < tow.length; j++) {
-
+                                
 								var ifHide = tow[j].targetUserNickName || "hidden";
+							
 								secondCom +=
 									"<div class='comment_secondComment '>" +
-//									"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
+									"<span >" + tow[j].selfNickName + "</span>" +
 //									"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 									"<span class='color_282828'>：" + tow[j].content + "</span>" +
 									"</div>"
 							}
