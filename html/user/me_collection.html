@@ -227,12 +227,13 @@
 							var str = data.newsList;
 							var div = "";							
 							for (var i = 0; i < str.length; i++) {
+								//overflow
 								div +=
 									"<div  class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-coll_id='"+ str[i].coll_id +"'    data-id='"+ str[i].id +"' data-gameId='"+ str[i].game_id +"'>"+
 										"<div class='news_img' style='background-image: url("+ config.img + encodeURI(str[i].img) +");'>"+
 											"<div class='news_img_content color_white'>"+
 												"<div class='news_img_header fl' style='background-image: url("+  config.img + encodeURI(str[i].icon) +");'></div>"+
-												"<div class='fl  new_art_name font_14 overflow'>"+ str[i].game_name +"</div>"+
+												"<div class='fl  new_art_name font_14 '>"+ str[i].game_name +"</div>"+
 												"<div class='fr font_12' style='margin-top: 1.75rem;'>"+
 											
 													"<div class='fr news_art_viewNum' style='width: 1.8rem;'>"+ str[i].browse +"</div>"+
@@ -308,6 +309,11 @@
 								}else{
 									portrait=str[i].portrait;
 								}
+								
+								if(str[i].essence==1){
+                               	var essence_image="<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
+                               	}else{var essence_image="&nbsp;"}
+                              
 					
 							    div +=
 										"<div class='strategy_content' data-coll_id='"+ str[i].coll_id +"'  data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'>"+
@@ -328,6 +334,7 @@
 											"<div class='strategy_content_art font_14 color_7a7a7a'>"+
 												"<img class='str_img' style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
 												"<div class='strategy_content_titles'>"+
+												 essence_image+
 												  "<div class='strategy_content_title color_282828'>" + str[i].title+ "</div>"+											
 											    "</div>"+
 												"<div class='strategy_content'>"+detail+"</div>"+

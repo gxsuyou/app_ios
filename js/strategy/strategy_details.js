@@ -6,8 +6,8 @@ var sort = "add_time";
 var target_img;
 var target_title;
 var lord_id;
-$(function(){
-	$('body').on("tap",".news_review",function() {
+$(function() {
+	$('body').on("tap", ".news_review", function() {
 		$('html, body').animate({
 			scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
 		}, 1000)
@@ -16,7 +16,7 @@ $(function(){
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
 		var anchor = self.anchor;
-		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";	
+		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";
 		mui.init({
 			swipeBack: true,
 			gestureConfig: {
@@ -31,7 +31,7 @@ $(function(){
 					auto: true, //可选,默认false.自动上拉加载一次
 					contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 					contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-					callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				},
 				down: {
 					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -45,9 +45,8 @@ $(function(){
 			}
 		})
 
-
 		detail();
-		$('body').on("tap",".news_collect",function() {
+		$('body').on("tap", ".news_collect", function() {
 			if(userId !== 0) {
 				if($(this).attr('data-collect') == 1) {
 					$('.news_collect').attr('data-collect', 0)
@@ -69,18 +68,15 @@ $(function(){
 
 		})
 		//长按保存图片结束
-		
-		$('body').on('tap','.mui-preview-header',function(){
-          var num=$(".mui-preview-indicator").text();        
-          num=num.substring(0,1)-1;
-          var  url=$(".mui-preview-image img:eq("+num+")").attr("src");
-          saveImg(url);
+
+		$('body').on('tap', '.mui-preview-header', function() {
+			var num = $(".mui-preview-indicator").text();
+			num = num.substring(0, 1) - 1;
+			var url = $(".mui-preview-image img:eq(" + num + ")").attr("src");
+			saveImg(url);
 		});
-		
-		
-		
-		
-		function saveImg(picurl){
+
+		function saveImg(picurl) {
 			var picname;
 			var btnArray = ['否', '是'];
 			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
@@ -227,31 +223,26 @@ $(function(){
 		})
 
 		//		点赞与取消点赞结束
-		
-		
-
-
 
 		$('body').on('tap', '.more_secondComment,.comment_img', function(event) {
-		  if(userId != 0) {
-			event.stopPropagation();
-			var commentId = $(this).attr('data-id')
-			mui.openWindow({
-				url: "strategy_allComments.html",
-				id: "strategy_allComments.html",
-				createNew: true,
-				extras: {
-					strategyId: strategyId,
-					commentId: $(this).attr('data-id'),
-					target_img: target_img,
-					target_title: target_title
-				}
-			});
-		  }else{
-		  	mui.toast("请先登录")
-		  }
-			
-			
+			if(userId != 0) {
+				event.stopPropagation();
+				var commentId = $(this).attr('data-id')
+				mui.openWindow({
+					url: "strategy_allComments.html",
+					id: "strategy_allComments.html",
+					createNew: true,
+					extras: {
+						strategyId: strategyId,
+						commentId: $(this).attr('data-id'),
+						target_img: target_img,
+						target_title: target_title
+					}
+				});
+			} else {
+				mui.toast("请先登录")
+			}
+
 		})
 
 		//	滚动隐藏
@@ -261,12 +252,12 @@ $(function(){
 			window.addEventListener("scroll", function() {
 				var afterScrollTop = document.body.scrollTop,
 					delta = afterScrollTop - beforeScrollTop,
-				    scrollHeight=document.body.scrollHeight,
-				    windowHeight=$(window).height();
-				 /*到底部*/
-				if(scrollHeight<=windowHeight+afterScrollTop+20){
+					scrollHeight = document.body.scrollHeight,
+					windowHeight = $(window).height();
+				/*到底部*/
+				if(scrollHeight <= windowHeight + afterScrollTop + 20) {
 					fn('up');
-					return ;
+					return;
 				}
 				if(delta === 0) return false;
 				fn(delta > 0 ? "down" : "up");
@@ -276,62 +267,54 @@ $(function(){
 
 		scroll(function(direction) {
 			if(direction == "down") {
-				$('.news_userInfo_reply').css("display","none")
+				$('.news_userInfo_reply').css("display", "none")
 			} else {
-				$('.news_userInfo_reply').css("display","block")
+				$('.news_userInfo_reply').css("display", "block")
 			}
 		});
 
-        
-        $("body").on('tap','.news_post_content_detail a',function(){
-             mui.openWindow({
-			   url:"../play/h5game.html",
-			   id:"h5game.html",
-			   extras:{
-				url:$(this).attr('href')
-			  }
-		   })
-        });
+		$("body").on('tap', '.news_post_content_detail a', function() {
+			mui.openWindow({
+				url: "../play/h5game.html",
+				id: "h5game.html",
+				extras: {
+					url: $(this).attr('href')
+				}
+			})
+		});
 
+		$("body").on("tap", ".comment_dele", function(e) {
+			e.stopPropagation()
+			var id = $(this).attr("data-id")
+			plus.nativeUI.confirm("删除评论", function(e) {
+				if(e.index == 0) {
+					$.ajax({
+						type: "get",
+						url: config.data + "strategy/delMyComment",
+						async: true,
+						data: {
+							uid: userId,
+							id: id
+						},
+						success: function(data) {
+							if(data.state == 1) {
+								mui.toast("删除成功")
+								page = 0
+								$('.news_post_commentContents').empty()
+								getNum()
+								up()
+							} else {
+								mui.toast("删除失败")
+							}
+						}
+					})
+				}
+			})
 
-
-
-       
-    $("body").on("tap",".comment_dele",function(e){
-    	e.stopPropagation()
-       	var id=$(this).attr("data-id")
-	    plus.nativeUI.confirm("删除评论", function(e){	 	
-		   if(e.index==0){
-              $.ajax({
-           	    type: "get",
-			    url: config.data + "strategy/delMyComment",
-			    async: true,
-			    data:{
-			      uid:userId,
-			      id:id
-			    },
-			    success:function(data){
-				  if(data.state==1){
-					mui.toast("删除成功")
-                    page = 0
-                    $('.news_post_commentContents').empty()
-                    getNum()          
-                    up()
-				   }else{
-					   mui.toast("删除失败")
-				   }
-			      }
-                })	            	
-	        }
-	    })
-       	
-    })
-
-
-
+		})
 
 		//滚动隐藏结束
-		$('body').on("tap",".news_userInfo_replyInput",function() {
+		$('body').on("tap", ".news_userInfo_replyInput", function() {
 			if(userId !== 0) {
 				mui.openWindow({
 					url: "strategy_comment.html",
@@ -348,263 +331,248 @@ $(function(){
 			}
 
 		})
-		
 
 		$('body').on('tap', '.news_post_commentContent', function() {
-		  if(userId !== 0) {
-			mui.openWindow({
-				url: "strategy_allComments.html",
-				id: "strategy_allComments.html",
-				createNew: true,
-				extras: {
-					strategyId: strategyId,
-					commentId: $(this).attr('data-id'),
-					target_img: target_img,
-					target_title: target_title
-				}
-			})
-		  }else{
-		  	mui.toast("请先登录")
-		  }
-		  
-		});
-        //取消收藏结束	
-
-	})
-	
-	
-	
-	
-})
-
-
-
-
-function up() {
-			page++;
-			if(sort == "comment_num") {
-				$.ajax({
-					type: "get",
-					url: config.data + "strategy/getStrategyCommentByPageUser",
-					async: true,
-					data: {
-						page: page,
-						userId: userId,
-						targetId: proId,
-						strategyId: strategyId
-					},
-					success: function(data) {                      
-						if(data.state) {
-							var com = data.comment;
-							var div = "",portrait;
-								
-							
-							for(var i = 0; i < com.length; i++) {
-								if(com[i].img) {
-									var img = "img"
-								} else {
-									var img = "hidden"
-								}
-								var sec = "";
-								if(com[i].towCommentList.length > 0) {
-									for(var j = 0; j < com[i].towCommentList.length; j++) {
-										if(com[i].towCommentList[j].targetUserNickName) {
-											ifHide = "ifHide"
-										} else {
-											ifHide = "hidden"
-										}
-										sec +=
-											"<div class='comment_secondComment'>" +
-											"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
-//											"<span class='" + ifHide + "'>回复</span>" +
-//											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
-											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
-											"</div>"
-									}
-
-									sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
-
-								}
-
-								if(com[i].state !== 1) {
-									var ifLike = "unLike"
-
-								} else {
-									var ifLike = "liked"
-								}
-
-								
-								if(com[i].portrait==0||com[i].portrait==null){
-									portrait="../../Public/image/morentouxiang.png";
-								}else{
-								    portrait=com[i].portrait;
-								}
-								
-								
-								 if(com[i].user_id==userId){
-                        	        var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
-                                }else{
-                        	        var comment_dele="&nbsp;"
-                                }
-								
-	
-								div +=
-									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-									"<div class='news_post_commentContent_content fl'>" +
-									"<img class='fl lord_image' src='../../Public/image/lord.png' >"+
-									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
-									"<div class='comment_info ofh'>" +
-									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-									comment_dele+
-									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb " + ifLike + "'></span>" +
-									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
-									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
-									"</div>" +
-									"</div>" +
-									"<div class='comment_secondComments font_14 ofh'>" +
-									sec +
-									"</div>" +
-									"</div>" +
-									"</div>"
-
-							}
-
-							$('.news_post_commentContents').append(div);
-
-							if(com.length < 5) {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
-							} else {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
-							}
-						} else {
-
-						}
-					}
-				});
-			} else {
-				$.ajax({
-					type: "get",
-					url: config.data + "strategy/getStrategyCommentByPage",
-					async: true,
-					data: {
+			if(userId !== 0) {
+				mui.openWindow({
+					url: "strategy_allComments.html",
+					id: "strategy_allComments.html",
+					createNew: true,
+					extras: {
 						strategyId: strategyId,
-						page: page,
-						userId: userId,
-						sort: sort
-					},
-					success: function(data) {                      
-						if(data.state) {
-							var com = data.comment;
-							var div = "";
-							for(var i = 0; i < com.length; i++) {
-                         
-								if(com[i].img) {
-									var img = "img"
-								} else {									
-									var img = "hidden"
-								}
-								var sec = "",portrait;
- 
-                                
-								if(com[i].towCommentList.length > 0) {
-									for(var j = 0; j < com[i].towCommentList.length; j++) {
-										if(com[i].towCommentList[j].targetUserNickName) {
-											ifHide = "ifHide"
-										} else {
-											ifHide = "hidden"
-										}
-										sec +=
-											"<div class='comment_secondComment'>" +
-											"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
-//											"<span class='" + ifHide + "'>回复</span>" +
-//											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
-											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
-											"</div>"
-									}
-
-									sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
-
-								}
-
-								if(com[i].state !== 1) {
-									var ifLike = "unLike"
-
-								} else {
-									var ifLike = "liked"
-
-								}
-								
-								if(com[i].portrait==0||com[i].portrait==null){
-									portrait="../../Public/image/morentouxiang.png";
-								}else{
-									portrait=com[i].portrait;
-								}
-								
-								  
-					            if(com[i].user_id==userId){
-                        	        var comment_dele="<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
-                                }else{
-                        	        var comment_dele="&nbsp;"
-                                }
-								
-								if(com[i].user_id==lord_id){									
-									var lord_image="<img class='fl lord_image' src='../../Public/image/lord.png' >"
-									
-								}else{
-									var lord_image="<img class='fl lord_image hidden'  src='../../Public/image/lord.png' >"
-								}
-								
-
-								div +=
-									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-									"<div class='news_post_commentContent_content fl'>" +
-									lord_image+
-									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<div class='imgFirst'>"+
-									   "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
-									"</div>"+
-									"<div class='comment_info ofh'>" +
-									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-									comment_dele+
-									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb " + ifLike + "'></span>" +
-									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
-									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
-									"</div>" +
-									"</div>" +
-									"<div class='comment_secondComments font_14 ofh'>" +
-									sec +
-									"</div>" +
-									"</div>" +
-									"</div>"
-									
-						}							 
-							$('.news_post_commentContents').append(div);
-	
-							if(com.length < 5) {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
-							} else {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
-							}
-						} else {
-
-						}
+						commentId: $(this).attr('data-id'),
+						target_img: target_img,
+						target_title: target_title
 					}
-				});
+				})
+			} else {
+				mui.toast("请先登录")
 			}
 
-		}
+		});
+		//取消收藏结束	
 
+	})
 
+})
 
+function up() {
+	page++;
+	if(sort == "comment_num") {
+		$.ajax({
+			type: "get",
+			url: config.data + "strategy/getStrategyCommentByPageUser",
+			async: true,
+			data: {
+				page: page,
+				userId: userId,
+				targetId: proId,
+				strategyId: strategyId
+			},
+			success: function(data) {
+				if(data.state) {
+					var com = data.comment;
+					var div = "",
+						portrait;
+
+					for(var i = 0; i < com.length; i++) {
+						if(com[i].img) {
+							var img = "img"
+						} else {
+							var img = "hidden"
+						}
+						var sec = "";
+						if(com[i].towCommentList.length > 0) {
+							for(var j = 0; j < com[i].towCommentList.length; j++) {
+								if(com[i].towCommentList[j].targetUserNickName) {
+									ifHide = "ifHide"
+								} else {
+									ifHide = "hidden"
+								}
+								sec +=
+									"<div class='comment_secondComment'>" +
+									"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
+									//											"<span class='" + ifHide + "'>回复</span>" +
+									//											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+									"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
+									"</div>"
+							}
+
+							sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
+
+						}
+
+						if(com[i].state !== 1) {
+							var ifLike = "unLike"
+
+						} else {
+							var ifLike = "liked"
+						}
+
+						if(com[i].portrait == 0 || com[i].portrait == null) {
+							portrait = "../../Public/image/morentouxiang.png";
+						} else {
+							portrait = com[i].portrait;
+						}
+
+						if(com[i].user_id == userId) {
+							var comment_dele = "<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+						} else {
+							var comment_dele = "&nbsp;"
+						}
+
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
+							"<div class='news_post_commentContent_content fl'>" +
+							"<img class='fl lord_image' src='../../Public/image/lord.png' >" +
+							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
+							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
+							"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifLike + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"<div class='comment_secondComments font_14 ofh'>" +
+							sec +
+							"</div>" +
+							"</div>" +
+							"</div>"
+
+					}
+
+					$('.news_post_commentContents').append(div);
+
+					if(com.length < 5) {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
+					} else {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
+					}
+				} else {
+
+				}
+			}
+		});
+	} else {
+		$.ajax({
+			type: "get",
+			url: config.data + "strategy/getStrategyCommentByPage",
+			async: true,
+			data: {
+				strategyId: strategyId,
+				page: page,
+				userId: userId,
+				sort: sort
+			},
+			success: function(data) {
+				if(data.state) {
+					var com = data.comment;
+					var div = "";
+					for(var i = 0; i < com.length; i++) {
+
+						if(com[i].img) {
+							var img = "img"
+						} else {
+							var img = "hidden"
+						}
+						var sec = "",
+							portrait;
+
+						if(com[i].towCommentList.length > 0) {
+							for(var j = 0; j < com[i].towCommentList.length; j++) {
+								if(com[i].towCommentList[j].targetUserNickName) {
+									ifHide = "ifHide"
+								} else {
+									ifHide = "hidden"
+								}
+								sec +=
+									"<div class='comment_secondComment'>" +
+									"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
+									//											"<span class='" + ifHide + "'>回复</span>" +
+									//											"<span class='color_green" + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+									"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
+									"</div>"
+							}
+
+							sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
+
+						}
+
+						if(com[i].state !== 1) {
+							var ifLike = "unLike"
+
+						} else {
+							var ifLike = "liked"
+
+						}
+
+						if(com[i].portrait == 0 || com[i].portrait == null) {
+							portrait = "../../Public/image/morentouxiang.png";
+						} else {
+							portrait = com[i].portrait;
+						}
+
+						if(com[i].user_id == userId) {
+							var comment_dele = "<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+						} else {
+							var comment_dele = "&nbsp;"
+						}
+
+						if(com[i].user_id == lord_id) {
+							var lord_image = "<img class='fl lord_image' src='../../Public/image/lord.png' >"
+
+						} else {
+							var lord_image = "<img class='fl lord_image hidden'  src='../../Public/image/lord.png' >"
+						}
+
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
+							"<div class='news_post_commentContent_content fl'>" +
+							lord_image +
+							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
+							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
+							"<div class='imgFirst'>" +
+							"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='max-height:10rem' />" +
+							"</div>" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifLike + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14' style='margin-left:0.25rem;'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"<div class='comment_secondComments font_14 ofh'>" +
+							sec +
+							"</div>" +
+							"</div>" +
+							"</div>"
+
+					}
+					$('.news_post_commentContents').append(div);
+
+					if(com.length < 5) {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
+					} else {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
+					}
+				} else {
+
+				}
+			}
+		});
+	}
+
+}
 
 //获取详情ajax
 
@@ -618,11 +586,10 @@ function detail() {
 			userId: userId
 		},
 		success: function(data) {
-//			console.log(JSON.stringify(data))
 			if(data.state) {
 				var str = data.strategy,
-					portrait,nickName,detail;
-                lord_id = str.user_id;
+					portrait, nickName, detail;
+				lord_id = str.user_id;
 				if(str.comment_num > 99) {
 					var comment_num = 99
 				} else {
@@ -634,23 +601,23 @@ function detail() {
 					portrait = str.portrait;
 				}
 
-                if(str.admin){
-                	nickName=str.nike_name;
-                }else{
-                	nickName=str.nick_name;
-                }              
-                if(str.detail!=null){
-                	detail=str.detail.replace(/<span> <\/span>/g,"&nbsp;");
-                }
-           
-                $('.news_post_content_detail').html(detail);
+				if(str.admin) {
+					nickName = str.nike_name;
+				} else {
+					nickName = str.nick_name;
+				}
+				if(str.detail != null) {
+					detail = str.detail.replace(/<span> <\/span>/g, "&nbsp;");
+				}
+
+				$('.news_post_content_detail').html(detail);
 				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
-				$('.news_userInfo_date').text(str.add_time);			
-				$(".news_post_content_detail img").attr("data-preview-src","");
-                $(".news_post_content_detail img").attr("data-preview-group","1");  
+				$('.news_userInfo_date').text(str.add_time);
+				$(".news_post_content_detail img").attr("data-preview-src", "");
+				$(".news_post_content_detail img").attr("data-preview-group", "1");
 				$('.news_post_content_detail img').css("max-width", "100%");
 				target_img = str.top_img_src;
 				target_title = str.title;
@@ -754,17 +721,16 @@ function savePicture(picurl, picname) {
 	dtask.start();
 }
 
-
 //获得评论数
-function getNum(){
+function getNum() {
 	$.ajax({
-		type:"get",
-		url:config.data+"strategy/getStrategyNum",
-		async:true,
-		data:{
-			strategyId:strategyId
+		type: "get",
+		url: config.data + "strategy/getStrategyNum",
+		async: true,
+		data: {
+			strategyId: strategyId
 		},
-		success:function(data){
+		success: function(data) {
 			$('.news_reviewNum').text(data.strategy.comment_num);
 		}
 	})

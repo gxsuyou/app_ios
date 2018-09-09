@@ -8,6 +8,17 @@ $(function(){
 		$("."+t.siblings('span').attr("data-class")).addClass('hidden')
 		
 	})
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
 	$('.me_collectionNav').children('span').eq(0).click(function(){
 		$('.news_art_list').removeClass('hidden')
 		$('.strategy_contents').addClass('hidden').children().remove();

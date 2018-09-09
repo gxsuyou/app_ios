@@ -18,31 +18,42 @@ $(function() {
 			}
 		})
 	})
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
 
-	$('body').on('longtap','.strategy_content',function() {
-		var strategyId  = $(this).attr('data-id');
+	$('body').on('longtap', '.strategy_content', function() {
+		var strategyId = $(this).attr('data-id');
 		var btnarr = ["确定", "取消"];
 		mui.confirm("你确定删除这条攻略吗？", "操作提示", btnarr, function(e) {
 			if(e.index == 0) {
 				$.ajax({
-					type:"get",
-					url:config.data + "strategy/strategyDelete",
-					async:true,
-					data:{
-						strategyId:strategyId
+					type: "get",
+					url: config.data + "strategy/strategyDelete",
+					async: true,
+					data: {
+						strategyId: strategyId
 					},
-					success:function(data){
-						if (data.state) {
+					success: function(data) {
+						if(data.state) {
 							mui.alert("删除成功！", "操作提示", "确定");
 							location.reload()
-						} else{
+						} else {
 							mui.alert("删除失败！", "操作提示", "确定");
 						}
 					}
 				});
-				
+
 			} else {
-				
+
 			}
 		});
 	})

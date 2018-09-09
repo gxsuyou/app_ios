@@ -451,7 +451,7 @@ $(function() {
 
          var  face_to=1
 		$("body").on("tap", ".face", function() {
-			$(".news_secondComment_input").blur()
+//			$(".news_secondComment_input").blur()
 			setTimeout(function(){
 				$(".news_secondComment").css("display", "block")
 				$(".news_userInfo_reply").css("display", "none")
@@ -470,11 +470,13 @@ $(function() {
 			var tc = document.querySelector(".news_secondComment_input")
 			var tclen = tc.value.length;
 			tc.focus();
+			
 			if(typeof document.selection != "undefined") {
 				document.selection.createRange().text = str;
 			} else {
 				tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
 			}
+			
 		})
 
 		$('body').on('tap', '.publish', function(event) {

@@ -112,15 +112,7 @@ html,body{
 	color: #7A7A7A;
 	font-size: 14px;
 }
-.face{
-	width:1.8rem;
-	height:1.8rem;
-	background:url(../../Public/image/face.png) no-repeat center /100% auto;
-	position: absolute;
-	top: 50%;
-	margin-top: -0.9rem;
-	right:3.8rem;
-}
+
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     font-size: 14px;
 }
@@ -141,6 +133,15 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	padding: 0;
 	height: 3rem;
 	line-height: 3rem;
+}
+.face{
+	width:1.8rem;
+	height:1.8rem;
+	background:url(../../Public/image/face.png) no-repeat center /100% auto;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.9rem;
+	right:3.8rem;
 }
 .faceContent{
     border-top:1.5px solid #E7EAEC;

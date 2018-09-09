@@ -191,11 +191,25 @@ $(function() {
 		$(".faceContent").append(faceContent)
 	}
 
-	$("body").on("tap", ".face", function() {
-		$(".faceContent").css("display", "block")
-		$(".show_imgs").css("display", "none")
-		$(".choose_img").css("bottom", "2.425rem")
+    $("body").on("tap",".mui-back",function(){
+    	var val=$("#strategy_textarea").val()
+    	localStorage.setItem("strategyVal",val)
+    	mui.back()
+    })
 
+
+	var face_t = 1;
+	$("body").on("tap", ".face", function() {
+		if(face_t == 1) {
+			 face_t =0;
+			$(".faceContent").css("display", "block")
+			$(".show_imgs").css("display", "none")
+			$(".choose_img").css("bottom", "2.425rem")
+		}else{
+			 face_t =1;
+			$(".faceContent").css("display", "none")
+			$(".show_imgs").css("display", "none")
+		}
 	})
 
 	$("body").on("blur", "textarea", function() {
@@ -230,7 +244,9 @@ $(function() {
 		var old_back = mui.back;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-
+        var  strategyVal  =localStorage.getItem("strategyVal")
+        $("#strategy_textarea").val(strategyVal)
+        
 		$('body').on('tap', '.choose', function() {
 			$(".faceContent").css("display", "none")
 			$(".show_imgs").css("display", "block")

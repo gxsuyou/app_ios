@@ -10,7 +10,13 @@ html {
 	position: absolute;
 	top: 0;
 }
-
+.mui-back{
+	line-height: 45px;
+	width: 3rem;
+	font-size: 20px;
+	color: white;
+	position:absolute;
+}
 .add_comment {
 	position: absolute;
 	left: 50%;
@@ -38,11 +44,9 @@ textarea {
 
 
 .choose_img{
-	width: 100%;
-	
+	width: 100%;	
 	position: absolute;
-	bottom: 10.625rem;
-	
+	bottom: 10.625rem;	
 }
 .chooseContent{
 	display: flex;

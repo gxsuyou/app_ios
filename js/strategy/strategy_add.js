@@ -40,12 +40,10 @@ $(function() {
 		console.log(strategy_title, strategy_game, strategy_content);
 
 		if(strategy_title != "" || strategy_game != "", strategy_content != "") {
-			console.log(2)
 			$(".strategy_title").val(strategy_title)
 			$(".choose_game").val(strategy_game)
 			$("#strategy_textarea").html(strategy_content)
 		}
-
 	}
     /*返回查询是否保存攻略*/
 	$("body").on("tap", ".strategy-back", function() {

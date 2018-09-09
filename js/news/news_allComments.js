@@ -344,8 +344,7 @@ function toface() {
 	$(".faceContent").append(faceContent)
 }
 var face_to = 1;
-$("body").on("tap", ".face", function(e) {
-	e.stopPropagation()
+$("body").on("tap", ".face", function() {
 	if(face_to == 1) {
 		face_to = 0
 		$(".faceContent").css("display", "block")

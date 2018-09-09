@@ -308,6 +308,7 @@ body{
 }
 .first_three{
 	background:#fff;
+	display:flex;
 }
 .game_lists{
 	background-color:#fff;

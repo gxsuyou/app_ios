@@ -8,6 +8,25 @@ $(function(){
 		$("."+t.siblings('span').attr("data-class")).addClass('hidden')
 		
 	})
+	$("body").on("tap", ".game_listDownload", function(e) {
+		e.stopPropagation()
+		var downloadUrl = $(this).attr("data-url")
+		location.href = downloadUrl
+	})
+	
+	$('body').on('tap', '.tag', function(e) {
+		e.stopPropagation()
+		mui.openWindow({
+			url: "../game/game_classify_list.html",
+			id: "game_classify_list.html",
+			extras: {
+				tagId: $(this).attr('data-id'),
+				tagName: $(this).text()
+			},
+			createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+		})
+	})
+	
 	
 	$('.me_gameNav').children('span').eq(0).click(function(){
 		$('.game_lists').removeClass('hidden');

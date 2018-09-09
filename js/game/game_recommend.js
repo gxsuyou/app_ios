@@ -241,20 +241,6 @@ $(function() {
 		})
 	})
 
-	//	$(".game_topicBox").on("swipeleft", function() {
-	//		alert(1)
-	//	});
-	//	$(".game_topicBox").on("swiperight", function() {
-	//		alert(2)
-	//	});
-	//	window.addEventListener("swiperight", function(e) {
-	//		//默认滑动角度在-45度到45度之间，都会触发右滑菜单，为避免误操作，可自定义限制滑动角度；
-	//		console.log(e.detail.angle)
-	//		if(Math.abs(e.detail.angle) < 4) {
-	//			alert(1)
-	//		}
-	//	});
-
 	$('body').on('tap', '.check_more', function() {
 		var tagId = $(this).attr("data-tagid");
 		var tagName = $(this).prev().text();
@@ -269,16 +255,12 @@ $(function() {
 	})
 
 	//标签结束
-	
-	$("body").on("tap",".game_listDownload",function(e){
+
+	$("body").on("tap", ".game_listDownload,.y_listDownload", function(e) {
 		e.stopPropagation()
-		var downloadUrl=$(this).attr("data-url")
-		location.href=downloadUrl
+		var downloadUrl = $(this).attr("data-url")
+		location.href = downloadUrl
 	})
-	
-	
-	
-	
 
 	//底下新加部分
 
@@ -289,7 +271,7 @@ $(function() {
 			url: config.data + "game/getActiveLenOfTen?sys=1",
 			async: true,
 			success: function(data) {
-//				alert(JSON.stringify(data))
+				//				alert(JSON.stringify(data))
 				if(data.state) {
 					var g = data.game;
 					var list = '';
@@ -312,16 +294,14 @@ $(function() {
 							}
 
 						}
-						
-						if(g[i].game_download_ios2){
-							
-							var urlDownload=g[i].game_download_ios2
-						}else{
-//							alert(1)
-							var urlDownload=g[i].game_download_ios
+
+						if(g[i].game_download_ios2) {
+
+							var urlDownload = g[i].game_download_ios2
+						} else {
+							//							alert(1)
+							var urlDownload = g[i].game_download_ios
 						}
-						
-						
 
 						list =
 							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
@@ -342,7 +322,7 @@ $(function() {
 							signs +
 							"</div>" +
 							"</div>" +
-							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='"+urlDownload+"'>下载</div>" +
+							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='" + urlDownload + "'>下载</div>" +
 							"</li>";
 
 						if(i < 3) {
@@ -594,19 +574,8 @@ $('.game_rank').children().click(function() {
 	$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
 	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
 	$('.game_lists').children().remove();
-	$(".first_three").css("display", "none");
 	getRank(sort);
 })
-//var le = document.getElementById("game_container")
-//le.addEventListener("swipeleft",function(){
-//   alert("你正在向左滑动");
-//});
-//le.addEventListener("swiperight",function(){
-//   alert("你正在向右边滑动");
-//});
-//$("body").on("swipeleft","body",function(){
-//	alert("你正在向左滑动");
-//})
 
 $("body").on("tap", ".oneRank_index", function() {
 	mui.openWindow({
@@ -639,16 +608,18 @@ function getRank(sort) {
 							$('.first').attr('data-id', g[0].id)
 							$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
 							$('.first .y_listName').text(g[0].game_name)
-							$('.first .game_recommend_starScore').text(g[0].grade)
+							$('.first .y_listDownload').attr("data-url",g[0].game_download_ios)												
+							$('.first .game_recommend_starScore').text(g[0].grade)							
 							$('.second').attr('data-id', g[1].id)
 							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
 							$('.second .y_listName').text(g[1].game_name)
+							$('.second .y_listDownload').attr("data-url",g[1].game_download_ios)	
 							$('.second .game_recommend_starScore').text(g[1].grade)
 							$('.third ').attr('data-id', g[2].id)
 							$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
 							$('.third  .y_listName').text(g[2].game_name)
 							$('.third  .game_recommend_starScore').text(g[2].grade)
-							$(".first_three").css("display", "flex");
+							$('.third .y_listDownload').attr("data-url",g[2].game_download_ios)
 						} else {
 							var signs = '';
 							if(g[i].tagList && g[i].tagList !== "null") {
@@ -670,14 +641,10 @@ function getRank(sort) {
 
 							}
 
-							var downloadToggle = plus.runtime.isApplicationExist({
-								pname: g[i].game_packagename,
-								action: ''
-							});
-							if(downloadToggle) {
-								var buttonDown = "打开";
+							if(g[i].game_download_ios2) {
+								var urlDownload = g[i].game_download_ios2
 							} else {
-								var buttonDown = "下载";
+								var urlDownload = g[i].game_download_ios
 							}
 
 							list +=
@@ -700,7 +667,7 @@ function getRank(sort) {
 								signs +
 								"</div>" +
 								"</div>" +
-								"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>" + buttonDown + "</div>" +
+								"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='" + urlDownload + "'>下载</div>" +
 								"</li>"
 						}
 					}
@@ -764,8 +731,12 @@ function getRankup(page, sort) {
 									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
 							}
 						}
-					} else {
+					}
 
+					if(g[i].game_download_ios2) {
+						var urlDownload = g[i].game_download_ios2
+					} else {
+						var urlDownload = g[i].game_download_ios
 					}
 
 					list +=
@@ -788,7 +759,7 @@ function getRankup(page, sort) {
 						signs +
 						"</div>" +
 						"</div>" +
-						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>" +
+						"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='" + urlDownload + "'>下载</div>" +
 						"</li>"
 
 				}

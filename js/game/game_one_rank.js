@@ -1,5 +1,6 @@
 page = 0
-function up(){
+
+function up() {
 	page++
 	$.ajax({
 		type: "get",
@@ -32,6 +33,12 @@ function up(){
 							}
 						}
 
+						if(g[i].game_download_ios2) {
+							var urlDownload = g[i].game_download_ios2
+						} else {
+							var urlDownload = g[i].game_download_ios
+						}
+
 						list +=
 							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
 							"<div class='color_9e9e9e fl game_listScore'>" + (i + 1 + (page - 1) * 20) + "</div>" +
@@ -52,7 +59,7 @@ function up(){
 							signs +
 							"</div>" +
 							"</div>" +
-							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>下载</div>" +
+							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='" + urlDownload + "'>下载</div>" +
 							"</li>"
 					}
 				}
@@ -82,6 +89,12 @@ function up(){
 
 			}
 		}
+	})
+
+	$("body").on("tap", ".game_listDownload", function(e) {
+		e.stopPropagation()
+		var downloadUrl = $(this).attr("data-url")
+		location.href = downloadUrl
 	})
 	$('body').on('tap', '.game_list', function() {
 		mui.openWindow({

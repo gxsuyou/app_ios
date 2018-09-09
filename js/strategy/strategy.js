@@ -44,34 +44,56 @@ $(function() {
 
 	var startX, startY;
 	$("body").on("touchstart", function(e) {
-//		e.preventDefault();
 		startX = e.originalEvent.changedTouches[0].pageX,
 			startY = e.originalEvent.changedTouches[0].pageY;
-		//		alert(startX)
-	});
+	})
 
 	$("body").on("touchmove", function(e) {
-//		e.preventDefault();
 		moveEndX = e.originalEvent.changedTouches[0].pageX,
 			moveEndY = e.originalEvent.changedTouches[0].pageY,
 			X = moveEndX - startX,
 			Y = moveEndY - startY;
 
+		if(X > 0 && X > 160) {
 
-		if(X > 0&&X>150) {
-			alert(X)
-			alert("left 2 right");
-		} else if(X < 0&&150<-(X)) {
-//			alert(moveEndY)
-//			alert(startY
-	alert(X)
-			alert("right 2 left");
-		} else if(Y > 0) {
-//			alert("top 2 bottom");
-		} else if(Y < 0) {
-//			alert("bottom 2 top");
-		} else {
-//			alert("just touch");
+			if(sort == "comment_num") {
+				return false;
+//				sort = "add_time"
+//				$(".strategy_nav>div:first-child").removeClass('color_green border_bottom');
+//				$(".strategy_nav>div:nth-child(2)").addClass('color_green border_bottom')
+			}else if(sort == "add_time"){
+				sort = "comment_num"
+				$(".strategy_nav>div:nth-child(2)").removeClass('color_green border_bottom');
+				$(".strategy_nav>div:first-child").addClass('color_green border_bottom')
+			}else if(sort == "essence"){
+				sort = "add_time"
+				$(".strategy_nav>div:nth-child(3)").removeClass('color_green border_bottom');
+				$(".strategy_nav>div:nth-child(2)").addClass('color_green border_bottom')
+			}else {
+				return false;
+			}
+			$('.strategy_contents').children().remove();
+			page = 0;
+			mui('.strategy').pullRefresh().refresh(true);
+			up()
+		} else if(X < 0 && 160 < -(X)) {
+			//向右
+			if(sort == "comment_num") {
+				sort = "add_time"
+				$(".strategy_nav>div:first-child").removeClass('color_green border_bottom');
+				$(".strategy_nav>div:nth-child(2)").addClass('color_green border_bottom')
+			}else if(sort == "add_time"){
+				sort = "essence"
+				$(".strategy_nav>div:nth-child(2)").removeClass('color_green border_bottom');
+				$(".strategy_nav>div:nth-child(3)").addClass('color_green border_bottom')
+			}else {
+				return false;
+			}
+			$('.strategy_contents').children().remove();
+			page = 0;
+			mui('.strategy').pullRefresh().refresh(true);
+			up()
+	
 		}
 	});
 
@@ -101,8 +123,9 @@ $(function() {
 	})
 
 	$('.strategy_nav').children().click(function() {
-		$('.strategy_contents').children().remove();
+
 		$(this).addClass('color_green border_bottom').siblings().removeClass('color_green border_bottom');
+		$('.strategy_contents').children().remove();
 		page = 0;
 		mui('.strategy').pullRefresh().refresh(true);
 		up()
