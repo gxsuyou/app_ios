@@ -7,7 +7,7 @@ mui.plusReady(function() {
 		url: config.data + "news/searchNewsByGameName",
 		async: true,
 		data: {
-			sys: 1,
+			sys: 2,
 			msg: val,
 			page: 1
 		},

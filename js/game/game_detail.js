@@ -111,7 +111,6 @@ $(function() {
 			var isFile = false;
 
 			addMyGame() //添加首席收藏
-			//return false;
 			addDownNum() //增加下载量
 
 			if(String(game.game_download_ios) != "null") {

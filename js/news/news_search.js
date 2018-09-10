@@ -40,7 +40,7 @@ $(function() {
 				url: config.data + "news/searchNewsByGameName",
 				async: true,
 				data: {
-					sys: 2,
+					sys: 1,
 					msg: val,
 					page: 1
 				},
@@ -103,7 +103,7 @@ $(function() {
 					uid: userId,
 					keyword: val,
 					type: 1,
-					sys: 1,
+					sys:1,
 				},
 				success: function(data) {}
 			})
