@@ -7,25 +7,25 @@ var targetUserId;
 var loginToggle = false;
 mui.init({
 	swipeBack: true, //启用右滑关闭功能
-	pullRefresh: {
-		container: ".news_post_commentContents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-		//			up: {
-		//				height:50, //可选.默认50.触发上拉加载拖动距离
-		//				auto:false, //可选,默认false.自动上拉加载一次
-		//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-		//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-		//				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		//			}
-		//		    down: {
-		//				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-		//				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-		//				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-		//				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-		//				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-		//				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
-		//				callback:down
-		//			},
-	}
+	//	pullRefresh: {
+	//		container: ".news_post_commentContents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+	//			up: {
+	//				height:50, //可选.默认50.触发上拉加载拖动距离
+	//				auto:false, //可选,默认false.自动上拉加载一次
+	//				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+	//				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+	//				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	//			}
+	//		    down: {
+	//				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+	//				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+	//				height: '50px', //可选,默认50px.下拉刷新控件的高度,
+	//				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+	//				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+	//				auto:false, //可选,默认false.首次加载自动上拉刷新一次	,
+	//				callback:down
+	//			},
+	//	}
 });
 
 $(function() {
@@ -88,8 +88,7 @@ $(function() {
 			}
 		})
 
-		$('body').on('tap', '.comment_summary', function(e) {
-			e.stopPropagation();
+		$('body').on('tap', '.comment_summary', function() {
 			var newsId = $(this).attr('data-id');
 			mui.openWindow({
 				url: "news_post.html",
@@ -160,7 +159,20 @@ $(function() {
 
 		})
 
-		//		点击发布结束
+		//点击发布结束
+
+		$("body").on("tap", ".faceContent>div", function(e) {
+			e.preventDefault()
+			var str = $(this).attr("data-id")
+			var tc = document.querySelector(".news_secondComment_input")
+			var tclen = tc.value.length;
+			tc.focus()
+			if(typeof document.selection != "undefined") {
+				document.selection.createRange().text = str;
+			} else {
+				tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
+			}
+		})
 
 	})
 
@@ -339,7 +351,8 @@ function toface() {
 	]
 	var faceContent = ""
 	face.forEach(function(item) {
-		faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+		//faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+	    faceContent+="<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src+")'></div>"
 	})
 	$(".faceContent").append(faceContent)
 }
@@ -362,19 +375,6 @@ $("body").on("tap", ".face", function() {
 //		}, 0)
 //	}, 400);
 //})
-
-$("body").on("tap", ".faceContent>img", function(e) {
-	e.stopPropagation()
-	var str = $(this).attr("data-id")
-	var tc = document.querySelector(".news_secondComment_input")
-	var tclen = tc.value.length;
-	tc.focus()
-	if(typeof document.selection != "undefined") {
-		document.selection.createRange().text = str;
-	} else {
-		tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
-	}
-})
 
 //获取二级评论
 function up() {
@@ -448,9 +448,9 @@ function up() {
 	//		获取二级评论结束
 }
 
-function down() {
-	window.location.reload();
-	setTimeout(function() {
-		mui('.news_allComments').pullRefresh().endPulldown(true);
-	}, 1000);
-}
+//function down() {
+//	window.location.reload();
+//	setTimeout(function() {
+//		mui('.news_allComments').pullRefresh().endPulldown(true);
+//	}, 1000);
+//}

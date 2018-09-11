@@ -128,7 +128,7 @@ $(function() {
 						if(data.length < 6 || val == "all") {
 							data.forEach(function(item) {
 								content += "<div class='search_log font_12 simHei'  >" +
-									"<div class='fl overflow nb' style='margin-left: 0.2rem; width: 100%;'>" + item.title + "<div class='fr delLog' data-id='" + item.id + "'>×</div>" + "</div>" +
+									"<div class='fl nb' style='margin-left: 0.2rem; width: 100%;'><div class='overflow fl' style='width:80%;'>" + item.title + "</div><div class='fr delLog' data-id='" + item.id + "'>×</div>" + "</div>" +
 									"</div>"
 							})
 							content += "<div class='search_log  font_12 simHei clear_log'  style='text-align:center;color:#bfbfbf;font-weight:600;'>" +
@@ -138,16 +138,15 @@ $(function() {
 
 							for(var n = 0; n < 6; n++) {
 								content += "<div class='search_log font_12 simHei'  >" +
-									"<div class='fl overflow nb' style='margin-left: 0.2rem; width: 100%;'>" + data[n].title + "<div class='fr delLog' data-id='" + data[n].id + "'>×</div>" + "</div>" +
+									"<div class='fl nb' style='margin-left: 0.2rem; width: 100%;'><div class='overflow fl' style='width:80%;'>" + data[n].title + "</div><div class='fr delLog' data-id='" + data[n].id + "'>×</div>" + "</div>" +
 									"</div>";
 							}
 							content += "<div class='search_log  font_12 simHei more_log'  style='text-align:center;color:#bfbfbf;font-weight:600;'>" +
 								"全部搜索记录" +
 								"</div>"
-						}
-
-						$('.search_lists').empty().append(content)
+						}					
 					}
+					$('.search_lists').empty().append(content)
 				}
 			})
 
@@ -155,6 +154,7 @@ $(function() {
 	}
 
 	$("body").on("tap", ".nb", function() {
+
          var val=$(this).text()
          val=val.replace(/×/g,"")
          $(".search_bar").val(val)
@@ -166,7 +166,9 @@ $(function() {
 	})
 
 	/*清除单个记录*/
-	$("body").on("tap", ".delLog", function() {
+	$("body").on("tap", ".delLog", function(e) {
+	
+		e.stopPropagation()
 		var id = $(this).attr("data-id");
 		delLog(id)
 	})
@@ -188,7 +190,8 @@ $(function() {
 				id: id
 			},
 			success: function(data) {
-				if(data.state = 1) {
+				if(data.state == 1) {
+
 					LogInit("part")
 				} else {
 					mui.toast("删除记录失败")

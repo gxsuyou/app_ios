@@ -108,6 +108,32 @@ body,html{
 	color: #7A7A7A;
 	font-size: 14px;
 }
+
+
+
+
+
+input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-size: 14px;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   font-size: 14px;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   font-size: 14px;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   font-size: 14px;
+}
+.publish{
+	position: absolute;
+	right: 4%;
+	top: 50%;
+	margin-top: -0.5rem;
+}
+
+
+/*表情包*/
 .face{
 	width:1.8rem;
 	height:1.8rem;
@@ -132,21 +158,13 @@ body,html{
 	margin:0 0.8rem;
 }
 
-input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    font-size: 14px;
-}
-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   font-size: 14px;
-}
-input::-moz-placeholder { /* Mozilla Firefox 19+ */
-   font-size: 14px;
-}
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   font-size: 14px;
-}
-.publish{
-	position: absolute;
-	right: 4%;
-	top: 50%;
-	margin-top: -0.5rem;
+.faceContent div{
+	float: left;
+	height:1.8rem;
+	width:1.8rem;
+	margin:0 0.8rem;
+	margin-bottom:0.2rem;
+	background-size:contain;
+	background-position: center;
+	background-repeat: no-repeat;
 }

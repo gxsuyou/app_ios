@@ -81,7 +81,6 @@ $(function() {
 		//评论页开始
 
 		$('body').on("tap", ".game_detail_assess", function() {
-			//			alert(pageIndex)
 			mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 			detail_assess();
 		});
@@ -90,7 +89,7 @@ $(function() {
 
 		//		攻略页开始
 		$('body').on("tap", ".game_detail_strategy", function() {
-			
+
 			detail_strategy();
 		});
 
@@ -470,7 +469,7 @@ function detail_strategy() {
 			page: 1
 		},
 		success: function(data) {
-			//			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -647,7 +646,7 @@ function detail_assess() {
 
 }
 
-/* 评论下的 评论 */
+/* 评价下的 评论 */
 function getAccess() {
 	$.ajax({
 		type: "get",
@@ -696,7 +695,7 @@ function getAccess() {
 
 					div +=
 						"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-						"<div class='ofh'>" +
+						"<div >" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 						"<div class='fl'>" +
 						"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +
@@ -1013,7 +1012,7 @@ function indexCommit() {
 
 					div +=
 						"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-						"<div class='ofh'>" +
+						"<div >" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 						"<div class='fl'>" +
 						"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +

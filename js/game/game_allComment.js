@@ -12,7 +12,7 @@ $(function() {
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
 			softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
-		});
+		})
 		var self = plus.webview.currentWebview();
 		commentId = self.commentId;
 		gameId = self.gameId;
@@ -54,8 +54,6 @@ $(function() {
 					$('.game_commentDay').text(com.add_time)
 					defaultName = com.nick_name
 					$('.news_secondComment_input').attr('placeholder', "@" + defaultName)
-
-				} else {
 
 				}
 			}

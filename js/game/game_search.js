@@ -19,9 +19,8 @@ $(function() {
 			})
 		}
 	})
-	
-	
-    /*input输入*/
+
+	/*input输入*/
 	$("body").on("input", ".search_bar", function() {
 		val = $('.search_bar').val().replace(/[&\|\\\*^%$#@\-]/g, "");
 		$('.search_lists').children().remove();
@@ -82,7 +81,7 @@ $(function() {
 		$(".search_bar").blur()
 
 		addLog(val) /*添加历史信息*/
-		
+
 		mui.openWindow({
 			url: "game_detail.html",
 			id: "game_detail.html",
@@ -145,15 +144,16 @@ $(function() {
 								"</div>"
 						}
 
-						$('.search_lists').empty().append(content)
 					}
+
+					$('.search_lists').empty().append(content)
 				}
 			})
 
 		}
 	}
 
-    /*点击*/
+	/*点击*/
 
 	$("body").on("tap", ".nb", function() {
 		var val = $(this).text()
@@ -168,7 +168,8 @@ $(function() {
 	})
 
 	/*清除单个记录*/
-	$("body").on("tap", ".delLog", function() {
+	$("body").on("tap", ".delLog", function(e) {
+		e.stopPropagation()
 		var id = $(this).attr("data-id");
 		delLog(id)
 	})

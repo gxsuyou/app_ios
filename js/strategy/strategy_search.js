@@ -123,7 +123,7 @@ $(function() {
 						if(data.length < 6 || val == "all") {
 							data.forEach(function(item) {
 								content += "<div class='search_log font_12 simHei'  >" +
-									"<div class='fl overflow nb searchTitle' style='margin-left: 0.2rem; width: 100%;'><div class='searchTitle fl' style='width:80%;'>" + item.title + "</div><div class='fr delLog' data-id='" + item.id + "'>×</div>" + "</div>" +
+									"<div class='fl nb searchTitle' style='margin-left: 0.2rem; width: 100%;'><div class='searchTitle fl' style='width:80%;'>" + item.title + "</div><div class='fr delLog' data-id='" + item.id + "'>×</div>" + "</div>" +
 									"</div>"
 							})
 							content += "<div class='search_log  font_12 simHei clear_log'  style='text-align:center;color:#bfbfbf;font-weight:600;'>" +
@@ -133,16 +133,15 @@ $(function() {
 
 							for(var n = 0; n < 6; n++) {
 								content += "<div class='search_log font_12 simHei'  >" +
-									"<div class='fl overflow nb ' style='margin-left: 0.2rem; width: 100%;'><div class='searchTitle fl' style='width:80%;'>" + data[n].title + "</div><div class='fr delLog' data-id='" + data[n].id + "'>×</div>" + "</div>" +
+									"<div class='fl nb ' style='margin-left: 0.2rem; width: 100%;'><div class='searchTitle fl' style='width:80%;'>" + data[n].title + "</div><div class='fr delLog' data-id='" + data[n].id + "'>×</div>" + "</div>" +
 									"</div>";
 							}
 							content += "<div class='search_log  font_12 simHei more_log'  style='text-align:center;color:#bfbfbf;font-weight:600;'>" +
 								"全部搜索记录" +
 								"</div>"
-						}
-
-						$('.search_lists').empty().append(content)
+						}					
 					}
+					$('.search_lists').empty().append(content)
 				}
 			})
 
@@ -164,7 +163,8 @@ $(function() {
 	})
 	
 	/*清除单个记录*/
-	$("body").on("tap", ".delLog", function() {
+	$("body").on("tap", ".delLog", function(e) {
+		e.stopPropagation()
 		var id = $(this).attr("data-id");
 		delLog(id)
 	})

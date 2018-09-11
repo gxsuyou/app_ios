@@ -113,14 +113,14 @@ $(function() {
 				}
 			})
 		})
-//		$("body").on("focus", ".news_secondComment_input", function() {
-//			setTimeout(function() {
-//				var scrollY = $('.strategy_all').height()
-//				$('.strategy_all').animate({
-//					scrollTop: scrollY
-//				}, 0)
-//			}, 400);
-//		})
+		//		$("body").on("focus", ".news_secondComment_input", function() {
+		//			setTimeout(function() {
+		//				var scrollY = $('.strategy_all').height()
+		//				$('.strategy_all').animate({
+		//					scrollTop: scrollY
+		//				}, 0)
+		//			}, 400);
+		//		})
 		//滚动触发
 		$(".strategy_all").scroll(function() {
 			var height = $(this).height();
@@ -364,9 +364,11 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			//faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
+
 	}
 	var face_to = 1;
 	$("body").on("tap", ".face", function(e) {
@@ -382,7 +384,7 @@ $(function() {
 
 })
 
-$("body").on("tap", ".faceContent>img", function(e) {
+$("body").on("tap", ".faceContent>div", function(e) {
 	e.stopPropagation()
 	var str = $(this).attr("data-id")
 	var tc = document.querySelector(".news_secondComment_input")
