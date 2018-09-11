@@ -83,6 +83,7 @@ $(function() {
 	$('body').on('tap', '.search_list', function() {
 		var val = $(this).text()
 		addLog(val) /*添加历史信息*/
+//		return false;
 		$(".search_bar").blur();
 		mui.openWindow({
 			url: "news_post.html",
@@ -94,7 +95,9 @@ $(function() {
 	})
 
 	function addLog(val) {
+		
 		if(userId && val) {
+			
 			$.ajax({
 				type: "get",
 				url: config.data + "users/searchLogAdd",

@@ -51,6 +51,7 @@ $(function() {
 		});
 	}
 
+
 	$("body").on('tap', '.search_list', function() {
 		$(".search_bar").blur();
 		var val = $(this).children('.searchTitle').text();
@@ -76,6 +77,7 @@ $(function() {
 		if(val != "") {
 			addLog(val)
 			$(".search_bar").blur();
+			
 			mui.openWindow({
 				url: "strategy_search_result_list.html",
 				id: "strategy_search_result_list.html",
@@ -99,7 +101,7 @@ $(function() {
 					type: 3,
 					sys: 1,
 				},
-				success: function(data) {}
+				success: function(data){}
 			})
 		}
 	}
@@ -194,6 +196,4 @@ $(function() {
 			}
 		})
 	}
-
-
 })
