@@ -1,4 +1,5 @@
 var msg;
+
 $(function(){
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();

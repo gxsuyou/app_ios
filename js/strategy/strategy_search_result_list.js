@@ -1,6 +1,7 @@
 mui.plusReady(function() {
 	var self = plus.webview.currentWebview()
 	val = self.val
+	
 	$.ajax({
 		type: "get",
 		url: config.data + "strategy/getStrategyGameNameByMsg",

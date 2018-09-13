@@ -1,3 +1,4 @@
+var strategyId;
 $(function() {
 	var h = $(window).height()
 	$(window).resize(function() {
@@ -186,14 +187,30 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
 	}
+	
+	$("body").on("tap", ".faceContent div", function() {
+		var str = $(this).attr("data-id")
+		var tc = document.querySelector("#strategy_textarea")
+		var tclen = tc.value.length;
+		tc.focus();
+		if(typeof document.selection != "undefined") {
+			document.selection.createRange().text = str;
+		} else {
+			tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
+		}
+	})
+	
+	
+	
 
+    /* 离开保存 */
     $("body").on("tap",".mui-back",function(){
     	var val=$("#strategy_textarea").val()
-    	localStorage.setItem("strategyVal",val)
+    	localStorage.setItem("strategyVal_"+strategyId,val)  	
     	mui.back()
     })
 
@@ -202,6 +219,9 @@ $(function() {
 	$("body").on("tap", ".face", function() {
 		if(face_t == 1) {
 			 face_t =0;
+			 $("#strategy_textarea").css("margin-bottom","8.2rem")
+			 
+			 
 			$(".faceContent").css("display", "block")
 			$(".show_imgs").css("display", "none")
 			$(".choose_img").css("bottom", "2.425rem")
@@ -222,30 +242,23 @@ $(function() {
 		$(this).parent().parent('.show_imgcontent').remove();
 	});
 
-	$("body").on("tap", ".faceContent>img", function() {
-		var str = $(this).attr("data-id")
-		var tc = document.querySelector("#strategy_textarea")
-		var tclen = tc.value.length;
-		tc.focus();
-		if(typeof document.selection != "undefined") {
-			document.selection.createRange().text = str;
-		} else {
-			tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
-		}
-	})
+	
 
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
 			softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
 		});
 		var self = plus.webview.currentWebview();
-		var strategyId = self.strategyId;
+		 strategyId = self.strategyId;
 		var proId = self.proId;
 		var old_back = mui.back;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-        var  strategyVal  =localStorage.getItem("strategyVal")
-        $("#strategy_textarea").val(strategyVal)
+        var  strategyVal  =localStorage.getItem("strategyVal_"+strategyId)
+        if(strategyVal){
+        	 $("#strategy_textarea").val(strategyVal)
+        }
+       
         
 		$('body').on('tap', '.choose', function() {
 			$(".faceContent").css("display", "none")
@@ -278,10 +291,11 @@ $(function() {
 
 		$('body').on("tap", ".publish", function() {
 			var content = $('#strategy_textarea').val()
+			alert(content)
 			if(content) {
 				mui.toast("正在发送，请稍候")
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: config.data + "strategy/strategyComment",
 					async: true,
 					data: {
@@ -295,6 +309,7 @@ $(function() {
 						target_title: target_title
 					},
 					success: function(data) {
+						alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("评论成功")
 							var commentId = data.commentId;
