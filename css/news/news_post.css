@@ -53,11 +53,11 @@ a{
 }
 
 .new_post_contents img{
-	width: 100%;
+	width:100%;
 }
 .notice{
 	position: absolute;
-	left: 50%;
+	left:50%;
 	margin-left: -1rem;
 	font-size: 18px;
 }

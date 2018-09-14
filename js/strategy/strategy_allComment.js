@@ -161,7 +161,7 @@ $(function() {
 			var content = $(this).siblings('.news_secondComment_input').val()
 			if(content) {
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: config.data + "strategy/strategyComment",
 					async: true,
 					data: {
@@ -376,9 +376,11 @@ $(function() {
 		if(face_to == 1) {
 			face_to = 0
 			$(".faceContent").css("display", "block")
+			$(".strategy_all").css("padding-bottom","13.2rem")
 		} else {
 			face_to = 1
 			$(".faceContent").css("display", "none")
+			$(".strategy_all").css("padding-bottom","5rem")
 		}
 	})
 

@@ -30,7 +30,9 @@ html {
 
 textarea {
 	width: 90%;
-	height: 30rem;
+	/*height: 30rem;*/
+/*	height:13rem;*/
+/*	background:red;*/
 	border: 0;
 	margin-left: 1rem;
 	padding: 0;

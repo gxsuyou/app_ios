@@ -7,11 +7,7 @@ var target_img;
 var target_title;
 var lord_id;
 $(function() {
-	$('body').on("tap", ".news_review", function() {
-		$('html, body').animate({
-			scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
-		}, 1000)
-	})
+
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
@@ -19,6 +15,10 @@ $(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";
 		mui.init({
 			swipeBack: true,
+			beforeback: function() {
+				var list = plus.webview.getWebviewById("html/strategy/strategy.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+				mui.fire(list, 'reload');
+			},
 			gestureConfig: {
 				tap: true, //默认为true
 				doubletap: true, //默认为false
@@ -43,6 +43,12 @@ $(function() {
 					callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				}
 			}
+		})
+
+		$('body').on("tap", ".news_review", function() {
+			$('html, body').animate({
+				scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
+			}, 1000)
 		})
 
 		detail();

@@ -361,9 +361,11 @@ $("body").on("tap", ".face", function() {
 	if(face_to == 1) {
 		face_to = 0
 		$(".faceContent").css("display", "block")
+		$(".news_post_commentContents").css("padding-bottom","12.2rem")
 	} else {
 		face_to = 1
 		$(".faceContent").css("display", "none")
+		$(".news_post_commentContents").css("padding-bottom","4rem")
 	}
 })
 

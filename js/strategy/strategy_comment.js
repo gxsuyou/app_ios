@@ -191,8 +191,13 @@ $(function() {
 		})
 		$(".faceContent").append(faceContent)
 	}
-	
+
 	$("body").on("tap", ".faceContent div", function() {
+		var textarea_num = $("#strategy_textarea").val().length
+		if(textarea_num >= 200) {
+			mui.toast("输入字符只能输入200个字")
+			return false;
+		}
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector("#strategy_textarea")
 		var tclen = tc.value.length;
@@ -203,33 +208,77 @@ $(function() {
 			tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
 		}
 	})
-	
-	
-	
 
-    /* 离开保存 */
-    $("body").on("tap",".mui-back",function(){
-    	var val=$("#strategy_textarea").val()
-    	localStorage.setItem("strategyVal_"+strategyId,val)  	
-    	mui.back()
-    })
+	/* 离开保存 */
+	$("body").on("tap", ".mui-back", function() {
+		var val = $("#strategy_textarea").val()
+		localStorage.setItem("strategyVal_" + strategyId, val)
+		mui.back()
+	})
 
+	window.onresize = function() {
+		changeTextContent()
+	}
+
+	function changeTextContent() {
+		var _body = $("body").height()
+		var _chooseC = $(".choose_img").height()
+		var _header = $(".header_box").height()
+
+		//		console.log("全局" + _body)
+		//		console.log("下部" + _chooseC)
+		//		console.log("头部" + _header)
+
+		var _remain = _body - _chooseC - _header
+
+		//console.log(_remain) //被减去剩余的空间
+		var _textarea = $("#strategy_textarea").height()
+		//console.log(_textarea) //text的高度
+
+		//如果剩余空间大于text的高度
+		if(_remain < _textarea) {
+			//打开并聚焦修改高度
+			$("#strategy_textarea").css("height", _remain)
+
+
+		} else {
+			//关闭不聚焦修改高度
+			$("#strategy_textarea").css("height", "auto")
+		}
+	}
 
 	var face_t = 1;
 	$("body").on("tap", ".face", function() {
+
+		var _body = $("body").height()
+		var isFocus
+		//小于600的高度则判断为聚焦否则失焦
+		_body < 600 ? isFocus = true : isFocus = false;
+		console.log("焦距" + isFocus)
+
 		if(face_t == 1) {
-			 face_t =0;
-			 $("#strategy_textarea").css("margin-bottom","8.2rem")
-			 
-			 
+			face_t = 0;//出现			
 			$(".faceContent").css("display", "block")
 			$(".show_imgs").css("display", "none")
-			$(".choose_img").css("bottom", "2.425rem")
-		}else{
-			 face_t =1;
+			if(true == isFocus) {
+				$(".choose_img").css("bottom", "0rem")
+			} else {
+				$(".choose_img").css("bottom", "2.425rem")
+			}
+
+		} else {
+			face_t = 1;//消失			
 			$(".faceContent").css("display", "none")
 			$(".show_imgs").css("display", "none")
+			if(true == isFocus) {
+				$(".choose_img").css("bottom", "0rem")
+			} else {
+				$(".choose_img").css("bottom", "10.625rem")
+			}
+
 		}
+
+		changeTextContent()
 	})
 
 	$("body").on("blur", "textarea", function() {
@@ -242,24 +291,21 @@ $(function() {
 		$(this).parent().parent('.show_imgcontent').remove();
 	});
 
-	
-
 	mui.plusReady(function() {
 		plus.webview.currentWebview().setStyle({
 			softinputMode: "adjustResize" // 弹出软键盘时自动改变webview的高度
 		});
 		var self = plus.webview.currentWebview();
-		 strategyId = self.strategyId;
+		strategyId = self.strategyId;
 		var proId = self.proId;
 		var old_back = mui.back;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-        var  strategyVal  =localStorage.getItem("strategyVal_"+strategyId)
-        if(strategyVal){
-        	 $("#strategy_textarea").val(strategyVal)
-        }
-       
-        
+		var strategyVal = localStorage.getItem("strategyVal_" + strategyId)
+		if(strategyVal) {
+			$("#strategy_textarea").val(strategyVal)
+		}
+
 		$('body').on('tap', '.choose', function() {
 			$(".faceContent").css("display", "none")
 			$(".show_imgs").css("display", "block")
@@ -291,7 +337,6 @@ $(function() {
 
 		$('body').on("tap", ".publish", function() {
 			var content = $('#strategy_textarea').val()
-			alert(content)
 			if(content) {
 				mui.toast("正在发送，请稍候")
 				$.ajax({
@@ -309,7 +354,6 @@ $(function() {
 						target_title: target_title
 					},
 					success: function(data) {
-						alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("评论成功")
 							var commentId = data.commentId;

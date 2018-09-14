@@ -49,6 +49,8 @@ $(function() {
 			longtap: true, //默认为false
 		},
 		beforeback: function() {
+			var list = plus.webview.getWebviewById("html/news/news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+			mui.fire(list, 'reload');	
 			var input_val = $(".news_secondComment_input").val();
 			if(input_val != "") {
 				var id = "strategy_title_" + newsId
@@ -457,9 +459,11 @@ $(function() {
 				$(".news_userInfo_reply").css("display", "none")
 			 if(face_to == 1) {
 			 	face_to = 0				
+			 	$(".new_post_contents").css("padding-bottom","15.2rem")
 				$(".faceContent").css("display", "block")
 			  }else{
 			  	face_to = 1
+			  	$(".new_post_contents").css("margin-bottom","7rem")
 			  	$(".faceContent").css("display", "none")
 			  }
 			}, 300)
@@ -524,6 +528,7 @@ $(function() {
 							$(".bottomInfo").text("正在加载...");
 							closeAjax = false;
 							$(".news_post_commentContents").empty();
+							$(".new_post_contents").css("padding-bottom","7rem")
 							page = 0;
 							up();
 							mui.toast("评论成功")
