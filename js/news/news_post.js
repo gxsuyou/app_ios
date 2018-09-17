@@ -453,7 +453,6 @@ $(function() {
 
          var  face_to=1
 		$("body").on("tap", ".face", function() {
-//			$(".news_secondComment_input").blur()
 			setTimeout(function(){
 				$(".news_secondComment").css("display", "block")
 				$(".news_userInfo_reply").css("display", "none")
@@ -463,7 +462,7 @@ $(function() {
 				$(".faceContent").css("display", "block")
 			  }else{
 			  	face_to = 1
-			  	$(".new_post_contents").css("margin-bottom","7rem")
+			  	$(".new_post_contents").css("padding-bottom","7rem")
 			  	$(".faceContent").css("display", "none")
 			  }
 			}, 300)
@@ -525,10 +524,18 @@ $(function() {
 							}
 							$('.news_reviewNum').text(reviewNum);
 
-							$(".bottomInfo").text("正在加载...");
-							closeAjax = false;
-							$(".news_post_commentContents").empty();
+							
+							
+
+                            /* 收回 */
+							$(".news_secondComment,.faceContent").css("display","none")
+							$(".news_userInfo_reply").css("display","block")
 							$(".new_post_contents").css("padding-bottom","7rem")
+							
+							
+							$(".bottomInfo").text("正在加载...")
+							closeAjax = false;
+							$(".news_post_commentContents").empty()
 							page = 0;
 							up();
 							mui.toast("评论成功")
