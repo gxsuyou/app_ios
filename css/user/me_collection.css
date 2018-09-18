@@ -106,11 +106,10 @@ body{
 
 
 .thumb_num,.comment_num{
-	width: 1.8rem;		
+	/*width: 1.8rem;		*/
 }
 .thumb_num{
 	margin-left:0.3rem;
-/*	background:red;*/
 	text-align: center;
 }
 .comment_imgs > span{
@@ -118,11 +117,10 @@ body{
 	margin-left: 0.1rem;
 }
 .thumb{
-	
+	margin-right:0.3rem;
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/good.png");
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

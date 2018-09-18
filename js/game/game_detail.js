@@ -330,11 +330,11 @@ $(function() {
 				ts.attr('data-state', 'null');
 				$.ajax({
 					type: "get",
-					url: config.data + "game/unLikeComment",
+					url: config.data + "strategy/unLikeNum",
 					async: true,
 					data: {
-						commentId: ts.siblings('.comment_img').attr('data-id'),
-						userId: userId
+						strategyId: ts.siblings('.comment_img').attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -350,11 +350,11 @@ $(function() {
 				ts.attr('data-state', 1)
 				$.ajax({
 					type: "get",
-					url: config.data + "game/likeComment",
+					url: config.data + "strategy/addNum",
 					async: true,
 					data: {
-						commentId: ts.siblings('.comment_img').attr('data-id'),
-						userId: userId
+						strategyId: ts.siblings('.comment_img').attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
 
@@ -460,19 +460,23 @@ function detail_strategy() {
 	mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 	$(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
 	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden'); //获取游戏攻略	
+//	alert(userId)
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getStrategyByGameName",
 		async: true,
 		data: {
 			gameName: gameName,
-			page: 1
+			page: 1,
+			user_id:userId
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
+			
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
+				alert(JSON.stringify(data.strategy))
 				if(str.length > 0) {
 					for(var i = 0; i < str.length; i++) {
 						if(str[i].src) {
@@ -515,8 +519,8 @@ function detail_strategy() {
 							//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 							"<div class='comment_info'>" +
 							"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-							//									 "<div class='thumb'></div>" +
-							//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+																 "<div class='thumb'></div>" +
+																 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
 							"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 							"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 							"</div>" +

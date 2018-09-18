@@ -168,7 +168,7 @@ body{
 
 
 .thumb_num,.comment_num{
-	
+/*	margin-left:0.5rem;*/
 	width: 1.8rem;
 	
 	
@@ -178,11 +178,10 @@ body{
 	margin-left: 0.1rem;
 }
 .thumb{
-	
+	margin-right:0.3rem;
 	width: 1.0625rem;
 	height: 1.0625rem;
-	background-image: url("../../Public/image/good.png");
-	
+	background-image: url("../../Public/image/good.png");	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

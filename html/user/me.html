@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +13,7 @@
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
 	</head>
+
 	<body>
 		<div class="me_header">
 			<div class="me_info">
@@ -30,7 +31,7 @@
 
 					</div><br />
 					<div class="me_headerset"></div>
-					<div class="me_share" ></div>
+					<div class="me_share"></div>
 					<!--<div class="me_money font_12 font_bold" style="margin-top: 0.4rem;">
 						<div class="fl">
 							<div class="fl color_white">平台币：</div>
@@ -100,13 +101,14 @@
 		<script src="../../js/user/me.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init();
-			mui.init({	 
-				subpages:[{
-                    url:'me.html',
-                    id:'me.html',
-                }],
+			mui.init({
+				subpages: [{
+					url: 'me.html',
+					id: 'me.html',
+				}],
 			})
-			function openShare() {		
+
+			function openShare() {
 				shareWebview();
 			}
 			mui.plusReady(function() {
@@ -120,15 +122,16 @@
 			 *分享窗口  
 			 */
 			function shareWebview() {
-				ws = plus.webview.currentWebview();
-				if(sharew) { // 避免快速多次点击创建多个窗口  
-					return;
-				}
+				ws = plus.webview.getLaunchWebview();
+//				alert(sharew)
+//				if(sharew) { // 避免快速多次点击创建多个窗口  
+//					return;
+//				}
 				var top = plus.display.resolutionHeight - 134;
 				var href = "share.html";
 				sharew = plus.webview.create(href, "share.html", {
 					width: '100%',
-					height: '134',
+					height: '142',
 					bottom: 0,
 					zindex: 999,
 					scrollIndicator: 'none',
@@ -150,10 +153,13 @@
 					mask: "rgba(0,0,0,0.5)"
 				});
 				// 点击关闭遮罩层  
-				ws.addEventListener("maskClick", closeMask, false);
+				ws.addEventListener("maskClick",closeMask, false);
 			}
 
-			function closeMask() {
+
+
+			function closeMask(){
+
 				ws.setStyle({
 					mask: "none"
 				});
@@ -162,13 +168,73 @@
 					sharew = plus.webview.getWebviewById("share.html");
 				}
 				if(sharew) {
+					
 					sharew.close();
 					sharew = null;
+		
 				}
 			}
-            window.addEventListener('reload',function(event){	
-			   location.reload();
-		    });
+
+			var h;
+			var qrcodeshare;
+			window.addEventListener('qrcode_share', function(event) {
+
+//				var ws = null;
+				/**  
+				 *分享窗口  
+				 */
+				//				function shareWebview() {
+//				ws = plus.webview.getLaunchWebview();
+//				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
+//					return;
+//				}
+//              alert(3)
+				var href = "qrcode.html";
+				qrcodeshare = plus.webview.create(href, "qrcode.html", {
+					width: '100%',
+					height: '100%',
+					top: 0,
+					zindex: 0,
+					opacity: 1,
+					background: 'transparent',
+					scrollIndicator: 'none',
+					scalable: false,
+					popGesture: 'none',
+				});
+				qrcodeshare.addEventListener("loaded", function() {
+					qrcodeshare.show('slide-in-bottom', 300);
+				}, false);
+				// 显示遮罩层    
+
+				h = plus.webview.getLaunchWebview();
+				h.setStyle({
+					mask: "rgba(0,0,0,0.5)",
+//					zindex: 9999,
+				});
+
+				// 点击关闭遮罩层  
+				h.addEventListener("maskClickShare", closeMaskShare, false);
+
+			});
+
+			function closeMaskShare() {
+				h.setStyle({
+					mask: "none"
+				});
+				//避免出现特殊情况，确保分享页面在初始化时关闭   
+				if(!qrcodeshare) {
+					qrcodeshare = plus.webview.getWebviewById("qrcode.html");
+				}
+				if(qrcodeshare) {
+					qrcodeshare.close();
+					qrcodeshare = null;
+				}
+
+			}
+
+			window.addEventListener('reload', function(event) {
+				location.reload();
+			});
 		</script>
 	</body>
 

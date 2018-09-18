@@ -1,19 +1,37 @@
+var ENV = "dev";
 //测试环境
-var config = {
-	img: "http://img.oneyouxi.com.cn/",
-	apk: "http://apk.oneyouxi.com.cn/",
-	//	data: "http://192.168.2.156:8877/",
-	//	data:"http://192.168.2.108:8877/",
-	//  data:"http://192.168.2.117:8877/",
-	// data:"http://182.61.26.179:8877/",
-	//data:"http://www.oneyouxi.com.cn:8877/",	
-	//	data:"http://127.0.0.1:8877/",
-	//  data:"http://www.oneyouxi.com.cn:8877/",
-	data: "http://onetest.oneyouxi.com.cn/",
-	base64: "http://base64.oneyouxi.com.cn/",
-	url_upload: "https://admin.oneyouxi.com.cn/",
-	// url_upload:"http://192.168.2.117:8878/",
+if(ENV == "dev") {
+   //发开模式
+	var config = {
+		img: "http://img.oneyouxi.com.cn/",
+		apk: "http://apk.oneyouxi.com.cn/",
+		//	data: "http://192.168.2.156:8877/",
+		//	data:"http://192.168.2.108:8877/",
+		//  data:"http://192.168.2.117:8877/",
+		//	data:"http://182.61.26.179:8877/",
+		//	data:"http://192.168.0.207:8877/",
+		//	data:"http://192.168.0.67:8877/",
+		//	data:"http://192.168.0.207:8877/",
+		data: "http://onetest.oneyouxi.com.cn/",
+		base64: "http://base64.oneyouxi.com.cn/",
+		//	url_upload:"http://182.61.26.179:8878/",
+		url_upload: "https://admin.oneyouxi.com.cn/",
+		//	url_upload:"http://192.168.0.207:8878/",
+		wgtUrl: "https://admin.oneyouxi.com.cn/www/test/IOS/H5BD8D7F0.wgt"
+	}
+}else{
+	//正式模式
+	var config = {
+		img: "http://img.oneyouxi.com.cn/",
+		apk: "http://apk.oneyouxi.com.cn/",
+		data: "http://182.61.26.179:8877/",
+		base64: "http://base64.oneyouxi.com.cn/",
+		url_upload: "https://admin.oneyouxi.com.cn/",
+		wgtUrl: "https://admin.oneyouxi.com.cn/www/IOS/H5BD8D7F0.wgt"
+	}
 }
+
+
 
 var userInfostr = window.localStorage.getItem("userInfo");
 var userInfojson = eval('(' + userInfostr + ')');
@@ -45,6 +63,7 @@ function activeBell() {
 
 var total_height;
 var wgtVer = null;
+var totalSize;
 
 $(function() {
 	mui.plusReady(function() {
@@ -71,13 +90,14 @@ $(function() {
 				//	检测更新
 				$.ajax({
 					type: "get",
-					url: "http://www.oneyouxi.com.cn:8877/h5/updateIos",
+					url: config.data+"/h5/updateIos",
 					async: true,
 					success: function(data) {
 						if(data.state) {
-							newVer = data.mark;
-
-							if(wgtVer && newVer&& (wgtVer != newVer)) {
+							newVer = data.mark
+                             totalSize=data.totalSize
+                             
+							if(wgtVer && newVer&& (wgtVer != newVer)){
 								showUpload() //展示
 								downWgt(); // 下载升级包
 							} else {
@@ -101,11 +121,8 @@ $(function() {
 		}
 
 		// 下载wgt文件
-		var wgtUrl = "https://admin.oneyouxi.com.cn/www/IOS/H5BD8D7F0.wgt";
-
 		function downWgt() {
-			//		plus.nativeUI.showWaiting("正在更新中");
-			var dtask = plus.downloader.createDownload(wgtUrl, {
+			var dtask = plus.downloader.createDownload(config.wgtUrl, {
 				method: 'GET',
 				data: '',
 				filename: "_doc/update/",
@@ -163,7 +180,7 @@ $(function() {
 					break;
 				case 3:
 					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-					loading((download.downloadedSize / 17097536 * 100).toFixed(0))
+					loading((download.downloadedSize / totalSize * 100).toFixed(0))
 
 					break;
 				case 4:

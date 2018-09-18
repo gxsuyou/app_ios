@@ -222,4 +222,67 @@ $(function() {
 //	});
 //}
 
+
 //添加浏览,点赞,评论数结束
+
+
+	//	游戏攻略点赞
+
+	$('body').on('tap', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
+		if(userId) {
+			var ts = $(this);
+			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
+				ts.css('background-image', 'url("../../Public/image/good.png")')
+				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) - 1)
+				ts.attr('data-state', 'null');
+				$.ajax({
+					type: "get",
+					url: config.data + "game/unLikeComment",
+					async: true,
+					data: {
+						commentId: ts.siblings('.comment_img').attr('data-id'),
+						userId: userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("取消点赞成功")
+						} else {
+							mui.toast("取消点赞失败，请重试")
+						}
+					}
+				});
+			} else {
+				ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
+				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) + 1)
+				ts.attr('data-state', 1)
+				$.ajax({
+					type: "get",
+					url: config.data + "strategy/addNum",
+					async: true,
+					data: {
+						commentId: ts.siblings('.comment_img').attr('data-id'),
+						userId: userId
+					},
+					success: function(data) {
+
+						if(data.state) {
+							mui.toast("点赞成功")
+
+						} else {
+							mui.toast("点赞失败，请重试")
+						}
+					}
+				});
+			}
+		} else {
+			mui.openWindow({
+				url: "../user/login.html",
+				id: "../user/login.html",
+
+			})
+		}
+
+	})
+
+	//	游戏点赞结束

@@ -66,8 +66,8 @@ mui.plusReady(function() {
 					"<div class='strategy_content_classifys ofh'>" +
 					"<div class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
 					"<div class='fr color_9e9e9e comment_imgs fr'>" +
-					//															"<span class='thumb' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'></span>"+
-					//															"<span class='thumb_num font_14'>"+ str[i].agree_num +"</span>"+
+					"<span class='thumb' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'></span>"+
+				    "<span class='thumb_num font_14'>"+ str[i].agree_num +"</span>"+
 					"<span class='comment_img' data-id='" + str[i].id + "' data-userId='" + str[i].user_id + "'></span>" +
 					"<span class='comment_num font_14' style='margin-left:0.4rem;'>" + str[i].comment_num + "</span>" +
 					"</div>" +
