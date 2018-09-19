@@ -49,8 +49,8 @@ $(function() {
 			longtap: true, //默认为false
 		},
 		beforeback: function() {
-			var list = plus.webview.getWebviewById("html/news/news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
-			mui.fire(list, 'reload');	
+			var list = plus.webview.getWebviewById("html/news/news.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+			mui.fire(list, 'reload');
 			var input_val = $(".news_secondComment_input").val();
 			if(input_val != "") {
 				var id = "strategy_title_" + newsId
@@ -164,34 +164,185 @@ $(function() {
 				}
 			}
 		})
-		
-		
-		
+
 		toface()
-		function toface(){
-			var face=[{src:"a_what.png",id:"<好奇怪>"},{src:"alas.png",id:"<哎呀>"},{src:"angry.png",id:"<怒>"},
-			{src:"ass.png",id:"<屎>"},{src:"bad_smile.png",id:"<坏笑>"},{src:"beer_brown.png",id:"<棕啤>"},{src:"beer_yellow.png",id:"<黄啤>"},
-			{src:"black.png",id:"<黑头>"},{src:"but.png",id:"<无奈>"},{src:"butcry.png",id:"<无奈哭>"},{src:"bye.png",id:"<再见>"},{src:"cool.png",id:"<酷>"}
-			,{src:"cry.png",id:"<哭>"},{src:"cry_hand.png",id:"<手扶脸>"},{src:"cry_smile.png",id:"<哭笑>"},{src:"cut.png",id:"<可爱>"},
-			{src:"dog.png",id:"<狗>"},{src:"doughnut.png",id:"<甜甜圈>"},{src:"duck.png",id:"<鸭子>"},{src:"eat_wat.png",id:"<吃西瓜>"},{src:"eee.png",id:"<额>"},{src:"halo.png",id:"<晕>"}
-			,{src:"heart.png",id:"<心>"},{src:"heart_break.png",id:"<心碎>"},{src:"impatine.png",id:"<不耐烦>"},{src:"kiss.png",id:"<亲亲>"},{src:"laugl.png",id:"<偷笑>"}
-			,{src:"leaf.png",id:"<树叶>"},{src:"lemon.png",id:"<柠檬>"},{src:"notsobad.png",id:"<好无奈>"},{src:"ooo.png",id:"<噢噢>"},{src:"pig.png",id:"<猪>"}
-			,{src:"punch_face.png",id:"<打脸>"},{src:"rigid.png",id:"<僵硬>"},{src:"see_smile.png",id:"<看坏笑>"},{src:"she.png",id:"<喜欢>"},
-			{src:"shine.png",id:"<闪耀>"},{src:"shock.png",id:"<惊呆>"},{src:"shutup.png",id:"<闭嘴>"},{src:"shy.png",id:"<害羞>"},{src:"sleep.png",id:"<睡觉>"}
-			,{src:"slience.png",id:"<沉默>"},{src:"split.png",id:"<吐>"},{src:"strange.png",id:"<奇怪>"},{src:"smile_big.png",id:"<大笑>"},{src:"smile_little.png",id:"<害羞无奈>"},{src:"soangry.png",id:"<超生气>"}
-			,{src:"surprised.png",id:"<惊讶>"},{src:"unhappy.png",id:"<不高兴>"},{src:"wa.png",id:"<青蛙>"},{src:"watermelon.png",id:"<西瓜>"},{src:"what.png",id:"<啥>"}
-			,{src:"wired.png",id:"<奇怪咯>"},{src:"yes.png",id:"<好的>"}]
-		   var faceContent=""
-		   face.forEach(function(item){
-		   	  faceContent+="<img src='"+"../../Public/image/face/"+item.src+"' data-id='"+item.id+"' />"
-		   })
-		   $(".faceContent").append(faceContent)
+
+		function toface() {
+			var face = [{
+					src: "a_what.png",
+					id: "<好奇怪>"
+				}, {
+					src: "alas.png",
+					id: "<哎呀>"
+				}, {
+					src: "angry.png",
+					id: "<怒>"
+				},
+				{
+					src: "ass.png",
+					id: "<屎>"
+				}, {
+					src: "bad_smile.png",
+					id: "<坏笑>"
+				}, {
+					src: "beer_brown.png",
+					id: "<棕啤>"
+				}, {
+					src: "beer_yellow.png",
+					id: "<黄啤>"
+				},
+				{
+					src: "black.png",
+					id: "<黑头>"
+				}, {
+					src: "but.png",
+					id: "<无奈>"
+				}, {
+					src: "butcry.png",
+					id: "<无奈哭>"
+				}, {
+					src: "bye.png",
+					id: "<再见>"
+				}, {
+					src: "cool.png",
+					id: "<酷>"
+				}, {
+					src: "cry.png",
+					id: "<哭>"
+				}, {
+					src: "cry_hand.png",
+					id: "<手扶脸>"
+				}, {
+					src: "cry_smile.png",
+					id: "<哭笑>"
+				}, {
+					src: "cut.png",
+					id: "<可爱>"
+				},
+				{
+					src: "dog.png",
+					id: "<狗>"
+				}, {
+					src: "doughnut.png",
+					id: "<甜甜圈>"
+				}, {
+					src: "duck.png",
+					id: "<鸭子>"
+				}, {
+					src: "eat_wat.png",
+					id: "<吃西瓜>"
+				}, {
+					src: "eee.png",
+					id: "<额>"
+				}, {
+					src: "halo.png",
+					id: "<晕>"
+				}, {
+					src: "heart.png",
+					id: "<心>"
+				}, {
+					src: "heart_break.png",
+					id: "<心碎>"
+				}, {
+					src: "impatine.png",
+					id: "<不耐烦>"
+				}, {
+					src: "kiss.png",
+					id: "<亲亲>"
+				}, {
+					src: "laugl.png",
+					id: "<偷笑>"
+				}, {
+					src: "leaf.png",
+					id: "<树叶>"
+				}, {
+					src: "lemon.png",
+					id: "<柠檬>"
+				}, {
+					src: "notsobad.png",
+					id: "<好无奈>"
+				}, {
+					src: "ooo.png",
+					id: "<噢噢>"
+				}, {
+					src: "pig.png",
+					id: "<猪>"
+				}, {
+					src: "punch_face.png",
+					id: "<打脸>"
+				}, {
+					src: "rigid.png",
+					id: "<僵硬>"
+				}, {
+					src: "see_smile.png",
+					id: "<看坏笑>"
+				}, {
+					src: "she.png",
+					id: "<喜欢>"
+				},
+				{
+					src: "shine.png",
+					id: "<闪耀>"
+				}, {
+					src: "shock.png",
+					id: "<惊呆>"
+				}, {
+					src: "shutup.png",
+					id: "<闭嘴>"
+				}, {
+					src: "shy.png",
+					id: "<害羞>"
+				}, {
+					src: "sleep.png",
+					id: "<睡觉>"
+				}, {
+					src: "slience.png",
+					id: "<沉默>"
+				}, {
+					src: "split.png",
+					id: "<吐>"
+				}, {
+					src: "strange.png",
+					id: "<奇怪>"
+				}, {
+					src: "smile_big.png",
+					id: "<大笑>"
+				}, {
+					src: "smile_little.png",
+					id: "<害羞无奈>"
+				}, {
+					src: "soangry.png",
+					id: "<超生气>"
+				}, {
+					src: "surprised.png",
+					id: "<惊讶>"
+				}, {
+					src: "unhappy.png",
+					id: "<不高兴>"
+				}, {
+					src: "wa.png",
+					id: "<青蛙>"
+				}, {
+					src: "watermelon.png",
+					id: "<西瓜>"
+				}, {
+					src: "what.png",
+					id: "<啥>"
+				}, {
+					src: "wired.png",
+					id: "<奇怪咯>"
+				}, {
+					src: "yes.png",
+					id: "<好的>"
+				}
+			]
+			var faceContent = ""
+			face.forEach(function(item) {
+				faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			})
+			$(".faceContent").append(faceContent)
 		}
-		
-		
-		
-		
-		
+
 		$('body').on('tap', '.more_secondComment,.comment_img', function() {
 			if(userId) {
 				var commentId = $(this).attr("data-id");
@@ -448,23 +599,21 @@ $(function() {
 			});
 
 		})
-		
-		
 
-         var  face_to=1
+		var face_to = 1
 		$("body").on("tap", ".face", function() {
-			setTimeout(function(){
+			setTimeout(function() {
 				$(".news_secondComment").css("display", "block")
 				$(".news_userInfo_reply").css("display", "none")
-			 if(face_to == 1) {
-			 	face_to = 0				
-			 	$(".new_post_contents").css("padding-bottom","15.2rem")
-				$(".faceContent").css("display", "block")
-			  }else{
-			  	face_to = 1
-			  	$(".new_post_contents").css("padding-bottom","7rem")
-			  	$(".faceContent").css("display", "none")
-			  }
+				if(face_to == 1) {
+					face_to = 0
+					$(".new_post_contents").css("padding-bottom", "15.2rem")
+					$(".faceContent").css("display", "block")
+				} else {
+					face_to = 1
+					$(".new_post_contents").css("padding-bottom", "7rem")
+					$(".faceContent").css("display", "none")
+				}
 			}, 300)
 
 		})
@@ -473,13 +622,13 @@ $(function() {
 			var tc = document.querySelector(".news_secondComment_input")
 			var tclen = tc.value.length;
 			tc.focus();
-			
+
 			if(typeof document.selection != "undefined") {
 				document.selection.createRange().text = str;
 			} else {
 				tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
 			}
-			
+
 		})
 
 		$('body').on('tap', '.publish', function(event) {
@@ -524,15 +673,11 @@ $(function() {
 							}
 							$('.news_reviewNum').text(reviewNum);
 
-							
-							
+							/* 收回 */
+							$(".news_secondComment,.faceContent").css("display", "none")
+							$(".news_userInfo_reply").css("display", "block")
+							$(".new_post_contents").css("padding-bottom", "7rem")
 
-                            /* 收回 */
-							$(".news_secondComment,.faceContent").css("display","none")
-							$(".news_userInfo_reply").css("display","block")
-							$(".new_post_contents").css("padding-bottom","7rem")
-							
-							
 							$(".bottomInfo").text("正在加载...")
 							closeAjax = false;
 							$(".news_post_commentContents").empty()
@@ -607,6 +752,14 @@ $("body").on("tap", ".news_dele_com", function() {
 				success: function(data) {
 					if(data.state == 1) {
 						mui.toast("删除成功")
+
+						/*更新*/
+
+						var reviewNum = $('.news_reviewNum').text()
+						reviewNum = Number(reviewNum)
+						reviewNum = reviewNum - 1;
+						$('.news_reviewNum').text(reviewNum);
+
 						$(".bottomInfo").text("正在加载 ...");
 						closeAjax = false;
 						$(".news_post_commentContents").empty();
@@ -663,12 +816,12 @@ function up() {
 
 							for(var j = 0; j < tow.length; j++) {
 								var ifHide = tow[j].targetUserNickName || "hidden";
-					
+
 								secondCom +=
 									"<div class='comment_secondComment'>" +
 									"<span >" + tow[j].selfNickName + "</span>" +
 									//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+									//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 									"<span class='color_282828'>：" + tow[j].content + "</span>" +
 									"</div>";
 							}
@@ -749,7 +902,7 @@ function up() {
 						var com = data.comment;
 						var comment = "";
 						var towLen;
-						
+
 						for(var i = 0; i < com.length; i++) {
 
 							var tow = com[i].towCommentList;
@@ -760,14 +913,14 @@ function up() {
 								var ifGood = "noGood";
 							}
 							for(var j = 0; j < tow.length; j++) {
-                                
+
 								var ifHide = tow[j].targetUserNickName || "hidden";
-							
+
 								secondCom +=
 									"<div class='comment_secondComment '>" +
 									"<span >" + tow[j].selfNickName + "</span>" +
-//									"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+									//									"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+									//									"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 									"<span class='color_282828'>：" + tow[j].content + "</span>" +
 									"</div>"
 							}

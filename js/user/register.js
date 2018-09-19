@@ -93,7 +93,7 @@ $(function() {
 									url: "personal_data.html",
 									id:"personal_data.html",
 									extras:{
-										id: data.id
+										userId: data.id
 									}
 									
 								})

@@ -109,7 +109,8 @@ body{
 	/*width: 1.8rem;		*/
 }
 .thumb_num{
-	margin-left:0.3rem;
+	margin-left:1rem;
+	margin-right:0.6rem;
 	text-align: center;
 }
 .comment_imgs > span{

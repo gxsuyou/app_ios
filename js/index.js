@@ -7,8 +7,85 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 mui.plusReady(function() {
-	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 
+	if(window.plus) {
+		plusReady();
+	} else {
+		document.addEventListener('plusready', plusReady, false);
+	}
+	var totalSize, newVer;
+
+	function plusReady() {
+		plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+			wgtVer = inf.version;
+			console.log("当前应用版本：" + wgtVer);
+			//	检测更新
+			$.ajax({
+				type: "get",
+				url: config.data + "/h5/updateIos",
+				async: true,
+				success: function(data) {
+					//						alert(JSON.stringify(data))
+					if(data.state) {
+						newVer = data.mark
+						totalSize = data.totalSize
+						if(wgtVer && newVer && (wgtVer != newVer)) {
+//													if(wgtVer && newVer) {
+
+							showUpload() //展示
+						} else {
+							//plus.nativeUI.alert("无新版本可更新！");
+						}
+					} else {
+						console.log("检测更新失败！");
+						plus.nativeUI.alert("检测更新失败！");
+					}
+				}
+			});
+		});
+	}
+    
+    
+    function showUpload() {
+
+		var download_wgt = null
+		var href = "./html/user/upload.html";
+
+		if(download_wgt) { // 避免快速多次点击创建多个窗口  
+			return;
+		}
+		download_wgt = plus.webview.create(href, "upload.html", {
+			width: '100%',
+			height: '100%',
+			top: 0,
+			zindex: 0,
+			opacity: 1,
+			background: 'transparent',
+			scrollIndicator: 'none',
+			scalable: false,
+			popGesture: 'none',
+		}, {
+			info: {
+				totalSize:totalSize,
+			}
+		});
+		
+	
+		download_wgt.addEventListener("loaded", function() {
+			download_wgt.show('fade-in', 0);
+		}, false);
+
+		plus.webview.getLaunchWebview().setStyle({
+			mask: "rgba(0,0,0,0.5)",
+		});
+	}
+
+
+
+
+
+
+	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 	var h1 = plus.webview.getLaunchWebview()
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
 	window.onresize = function() {

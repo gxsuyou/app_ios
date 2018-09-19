@@ -200,27 +200,6 @@ $(function() {
 	})
 })
 
-//添加浏览,点赞,评论数
-//function add(strategyId,numType){
-//	$.ajax({
-//		type:"get",
-//		url:config.data+ "strategy/addNum",
-//		async:true,
-//		data:{
-//			strategyId:strategyId,
-//			numType:numType,
-//			num:0
-//		},
-//		success:function(data){
-//			if (data.state) {
-//				
-//
-//			} else{
-//				
-//			}
-//		}
-//	});
-//}
 
 
 //添加浏览,点赞,评论数结束
@@ -238,11 +217,11 @@ $(function() {
 				ts.attr('data-state', 'null');
 				$.ajax({
 					type: "get",
-					url: config.data + "game/unLikeComment",
+					url: config.data + "strategy/unLikeNum",
 					async: true,
 					data: {
-						commentId: ts.siblings('.comment_img').attr('data-id'),
-						userId: userId
+						strategyId: ts.attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -261,8 +240,8 @@ $(function() {
 					url: config.data + "strategy/addNum",
 					async: true,
 					data: {
-						commentId: ts.siblings('.comment_img').attr('data-id'),
-						userId: userId
+						strategyId: ts.attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
 

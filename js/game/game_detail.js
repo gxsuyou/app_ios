@@ -182,6 +182,18 @@ $(function() {
 
 	})
 
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
+
 	$('body').on('longtap', '.mui-slider-item img', function() {
 		var picurl = $(this).attr("src");
 		saveImg(picurl);
@@ -333,7 +345,7 @@ $(function() {
 					url: config.data + "strategy/unLikeNum",
 					async: true,
 					data: {
-						strategyId: ts.siblings('.comment_img').attr('data-id'),
+						strategyId: ts.attr('data-id'),
 						user_id: userId
 					},
 					success: function(data) {
@@ -353,7 +365,7 @@ $(function() {
 					url: config.data + "strategy/addNum",
 					async: true,
 					data: {
-						strategyId: ts.siblings('.comment_img').attr('data-id'),
+						strategyId: ts.attr('data-id'),
 						user_id: userId
 					},
 					success: function(data) {
@@ -460,7 +472,6 @@ function detail_strategy() {
 	mui('#game_detailContent').pullRefresh().enablePullupToRefresh();
 	$(".game_detail_strategy").addClass('game_detail_strategy_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_detail_active').removeClass('game_detail_assess_active')
 	$('.game_detail_walkThroughs').removeClass('hidden').siblings('div').addClass('hidden'); //获取游戏攻略	
-//	alert(userId)
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getStrategyByGameName",
@@ -468,15 +479,14 @@ function detail_strategy() {
 		data: {
 			gameName: gameName,
 			page: 1,
-			user_id:userId
+			user_id: userId
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
-			
+
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
-				alert(JSON.stringify(data.strategy))
 				if(str.length > 0) {
 					for(var i = 0; i < str.length; i++) {
 						if(str[i].src) {
@@ -499,6 +509,13 @@ function detail_strategy() {
 						} else {
 							portrait = str[i].portrait;
 						}
+
+						if(str[i].strategy_id == null) {
+							var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
+						} else {
+							var dianz = "<div class='thumb' data-state='1'     data-id='" + str[i].id + "' style='background-image:url(../../Public/image/diangoodone.png)'></div>"
+						}
+
 						div +=
 							"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
 							"<div class='ofh'>" +
@@ -517,10 +534,11 @@ function detail_strategy() {
 							"<div  class='strategy_content'>" + detail + "</div>" +
 							"</div>" +
 							//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+							"<div style='margin-top:0.2rem' class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
 							"<div class='comment_info'>" +
 							"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-																 "<div class='thumb'></div>" +
-																 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+							dianz +
+							"<div  class='thumb_num' data-id='" + str[i].id + "'>" + str[i].agree_num + "</div>" +
 							"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 							"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 							"</div>" +
@@ -586,7 +604,7 @@ function detail_assess() {
 			gameId: gameId
 		},
 		success: function(data) {
-
+			$(".bar0,.bar1,.bar2,.bar3,.bar4").css('width', "0rem");
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;
@@ -712,7 +730,7 @@ function getAccess() {
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 						comment_dele +
 						"<div class='fr color_9e9e9e comment_imgs'>" +
-						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb" + ifGood + "' data-state='" + com[i].state + "'></span>" +
 						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
 						"<span class='comment_img' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'></span>" +
 						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
@@ -955,7 +973,8 @@ $("body").on("tap", ".game_dele_com", function(e) {
 						mui.toast("删除成功")
 						indexCommit()
 						getAccess()
-						check_assess()
+						//						check_assess()
+						detail_assess()
 					} else {
 						mui.toast("删除失败")
 					}

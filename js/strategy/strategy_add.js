@@ -45,7 +45,7 @@ $(function() {
 			$("#strategy_textarea").html(strategy_content)
 		}
 	}
-    /*返回查询是否保存攻略*/
+	/*返回查询是否保存攻略*/
 	$("body").on("tap", ".strategy-back", function() {
 		var title = $(".strategy_title").val()
 		var game = $(".choose_game").val()
@@ -119,6 +119,11 @@ $(function() {
 		var str = $('.strategy_title').val();
 		var title = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 		var gameName = $('.choose_game').val().replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+
+		if(gameName.length > 8) {
+			mui.toast("游戏名不能超过8个字");
+			return false;
+		}
 
 		if(title && content && gameName) {
 			mui.toast("正在发布，请等待");

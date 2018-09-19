@@ -18,6 +18,13 @@
 	z-index: 100;
 }
 
+.strategy_content_classify {
+	padding: 0 0.4rem;
+	height: 1.25rem;
+	line-height: 1.25rem;
+	margin-left: 0.30rem;
+}
+
 .game_nameHeader {
 	position: absolute;
 	left: 50%;
@@ -398,7 +405,7 @@
 .game_comment_content {
 	padding: 0 0.625rem;
 	margin-top: -0.2rem;
-	clear:both;
+	clear: both;
 }
 
 .stars>div {

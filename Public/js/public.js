@@ -74,75 +74,31 @@ $(function() {
 		});
 		$('.header_box').next().css("margin-top", total_height + "px");
 
-		//更新版本
-		// 获取本地应用资源版本号
-		document.addEventListener("plusready", onPlusReady, false);
-		var dtask = null;
-		// 扩展API加载完毕，现在可以正常调用扩展API 
-		function onPlusReady() {
-			checkAppid()
-		}
-
-		function checkAppid() {
-			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-				wgtVer = inf.version;
-				console.log("当前应用版本：" + wgtVer);
-				//	检测更新
-				$.ajax({
-					type: "get",
-					url: config.data+"/h5/updateIos",
-					async: true,
-					success: function(data) {
-						if(data.state) {
-							newVer = data.mark
-                             totalSize=data.totalSize
-                             
-							if(wgtVer && newVer&& (wgtVer != newVer)){
-								showUpload() //展示
-								downWgt(); // 下载升级包
-							} else {
-								//plus.nativeUI.alert("无新版本可更新！");
-							}
-						} else {
-							console.log("检测更新失败！");
-							plus.nativeUI.alert("检测更新失败！");
-						}
-					}
-				});
-			});
-		}
-
-		function showUpload() {
-			$(".upload-layer").removeClass("hidden")
-		}
-		
-		function hiddenUpload() {
-			$(".upload-layer").addClass("hidden")
-		}
+	
 
 		// 下载wgt文件
-		function downWgt() {
-			var dtask = plus.downloader.createDownload(config.wgtUrl, {
-				method: 'GET',
-				data: '',
-				filename: "_doc/update/",
-				timeout: '3000',
-				retry: 0,
-				retryInterval: 0
-			}, function(d, status) {
-				if(status == 200) {
-					console.log("下载wgt成功：" + d.filename);
-					installWgt(d.filename); // 安装wgt包
-				} else {
-					console.log("下载wgt失败！");
-					plus.nativeUI.alert("下载wgt失败！");
-					hiddenUpload()
-				}
-				plus.nativeUI.closeWaiting();
-			})
-			dtask.addEventListener("statechanged", onStateChanged, false);
-			dtask.start();
-		}
+//		function downWgt() {
+//			var dtask = plus.downloader.createDownload(config.wgtUrl, {
+//				method: 'GET',
+//				data: '',
+//				filename: "_doc/update/",
+//				timeout: '3000',
+//				retry: 0,
+//				retryInterval: 0
+//			}, function(d, status) {
+//				if(status == 200) {
+//					console.log("下载wgt成功：" + d.filename);
+//					installWgt(d.filename); // 安装wgt包
+//				} else {
+//					console.log("下载wgt失败！");
+//					plus.nativeUI.alert("下载wgt失败！");
+//					hiddenUpload()
+//				}
+//				plus.nativeUI.closeWaiting();
+//			})
+//			dtask.addEventListener("statechanged", onStateChanged, false);
+//			dtask.start();
+//		}
 
 		// 更新应用资源
 		function installWgt(path) {
