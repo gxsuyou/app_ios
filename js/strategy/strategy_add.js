@@ -39,7 +39,7 @@ $(function() {
 		var strategy_content = window.localStorage.getItem("strategy_content");
 		console.log(strategy_title, strategy_game, strategy_content);
 
-		if(strategy_title != "" || strategy_game != "", strategy_content != "") {
+		if(strategy_title != "" || strategy_game != ""||strategy_content != "") {
 			$(".strategy_title").val(strategy_title)
 			$(".choose_game").val(strategy_game)
 			$("#strategy_textarea").html(strategy_content)
@@ -76,6 +76,9 @@ $(function() {
 			})
 
 		} else {
+			window.localStorage.setItem("strategy_title", "")
+			window.localStorage.setItem("strategy_game", "")
+			window.localStorage.setItem("strategy_content", "")
 			mui.back()
 		}
 
@@ -120,8 +123,8 @@ $(function() {
 		var title = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 		var gameName = $('.choose_game').val().replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 
-		if(gameName.length > 8) {
-			mui.toast("游戏名不能超过8个字");
+		if(gameName.length >15) {
+			mui.toast("游戏名不能超过15个字");
 			return false;
 		}
 
@@ -156,9 +159,7 @@ $(function() {
 			mui.toast("标题及内容和游戏名不能为空")
 		}
 	})
-
 	//	发帖子结束
-
 })
 
 $("body").on("tap", "#strategy_textarea", function() {

@@ -490,56 +490,56 @@
 							var str = data.strategy;
 							var div = '';
 							for(var i = 0; i < str.length; i++) {
-								if(str[i].src) {
-									var src = "src"
+								if(com[i].state) {
+									var ifGood = "good";
 								} else {
-									var src = "hidden"
+									var ifGood = "noGood";
 								}
 
-								if(str[i].top_img_src == "" || str[i].top_img_src == null) {
-									imgSrc = "";
-									imgToggle = "none";
+								if(com[i].portrait == 0 || com[i].portrait == null) {
+									portrait = "../../Public/image/morentouxiang.png";
 								} else {
-									imgSrc = str[i].top_img_src;
-									imgToggle = "block";
+									portrait = com[i].portrait;
 								}
-								var detail = $(str[i].detail).text();
-								portrait = "../../Public/image/morentouxiang.png";
-								if(str[i].portrait == 0 || str[i].portrait == null) {
 
+								if(com[i].user_id == userId) {
+									var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com' data-id='" + com[i].id + "'>删除</div>"
 								} else {
-									portrait = str[i].portrait;
+									var comment_dele = "&nbsp;"
 								}
-								if(str[i].strategy_id == null) {
-									var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
-								} else {
-									var dianz = "<div class='thumb' data-state='1'     data-id='" + str[i].id + "' style='background-image:url(../../Public/image/diangoodone.png)'></div>"
+								var score = Number(com[i].score) / 2
+								var scoreStar = ""
+
+								for(var n = 0; n < score; n++) {
+									scoreStar += "<div class='game_list_star_active'></div>"
 								}
+								for(var m = 0; m < 5 - score; m++) {
+									scoreStar += "<div></div>"
+								}
+
+								var star = "<div class='stars'>" +
+									scoreStar +
+									"</div>"
 
 								div +=
-									"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
-									"<div class='ofh'>" +
+									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+									"<div >" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-									"<div  class='timeName'>" +
-									"<div class='comment_user font_14 font_bold fl'>" + str[i].nick_name + "</div>" +
-									"<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
+									"<div class='fl'>" +
+									"<div class='comment_user font_12 font_bold'>" + com[i].nick_name + "</div>" +
+									star +
 									"</div>" +
 									"</div>" +
-									"<div class='game_comment_content'style='margin-top:0.4rem;' >" +
-									"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
-									"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
-									"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
-									"<span>" + str[i].title + "</span>" +
-									"</div>" +
-									"<div  class='strategy_content'>" + detail + "</div>" +
-									"</div>" +
-									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
-									"<div class='comment_info'>" +
-									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-									dianz +
-									"<div  class='thumb_num'>" + str[i].agree_num + "</div>" +
-									"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
-									"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
+									"<div class='game_comment_content'>" +
+									"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
+									"<div class='comment_info ofh'>" +
+									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+									comment_dele +
+									"<div class='fr color_9e9e9e comment_imgs'>" +
+									"<span class='thumb_game " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+									"<span class='thumb_num_game font_14'>" + com[i].agree + "</span>" +
+									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
 									"</div>" +
 									"</div>" +
 									"</div>" +

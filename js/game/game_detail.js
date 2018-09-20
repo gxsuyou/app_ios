@@ -483,7 +483,6 @@ function detail_strategy() {
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
-
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -730,8 +729,8 @@ function getAccess() {
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 						comment_dele +
 						"<div class='fr color_9e9e9e comment_imgs'>" +
-						"<span class='thumb" + ifGood + "' data-state='" + com[i].state + "'></span>" +
-						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='thumb_game    " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num_game font_14'>" + com[i].agree + "</span>" +
 						"<span class='comment_img' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'></span>" +
 						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
 						"</div>" +
@@ -751,6 +750,66 @@ function getAccess() {
 	});
 
 }
+
+//	游戏攻略点赞
+
+$('body').on('tap', '.thumb_game,.thumb_num_game', function(e) {
+	e.stopPropagation();
+	if(userId) {
+		var ts = $(this);
+		if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
+			ts.css('background-image', 'url("../../Public/image/good.png")')
+			ts.siblings('.thumb_num_game').text(parseInt(ts.siblings('.thumb_num_game').text()) - 1)
+			ts.attr('data-state', 'null');
+			$.ajax({
+				type: "get",
+				url: config.data + "game/unLikeComment",
+				async: true,
+				data: {
+					commentId: ts.siblings('.comment_img').attr('data-id'),
+					userId: userId
+				},
+				success: function(data) {
+					if(data.state) {
+						mui.toast("取消点赞成功")
+					} else {
+						mui.toast("取消点赞失败，请重试")
+					}
+				}
+			});
+		} else {
+			ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
+			ts.siblings('.thumb_num_game').text(parseInt(ts.siblings('.thumb_num_game').text()) + 1)
+			ts.attr('data-state', 1)
+			$.ajax({
+				type: "get",
+				url: config.data + "game/likeComment",
+				async: true,
+				data: {
+					commentId: ts.siblings('.comment_img').attr('data-id'),
+					userId: userId
+				},
+				success: function(data) {
+
+					if(data.state) {
+						mui.toast("点赞成功")
+
+					} else {
+						mui.toast("点赞失败，请重试")
+					}
+				}
+			});
+		}
+	} else {
+		mui.openWindow({
+			url: "../user/login.html",
+			id: "../user/login.html",
+
+		})
+	}
+})
+
+//	游戏点赞结束
 
 /*去到更多标签*/
 $("body").on("tap", ".sign_more", function() {
@@ -1048,8 +1107,8 @@ function indexCommit() {
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 						comment_dele +
 						"<div class='fr color_9e9e9e comment_imgs'>" +
-						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='thumb_game " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num_game font_14'>" + com[i].agree + "</span>" +
 						"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
 						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
 						"</div>" +

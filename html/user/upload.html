@@ -94,7 +94,6 @@
 			downWgt()
 			// 下载wgt文件
 			function downWgt() {
-				//								alert(config.wgtUrl)
 				var dtask = plus.downloader.createDownload(config.wgtUrl, {
 					method: 'GET',
 					data: '',
@@ -154,7 +153,6 @@
 				//				hiddenUpload()
 				//			plus.nativeUI.showWaiting("安装wgt文件...");
 				plus.runtime.install(path, {}, function() {
-					alert(path)
 					plus.nativeUI.closeWaiting();
 					//				console.log("安装wgt文件成功！");
 					plus.runtime.restart();

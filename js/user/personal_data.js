@@ -53,7 +53,7 @@ $(function() {
 								var userInfo = JSON.stringify(data.user);
 
 								window.localStorage.setItem("rememberUser", "true");
-
+                                window.localStorage.setItem("userId",id)
 								window.localStorage.setItem("userInfo", userInfo);
 
 							} else {

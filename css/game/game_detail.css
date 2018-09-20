@@ -337,7 +337,7 @@
 	padding-left: 3.6rem;
 }
 
-.thumb {
+.thumb,.thumb_game {
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/good.png");
@@ -373,11 +373,11 @@
 }
 
 .thumb_num,
-.comment_num {
+.comment_num,.thumb_num_game{
 	margin-left: 0.4rem;
 }
 
-.thumb_num {
+.thumb_num,.thumb_num_game{
 	padding-right: 1rem;
 	width: 1.5rem;
 }
