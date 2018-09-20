@@ -661,7 +661,10 @@ $(function() {
 						if(data.state == "1") {
 							$('.news_secondComment_input').val(""); //不刷新							 
 							$(".news_secondComment_input").blur();
-
+                            
+                            
+                            
+				            window.localStorage.setItem("strategy_title_" + newsId,"")
 							/*更新*/
 
 							var reviewNum = $('.news_reviewNum').text()

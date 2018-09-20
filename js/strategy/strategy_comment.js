@@ -336,6 +336,7 @@ $(function() {
 		});
 
 		$('body').on("tap", ".publish", function() {
+
 			var content = $('#strategy_textarea').val()
 			if(content) {
 				mui.toast("正在发送，请稍候")
@@ -356,6 +357,7 @@ $(function() {
 					success: function(data) {
 						if(data.state) {
 							mui.toast("评论成功")
+							localStorage.setItem("strategyVal_" + strategyId,"")
 							var commentId = data.commentId;
 							if($('.show_imgs').find('.show_imgcontent').length >= 1) {
 
