@@ -1,20 +1,20 @@
 mui.plusReady(function() {
 	var self = plus.webview.currentWebview()
-	val = self.val
+	var val = self.val
 	$.ajax({
 		type: "get",
 		url: config.data + "game/searchGameByMsg",
 		async: true,
 		data: {
-			sys: 1,
-			msg: val,
-			sort: "sort",
-			page: 1
+			sys:1,
+			msg:val,
+			sort:"sort",
+			page:1
 		},
 		success: function(data) {
 			var g = data.game;
 			var list = "";
-			for(var i = 0; i < g.length; i++) {
+			for(var i = 0; i < g.length; i++){
 				var signs = '';
 				if(g[i].tagList && g[i].tagList !== "null") {
 					var result = g[i].tagList.split(",");

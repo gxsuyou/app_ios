@@ -18,6 +18,21 @@
 	box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
+.thumb_num{
+	margin-right: 1rem;
+}
+
+.thumb{
+	margin-right:0.3rem;
+	width: 1.0625rem;
+	height: 1.0625rem;
+	background-image: url("../../Public/image/good.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	vertical-align: middle;
+}
+
 .icon_read {
 	display: inline-block;
 	width: 0.9rem;

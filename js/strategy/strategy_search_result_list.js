@@ -1,13 +1,13 @@
 mui.plusReady(function() {
 	var self = plus.webview.currentWebview()
-	val = self.val
-	
+	val = self.val	
 	$.ajax({
 		type: "get",
 		url: config.data + "strategy/getStrategyGameNameByMsg",
 		async: true,
 		data: {
-			msg: val
+			msg: val,
+			user_id:userId
 		},
 		success: function(data) {
 			var str = data.gameName,
@@ -38,6 +38,13 @@ mui.plusReady(function() {
 				} else {
 					var essence_image = "&nbsp;"
 				}
+				
+				if(str[i].strategy_id == null) {
+					var dianz = "<span class='thumb' data-state='null' data-id='" + str[i].id + "'></span>"
+				} else {
+					var dianz = "<span class='thumb' data-state='1'  data-id='" + str[i].id + "' style='background-image:url(../../Public/image/diangoodone.png)'></span>"
+				}
+				
 
 				div +=
 					"<div class='strategy_content' data-id='" + str[i].id + "' data-userId='" + str[i].user_id + "'>" +
@@ -66,8 +73,8 @@ mui.plusReady(function() {
 					"<div class='strategy_content_classifys ofh'>" +
 					"<div class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
 					"<div class='fr color_9e9e9e comment_imgs fr'>" +
-					"<span class='thumb' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'></span>"+
-				    "<span class='thumb_num font_14'>"+ str[i].agree_num +"</span>"+
+					dianz +
+					"<span class='thumb_num font_14' data-id='" + str[i].id + "'>" + str[i].agree_num + "</span>" +
 					"<span class='comment_img' data-id='" + str[i].id + "' data-userId='" + str[i].user_id + "'></span>" +
 					"<span class='comment_num font_14' style='margin-left:0.4rem;'>" + str[i].comment_num + "</span>" +
 					"</div>" +
@@ -104,4 +111,62 @@ mui.plusReady(function() {
 			}
 		})
 	})
+	
+		//	游戏点赞
+	$('body').on('tap', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
+		if(userId) {
+			var ts = $(this);
+			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
+				ts.css('background-image', 'url("../../Public/image/good.png")')
+				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) - 1)
+				ts.attr('data-state', 'null')
+				$.ajax({
+					type: "get",
+					url: config.data + "strategy/unLikeNum",
+					async: true,
+					data: {
+						strategyId:ts.attr('data-id'),
+						user_id: userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("取消点赞成功")
+						} else {
+							mui.toast("取消点赞失败，请重试")
+						}
+					}
+				});
+			} else {
+				ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
+				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) + 1)
+				ts.attr('data-state', 1)
+				$.ajax({
+					type: "get",
+					url: config.data + "strategy/addNum",
+					async: true,
+					data: {
+						strategyId:ts.attr('data-id'),
+						user_id:userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("点赞成功")
+
+						} else {
+							mui.toast("点赞失败，请重试")
+						}
+					}
+				});
+			}
+		} else {
+			mui.openWindow({
+				url: "../user/login.html",
+				id: "../user/login.html",
+
+			})
+		}
+	})
+
+	//	游戏点赞结束
 })

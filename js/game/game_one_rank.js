@@ -32,13 +32,12 @@ function up() {
 									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
 							}
 						}
-
-						if(g[i].game_download_ios2) {
+							if(g[i].game_download_ios2) {
 							var urlDownload = g[i].game_download_ios2
 						} else {
 							var urlDownload = g[i].game_download_ios
 						}
-
+			
 						list +=
 							"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
 							"<div class='color_9e9e9e fl game_listScore'>" + (i + 1 + (page - 1) * 20) + "</div>" +
@@ -46,19 +45,17 @@ function up() {
 							"<div class='fl' style='margin-top: 1.25rem;margin-left: 0.875rem;'>" +
 							"<div class='font_14 overflow'>" + g[i].game_name + "</div>" +
 							"<div class='font_12'>" +
-							//							"<div class='ofh game_recommend_stars'>" +
-							//							"<div class='game_recommend_star fl'></div>" +
-							//							"<div class='game_recommend_star fl'></div>" +
-							//							"<div class='game_recommend_star fl'></div>" +
-							//							"<div class='game_recommend_star fl'></div>" +
-							//							"<div class='game_recommend_star fl'></div>" +
-							//							"<div class='game_recommend_starScore fl color_green' >" + g[i].grade + "</div>" +
-							//							"</div>" +
+							"<div class='ofh game_recommend_stars'>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_star fl'></div>" +
+							"<div class='game_recommend_starScore fl color_green' >" + g[i].grade + "</div>" +
 							"</div>" +
-							"<div class='font_12 color_green all_voucher_show'>" +
-							"<img style='width:8rem;height:auto' src='../../Public/image/voucher_icon.png'  />" +
-							"<div class='open_voucher'>领取更多抵用券</div>" +
-							"<img style='margin-left:0.3rem;' src='../../Public/image/right_arrow_icon.png'  />" +
+							"</div>" +
+							"<div class='font_12 color_green all_signs'>" +
+							signs +
 							"</div>" +
 							"</div>" +
 							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac' data-url='" + urlDownload + "'>下载</div>" +
@@ -107,46 +104,18 @@ function up() {
 			}
 		});
 	})
-	$('body').on('tap', '.all_voucher_show', function(event) {
+	$('body').on('tap', '.tag', function(event) {
 		event.stopPropagation();
-		var href = "game_getvoucher.html";
-		var sharew = plus.webview.create(href, "game_getvoucher.html", {
-				width: '100%',
-					height: '100%',
-					top: 0,
-					zindex: 0,
-					opacity: 1,
-					background: 'transparent',
-					scrollIndicator: 'none',
-					scalable: false,
-					popGesture: 'none',
-		}, {
-			shareInfo: {
-				"href": "https://oneyouxi.com.cn/qrcode.html",
-				"title": "随时随地，乐享游戏",
-				"content": "我正在使用ONE游戏平台，赶紧跟我一起来体验！",
-				"pageSourceId": plus.webview.currentWebview().id
+		var tagId = $(this).attr("data-id");
+		var tagName = $(this).text();
+		mui.openWindow({
+			url: "game_classify_list.html",
+			id: "game_classify_list.html",
+			extras: {
+				tagId: tagId,
+				tagName: tagName
 			}
-		});
-		sharew.addEventListener("loaded", function() {
-			sharew.show('fade-in',0);
-		}, false);
-		
-		
-		var h = plus.webview.currentWebview();
-		h.setStyle({
-			mask: "rgba(0,0,0,0.5)"
-		});
-		//		var tagId = $(this).attr("data-id");
-		//		var tagName = $(this).text();
-		//		mui.openWindow({
-		//			url: "game_classify_list.html",
-		//			id: "game_classify_list.html",
-		//			extras: {
-		//				tagId: tagId,
-		//				tagName: tagName
-		//			}
-		//		})
+		})
 	})
 }
 
