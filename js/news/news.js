@@ -123,6 +123,7 @@ $(function() {
 			}
 		},
         error:function(e){
+
        	  var errorHTML="<div class='errorContent'><img style='width:138px;height:180px;' src='../../Public/image/notonline.png' /></div>";
        	  $("#news_content").remove();
        	  $('body').append(errorHTML);
