@@ -13,7 +13,6 @@ $(function() {
 	} else {
 		$('.me_share').click(function() {
 			openShare()
-
 		})
 		var userInfostr = window.localStorage.getItem("userInfo");
 		var userInfojson = eval('(' + userInfostr + ')');
