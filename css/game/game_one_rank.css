@@ -7,16 +7,15 @@
 	background: #fff;
 }
 
-
 .game_listImg{
 	width: 3.5625rem;
 	height: 3.5625rem;
 	border-radius:10px;
 	background-position:center;
 	background-repeat:no-repeat;
-	background-size: cover;
-	margin-top: 1.25rem;
-	margin-left: 1.5rem;
+	background-size:cover;
+	margin-top:1.25rem;
+	margin-left:1.5rem;
 }
 .game_recommend_star{	
 	width: 0.8125rem;
