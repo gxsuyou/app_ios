@@ -135,4 +135,53 @@ input{
 	margin:-0.875rem -0.6rem ;
 }
 
+/* middlebox*/
+.me_middlebox{
+	display: flex;
+	padding:0.7rem 0rem 0.3rem 0rem;
+	border-top:1px solid #e2e2e3;
+	border-bottom:1px solid #e2e2e3;
+	background-color:#ffffff;
+	font-size:14px;
+}
+.me_gold img{
+	width:2rem;
+}
+.me_gold{
+	margin-left:5%;
+}
+.me_voucher{
+	margin-left:11%;
+}
+.me_qiandao{
+	margin-left: auto;
+	margin-right:11%;
+}
+.me_voucher img{
+	width:2.55rem;
+}
+
+.me_qiandao>div:first-child,.me_voucher>div:first-child,.me_gold>div:first-child{
+	height:1.75rem;
+}
+.me_qiandao,.me_voucher,.me_gold{
+	text-align:center;
+	font-weight:normal;
+	
+}
+.me_qiandao img{
+	width:2.2rem;
+}
+.me_getgold{
+	color:#f7c238;
+	font-weight:600;
+	width:4rem;
+	margin-left:0.3rem;
+	text-align:left;
+	overflow: hidden;
+	word-wrap:nowrap;
+	text-overflow: ellipsis;	
+}
+
+
 

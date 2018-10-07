@@ -82,6 +82,36 @@ function up() {
 			}
 		})
 	})
+	$('body').on('tap', '.all_voucher_show', function(event) {
+		event.stopPropagation()
+		var gameId = $(this).attr("data-id")
+		var name = $(this).attr("data-name")
+		var href = "game_getvoucher.html"
+		sharew = plus.webview.create(href, "game_getvoucher.html", {
+			width: '100%',
+			height: '100%',
+			top: 0,
+			zindex: 0,
+			opacity: 1,
+			background: 'transparent',
+			scrollIndicator: 'none',
+			scalable: false,
+			popGesture: 'none',
+		}, {
+			info: {
+				gameName: name,
+				gameId: gameId
+			}
+		});
+		sharew.addEventListener("loaded", function() {
+			sharew.show('fade-in', 0);
+		}, false);
+
+		h = plus.webview.currentWebview();
+		h.setStyle({
+			mask: "rgba(0,0,0,0.5)"
+		});
+	})
 }
 
 function down() {

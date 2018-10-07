@@ -100,6 +100,15 @@ $(function() {
 				id: "set_list.html"
 			})
 		})
+		
+		$("body").on("tap",".me_gold",function(){
+			mui.openWindow({
+				url:"me_pocket.html",
+				id:"me_pocket.html"
+			})
+		})
+		
+		
 
 	}
 
@@ -117,3 +126,26 @@ $('.me_headerset').click(function() {
 		$(".me_headerset").removeClass("move")
 	}, 400)
 })
+
+$('.me_voucher').click(function() {
+		if(userId) {
+			mui.openWindow({
+				url: "me_voucher.html",
+				id: "me_voucher.html"
+			})
+		} else {
+			mui.toast("请登录")
+		}
+	})
+
+$(".me_qiandao").click(function() {
+		if(userId) {
+			mui.openWindow({
+				url: "me_signin.html",
+				id: "me_signin.html"
+			})
+		} else {
+			mui.toast("请登录")
+		}
+	
+	})

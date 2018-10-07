@@ -41,6 +41,26 @@
 			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
 				border: 0;
 			}
+			
+			.share_lan {
+				color: #9e9e9e;
+				font-size: 14px;
+				text-align: center;
+				margin-top: 0.8rem;
+			}
+			
+			.share_copy {
+				display: block;
+				color: #282828;
+				font-size: 14px;
+				width: 90%;
+				margin: 0 auto;
+				background: #f7f7f7;
+				padding: 3.5%;
+				border-radius: 0.5rem;
+				margin-top: 0.3rem;
+				border: none;
+			}
 		</style>
 	</head>
 
@@ -48,6 +68,13 @@
 		<div class="mui-content">
 			<img id="pic" src="img/add.png" style="display: none;" />
 		</div>
+		<div class="share_lan">
+			复制框内文字 粘贴分享给好友吧～
+		</div>
+					<!--随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【1111】一起赢金币吧！)-->
+		<textarea class="share_copy" type="text" onclick="copy()"   readonly />
+	
+		</textarea>
 		<footer style="position:absolute;bottom: 0px; width:100%;background:white;">
 			<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%; ;margin-top: 50%;">&nbsp;&nbsp;分享到</div>
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -96,13 +123,19 @@
 			sharehrefDes.value = shareInfo.content;
 			pageSourceId = shareInfo.pageSourceId;
 			console.log("pageSource:" + pageSourceId);
+			document.querySelector(".share_copy").innerText="随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【"+only_id+"】一起赢金币吧！)";
 		}
 		if(window.plus) {
 			plusReady();
 		} else {
 			document.addEventListener("plusready", plusReady, false);
 		}
-
+		function copy() {
+			var Url2 = document.querySelector(".share_copy");
+			Url2.select(); // 选择对象
+			document.execCommand("Copy"); // 执行浏览器复制命令
+			mui.toast("复制成功！");
+		}
 		/**  
 		 *   
 		 * 更新分享服务  

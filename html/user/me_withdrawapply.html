@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我要提现</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/me_withdraw.css" />
+		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background:#e7ebed">
+		<div class="header_box">
+			<div class="before_header"></div>
+			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
+				<div style="width:100%;text-align:center;">
+					提现申请
+				</div>
+			</header>
+		</div>
+		<div class="me_applyinputcontent">
+			<div>
+				<div>
+					提现金额
+				</div>
+				<div class="coinnum" style="color:#fab645;font-weight:600;">10元</div>
+			</div>
+			<div>
+				<div class="me_counter">
+					支付宝账号
+				</div>
+				<div>
+					<input class="me_account" type="text" value="" placeholder="请输入您的账号" />
+				</div>
+			</div>
+			<div>
+				<div>
+					确认账户
+				</div>
+				<div>
+					<input class="me_confirmaccount" type="text" value="" placeholder="请确认您的账号" />
+				</div>
+			</div>
+		</div>
+		<div class="me_applyinfo">
+			<div class="me_applytop">
+				提现说明
+			</div>
+			<div class="me_applyInfoContents">
+				1、支付宝提现，即直接转账到支付宝账号。<br> 2、提现申请时间为工作日的
+				<span style="color:#f04c4c">14点-18点</span>内。<br> 3、提现时
+				<span style="color:#f04c4c">请务必正确填写账号</span>（手机号或邮箱账号），如因个人原因，支付宝账号填写错误，损失将由个人承担。<br> 4、提现金额将在发起申请后的
+				<span style="color:#f04c4c">1-3个工作日</span>内审批到账；如遇高峰期可能延迟到账，烦请耐心等待，请及时关注“我-我的钱包-交易明细”查看提现记录状态。<br> 5、如已忘记支付宝账号，可通过“支付宝→我的→个人头像昵称→支付宝账号”查看。
+			</div>
+		</div>
+		<div class="withdraw_botton">
+			提交申请
+		</div>
+		<div class="withdrawApplyPopp">
+			<div><img style="width:1.8rem;margin-right:0.4rem;" src="../../Public/image/tick.png" />提现申请已提交，请耐心等待!</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			var coin, types = "ALIPAY";
+			var i = plus.webview.currentWebview();
+			types = i.withdrawFunId;
+			coin = i.coin;
+			$(".coinnum").text(coin + "元")
+			$(".me_counter").text(i.withdrawMetFunFont + "账户")
+			var mask = mui.createMask(function() {
+				//				$(".me_popp").css("display", "none")
+			})
+
+			$("body").on("tap", ".withdraw_botton", function() {
+				var account = $(".me_account").val()
+				var confirmaccount = $(".me_confirmaccount").val()
+
+				if(account == "" || confirmaccount == "") {
+					mui.toast("不能为空")
+					return false;
+				}
+
+				if(account != confirmaccount) {
+					mui.toast("请确认账户名一致")
+					return false;
+				}
+
+
+				$.ajax({
+					type: "post",
+					url: config.data + "users/goWithdraw",
+					async: true,
+					data: {
+						uid: userId,
+						coin: coin,
+						code_no: confirmaccount,
+						types: types
+					},
+					success: function(data) {
+						if(data.state) {
+							mask.show()
+							$(".withdrawApplyPopp").css("display", "flex")
+							setTimeout(function() {
+								mask.close()
+								$(".withdrawApplyPopp").css("display", "none")
+							}, 1500)
+
+						} else {
+                            mui.toast(data.info)
+						}
+
+					}
+				})
+
+			})
+		})
+	</script>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>抵用券</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/me_voucher.css" />
+		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="header_box">
+			<div class="before_header"></div>
+			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+
+				</div>
+				<div style="width:100%;text-align:center;">
+					抵用券
+				</div>
+				<div class="userule" style='position: absolute;top:0;right:0.5rem;font-size:14px;'>
+					使用规则
+				</div>
+			</header>
+			<div class="voucher_nav ui_flex_h ui_flex_wrapper">
+				<div class="ui_flex_wide tac font_14 color_green border_bottom" style="height: 2.8rem;line-height: 2.8rem;">未使用</div>
+				<div class="ui_flex_wide tac font_14" style="height: 2.8rem;line-height: 2.8rem;">已失效</div>
+			</div>
+		</div>
+
+		<div class="voucher_content" id="voucher_nouse">
+			<ul class="mui-table-view" >
+				<li class="mui-table-view-cell commendTicket">
+					<div class="voucher_header " >
+						<span  style="color:#7fcadf;">						
+						【通用券】</span>
+						<a class="mui-icon mui-icon-arrowdown"></a>
+					</div>
+					<ul class="voucher_contents commendTicketContents" >
+						<!--<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>50</span>
+								</div>
+								<div>
+									满200元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									活动专区任意游戏充值满500元可返还100元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>20</span>
+								</div>
+								<div>
+									满100元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									活动专区任意游戏充值满100元可返还20元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>20</span>
+								</div>
+								<div>
+									满100元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									活动专区任意游戏充值满100元可返还20元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>5</span>
+								</div>
+								<div>
+									满30元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									活动专区任意游戏充值满30元可返还5元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>5</span>
+								</div>
+								<div>
+									满30元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									活动专区任意游戏充值满30元可返还5元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>-->
+					</ul>
+				</li>
+				<!--<li class="mui-table-view-cell">
+					<div class="voucher_header">
+						<img src="http://img.oneyouxi.com.cn/game/gameId851/icon/454" /> 《崩坏学院》
+						<a class="mui-icon mui-icon-arrowdown"></a>
+					</div>
+					<ul class="voucher_contents">
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>50</span>
+								</div>
+								<div>
+									满200元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>50</span>
+								</div>
+								<div>
+									满200元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+					</ul>
+				</li>-->
+				<!--<li class="mui-table-view-cell">
+					<div class="voucher_header">
+						<img src="http://img.oneyouxi.com.cn/game/gameId851/icon/454" /> 《崩坏学院》
+						<a class="mui-icon mui-icon-arrowdown"></a>
+					</div>
+					<ul class="voucher_contents">
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>50</span>
+								</div>
+								<div>
+									满200元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+						<li>
+							<div class="voucher_val">
+								<div>
+									￥ <span>50</span>
+								</div>
+								<div>
+									满200元可用
+								</div>
+							</div>
+							<div class="voucher_get">
+								<div>
+									<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+								</div>
+								<div>去使用</div>
+							</div>
+						</li>
+					</ul>
+				</li>-->
+			</ul>
+		</div>
+		<div class="voucher_content" id="voucher_use" style="top:7.8rem;background:transparent">
+			<ul class="voucher_uselist">
+				<!--<li>
+					<div class="voucher_val" style="color:#7a7a7a">
+						<div>
+							￥ <span>50</span>
+						</div>
+						<div>
+							满200元可用
+						</div>
+					</div>
+					<div class="voucher_get">
+						<div>
+							<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+						</div>
+						<img style='width:3.3rem;height:2.7rem;margin-left:0.5rem;' src='../../Public/image/voucher_aluse.png' />
+					</div>
+				</li>-->
+			</ul>
+		</div>
+	</body>
+	<script src="../../js/user/me_voucher.js" type="text/javascript"></script>
+
+</html>

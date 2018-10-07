@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>交易记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/me_dealrecord.css" />
+		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background:#fff">
+		<div class="header_box">
+			<div class="before_header"></div>
+			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
+				<div style="width:100%;text-align:center;">
+					交易明细
+				</div>
+			</header>
+		</div>
+		<div class="dealrecord">
+			<ul class="dealrecordContents">
+				<!--<li>
+				<div class="recordContents_left">
+					<div>
+						每日签到
+					</div>
+					<div>
+						2018-8-27
+					</div>
+				</div>
+				<div class="recordContents_right plusColor">
+					+10金币
+				</div>
+			</li>
+			<li>
+				<div class="recordContents_left">
+					<div>
+						金币兑换现金
+					</div>
+					<div>
+						2018-8-27
+					</div>
+				</div>
+				<div class="recordContents_right">
+					10金币
+				</div>
+			</li>-->
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var page = 1
+			mui.init({
+				pullRefresh: {
+					container: ".dealrecord", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						auto: true, //可选,默认false.自动上拉加载一次
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					},
+					down:{
+						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+
+			})
+			
+
+
+			function up() {
+				
+				$.ajax({
+					type: "get",
+					url: config.data + "users/getMyCoinLog",
+					async: true,
+					data: {
+						uid: userId,
+						page: page
+					},
+					success: function(data) {
+						page++
+						var content = ""
+						for(var i = 0; i < data.length; i++) {
+							if(data[i].types == 1) {
+								content += "<li>" +
+									"<div class='recordContents_left'>" +
+									"<div>" + data[i].b_types_memo + "</div>" +
+									"<div>" + data[i].addTime + "</div>" +
+									"</div>" +
+									"<div class='recordContents_right plusColor'>" +
+									"+" + data[i].coin + "金币" +
+									"</div>" +
+									"</li>";
+							} else {
+								content += "<li>" +
+									"<div class='recordContents_left'>" +
+									"<div>" + data[i].b_types_memo + "</div>" +
+									"<div>" + data[i].addTime + "</div>" +
+									"</div>" +
+									"<div class='recordContents_right'>" +
+									+data[i].coin + "金币" +
+									"</div>" +
+									"</li>";
+							}
+
+						}
+						$(".dealrecordContents").append(content);
+
+						if(data.length < 10) {
+							mui('.dealrecord').pullRefresh().endPullupToRefresh(true);
+						} else {
+							mui('.dealrecord').pullRefresh().endPullupToRefresh(false);
+						}
+
+					}
+				})
+			}
+
+
+			function down() {
+				window.location.reload();
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>交易记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/me_signin.css" />
+		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background:#e7ebed">
+		<div class="header_box">
+			<div class="before_header"></div>
+			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
+				<div style="width:100%;text-align:center;">
+					每日签到
+				</div>
+			</header>
+		</div>
+		<div class="me_signin">
+			<div class="me_signinInfo">
+				<div>
+					金币
+				</div>
+				<div>
+					9999
+				</div>
+			</div>
+		</div>
+		<div class="me_dateSignContents">
+			<div class="circle cir_0 ">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+				<div>
+					一天
+				</div>
+			</div>
+			<div class="land lan_0 ">
+
+			</div>
+			<div class="circle cir_1">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+				<div>
+					二天
+				</div>
+			</div>
+			<div class="land lan_1" style="left:4.5rem;">
+
+			</div>
+			<div class="circle cir_2">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+				<div>
+					三天
+				</div>
+			</div>
+			<div class="land lan_2" style="left:7.5rem;">
+
+			</div>
+			<div class="circle cir_3">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+				<div>
+					四天
+				</div>
+			</div>
+			<div class="land lan_3" style="left:10.5rem;">
+
+			</div>
+			<div class="circle cir_4">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+				<div>
+					五天
+				</div>
+			</div>
+			<div class="land lan_4" style="left:13.5rem;">
+
+			</div>
+			<div class="circle cir_5">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content ">
+					<div class="on_circle ">
+
+					</div>
+				</div>
+				<div>
+					六天
+				</div>
+			</div>
+			<div class="land lan_5" style="left:16.5rem;">
+
+			</div>
+			<div class="circle cir_6">
+				<div class="circlefont">
+					+30
+				</div>
+				<div class="circle_content" style="width:1.5rem;height:1.5rem;">
+					<div class="on_circle " style="width:1.5rem;height:1.5rem;">
+						<img src="../../Public/image/me_lihe.png" style="width:0.75rem;" />
+					</div>
+				</div>
+				<div>
+					七天
+				</div>
+
+			</div>
+			<!--<div class="land lan_6" style="left:16.5rem;">
+
+			</div>-->
+		</div>
+		<div class="me_siginbutton">
+			签到
+		</div>
+		<div class="me_signinrule">
+			<div class="me_signinrule_top">
+				签到规则：
+			</div>
+			<div class="me_signinrule_content">
+				1、每天完成签到任务，即可获得当日奖励；<br> 2、连续签到7天还能获得额外奖励；
+				<br> 3、每完成一轮7天签到，系统会自动开启新周期；
+				<br> 4、若签到中途断开，则下一次签到会重新开启新周期。
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var signData = 0;
+         initgold()
+		function initgold() {
+			$.ajax({
+				type: "get",
+				url: config.data + "users/getUserMsgById",
+				async: true,
+				data: {
+					id: userId
+				},
+				success: function(data) {
+
+					$(".me_signinInfo>div:last-child").text(data.user.coin);
+					signData = data.user.sign;
+					var date=new Date()
+					var h=date.setHours(0,0,0,0)
+
+                    var nowTime =Number(h)/1000-86400
+                    var lastTime =data.user.new_sign
+                     if(nowTime==lastTime&&signData==7){
+                     	signData=0
+                     }
+
+					for(var i = 0; i < signData; i++) {
+						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
+						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
+						$(".lan_" + (i-1)).addClass("on_lan")
+					}
+
+				}
+			})
+		}
+
+		$("body").on("tap", ".me_siginbutton", function() {
+
+			$.ajax({
+				type: "get",
+				url: config.data + "users/getSign",
+				async: true,
+				data: {
+					uid: userId
+				},
+				success: function(data) {
+					if(data.state == 1) {
+						 initgold()
+
+					}
+					//					else if(data.state == 2) {
+					//						//不允许重复签到
+					//						
+					//					} else {
+					//
+					//					}
+					mui.toast(data.info)
+				}
+			})
+		})
+	</script>
+
+</html>

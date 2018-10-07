@@ -1,28 +1,192 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>抵用券</title>
 		<script src="../../js/mui.min.js"></script>
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/game/game_getvoucher.css" rel="stylesheet" type="text/css" />
+		<link href="../../Public/css/public.css" rel="stylesheet" type="text/css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../Public/js/public.js">
+		</script>
 	</head>
-	<style type="text/css">
-		body,
-		html {
-			width: 100%;
-			height: 100%;
-			background: transparent !important;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-	</style>
+
 	<body>
-		<div>
-			dedwedwdwede dwewe
+		<div class="getvoucher_content">
+			<div class="voucher_go">前往查看</div>
+			<ul class="voucher_lists">
+				<!--<li>
+					<div class="voucher_val">
+						<div>
+							￥ <span>50</span>
+						</div>
+						<div>
+							满200元可用
+						</div>
+					</div>
+					<div class="voucher_get">
+						<div>
+							<span>
+							  【崩坏学园】
+							</span>充值满200元可返还50元
+						</div>
+						<div>领取</div>
+					</div>
+				</li>
+				<li>
+					<div class="voucher_val">
+						<div>
+							￥ <span>20</span>
+						</div>
+						<div>
+							满100元可用
+						</div>
+					</div>
+					<div class="voucher_get">
+						<div>
+							<span>
+							  【崩坏学园】
+							</span>充值满100元可返还20元
+						</div>
+						<div>领取</div>
+					</div>
+				</li>
+				<li>
+					<div class="voucher_val">
+						<div>
+							￥ <span>9</span>
+						</div>
+						<div>
+							满50元可用
+						</div>
+					</div>
+					<div class="voucher_get">
+						<div>
+							<span>
+							  【崩坏学园】
+							</span>充值满50元可返还9元
+						</div>
+						<div>领取</div>
+					</div>
+				</li>
+				<li>
+					<div class="voucher_val">
+						<div>
+							￥ <span>5</span>
+						</div>
+						<div>
+							满30元可用
+						</div>
+					</div>
+					<div class="voucher_get">
+						<div>
+							<span>
+							  【崩坏学园】
+							</span>充值满30元可返还5元
+
+						</div>
+						<div>领取</div>
+					</div>
+				</li>-->
+			</ul>
+			<div class="voucher_close">×</div>
 		</div>
 	</body>
-	
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			var v = plus.webview.currentWebview();
+			var info = plus.webview.currentWebview().info;
+			var gameId = info.gameId;
+
+			$.ajax({
+				type: "get",
+				url: config.data + "game/getGameTickets",
+				async: true,
+				data: {
+					game_id: gameId,
+					user_id: userId
+				},
+				success: function(data) {
+
+					var content = "";
+//                  alert(JSON.stringify(data))
+					for(var i = 0; i < data.length; i++) {
+						if(data[i].uid == null) {
+							var getornot = "<div data-id="+data[i].id+">领取</div>"
+						} else {
+							var getornot = "<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />"
+						}
+
+						content += "<li>" +
+							"<div class='voucher_val'>" +
+							"<div>" +
+							"￥ <span>" + data[i].coin + "</span>" +
+							"</div>" +
+							"<div>" +
+							"满" + data[i].a_coin + "元可用" +
+							"</div>" +
+							"</div>" +
+							"<div class='voucher_get'>" +
+							"<div>" +
+							"<span>" +
+							"【"+data[i].game_name+"】" +
+							"</span>充值满" + data[i].a_coin + "元可返还5元" +
+							"</div>" +
+							getornot +
+							" </div>" +
+							"</li>"
+					}
+					$(".voucher_lists").empty().append(content)
+				}
+			})
+
+			$(".voucher_get>div>span").text("【" + info.gameName + "】")
+			var one_rank = plus.webview.getWebviewById("game_one_rank.html")
+			var getvoucher = plus.webview.currentWebview()
+			var body = document.querySelector(".voucher_close")
+			body.addEventListener("tap", close, false)
+
+			function close() {
+				one_rank.setStyle({
+					mask: "none"
+				})
+				getvoucher.close()
+			}
+
+			$("body").on("tap", ".voucher_get>div:last-child", function() {
+				var v = $(this).text()
+				var id=$(this).attr("data-id")
+                var n =$(this)
+				if(v == "领取") {
+					$.ajax({
+						type: "get",
+						url: config.data+"game/goGameTicket",
+						async: true,
+						data: {
+							id:id,
+							user_id: userId
+						},
+						success:function(data) {
+                           if(data.state){
+                           	 n.parent().append("<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />")
+					         n.css("display", "none")
+                           }
+						}
+					})
+				}
+			})
+
+			$("body").on("tap", ".voucher_go", function() {
+
+				mui.openWindow({
+					url: "../user/me_voucher.html",
+					id: "me_voucher.html",
+				})
+			})
+		})
+	</script>
+
 </html>

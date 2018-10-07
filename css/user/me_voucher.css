@@ -1,0 +1,314 @@
+		body {
+			background-color: #e7eaec;
+			height: 100%;
+		}
+		
+		html {
+			height: 100%;
+		}
+		
+		.agreement_content {
+			padding: 0.85rem;
+		}
+		
+		h4 {
+			width: 100%;
+			text-align: center;
+		}
+		
+		h5 {
+			font-weight: 600;
+			margin-top: 0.4rem;
+		}
+		
+		.agreement_content p {
+			margin-top: 0.5rem;
+			margin-bottom: 0rem;
+		}
+		
+		.voucher_nav {
+			background-color: #fff;
+		}
+		
+		.border_bottom {
+			border-bottom: 2px solid #7fcadf;
+		}
+		
+		.voucher_content {
+			background: #fff;
+			width: 100%;
+			position: absolute;
+			top: 3.5rem;
+		}
+		
+		#voucher_use {
+			display: none;
+			width: 95%;
+			left: 0px;
+			right: 0px;
+			margin: auto;
+		}
+		
+		.mui-table-view-cell:after {
+			left: 0px !important;
+		}
+		
+		.voucher_header {
+			display: flex;
+			font-size: 13px;
+			align-items: center;
+		}
+		
+		.voucher_header img {
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+			width: 2.1rem;
+		}
+		
+		.voucher_header .mui-icon {
+			font-size: 16px;
+			margin-left: auto;
+			color: #c9c9c9;
+			font-weight: 600;
+		}
+		
+		.voucher_contents {
+			display: none;
+		}
+		
+		.voucher_uselist li:first-child {
+			margin-top: 0rem !important;
+		}
+		
+		.voucher_contents li,
+		.voucher_uselist li {
+			margin-top: 0.5rem;
+			width: 100%;
+			height: 5.5rem;
+			background: url(../../Public/image/me_voucherbg.png) no-repeat center /100% 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		.voucher_uselist li {
+			background-image: url(../../Public/image/voucher_useimg.png) !important;
+		}
+		
+		.voucher_val {
+			color: #00a2c8;
+			margin-top: 1.8rem;
+			margin-left: 1.3rem;
+			width: 32%;
+		}
+		
+		.voucher_get>span {
+			color: #7fcadf;
+			font-size: 13px;
+			display: block;
+			margin-top: auto;
+			margin-bottom: 1.2rem;
+		}
+		
+		.voucher_val>div:last-child {
+			font-size: 12px;
+			margin-top: 0.15rem;
+			font-weight: 600;
+		}
+		
+		.voucher_val>div:first-child {
+			margin-left: 0.2rem;
+		}
+		
+		.voucher_val>div:first-child span {
+			font-size: 28px;
+			font-weight: 600;
+			margin-left: -0.3rem;
+		}
+		
+		.voucher_get {
+			font-size: 12px;
+			display: flex;
+			margin-top: 1.5rem;
+			margin-left: 0.8rem;
+		}
+		
+		.voucher_get>div:first-child {
+			color: #7a7a7a;
+			width: 65%;
+		}
+		
+		.voucher_get>div:first-child {
+			color: #7a7a7a;
+			width: 65%;
+		}
+		
+		.voucher_get>div:last-child {
+			color: #fff;
+			width: 3.2rem;
+			height: 1.5rem;
+			line-height: 1.5rem;
+			text-align: center;
+			background: #7fcadf;
+			border-radius: 1rem;
+			font-size: 12px;
+			margin-left: 0.5rem;
+			margin-top: auto;
+			margin-bottom: 1rem;
+		}
+		
+		.commendTicket {
+			display: none;
+		}
+		/*me_checkvoucher */
+		
+		.me_voulan {
+			display: flex;
+			height: 3.2rem;
+			align-items: center;
+			font-size: 12px;
+			padding-left: 1.5rem;
+		}
+		
+		.me_voulan img {
+			width: 1.8rem
+		}
+		
+		.me_voulan span {
+			margin-left: 0.5rem;
+		}
+		
+		.me_getvouinfo {
+			font-size: 10px;
+			width: 90%;
+			margin: 0 auto;
+		}
+		
+		.me_getvouinfo>li:first-child {
+			color: #7fcadf !important;
+		}
+		
+		.me_getvouinfo>li {
+			color: #282828;
+		}
+		
+		.me_checkvoucontents {
+			font-size: 12px;
+			border-top: 2px solid #e7eaec;
+			border-bottom: 2px solid #e7eaec;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 1.2rem 0;
+		}
+		
+		.me_checkvoucontents input {
+			border: 1px solid transparent;
+			background-color: #e7eaec;
+		}
+		/*请填写游戏信息*/
+		
+		.me_checkvouhead {
+			color: #7fcadf;
+		}
+		
+		.me_vouinput {
+			width: 100%;
+		}
+		
+		.me_checkvouhead {
+			margin-right: auto;
+			margin-left: 2rem;
+		}
+		
+		.me_vouinput li {
+			margin-top: 1rem;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.me_vouinput input {
+			font-size: 14px;
+			border-radius: 10px;
+			height: 2rem;
+			padding-left: 0.5rem;
+			width: 65%;
+			margin-left: 0.8rem;
+		}
+		
+		.me_tochar {
+			background: #7fcadf;
+			width: 6rem;
+			height: 1.9rem;
+			line-height: 1.9rem;
+			text-align: center;
+			color: #fff;
+			border-radius: 15px;
+			margin-left: auto;
+			margin-right: 2rem;
+			margin-top: 0.8rem;
+		}
+		
+		.fontst {
+			color: #7fcadf;
+			font-size: 14px;
+		}
+		
+		.me_downclose {
+			width: 2.0rem;
+			line-height: 2.0rem;
+			font-size: 28px;
+			color: #fff;
+			text-align: center;
+			border-radius: 100%;
+			background: #7fcae0;
+			position: absolute;
+			right: -0.7rem;
+			top: -0.7rem;
+		}
+		
+		.me_downcontents {
+			display: none;
+			width: 68%;
+			height: 9rem;
+			border-radius: 1rem;
+			position: fixed;
+			z-index: 9999;
+			background: #fff;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			margin: auto;
+			font-size: 14px;
+		}
+		
+		.me_downinfo {
+			margin: 0 auto;
+			margin-top: 20%;
+			width: 90%;
+			text-align: center;
+			color: #282828;
+			padding-bottom: 10%;
+			border-bottom: 1px solid #e7eaec;
+		}
+		
+		.me_downgo {
+			color: #7fcadf;
+			width: 48%;
+			margin-left: auto;
+			margin-top: 1rem;
+			font-size: 13px;
+		}
+		
+		.me_downcontent {
+			width: 60%;
+			height: 5rem;
+			z-index: 9999;
+			background: #fff;
+			top: 0;
+		}
+		

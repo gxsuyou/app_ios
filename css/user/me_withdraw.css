@@ -1,0 +1,238 @@
+body {
+	background: #fff;
+}
+
+.me_getMonyContents {
+	height: 5.6rem;
+	border-bottom: 2px solid #e7ebed;
+}
+
+.me_withdrawMethod {
+	border-bottom: 2px solid #e7ebed;
+	height: 6.5rem;
+	padding-top: 4%;
+	padding-left: 5%;
+}
+
+.me_withdrawMethod>div:first-child,
+.me_withdrawNum>div:first-child {
+	color: #7a7a7a;
+	font-size: 14px;
+}
+
+.me_withdrawMethodBox {
+	display: flex;
+	margin-top: 0.6rem;
+}
+
+.me_withdrawMethodBox>div {
+	width: 6.5rem;
+	height: 2.3rem;
+	background: url(../../Public/image/withdraw_on.png) no-repeat center /100% 100%;
+	background-size: contain;
+	margin-right: 0.5rem;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.me_withdrawMethodBox>div>img {
+	width: 1.3rem;
+	margin-right: 0.4rem;
+}
+
+.me_withdrawNum {
+	padding-top: 4%;
+	padding-left: 5%;
+}
+
+.me_withdrawNumBox {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 1%;
+}
+
+.me_withdrawNumBox>div {
+	margin-right: 5%;
+	width: 6rem;
+	height: 6rem;
+	background: url(../../Public/image/withdrawnum_on.png) no-repeat center /contain;
+	line-height: 6rem;
+	text-align: center;
+	margin-top: 0.5rem;
+	font-weight: 600;
+}
+
+.me_withdrawButtonContents {
+	width: 100%;
+	border-top: 2px solid #e7ebed;
+	position: absolute;
+	bottom: 0px;
+	height: 3.3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.me_withdrawButton {
+	width: 70%;
+	height: 2.4rem;
+	background: #fab645;
+	line-height: 2.4rem;
+	text-align: center;
+	border-radius: 1.2rem;
+	color: #fff;
+}
+
+.me_getMonyContents {
+	padding-top: 4%;
+	padding-left: 5%;
+}
+
+.me_getMonyContents>div:first-child {
+	font-size: 11px;
+	color: #7a7a7a;
+}
+
+.me_getMonyContents>div:last-child {
+	margin-top: 0.7rem;
+	margin-left: 0.7rem;
+	font-size: 34px;
+	color: #282828;
+	font-weight: 600;
+}
+
+.me_getMonyContents>div>span {
+	font-size: 14px;
+	margin-left: 0.5rem;
+	font-weight: 500;
+}
+
+.me_popp {
+	display: none;
+	width: 68%;
+	height: 9rem;
+	border-radius: 1rem;
+	position: fixed;
+	z-index: 9999;
+	background: #fff;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	font-size: 14px;
+	padding-top: 15%;
+}
+
+.me_popp>div:first-child {
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+	color: #7a7a7a;
+	letter-spacing: 0.05rem;
+}
+
+.me_popp>div:last-child {
+	/*width:100%;*/
+	font-size: 14px;
+	width: 7.8rem;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	margin: 0 auto;
+	text-align: center;
+	color: #7fcadf;
+	border: 2px solid #7FCADF;
+	border-radius: 1rem;
+	margin-top: 7%;
+}
+
+
+/*me_withdrawapply.html*/
+
+.me_applyinputcontent {
+	background: #fff;
+	border-top: 1.2rem solid #e7ebed;
+}
+
+.me_applyinputcontent>div {
+	display: flex;
+	height: 3rem;
+	align-items: center;
+	/*width:90%;*/
+	margin: 0 auto;
+	justify-content: space-between;
+	border-top: 2px solid #e7ebed;
+	font-size: 14px;
+}
+
+.me_applyinputcontent>div:first-child {
+	border-top: none;
+}
+
+.me_applyinputcontent>div>div:first-child {
+	padding-left: 1.3rem;
+	width: 30%;
+	color: #282828;
+}
+
+.me_applyinputcontent>div>div:last-child {
+	width: 68%;
+}
+
+.me_applyinputcontent input{
+	width: 100%;
+	border:none;
+	font-size:14px;
+	color: #9e9e9e;
+	padding:0;
+	margin:0;
+}
+
+.withdraw_botton {
+	background: #fab645;
+	width: 100%;
+	height:2.8rem;
+	line-height:3rem;
+	text-align:center;
+	position: fixed;
+	bottom: 0px;
+	color: #fff;
+	letter-spacing: 0.05rem;
+}
+.me_applyinfo{
+	padding:1.5rem;
+	font-size: 12px;
+}
+.me_applyInfoContents {
+	/*font-size: 12px;*/
+	color:#7a7a7a;
+	line-height:1.5rem;
+}
+
+.me_applytop{
+	color: #7a7a7a;
+}
+.withdrawApplyPopp{
+	width: 70%;
+	height: 20%;
+	border-radius: 1rem;
+	position: fixed;
+	z-index: 9999;
+	background: #fff;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	font-size: 14px;
+	/*padding-top: 15%;*/
+	display:none;
+	align-items:center;
+	justify-content:center;
+}
+.withdrawApplyPopp>div{
+	display: flex;
+	align-items: center;
+}
