@@ -128,6 +128,7 @@
 		<script src="../../js/user/me.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init();
+			var only_id = 0;
 			mui.init({
 				subpages: [{
 					url: 'me.html',
@@ -168,7 +169,8 @@
 						"href": "https://oneyouxi.com.cn/qrcode.html",
 						"title": "随时随地，乐享游戏",
 						"content": "我正在使用ONE游戏平台，赶紧跟我一起来体验！",
-						"pageSourceId":plus.webview.currentWebview().id
+						"pageSourceId":plus.webview.currentWebview().id,
+						only_id: only_id
 					}
 				});
 				sharew.addEventListener("loaded", function() {

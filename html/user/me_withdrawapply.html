@@ -78,6 +78,7 @@
 			})
 
 			$("body").on("tap", ".withdraw_botton", function() {
+
 				var account = $(".me_account").val()
 				var confirmaccount = $(".me_confirmaccount").val()
 
@@ -90,7 +91,6 @@
 					mui.toast("请确认账户名一致")
 					return false;
 				}
-
 
 				$.ajax({
 					type: "post",
@@ -109,10 +109,16 @@
 							setTimeout(function() {
 								mask.close()
 								$(".withdrawApplyPopp").css("display", "none")
+								setTimeout(function() {
+									mui.openWindow({
+										url: "me_pocket.html",
+										id: "me_pocket.html"
+									})
+								},1000)
 							}, 1500)
 
 						} else {
-                            mui.toast(data.info)
+							mui.toast(data.info)
 						}
 
 					}

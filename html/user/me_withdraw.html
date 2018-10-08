@@ -96,7 +96,6 @@
 
 				var ccoin = withdranum.substring(0,3)
 				if(rcion >= ccoin) {
-
 					mui.openWindow({
 						url:"me_withdrawapply.html",
 						id:"me_withdrawapply.html",
@@ -117,6 +116,10 @@
 			$("body").on("tap", ".me_popp>div:last-child", function() {
 
 				mask.close()
+				setTimeout(function(){
+					mui.back()
+				},500)
+				
 			})
 		})
 	</script>
