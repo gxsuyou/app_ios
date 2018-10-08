@@ -29,11 +29,11 @@ mui.plusReady(function() {
 			success: function(data) {
 
 				var game = data.gameDetail;
-				packagename = game.game_packagename
-				hasno = plus.runtime.isApplicationExist({
-					pname: game.game_packagename,
-					action: ''
-				})
+//				packagename = game.game_packagename
+//				hasno = plus.runtime.isApplicationExist({
+//					pname: game.game_packagename,
+//					action: ''
+//				})
 			}
 		})
 	}
@@ -45,16 +45,16 @@ mui.plusReady(function() {
 	}); //callback为用户点击蒙版时自动执行的回调；
 	$("body").on("tap", ".me_tochar", function() {
 
-		if(hasno == false) {
-			mask.show() //"下载游戏"
-			 $(".me_downcontents").css("display", "block")
-			return false
-		}
+//		if(hasno == false) {
+//			mask.show() //"下载游戏"
+//			 $(".me_downcontents").css("display", "block")
+//			return false
+//		}
 
 		var playerId = $(".playerId").val()
 		var phoneNum = $(".phoneNum").val()
 		var playDir = $(".playDir").val()
-		if(playerId == "" || phoneNum == ""){
+		if(phoneNum == ""){
 			mui.toast("请输入必要信息")
 			return false;
 		}
@@ -82,16 +82,16 @@ mui.plusReady(function() {
 					mui.toast("提交，正在审核中。")
 					setTimeout(function() {
 						
-						if(plus.os.name == "Android") {
-							plus.runtime.launchApplication({
-								pname: packagename,
-								extra: {
-									//									url: "http://www.html5plus.org"
-								}
-							}, function(e) {
-								//								installApp('_downloads/' + game.game_name + '.apk')
-							});
-						}
+//						if(plus.os.name == "Android") {
+//							plus.runtime.launchApplication({
+//								pname: packagename,
+//								extra: {
+//									//									url: "http://www.html5plus.org"
+//								}
+//							}, function(e) {
+//								//								installApp('_downloads/' + game.game_name + '.apk')
+//							});
+//						}
 						back()
 					}, 2000)
 				}
@@ -134,7 +134,7 @@ mui.plusReady(function() {
     })
      
      function back(){
-     	 var list = plus.webview.getWebviewById("me_voucher.html");
+     	var list = plus.webview.getWebviewById("me_voucher.html");
         mui.fire(list, 'reload');
     	mui.openWindow({
     		url:"me_voucher.html",

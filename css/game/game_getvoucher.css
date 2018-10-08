@@ -43,7 +43,7 @@ html {
 	height:2.2rem;
 	text-align:center;
 	color:#fff;
-	line-height: 2.2rem;
+	line-height: 1.9rem;
 	background-color:#7fcadf;
 	border-radius: 100%;
 	font-size:28px;
@@ -53,17 +53,18 @@ html {
 .voucher_val{
 	color:#00a2c8;
 	margin-top:1.8rem;
-	margin-left:1.3rem;
+	margin-left:1.8rem;
 	width:32%;
+}
+.voucher_val>div:first-child{
+	margin-left:0.4rem;
 }
 .voucher_val>div:last-child{
 	font-size:12px;
     margin-top:0.15rem;
     font-weight:600;
 }
-.voucher_val>div:first-child{
-	margin-left:0.2rem;
-}
+
 .voucher_val>div:first-child span{
 	font-size:28px;
 	font-weight:600;
@@ -73,7 +74,7 @@ html {
 	font-size:12px;
 	display: flex;
 	margin-top:1.5rem;
-	margin-left:0.8rem;
+	margin-left:0.5rem;
 }
 .voucher_get>div:first-child{
 	color:#7a7a7a;

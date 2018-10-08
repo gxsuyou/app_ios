@@ -110,12 +110,10 @@
 					user_id: userId
 				},
 				success: function(data) {
-
 					var content = "";
-//                  alert(JSON.stringify(data))
 					for(var i = 0; i < data.length; i++) {
 						if(data[i].uid == null) {
-							var getornot = "<div data-id="+data[i].id+">领取</div>"
+							var getornot = "<div data-id=" + data[i].id + ">领取</div>"
 						} else {
 							var getornot = "<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />"
 						}
@@ -132,8 +130,8 @@
 							"<div class='voucher_get'>" +
 							"<div>" +
 							"<span>" +
-							"【"+data[i].game_name+"】" +
-							"</span>充值满" + data[i].a_coin + "元可返还5元" +
+							"【" + data[i].game_name + "】" +
+							"</span>充值满" + data[i].a_coin + "元可返还" + data[i].coin + "元" +
 							"</div>" +
 							getornot +
 							" </div>" +
@@ -158,29 +156,37 @@
 
 			$("body").on("tap", ".voucher_get>div:last-child", function() {
 				var v = $(this).text()
-				var id=$(this).attr("data-id")
-                var n =$(this)
+				var id = $(this).attr("data-id")
+				var n = $(this)
+
+
+				if(userId == 0) {
+					mui.openWindow({
+						url: "../user/login.html",
+						id: "login.html",
+					})
+				}          
+
 				if(v == "领取") {
 					$.ajax({
 						type: "get",
-						url: config.data+"game/goGameTicket",
+						url: config.data + "game/goGameTicket",
 						async: true,
 						data: {
-							id:id,
+							id: id,
 							user_id: userId
 						},
-						success:function(data) {
-                           if(data.state){
-                           	 n.parent().append("<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />")
-					         n.css("display", "none")
-                           }
+						success: function(data) {
+							if(data.state) {
+								n.parent().append("<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />")
+								n.css("display", "none")
+							}
 						}
 					})
 				}
 			})
 
 			$("body").on("tap", ".voucher_go", function() {
-
 				mui.openWindow({
 					url: "../user/me_voucher.html",
 					id: "me_voucher.html",

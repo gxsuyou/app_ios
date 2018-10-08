@@ -7,6 +7,8 @@
 	align-items: center;
 }
 
+
+
 .me_signinInfo {
 	height: 4.5rem;
 }
@@ -59,11 +61,11 @@
 	top: 1.25rem;
 }
 
-.circle>div:last-child {
-	font-size: 11px;
+.circle>div:last-child{
+	font-size:11px;
 	color: #7fcadf;
 	position: absolute;
-	bottom: 0;
+	bottom:-0.2rem;
 }
 
 .circle>div>div {
@@ -112,18 +114,19 @@
 	background: #fff !important;
 }
 .me_siginbutton{
-	width:8rem;
-	height:2.2rem;
-	line-height:2.2rem;
+	width:9rem;
+	height:2.4rem;
+	line-height:2.4rem;
 	background:#f9c554;
 	color:#fff;
-	font-size:14px;
+	font-size:16px;
 	font-weight:500;
 	border-radius:0.8rem;
 	text-align:center;
 	letter-spacing:0.2rem;
 	box-shadow:0px 3px 3px rgba(0,0,0,0.2);
 	margin:0 auto;
+	margin-top:0.5rem;
 }
 
 .me_signinrule{

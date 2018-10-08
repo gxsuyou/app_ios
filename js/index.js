@@ -22,10 +22,9 @@ mui.plusReady(function() {
 			//	检测更新
 			$.ajax({
 				type: "get",
-				url: config.data + "/h5/updateIos",
+				url: config.data + "h5/updateIos",
 				async: true,
 				success: function(data) {
-					//						alert(JSON.stringify(data))
 					if(data.state) {
 						newVer = data.mark
 						totalSize = data.totalSize

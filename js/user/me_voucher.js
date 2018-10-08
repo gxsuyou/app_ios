@@ -37,7 +37,7 @@ mui.plusReady(function() {
 				game_name: game_name,
 				game_id: game_id
 			},
-			createNew:true
+			createNew: true
 		})
 	})
 
@@ -64,8 +64,7 @@ mui.plusReady(function() {
 		mui.openWindow({
 			url: "voucher_userule.html",
 			id: "voucher_userule.html"
-		}
-		)
+		})
 	})
 
 	function aluse() {
@@ -75,19 +74,16 @@ mui.plusReady(function() {
 			async: true,
 			data: {
 				uid: userId,
-				stateType: 2,
-				sys:1
+				stateType: 2
 			},
 			success: function(data) {
+
 				var content = ""
-				//				alert(JSON.stringify(data))
 				for(var i = 0; i < data.length; i++) {
-
 					var ticket = data[i].mytickets
-
 					for(var n = 0; n < ticket.length; n++) {
 						if(ticket[n].state == 2) {
-							content += "<li >" +
+							content += "<li>" +
 								"<div class='voucher_val' style='color:#7a7a7a'>" +
 								"<div>" + "￥ <span>" + ticket[n].coin + "</span>" + "</div>" +
 								"<div>满" + ticket[n].a_coin + "元可用</div>" +
@@ -100,7 +96,14 @@ mui.plusReady(function() {
 						}
 					}
 				}
+				$("#voucher_use>img").remove()
 				$("#voucher_use>.voucher_uselist").empty().append(content)
+
+				var getlistNums = $("#voucher_use>.voucher_uselist>li").length
+				if(getlistNums == 0) {
+					$("#voucher_use").append("<img  src='../../Public/image/wuneirong.png' style='display:block;width:50%;margin:0 auto;margin-top:6rem;'  />")
+				}
+
 			}
 		})
 	}
@@ -117,11 +120,10 @@ function init() {
 			sys: 1
 		},
 		success: function(data) {
-
 			var commendTicket = "";
-//			alert(data.length)
 			if(data.length > 0) {
-				$(".commendTicket").css("display","block")
+				$(".commendTicket").css("display", "block")
+
 				for(var i = 0; i < data.length; i++) {
 					if(data[i].state == 3) {
 						var use = "<span>正在审核...</span>"
@@ -145,6 +147,7 @@ function init() {
 						"</div>" +
 						"</li>"
 				}
+				$("#voucher_nouse>img").remove()
 				$(".commendTicketContents").empty().append(commendTicket)
 			} else {
 				$(".commendTicket").css("display", "none")
@@ -161,58 +164,90 @@ function init() {
 			sys: 1
 		},
 		success: function(data) {
-			//						alert(JSON.stringify(data))
-			var content = ""
-			for(var i = 0; i < data.length; i++) {
+			//			alert(JSON.stringify(data.length))
+			if(data.length > 0) {
+				//          if(0) {
+				var content = ""
+				for(var i = 0; i < data.length; i++) {
 
-				var ticket = data[i].mytickets
+					var ticket = data[i].mytickets
+					var mytickets = ""
+					var t_nums = data[i].t_num;
 
-				var mytickets = ""
-
-				for(var n = 0; n < ticket.length; n++) {
-
-					if(ticket[n].state == 3) {
-						var use = "<span>正在审核...</span>"
+					if(t_nums) {
+						var infoNum = "<div class='voucher_info_num'>" + data[i].t_num + "</div>"
 					} else {
-						var use = "<div>去使用</div>"
+						var infoNum = ""
 					}
-					mytickets += "<ul data-game_id='" + data[i].game_id + "'   data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
-						"<div class='voucher_val' >" +
-						"<div>" +
-						"￥ <span>" + ticket[n].coin + "</span>" +
-						"</div>" +
-						"<div>" +
-						"满" + ticket[n].a_coin + "元可用" +
-						"</div>" +
-						"</div>" +
-						"<div class='voucher_get'>" +
-						"<div>" +
-						"<span>" +
-						"【" + data[i].game_name + "】" +
-						"</span>" +
-						"充值满" + ticket[n].a_coin + "元可返还" + ticket[n].coin + "元" +
-						"</div>" +
-						use +
-						"</div>" +
-						"</li>" +
-						"</ul>"
 
+					for(var n = 0; n < ticket.length; n++) {
+
+						var isNew = ticket[n].is_new
+
+						if(isNew) {
+
+							var isNewImages = "style='background:url(../../Public/image/me_voucherbg_new.png) no-repeat center /100% 100%;'";
+						} else {
+							var isNewImages = "style='background:url(../../Public/image/me_voucherbg.png) no-repeat center /100% 100%;'";
+						}
+
+						if(ticket[n].state == 3) {
+							var use = "<span>正在审核...</span>"
+						} else {
+							var use = "<div>去使用</div>"
+						}
+
+						mytickets +=
+							"<ul data-game_id='" + data[i].game_id + "'  " + isNewImages + "   data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
+							"<div class='voucher_val' >" +
+							"<div>" +
+							"￥ <span>" + ticket[n].coin + "</span>" +
+							"</div>" +
+							"<div>" +
+							"满" + ticket[n].a_coin + "元可用" +
+							"</div>" +
+							"</div>" +
+							"<div class='voucher_get'>" +
+							"<div>" +
+							"<span>" +
+							"【" + data[i].game_name + "】" +
+							"</span>" +
+							"充值满" + ticket[n].a_coin + "元可返还" + ticket[n].coin + "元" +
+							"</div>" +
+							use +
+							"</div>" +
+							"</li>" +
+							"</ul>"
+
+					}
+
+					content += "<li class='mui-table-view-cell'  >" +
+						"<div class='voucher_header'>" +
+						"<img src='" + config.img + data[i].icon + "' />" +
+						data[i].game_name +
+						"<div>" +
+						infoNum +
+						"<a class='mui-icon mui-icon-arrowdown'></a>" +
+						"</div>" +
+						"</div>" +
+						mytickets +
+						"</li>"
 				}
+				$("#voucher_nouse>img").remove()
+				$("#voucher_nouse>.mui-table-view>li:not('.commendTicket')").remove()
+				$("#voucher_nouse>.mui-table-view").append(content)
 
-				content += "<li class='mui-table-view-cell'>" +
-					"<div class='voucher_header'>" +
-					"<img src='" + config.img + data[i].icon + "' />" +
-					data[i].game_name +
-					"<a class='mui-icon mui-icon-arrowdown'></a>" +
-					"</div>" +
-					mytickets +
-					"</li>"
+			} else {
+				/*没有东西的情况下*/
+				var com = $(".commendTicket").css("display")
+				if(com == "none") {
+					$("#voucher_nouse").append("<img  src='../../Public/image/wuneirong.png' style='display:block;width:50%;margin:0 auto;margin-top:6rem;'  />")
+				}
 			}
-			$("#voucher_nouse>.mui-table-view>li:not(:first-child)").remove()
-//          $("#voucher_nouse .mui-table-view-cell:not(:first-child)").empty()
-			$("#voucher_nouse>.mui-table-view").append(content)
+
 		}
 	})
+
 }
 
 window.addEventListener('reload', function() {

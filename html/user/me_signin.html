@@ -63,7 +63,7 @@
 					二天
 				</div>
 			</div>
-			<div class="land lan_1" style="left:4.5rem;">
+			<div class="land lan_1" style="left:5.5rem;">
 
 			</div>
 			<div class="circle cir_2">
@@ -79,7 +79,7 @@
 					三天
 				</div>
 			</div>
-			<div class="land lan_2" style="left:7.5rem;">
+			<div class="land lan_2" style="left:9rem;">
 
 			</div>
 			<div class="circle cir_3">
@@ -95,7 +95,7 @@
 					四天
 				</div>
 			</div>
-			<div class="land lan_3" style="left:10.5rem;">
+			<div class="land lan_3" style="left:12.5rem;">
 
 			</div>
 			<div class="circle cir_4">
@@ -111,15 +111,15 @@
 					五天
 				</div>
 			</div>
-			<div class="land lan_4" style="left:13.5rem;">
+			<div class="land lan_4" style="left:15.8rem;">
 
 			</div>
 			<div class="circle cir_5">
 				<div class="circlefont">
 					+5
 				</div>
-				<div class="circle_content ">
-					<div class="on_circle ">
+				<div class="circle_content">
+					<div class="on_circle">
 
 					</div>
 				</div>
@@ -127,16 +127,16 @@
 					六天
 				</div>
 			</div>
-			<div class="land lan_5" style="left:16.5rem;">
+			<div class="land lan_5" style="left:19.5rem;">
 
 			</div>
 			<div class="circle cir_6">
 				<div class="circlefont">
 					+30
 				</div>
-				<div class="circle_content" style="width:1.5rem;height:1.5rem;">
-					<div class="on_circle " style="width:1.5rem;height:1.5rem;">
-						<img src="../../Public/image/me_lihe.png" style="width:0.75rem;" />
+				<div class="circle_content" style="width:1.55rem;height:1.55rem;">
+					<div class="on_circle " style="width:1.55rem;height:1.55rem;">
+						<img src="../../Public/image/me_lihe.png" style="width:0.8rem;" />
 					</div>
 				</div>
 				<div>
@@ -144,9 +144,6 @@
 				</div>
 
 			</div>
-			<!--<div class="land lan_6" style="left:16.5rem;">
-
-			</div>-->
 		</div>
 		<div class="me_siginbutton">
 			签到
@@ -164,7 +161,17 @@
 	</body>
 	<script type="text/javascript">
 		var signData = 0;
-         initgold()
+		var coin = 0;
+		initgold()
+		mui.init({
+			swipeBack: false,
+			beforeback: function(){
+				var list = plus.webview.getWebviewById("html/user/me.html");
+				mui.fire(list, 'getNowMoney', {
+					coin: coin
+				});
+			}
+		})	
 		function initgold() {
 			$.ajax({
 				type: "get",
@@ -189,6 +196,9 @@
 					for(var i = 0; i < signData; i++) {
 						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
 						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
+						
+						$(".cir_" + i + " .circlefont").css("color","#ffc712")
+						
 						$(".lan_" + (i-1)).addClass("on_lan")
 					}
 
@@ -210,12 +220,6 @@
 						 initgold()
 
 					}
-					//					else if(data.state == 2) {
-					//						//不允许重复签到
-					//						
-					//					} else {
-					//
-					//					}
 					mui.toast(data.info)
 				}
 			})
