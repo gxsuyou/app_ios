@@ -34,6 +34,14 @@
 			</div>
 		</div>
 		<div class="me_dateSignContents">
+			<div class="lan_dataSign">
+				<div class="move_lan_dataSign">
+					
+				</div>
+			</div>
+			<div class="me_dateSignContent">
+				
+			
 			<div class="circle cir_0 ">
 				<div class="circlefont">
 					+5
@@ -47,9 +55,7 @@
 					一天
 				</div>
 			</div>
-			<div class="land lan_0 ">
 
-			</div>
 			<div class="circle cir_1">
 				<div class="circlefont">
 					+5
@@ -63,9 +69,7 @@
 					二天
 				</div>
 			</div>
-			<div class="land lan_1" style="left:5.5rem;">
-
-			</div>
+	
 			<div class="circle cir_2">
 				<div class="circlefont">
 					+5
@@ -79,9 +83,7 @@
 					三天
 				</div>
 			</div>
-			<div class="land lan_2" style="left:9rem;">
 
-			</div>
 			<div class="circle cir_3">
 				<div class="circlefont">
 					+5
@@ -95,9 +97,7 @@
 					四天
 				</div>
 			</div>
-			<div class="land lan_3" style="left:12.5rem;">
 
-			</div>
 			<div class="circle cir_4">
 				<div class="circlefont">
 					+5
@@ -111,9 +111,7 @@
 					五天
 				</div>
 			</div>
-			<div class="land lan_4" style="left:15.8rem;">
 
-			</div>
 			<div class="circle cir_5">
 				<div class="circlefont">
 					+5
@@ -127,9 +125,7 @@
 					六天
 				</div>
 			</div>
-			<div class="land lan_5" style="left:19.5rem;">
 
-			</div>
 			<div class="circle cir_6">
 				<div class="circlefont">
 					+30
@@ -144,6 +140,8 @@
 				</div>
 
 			</div>
+		
+		   </div>
 		</div>
 		<div class="me_siginbutton">
 			签到
@@ -181,32 +179,40 @@
 					id: userId
 				},
 				success: function(data) {
-
+              
 					$(".me_signinInfo>div:last-child").text(data.user.coin);
 					signData = data.user.sign;
 					var date=new Date()
 					var h=date.setHours(0,0,0,0)
 
-                    var nowTime =Number(h)/1000-86400
+                    var nowTime_1 =Number(h)/1000-86400
+                    var nowTime=Number(h)/1000
+                                    
                     var lastTime =data.user.new_sign
-                     if(nowTime==lastTime&&signData==7){
+                    
+                    if(nowTime==lastTime){
+                    	$(".me_siginbutton").css("background-color","#c3c3c3")
+                    }
+                     if(nowTime_1==lastTime&&signData==7){
                      	signData=0
                      }
 
 					for(var i = 0; i < signData; i++) {
 						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
-						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
-						
-						$(".cir_" + i + " .circlefont").css("color","#ffc712")
-						
-						$(".lan_" + (i-1)).addClass("on_lan")
+						$(".cir_" + i + ">div>div").addClass("on_circle_bg")					
+						$(".cir_" + i + " .circlefont").css("color","#ffc712")						
+
 					}
+					
+						var lan_load=(i-1)*16.6;
+					$(".move_lan_dataSign").css("width",lan_load+"%")
 
 				}
 			})
 		}
 
 		$("body").on("tap", ".me_siginbutton", function() {
+
 
 			$.ajax({
 				type: "get",

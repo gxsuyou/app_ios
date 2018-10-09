@@ -4,13 +4,14 @@ mui.plusReady(function() {
 	mui.init({
 		swipeBack: false,
 		beforeback: function() {
-		  var list=plus.webview.getWebviewById("html/user/me.html");
-	      mui.fire(list,'getNowMoney',{coin:coin});
+			var list = plus.webview.getWebviewById("html/user/me.html");
+			mui.fire(list, 'getNowMoney', {
+				coin: coin
+			});
 		}
 	})
 
 	$.ajax({
-
 		type: "get",
 		url: config.data + "users/getUserMyCoin",
 		async: true,
@@ -22,8 +23,6 @@ mui.plusReady(function() {
 			coin = data.coin;
 		}
 	})
-
-
 
 	$("body").on("tap", ".topheadright", function() {
 		mui.openWindow({
@@ -47,10 +46,12 @@ mui.plusReady(function() {
 		var no = $(this).siblings(".voucher_getgoldcontent").css("display")
 
 		if(no == "none") {
+			$(this).css("border-bottom", "none")
 			$(this).find("a").removeClass("mui-icon-arrowdown")
 			$(this).find("a").addClass("mui-icon-arrowup")
 			$(this).siblings(".voucher_getgoldcontent").css("display", "flex")
 		} else {
+			$(this).css("border-bottom", "1.5px solid #e7ebed")
 			$(this).find("a").removeClass("mui-icon-arrowup")
 			$(this).find("a").addClass("mui-icon-arrowdown")
 			$(this).siblings(".voucher_getgoldcontent").css("display", "none")
@@ -69,10 +70,21 @@ mui.plusReady(function() {
 				})
 				break;
 			case "tostrategy":
-			    mui.openWindow({
-			    	url:"../strategy/strategy_add.html",
-			    	id:"stragtegy_add.html"
-			    })
+				mui.openWindow({
+					url: "../strategy/strategy_add.html",
+					id: "stragtegy_add.html"
+				})
+				break;
+			case "tofriend":
+				mui.back()
+				var p = plus.webview.getWebviewById("html/user/me.html")
+				mui.fire(p, "showShare")
+				break;
+			case "tochapter":
+			   mui.back()
+			   var h=plus.webview.getLaunchWebview();		 
+			   mui.fire(h,"toStrategy")
+			   break;
 		}
 	})
 

@@ -8,7 +8,6 @@
 }
 
 
-
 .me_signinInfo {
 	height: 4.5rem;
 }
@@ -32,12 +31,37 @@
 .me_dateSignContents {
 	width: 95%;
 	margin: 0 auto;
-	display: flex;
+	/*display: flex;
 	align-items: center;
 	justify-content: space-around;
 	position: relative;
-	top: -1.9rem;
+	top: -1.9rem;*/
+	  position: relative;
+	top: -2.1rem;
 }
+
+.me_dateSignContent{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	
+}
+.lan_dataSign{
+	width:90%;
+	height:0.25rem;
+	background: #c3c3c3;
+	position:relative;
+	top:2rem;
+	margin:0 auto;
+}
+
+.move_lan_dataSign{
+	width:0%;
+	height:100%;
+	background-color:#ffc712;
+}
+
+
 
 .circle {
 	width: 1.5rem;
@@ -79,7 +103,7 @@
 	justify-content: center;
 }
 
-.land {
+/*.land {
 	width: 3rem;
 	height: 0.25rem;
 	background: #c3c3c3;
@@ -89,7 +113,7 @@
 	left: 1.5rem;
 	margin: auto;
 	z-index: 8;
-}
+}*/
 
 .circle_content {
 	width: 1.3rem;

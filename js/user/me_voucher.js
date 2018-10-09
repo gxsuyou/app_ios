@@ -74,7 +74,8 @@ mui.plusReady(function() {
 			async: true,
 			data: {
 				uid: userId,
-				stateType: 2
+				stateType: 2,
+				sys:1
 			},
 			success: function(data) {
 
@@ -164,7 +165,6 @@ function init() {
 			sys: 1
 		},
 		success: function(data) {
-			//			alert(JSON.stringify(data.length))
 			if(data.length > 0) {
 				//          if(0) {
 				var content = ""

@@ -256,6 +256,8 @@ input:-webkit-autofill {-webkit-box-shadow:  0px 50px  #fff inset;}//为input设
    border-radius: 50%;
    background:#fff;
    box-shadow:0px 0px 0.6rem 0.5rem #fff;
+   top:30%;
+   left:35%;
 }
 
 

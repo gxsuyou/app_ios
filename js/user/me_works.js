@@ -57,5 +57,65 @@ $(function() {
 			}
 		});
 	})
+	
+	
+	
+	//添加浏览,点赞,评论数
+	$('body').on('tap', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
+		if(userId) {
+			var ts = $(this);
+			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
+
+				$.ajax({
+					type: "get",
+					url: config.data + "strategy/unLikeNum",
+					async: true,
+					data: {
+						strategyId: ts.attr('data-id'),
+						user_id: userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("取消点赞成功")
+							ts.css('background-image', 'url("../../Public/image/good.png")')
+							ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) - 1)
+							ts.attr('data-state', 'null')
+						} else {
+							mui.toast("取消点赞失败，请重试")
+						}
+					}
+				});
+			} else {
+				$.ajax({
+					type: "get",
+					url: config.data + "strategy/addNum",
+					async: true,
+					data: {
+						strategyId: ts.attr('data-id'),
+						user_id: userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("点赞成功")
+							ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
+							ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) + 1)
+							ts.attr('data-state', 1)
+
+						} else {
+							mui.toast("点赞失败，请重试")
+						}
+					}
+				});
+			}
+		} else {
+			mui.openWindow({
+				url: "../user/login.html",
+				id: "login.html",
+
+			})
+		}
+	})
+	//添加浏览,点赞,评论数结束
 
 })

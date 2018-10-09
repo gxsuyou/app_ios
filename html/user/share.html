@@ -64,19 +64,19 @@
 		</style>
 	</head>
 
-	<body onclick="closeShare();">
+	<body>
 		<div class="mui-content">
 			<img id="pic" src="img/add.png" style="display: none;" />
 		</div>
 		<div class="share_lan">
 			复制框内文字 粘贴分享给好友吧～
 		</div>
-					<!--随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【1111】一起赢金币吧！)-->
+		<!--随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【1111】一起赢金币吧！)-->
 		<textarea class="share_copy" type="text" onclick="copy()"   readonly />
 	
 		</textarea>
 		<footer style="position:absolute;bottom: 0px; width:100%;background:white;">
-			<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%; ;margin-top: 50%;">&nbsp;&nbsp;分享到</div>
+	<!--		<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%; ;margin-top: 50%;">&nbsp;&nbsp;分享到</div>-->
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
 				<li onclick="shareHref(2);" class="mui-table-view-cell mui-media mui-col-xs-3">
 					<img class="mui-media-object" src="../../Public/image/qq_share.png">
@@ -123,8 +123,9 @@
 			sharehrefTitle.value = shareInfo.title;
 			sharehrefDes.value = shareInfo.content;
 			pageSourceId = shareInfo.pageSourceId;
+			only_id = shareInfo.only_id
 			console.log("pageSource:" + pageSourceId);
-			document.querySelector(".share_copy").innerText="随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【"+only_id+"】一起赢金币吧！)";
+			document.querySelector(".share_copy").innerText="随时随地，乐享游戏！( 填写我的ID:【"+only_id+"】可以一起赢金币哦)";
 		}
 		if(window.plus) {
 			plusReady();
@@ -244,7 +245,6 @@
 			
 			if(sourcePage) {
 				 sourcePage.evalJS("closeMask()");
-
 				 mui.fire(sourcePage, 'qrcode_share');
 			}
 		}

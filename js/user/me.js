@@ -27,11 +27,11 @@ $(function() {
 			success: function(data) {
 
 				if(data.state) {
-					$(".me_getgold").text(data.user.coin)
-					$('.onlyId').text("ID:" + data.user.only_id);
+					$(".me_getgold").text(data.user.coin)					
+					only_id=data.user.only_id;
+					$('.onlyId').text("ID:" + only_id);
 					if(data.user.portrait != 0) {
 						img = data.user.portrait;
-						alert
 					} else {
 						img = "../../Public/image/morentouxiang.png";
 					}
@@ -148,4 +148,8 @@ $(".to_qiandao").click(function() {
 })
 window.addEventListener("getNowMoney", function(e) {
 	$(".me_getgold").text(e.detail.coin)
+})
+
+window.addEventListener("showShare",function(){
+	shareWebview()
 })

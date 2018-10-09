@@ -29,7 +29,7 @@ mui.plusReady(function() {
 						newVer = data.mark
 						totalSize = data.totalSize
 						if(wgtVer && newVer && (wgtVer != newVer)) {
-//													if(wgtVer && newVer) {
+							//													if(wgtVer && newVer) {
 
 							showUpload() //展示
 						} else {
@@ -43,9 +43,8 @@ mui.plusReady(function() {
 			});
 		});
 	}
-    
-    
-    function showUpload() {
+
+	function showUpload() {
 
 		var download_wgt = null
 		var href = "./html/user/upload.html";
@@ -65,11 +64,10 @@ mui.plusReady(function() {
 			popGesture: 'none',
 		}, {
 			info: {
-				totalSize:totalSize,
+				totalSize: totalSize,
 			}
 		});
-		
-	
+
 		download_wgt.addEventListener("loaded", function() {
 			download_wgt.show('fade-in', 0);
 		}, false);
@@ -78,11 +76,6 @@ mui.plusReady(function() {
 			mask: "rgba(0,0,0,0.5)",
 		});
 	}
-
-
-
-
-
 
 	plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
 	var h1 = plus.webview.getLaunchWebview()
@@ -128,13 +121,13 @@ mui.plusReady(function() {
 		}
 	);
 	self.append(sub);
-
+    
 	mui('.mui-bar-tab').on('tap', 'a', function(e) {
+		
 		var index = $(this).index();
-
 		//获取目标子页的id
 		var h = plus.webview.getWebviewById(subpages[index]) //有东西后就不create了
-
+   
 		console.log(plus.webview.getWebviewById(subpages[index]))
 		document.getElementsByClassName("mui-icon")[1].classList.remove('game_active');
 		document.getElementsByClassName("mui-icon")[0].classList.remove('news_active');
@@ -143,8 +136,9 @@ mui.plusReady(function() {
 		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');
 		this.children[0].classList.add(this.getAttribute('data-img'));
 		var targetTab = this.getAttribute('data-href');
-
+       
 		if(targetTab == activeTab) {
+		
 			return;
 		}
 
@@ -162,13 +156,32 @@ mui.plusReady(function() {
 		//更换标题
 		//	    title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 		//显示目标选项卡
+//      console.log(JSON.stringify(targetTab))
 		plus.webview.show(targetTab);
 		//隐藏当前选项卡
 		plus.webview.hide(activeTab);
 		//更改当前活跃的选项卡
 		activeTab = targetTab;
-
 	});
+
+	window.addEventListener("toStrategy", function() {
+		activeTab="html/strategy/strategy.html"
+		var h = plus.webview.getWebviewById(subpages[2])
+		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active')
+		document.getElementsByClassName("mui-icon")[2].classList.add('strategy_active')
+		if(!h) {
+			var sub = plus.webview.create(
+				"html/strategy/strategy.html", //子页url
+				"html/strategy/strategy.html", //子页id
+				{
+					top: '0px', //设置距离顶部的距离
+					bottom: '50px' //设置距离底部的距离
+				}
+			);
+			self.append(sub);
+		}
+		plus.webview.show("html/strategy/strategy.html");
+	})
 
 	mui.back = function() {
 		return false;

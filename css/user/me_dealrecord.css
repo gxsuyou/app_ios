@@ -1,0 +1,25 @@
+.dealrecordContents>li{
+	display:flex;
+	justify-content: space-between;
+	border-bottom:1px solid #e7ebed;
+	padding:0.55rem 0rem;
+	font-size:14px;
+	color:#282828;
+		font-weight:500;
+}
+.recordContents_left>div:last-child{
+	font-size:10px;
+	color:#9e9e9e;
+	margin-top:-0.1rem;
+	}
+.recordContents_left{
+	margin-left:5%;
+
+}
+.recordContents_right{
+	margin-right:5%;
+	font-weight:600;
+}
+.plusColor{
+	color:#fab645;
+}
