@@ -23,20 +23,10 @@ $(function() {
 	})
 
 	$('body').on("tap", ".loginout", function() {
-		window.localStorage.clear();
-		var all = plus.webview.all();
-		var current = plus.webview.currentWebview().id;
-		for(var i = 0, len = all.length; i < len; i++) {
-			if(all[i].id !== current) {
-				all[i].close();
-			}
-		}
-
-		mui.openWindow({
-			url: '../../index.html',
-			id: 'H5C62934A',
-			createNew: true
-		});
+	    window.localStorage.clear();
+		mui.back()
+		var p= plus.webview.getWebviewById("html/user/me.html");
+		mui.fire(p,"reload")
 	})
 
 })

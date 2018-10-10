@@ -49,7 +49,7 @@
 				margin-top: 0.8rem;
 			}
 			
-			.share_copy {
+			.share_copy_content{
 				display: block;
 				color: #282828;
 				font-size: 14px;
@@ -58,7 +58,20 @@
 				background: #f7f7f7;
 				padding: 3.5%;
 				border-radius: 0.5rem;
-				margin-top: 0.3rem;
+				margin-top: 0.35rem;
+				border: none;
+				text-align:center;
+			}
+			.share_copy{
+			    display: block;
+				color: #282828;
+				font-size: 14px;
+				width: 100%;
+				margin: 0 auto;
+				background: #f7f7f7;
+			    margin-top:0.3rem;
+			    padding:0px;
+			    text-align:center;
 				border: none;
 			}
 		</style>
@@ -72,11 +85,13 @@
 			复制框内文字 粘贴分享给好友吧～
 		</div>
 		<!--随时随地，乐享游戏！( 这些文字可以重新想注册填写我的ID：【1111】一起赢金币吧！)-->
-		<textarea class="share_copy" type="text" onclick="copy()"   readonly />
-	
-		</textarea>
+		<div class="share_copy_content">
+	             随时随地，乐享游戏！
+			<textarea class="share_copy" type="text" onclick="copy()" readonly />         
+		    </textarea>
+		</div>
 		<footer style="position:absolute;bottom: 0px; width:100%;background:white;">
-	<!--		<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%; ;margin-top: 50%;">&nbsp;&nbsp;分享到</div>-->
+	        <!--<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%; ;margin-top: 50%;">&nbsp;&nbsp;分享到</div>-->
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
 				<li onclick="shareHref(2);" class="mui-table-view-cell mui-media mui-col-xs-3">
 					<img class="mui-media-object" src="../../Public/image/qq_share.png">
@@ -125,7 +140,7 @@
 			pageSourceId = shareInfo.pageSourceId;
 			only_id = shareInfo.only_id
 			console.log("pageSource:" + pageSourceId);
-			document.querySelector(".share_copy").innerText="随时随地，乐享游戏！( 填写我的ID:【"+only_id+"】可以一起赢金币哦)";
+			document.querySelector(".share_copy").innerText="填写我的ID:【"+only_id+"】可以一起赢金币哦";
 		}
 		if(window.plus) {
 			plusReady();

@@ -104,6 +104,13 @@ $(function() {
 
 		//		攻略页结束
 		$("body").on("tap", "#game_detail_download", function(ev) {
+//			if(!userId) {
+//				mui.openWindow({
+//					url: '../user/login.html',
+//					id: 'login.html'
+//				})
+//				return false;
+//			}
 			event = ev || window.event;
 			event.stopPropagation();
 			var t = $(this);

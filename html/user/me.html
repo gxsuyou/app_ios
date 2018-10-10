@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +13,7 @@
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.min.js"></script>
 	</head>
+
 	<body>
 		<div class="me_header">
 			<div class="me_info">
@@ -26,7 +28,7 @@
 							<span class="onlyId"></span>
 						</div>
 						<!--<input class=" font_12 tac color_white" value="VIP0" style="height: 1rem;" disabled="disabled"></input>-->
-                        	<div class="to_qiandao hidden" >
+						<div class="to_qiandao hidden">
 							签到
 						</div>
 					</div><br />
@@ -47,35 +49,34 @@
 			</div>
 		</div>
 		<div class="me_middlebox">
-        	<div class="me_gold">
-        		<div style='display:flex;align-items:center;'>
-        			<img src="../../Public/image/me_gold.png"/>
-        			<span class="me_getgold">
+			<div class="me_gold">
+				<div style='display:flex;align-items:center;'>
+					<img src="../../Public/image/me_gold.png" />
+					<span class="me_getgold">
         				0
         			</span>
-        		</div>
-        		<div >
-        		 我的钱包
-        		</div>
-        	</div>
-        	<div class="me_voucher">
-        		<div >
-        			<img src="../../Public/image/me_voucher.png" />       			
-        		</div>
-        		<div>
-        			折扣券
-        		</div>
-        	</div>
-        	<div class="me_friend" onclick="openShare()">
-        		<div >
-        			<img src="../../Public/image/me_friend.png" />
-        		</div>
-        		<div style='margin-left:0.25rem'>邀请好友</div>
-        	</div>
-        </div>
+				</div>
+				<div>
+					我的钱包
+				</div>
+			</div>
+			<div class="me_voucher">
+				<div>
+					<img src="../../Public/image/me_voucher.png" />
+				</div>
+				<div>
+					优惠券
+				</div>
+			</div>
+			<div class="me_friend" >
+				<div>
+					<img src="../../Public/image/me_friend.png" />
+				</div>
+				<div style='margin-left:0.25rem'>邀请好友</div>
+			</div>
+		</div>
 		<ul class="mui-table-view me_newscenter">
 			<li class="mui-table-view-cell ">
-
 				<a class="mui-navigate-right ">
 					<div class="fl me_news"></div>
 					消息中心
@@ -126,16 +127,8 @@
 		</ul>
 		<script src="../../js/user/me.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-				
 			mui.init();
 			var only_id = 0;
-			mui.init({
-				subpages: [{
-					url: 'me.html',
-					id: 'me.html',
-				}],
-			})
-
 			function openShare() {
 				shareWebview();
 			}
@@ -151,9 +144,9 @@
 			 */
 			function shareWebview() {
 				ws = plus.webview.getLaunchWebview();
-//				if(sharew) { // 避免快速多次点击创建多个窗口  
-//					return;
-//				}
+				//				if(sharew) { // 避免快速多次点击创建多个窗口  
+				//					return;
+				//				}
 				var top = plus.display.resolutionHeight - 134;
 				var href = "share.html";
 				sharew = plus.webview.create(href, "share.html", {
@@ -169,7 +162,7 @@
 						"href": "https://oneyouxi.com.cn/qrcode.html",
 						"title": "随时随地，乐享游戏",
 						"content": "我正在使用ONE游戏平台，赶紧跟我一起来体验！",
-						"pageSourceId":plus.webview.currentWebview().id,
+						"pageSourceId": plus.webview.currentWebview().id,
 						only_id: only_id
 					}
 				});
@@ -181,12 +174,10 @@
 					mask: "rgba(0,0,0,0.5)"
 				});
 				// 点击关闭遮罩层  
-				ws.addEventListener("maskClick",closeMask, false);
+				ws.addEventListener("maskClick", closeMask, false);
 			}
 
-
-
-			function closeMask(){
+			function closeMask() {
 
 				ws.setStyle({
 					mask: "none"
@@ -196,10 +187,10 @@
 					sharew = plus.webview.getWebviewById("share.html");
 				}
 				if(sharew) {
-					
+
 					sharew.close();
 					sharew = null;
-		
+
 				}
 			}
 
@@ -207,15 +198,15 @@
 			var qrcodeshare;
 			window.addEventListener('qrcode_share', function(event) {
 
-//				var ws = null;
+				//				var ws = null;
 				/**  
 				 *分享窗口  
 				 */
 				//				function shareWebview() {
-//				ws = plus.webview.getLaunchWebview();
-//				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
-//					return;
-//				}
+				//				ws = plus.webview.getLaunchWebview();
+				//				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
+				//					return;
+				//				}
 				var href = "qrcode.html";
 				qrcodeshare = plus.webview.create(href, "qrcode.html", {
 					width: '100%',
@@ -224,23 +215,22 @@
 					zindex: 0,
 					opacity: 1,
 					background: 'transparent',
-					scrollIndicator:'none',
+					scrollIndicator: 'none',
 					scalable: false,
 					popGesture: 'none',
-				},{
-					info:{
+				}, {
+					info: {
 						only_id: only_id
-				 }
+					}
 				});
 				qrcodeshare.addEventListener("loaded", function() {
-					qrcodeshare.show('fade-in',0);
+					qrcodeshare.show('fade-in', 0);
 				}, false);
 				// 显示遮罩层    
 
-				h = plus.webview.getLaunchWebview();
+				var h = plus.webview.getWebviewById("H5BD8D7F0");
 				h.setStyle({
 					mask: "rgba(0,0,0,0.5)",
-//					zindex: 9999,
 				});
 
 				// 点击关闭遮罩层  
@@ -249,7 +239,7 @@
 			});
 
 			function closeMaskShare() {
-				h.setStyle({
+				plus.webview.getWebviewById("H5BD8D7F0").setStyle({
 					mask: "none"
 				});
 				//避免出现特殊情况，确保分享页面在初始化时关闭   
@@ -266,6 +256,7 @@
 			window.addEventListener('reload', function(event) {
 				location.reload();
 			});
+
 		</script>
 	</body>
 

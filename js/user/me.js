@@ -14,6 +14,7 @@ $(function() {
 		$('.me_share').click(function() {
 			openShare()
 		})
+
 		var userInfostr = window.localStorage.getItem("userInfo");
 		var userInfojson = eval('(' + userInfostr + ')');
 		var id = userInfojson.id;
@@ -27,8 +28,9 @@ $(function() {
 			success: function(data) {
 
 				if(data.state) {
-					$(".me_getgold").text(data.user.coin)					
-					only_id=data.user.only_id;
+                    
+					$(".me_getgold").text(data.user.coin)
+					only_id = data.user.only_id;
 					$('.onlyId').text("ID:" + only_id);
 					if(data.user.portrait != 0) {
 						img = data.user.portrait;
@@ -107,6 +109,13 @@ $(function() {
 				id: "me_pocket.html"
 			})
 		})
+		
+		
+		$("body").on("tap",".me_friend",function(){
+			openShare()
+		})
+		
+		
 
 	}
 
@@ -131,8 +140,6 @@ $('.me_voucher').click(function() {
 			url: "me_voucher.html",
 			id: "me_voucher.html"
 		})
-	} else {
-		mui.toast("请登录")
 	}
 })
 
@@ -146,10 +153,10 @@ $(".to_qiandao").click(function() {
 		mui.toast("请登录")
 	}
 })
+
+window.addEventListener("showShare", function() {
+	shareWebview()
+})
 window.addEventListener("getNowMoney", function(e) {
 	$(".me_getgold").text(e.detail.coin)
-})
-
-window.addEventListener("showShare",function(){
-	shareWebview()
 })

@@ -179,8 +179,8 @@
 					id: userId
 				},
 				success: function(data) {
-              
-					$(".me_signinInfo>div:last-child").text(data.user.coin);
+                    coin=data.user.coin
+					$(".me_signinInfo>div:last-child").text(coin);
 					signData = data.user.sign;
 					var date=new Date()
 					var h=date.setHours(0,0,0,0)
@@ -204,7 +204,8 @@
 
 					}
 					
-						var lan_load=(i-1)*16.6;
+					var lan_load=(i-1)*16.6;
+					
 					$(".move_lan_dataSign").css("width",lan_load+"%")
 
 				}

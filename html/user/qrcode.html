@@ -21,7 +21,7 @@
 		}		
 		.content {
 			width: 14.5rem;
-			height: 16rem;
+			height: 17.5rem;
 			background: #fff;
 			border-radius: 1rem;
 			display:flex;
@@ -31,26 +31,30 @@
 			z-index:9999;
 			flex-direction:column;
 		}
-		.content>div{
+		.content>div{			
+            font-size:14px;
+            color:#767676;
+            margin-top:0.35rem;
+		}
+		.content>div>span{
 			-webkit-user-select:text;
 			-moz-user-select:text;
             -khtml-user-select:text;
             user-select:text;
-            font-size:14px;
-            color:#767676;
-            margin-top:0.35rem;
 		}
 	</style>
 	<body>
 		<div class="content">
 			<img style='width:10rem;display:block;' src="../../Public/image/qrcode_img.jpg" />
 			<div>
-				我的ID:【<span class="only_id"></span>】一起赢金币吧
+				填写我的ID:【<span class="only_id"></span>】
+			</div>
+			<div style="font-size:16px;font-weight:600;">
+				一起赢金币吧
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript">
-
 		var bod = document.querySelector("body");
 		bod.addEventListener("tap", back, false)
 

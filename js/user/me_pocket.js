@@ -1,6 +1,5 @@
 var coin = 0;
 mui.plusReady(function() {
-
 	mui.init({
 		swipeBack: false,
 		beforeback: function() {
