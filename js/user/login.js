@@ -32,6 +32,7 @@ $(function() {
 						} else {
 							var userInfo = JSON.stringify(data.user);
 							var userId = data.user.id;
+							$("input").blur()
 							window.localStorage.setItem("rememberUser", "true");
 							window.localStorage.setItem("userInfo", userInfo);
 							window.localStorage.setItem("userId", userId);

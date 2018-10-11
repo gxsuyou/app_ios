@@ -1,11 +1,12 @@
 var tu_id = null;
 mui.plusReady(function() {
 
+
+
 	var n = plus.webview.currentWebview();
 	tu_id = n.tu_id
 	var gameId = n.game_id
 	var packagename;
-	var hasno
 	initGame()
 
 	function initGame() {
@@ -29,11 +30,7 @@ mui.plusReady(function() {
 			success: function(data) {
 
 				var game = data.gameDetail;
-//				packagename = game.game_packagename
-//				hasno = plus.runtime.isApplicationExist({
-//					pname: game.game_packagename,
-//					action: ''
-//				})
+
 			}
 		})
 	}
@@ -44,13 +41,6 @@ mui.plusReady(function() {
         $(".me_downcontents").css("display", "none")
 	}); //callback为用户点击蒙版时自动执行的回调；
 	$("body").on("tap", ".me_tochar", function() {
-
-//		if(hasno == false) {
-//			mask.show() //"下载游戏"
-//			 $(".me_downcontents").css("display", "block")
-//			return false
-//		}
-
 		var playerId = $(".playerId").val()
 		var phoneNum = $(".phoneNum").val()
 		var playDir = $(".playDir").val()
@@ -81,17 +71,6 @@ mui.plusReady(function() {
 				if(data.state == 1) {
 					mui.toast("提交，正在审核中。")
 					setTimeout(function() {
-						
-//						if(plus.os.name == "Android") {
-//							plus.runtime.launchApplication({
-//								pname: packagename,
-//								extra: {
-//									//									url: "http://www.html5plus.org"
-//								}
-//							}, function(e) {
-//								//								installApp('_downloads/' + game.game_name + '.apk')
-//							});
-//						}
 						back()
 					}, 2000)
 				}

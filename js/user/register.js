@@ -68,16 +68,16 @@ $(function() {
 		var username = $.trim($('#register-phone').val());
 		var code = $('#register-code').val();
 		var password = $('#register-password').val();
-
-		if(/^1[34578]\d{9}$/.test(username) && password.length >= 6 && code.length == 6  && /^[a-zA-Z0-9]*([a-zA-Z][0-9]|[0-9][a-zA-Z])[a-zA-Z0-9]*$/.test(password) && checked) {
-			
+        var recommend=$.trim($("#recommend-user").val())
+		if(/^1[34578]\d{9}$/.test(username) && password.length >= 6 && code.length == 6  && /^[a-zA-Z0-9]*([a-zA-Z][0-9]|[0-9][a-zA-Z])[a-zA-Z0-9]*$/.test(password) && checked) {			
 				$.ajax({
 					type: "post",
 					url: config.data + "users/reg", // 目标地址
 					data: {
 						"tel": username,
 						"verify": code,
-						"password": password
+						"password": password,
+						 only_id:recommend
 					},
 					success: function(data) {
 

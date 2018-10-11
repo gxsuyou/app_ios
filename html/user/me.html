@@ -143,10 +143,10 @@
 			 *分享窗口  
 			 */
 			function shareWebview() {
-				ws = plus.webview.getLaunchWebview();
-				//				if(sharew) { // 避免快速多次点击创建多个窗口  
-				//					return;
-				//				}
+				ws = plus.webview.currentWebview();
+				if(sharew) { // 避免快速多次点击创建多个窗口  
+					return;
+				}
 				var top = plus.display.resolutionHeight - 134;
 				var href = "share.html";
 				sharew = plus.webview.create(href, "share.html", {
