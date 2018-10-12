@@ -148,10 +148,11 @@ $(function() {
 		$('.head_cuts').addClass('hidden')
 	});
 
-	$('body').on("tap", ".publish", function() {
+	$('body').on("tap",".publish", function() {
+		
 		$(this).addClass("move")
 		setTimeout(function() {
-			$("..publish").removeClass("move")
+			$(".publish").removeClass("move")
 		}, 400)
 		var name = $('.personal_name').val().trim();
 		var bir = $('.personal_bir').text(); /* 先验证昵称 */
@@ -161,7 +162,7 @@ $(function() {
 			url: config.data + "users/updateNickName",
 			async: true,
 			data: {
-				id: id,
+				id:id,
 				nickName: name
 			},
 			success: function(data) {
@@ -178,6 +179,7 @@ $(function() {
 						success: function(data) {}
 					});
 					/*上传头图*/
+					
 					if(dataURLup) {
 						uploadHead(id, dataURLup, function() {
 							mui.back()
@@ -186,6 +188,8 @@ $(function() {
 						mui.back()
 					}
 
+                    var me=plus.webview.getWebviewById("html/user/me.html")
+                    mui.fire(me,"reload")
 				} else {
 					mui.toast('昵称不能重名');
 					return false;

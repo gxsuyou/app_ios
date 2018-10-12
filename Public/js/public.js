@@ -1,4 +1,4 @@
-var ENV = "dev";
+var ENV = "h";
 //测试环境
 if(ENV == "dev") {
    //发开模式

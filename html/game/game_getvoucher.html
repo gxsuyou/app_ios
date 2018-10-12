@@ -180,6 +180,8 @@
 							if(data.state) {
 								n.parent().append("<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />")
 								n.css("display", "none")
+							}else{
+								mui.toast(data.info)
 							}
 						}
 					})

@@ -145,6 +145,7 @@ input{
 
 /* middlebox*/
 .me_middlebox{
+	width:100%;
 	display: flex;
 	padding:0.7rem 3% 0.3rem 6%;
 	border-top:1px solid #e2e2e3;
@@ -199,12 +200,12 @@ input{
 	font-size:16px;
 	color:#f7c238;
 	font-weight:600;
-	width:4rem;
-	margin-left:0.3rem;
+	width:3.2rem;
 	text-align:left;
 	overflow: hidden;
 	word-wrap:nowrap;
 	text-overflow: ellipsis;	
+	text-align:center;
 }
 
 

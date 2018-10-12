@@ -8,7 +8,8 @@ function up() {
 		async: true,
 		data: {
 			sys: 1,
-			page: page,
+			page:page,
+			type:"one",
 		},
 		success: function(data) {
 			var g = data;
@@ -21,7 +22,7 @@ function up() {
 					} else {
 						var urlDownload = g[i].game_download_ios
 					}
-//                 alert(JSON.stringify(g[i]))
+
 
 					list +=
 							"<li class='game_list ofh' data-id='" + g[i].game_id + "'>" +

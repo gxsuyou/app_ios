@@ -75,10 +75,9 @@ mui.plusReady(function() {
 			data: {
 				uid: userId,
 				stateType: 2,
-				sys:1
+				sys: 1
 			},
 			success: function(data) {
-
 				var content = ""
 				for(var i = 0; i < data.length; i++) {
 					var ticket = data[i].mytickets
@@ -131,7 +130,7 @@ function init() {
 					} else {
 						var use = "<div>去使用</div>"
 					}
-					commendTicket += "<li data-tu_id='" + data[i].id + "' class='commendTicketUse'>" +
+					commendTicket += "<li style='background:url(../../Public/image/me_voucherbg.png) no-repeat center /100% 100%;' data-tu_id='" + data[i].id + "' class='commendTicketUse'>" +
 						"<div class='voucher_val'>" +
 						"<div>" +
 						"￥ <span>" + data[i].coin + "</span>" +
