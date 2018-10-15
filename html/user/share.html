@@ -15,13 +15,16 @@
 		<div onclick="back()" class="share-back mui-icon mui-icon-left-nav mui-pull-left">
 			< </div>
 				<div class="share_copy_content">
-					随时随地，乐享游戏！<br> 注册填写我的ID：【<span class='getid'></span>】<br>
-					<span style="font-size:16px;">一起赢金币吧！</span> <br>
-					<span style="color:#ababab">复制框内文字 粘贴分享给好友吧～</span>
-
+					注册填写我的ID：【<span class='getid'></span>】<br>
+					<span style="font-size:18px;">一起赢金币！</span>
 				</div>
+				<div style="font-size:12px;color:#ababab;text-align:center;margin:0.3rem 0">复制分享给好友吧～</div>
 				<div class="advfont">
 					注册送豪礼
+				</div>
+				<div class="share_info">
+					分享ONE游戏APP邀请好友注册<br> 好友注册时填写你的数字ID并注册成功
+					<br> 双方各获得100金币
 				</div>
 				<div class="qrcode_content">
 					<div>
@@ -81,10 +84,7 @@
 					</div>
 				</div>
 				<div class="share_notice">
-					<span style="color:#fe9900;font-size:14px;">好友注册即可获得100元通用代金券
-        		
-        	</span><br> 分享one游戏APP邀请好友注册，新用户注册时填写你
-					<br> 的数字ID并注册成功，双方各获得100金币
+					<span style="font-weight:600;color:#fe9900;font-size:18px;">注册即可获得100元代金券</span>
 				</div>
 				<footer style="position:absolute;bottom: 1rem; width:100%;">
 					<!-- mui-table-view mui-grid-view mui-grid-9	<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%;margin-top: 50%;">&nbsp;&nbsp;分享到</div>-->
@@ -123,13 +123,6 @@
 		// H5 plus事件处理  
 		function plusReady() {
 			updateSerivces();
-//			if(plus.os.name == "Android") {
-//				main = plus.android.runtimeMainActivity();
-//				Intent = plus.android.importClass("android.content.Intent");
-//				File = plus.android.importClass("java.io.File");
-//				Uri = plus.android.importClass("android.net.Uri");
-//				main = plus.android.runtimeMainActivity();
-//			}
 			var shareInfo = plus.webview.currentWebview().shareInfo;
 			sharehref.value = shareInfo.href;
 			sharehrefTitle.value = shareInfo.title;
@@ -145,7 +138,6 @@
 			document.addEventListener("plusready", plusReady, false);
 		}
 
-	
 		/**  
 		 *   
 		 * 更新分享服务  
@@ -194,8 +186,7 @@
 				}
 			}
 			// 发送分享  
-//			alert(JSON.stringify(msg))
-////			return;
+
 			if(sb.s.authenticated) {
 				console.log("---已授权---");
 				shareMessage(msg, sb.s);
@@ -210,27 +201,51 @@
 					console.log("认证授权失败：" + e.code + " - " + e.message);
 				});
 			}
-			
-			
+
 		}
+
 		/**  
 		 * 发送分享消息  
 		 * @param {JSON} msg  
 		 * @param {plus.share.ShareService} s  
 		 */
-		function shareMessage(msg, s) {
 
-			console.log(JSON.stringify(msg));
+		function shareMessage(msg, s) {
+			alert(JSON.stringify(msg));
+			alert(JSON.stringify(s))
 			s.send(msg, function() {
 				console.log("分享到\"" + s.description + "\"成功！ ");
-
 			}, function(e) {
 				console.log("分享到\"" + s.description + "\"失败: " + JSON.stringify(e));
-
 			});
 		}
 		// 分析链接  
 		function shareHref(index) {
+
+			if(index == 1) {
+
+				//				var message = {
+				//					title: "微信好友", //应用名字
+				//					content: "plusShare基于HTML5+的share模块，开发者只需调用一个API，即可调起微信好友、微信朋友圈、系统更多分享功能",
+				//					href: "http://www.dcloud.io/hellomui", //分享出去后，点击跳转地址
+				//					thumbs: ["http://img-cdn-qiniu.dcloud.net.cn/icon3.png"],//分享缩略图
+				//					pictures: ["https://oneyouxi.com/pc/img/oneicon.png"],//分享缩略图
+				//				    extra:{
+				//						scene: 'WXSceneSession'
+				//					}
+				//				}
+				//
+				//				plus.share.sendWithSystem(message, function() {
+				////				    TODO 系统分享暂不支持回调
+				////					callback && callback(true);
+				//				}, function() {
+				////					TODO 系统分享暂不支持回调
+				////					callback && callback(false);
+				//				});
+				//
+				//				return false;
+			}
+
 			// 更新分享列表  
 			var shareBts = [];
 			var ss = shares['weixin'];
@@ -249,6 +264,9 @@
 				title: 'QQ',
 				s: ss
 			});
+
+			alert(JSON.stringify(shareBts[index]))
+			//			return false;
 			shareAction(shareBts[index], true);
 		}
 

@@ -182,6 +182,7 @@
                     coin=data.user.coin
 					$(".me_signinInfo>div:last-child").text(coin);
 					signData = data.user.sign;
+//					alert(JSON.stringify(data))
 					var date=new Date()
 					var h=date.setHours(0,0,0,0)
 
@@ -191,8 +192,13 @@
                     var lastTime =data.user.new_sign
                     
                     if(nowTime==lastTime){
-                    	$(".me_siginbutton").css("background-color","#c3c3c3")
+                    	$(".me_siginbutton").css("background-color","#c3c3c3")                   	
                     }
+
+                    if(nowTime_1>lastTime){
+                    	signData=0
+                    }
+                    
                      if(nowTime_1==lastTime&&signData==7){
                      	signData=0
                      }
@@ -212,9 +218,7 @@
 			})
 		}
 
-		$("body").on("tap", ".me_siginbutton", function() {
-
-
+		$("body").on("tap", ".me_siginbutton", function(){
 			$.ajax({
 				type: "get",
 				url: config.data + "users/getSign",

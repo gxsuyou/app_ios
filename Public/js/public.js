@@ -1,4 +1,4 @@
-var ENV = "h";
+var ENV = "dev";
 //测试环境
 if(ENV == "dev") {
    //发开模式
@@ -93,60 +93,60 @@ $(function() {
 //		}
 
 		// 更新应用资源
-		function installWgt(path) {
-			//			plus.nativeUI.showWaiting("安装wgt文件...");
-			plus.runtime.install(path, {}, function() {
-				plus.nativeUI.closeWaiting();
-				//				console.log("安装wgt文件成功！");
-				plus.runtime.restart();
-				//				plus.nativeUI.alert("应用资源更新完成！", function() {
-				//					
-				//				});
-			}, function(e) {
-				plus.nativeUI.closeWaiting();
-				console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
-				plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
-				hiddenUpload()
-			});
-		}
+//		function installWgt(path) {
+//			//			plus.nativeUI.showWaiting("安装wgt文件...");
+//			plus.runtime.install(path, {}, function() {
+//				plus.nativeUI.closeWaiting();
+//				//				console.log("安装wgt文件成功！");
+//				plus.runtime.restart();
+//				//				plus.nativeUI.alert("应用资源更新完成！", function() {
+//				//					
+//				//				});
+//			}, function(e) {
+//				plus.nativeUI.closeWaiting();
+//				console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
+//				plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
+//				hiddenUpload()
+//			});
+//		}
 
-		function onStateChanged(download, status) {
-			//			console.log(JSON.stringify(download))
-			downloding(download)
-		}
+//		function onStateChanged(download, status) {
+//			//			console.log(JSON.stringify(download))
+//			downloding(download)
+//		}
 
-		function downloding(download) {
-			switch(download.state) {
-				case 0:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 1:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 2:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 3:
-					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-					loading((download.downloadedSize / totalSize * 100).toFixed(0))
+//		function downloding(download) {
+//			switch(download.state) {
+//				case 0:
+//					//			$(".ldownload_btn_text").text('等待');
+//					break;
+//				case 1:
+//					//			$(".ldownload_btn_text").text('等待');
+//					break;
+//				case 2:
+//					//			$(".ldownload_btn_text").text('等待');
+//					break;
+//				case 3:
+//					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
+//					loading((download.downloadedSize / totalSize * 100).toFixed(0))
+//
+//					break;
+//				case 4:
+//					//			$(".ldownload_btn_text").text("打开");
+//					loading(0)
+//					break;
+//			}
+//		}
 
-					break;
-				case 4:
-					//			$(".ldownload_btn_text").text("打开");
-					loading(0)
-					break;
-			}
-		}
-
-		function loading(num) {
-			if(num == 100) {
-				$(".progress-move").css("border-radius", "1rem")
-				hiddenUpload()
-			}
-			$(".progress-move").css("width", num + "%")
-			$(".progress-num").text("正在更新 " + num + "%")
-
-		}
+//		function loading(num) {
+//			if(num == 100) {
+//				$(".progress-move").css("border-radius", "1rem")
+//				hiddenUpload()
+//			}
+//			$(".progress-move").css("width", num + "%")
+//			$(".progress-num").text("正在更新 " + num + "%")
+//
+//		}
 
 	})
 });

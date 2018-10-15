@@ -31,21 +31,31 @@
 			border: 0;
 		}
 		
-		.share_copy_content {
-			display: block;
-			color: #282828;
-			font-size: 14px;
-			width: 90%;
-			margin: 0 auto;
-			border-radius: 0.5rem;
-			margin-top:20%;
-			border: none;
+		.share_info {
 			text-align: center;
+			font-size: 12px;
+			color: #454545;
+			line-height: 18px;
 			font-weight: 500;
+			margin-top: 0.5rem;
+		}
+				
+		.share_copy_content {
+		    display: block;
+			color: #282828;
+			font-size:12px;
+			width:53%;
+			margin:0 auto;
+			margin-top:4.5rem;
+			padding:0.4rem 0 0.35rem 0rem;
+			border: none;
+			text-align:center;
+			font-weight:500;
 			-webkit-user-select:text;
 			-moz-user-select:text;
 			-khtml-user-select:text;
 			user-select:text;
+			border:1px solid #7fcadf;
 		}
 		
 		.share_copy_content>span {
@@ -95,16 +105,15 @@
 			background: #fe9900;
 			color: #fff;
 			font-size: 32px;
-			text-align: center;
+			text-align:center;
 			margin: 0 auto;
 			margin-top: 0.1rem;
 			font-weight: normal;
 		}	
 		.qrcode_content {
-			width: 88%;
+			width: 78%;
 			margin: 0 auto;
 			position: relative;
-			margin-top: 0.8rem;
 		}
 		
 		.qrcode_content>img {
@@ -123,10 +132,8 @@
 		
 		.qrcode_content>div:first-child {
 			margin: 0 auto;
-			border: 2px solid #7fcadf;
-			width: 10rem;
-			padding: 0.6rem 0rem;
-			border-radius: 1rem;
+			width: 9.5rem;
+			padding: 0.5rem 0rem;
 		}
 		
 		.process_fonts {

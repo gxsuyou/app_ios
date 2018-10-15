@@ -30,13 +30,14 @@ $(function() {
 			sys: 1
 		},
 		success: function(data) {
-
+           
 			var c = data.carousel;
 			var divlast = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[(c.length - 1)].id + "' data-gameId='" + c[(c.length - 1)].game_id + "'>" +
 				"<div class='slider_item  home" + (c.length - 1) + " '></div>" +
 				"</div>";
 			var bb = "home" + (c.length - 1);
 			$('.main_slider .mui-slider-group').append(divlast);
+		
 			$("." + bb).css("background-image", "url(" + config.img + encodeURI(c[(c.length - 1)].active_img) + ")");
 			for(var i = 0; i < c.length; i++) {
 				var div = "<div class='mui-slider-item ' data-id='" + c[i].id + "' data-gameId='" + c[i].game_id + "' >" +
