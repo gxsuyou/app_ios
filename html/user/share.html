@@ -127,9 +127,8 @@
 			sharehref.value = shareInfo.href;
 			sharehrefTitle.value = shareInfo.title;
 			sharehrefDes.value = shareInfo.content;
-			pageSourceId = shareInfo.pageSourceId;
-			only_id = shareInfo.only_id
-			console.log("pageSource:" + pageSourceId);
+			shareInfo.appkey = "H5BD8D7F0";
+			only_id = shareInfo.only_id			
 			document.querySelector(".getid").innerText = only_id;
 		}
 		if(window.plus) {
@@ -142,13 +141,14 @@
 		 *   
 		 * 更新分享服务  
 		 */
-		function updateSerivces() {
+		function updateSerivces(){
 			plus.share.getServices(function(s) {
 				shares = {};
 				for(var i in s) {
 					var t = s[i];
 					shares[t.id] = t;
 				}
+//				alert(JSON.stringify(shares))
 			}, function(e) {
 				outSet("获取分享服务列表失败：" + e.message);
 			});
@@ -170,29 +170,37 @@
 					scene: sb.x
 				}
 			};
-			if(bh) {
-				msg.href = sharehref.value;
+			if(bh) {			
 				if(sharehrefTitle && sharehrefTitle.value != "") {
 					msg.title = sharehrefTitle.value;
 				}
 				if(sharehrefDes && sharehrefDes.value != "") {
 					msg.content = sharehrefDes.value;
 				}
+				msg.href = "https://oneyouxi.com.cn/qrcode.html";
 				msg.thumbs = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
-				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
+				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];         
 			} else {
 				if(pic && pic.realUrl) {
 					msg.pictures = [pic.realUrl];
 				}
 			}
 			// 发送分享  
-
+//			alert(JSON.stringify(msg))
+//          return false;
+//          var msg={
+//          	content:"ONE游戏",
+//          	href:"https://oneyouxi.com.cn/qrcode.html",
+//          	extra:{scene:"WXSceneSession"},
+//          	thumbs:["https://oneyouxi.com.cn/pc/img/oneicon.png"],
+//          	pictures:["https://oneyouxi.com.cn/pc/img/oneicon.png"]
+//          }
 			if(sb.s.authenticated) {
 				console.log("---已授权---");
 				shareMessage(msg, sb.s);
 			} else {
 				console.log("---未授权---");
-				sb.s.authorize(function() {
+				sb.s.authorize(function(){
 					shareMessage(msg, sb.s);
 				}, function(e) {
 					if(e.code == -8) {
@@ -211,8 +219,8 @@
 		 */
 
 		function shareMessage(msg, s) {
-			alert(JSON.stringify(msg));
-			alert(JSON.stringify(s))
+//			alert(JSON.stringify(msg));
+//			alert(JSON.stringify(s))
 			s.send(msg, function() {
 				console.log("分享到\"" + s.description + "\"成功！ ");
 			}, function(e) {
@@ -265,8 +273,8 @@
 				s: ss
 			});
 
-			alert(JSON.stringify(shareBts[index]))
-			//			return false;
+//			alert(JSON.stringify(shareBts[index]))
+//			return false;
 			shareAction(shareBts[index], true);
 		}
 
