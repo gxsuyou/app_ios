@@ -6,6 +6,7 @@ var newVer;
 var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
+mui.init();
 mui.plusReady(function() {
 
 	if(window.plus) {

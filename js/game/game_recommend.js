@@ -30,14 +30,14 @@ $(function() {
 			sys: 1
 		},
 		success: function(data) {
-           
+
 			var c = data.carousel;
 			var divlast = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[(c.length - 1)].id + "' data-gameId='" + c[(c.length - 1)].game_id + "'>" +
 				"<div class='slider_item  home" + (c.length - 1) + " '></div>" +
 				"</div>";
 			var bb = "home" + (c.length - 1);
 			$('.main_slider .mui-slider-group').append(divlast);
-		
+
 			$("." + bb).css("background-image", "url(" + config.img + encodeURI(c[(c.length - 1)].active_img) + ")");
 			for(var i = 0; i < c.length; i++) {
 				var div = "<div class='mui-slider-item ' data-id='" + c[i].id + "' data-gameId='" + c[i].game_id + "' >" +
@@ -46,17 +46,10 @@ $(function() {
 				var aa = "home" + i;
 
 				var indicator = "<div class='mui-indicator'></div>";
-
 				$('.main_slider .mui-slider-group').append(div);
 				$('.main_slider .mui-slider-indicator').append(indicator);
-				//				var gallery = mui('.main_slider');
-				//				gallery.slider({
-				//					interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
-				//				});
-
 				$("." + aa).css("background-image", "url(" + config.img + encodeURI(c[i].active_img) + ")");
-				//				$("." + aa).attr('data-id', c[i].game_id);
-
+				//$("." + aa).attr('data-id', c[i].game_id);
 			}
 			$('.main_slider .mui-slider-indicator').children().eq(0).addClass("mui-active");
 			var div0 = "<div class='mui-slider-item mui-slider-item-duplicate' data-id='" + c[0].id + "' data-gameId='" + c[0].game_id + "'>" +
@@ -66,7 +59,7 @@ $(function() {
 			$(".home0").css("background-image", "url(" + config.img + encodeURI(c[0].active_img) + ")");
 			var gallery = mui('.main_slider');
 			gallery.slider({
-				interval: 0 //自动轮播周期，若为0则不自动播放，默认为0；
+				interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
 			});
 		}
 
@@ -609,18 +602,18 @@ function getRank(sort) {
 							$('.first').attr('data-id', g[0].id)
 							$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
 							$('.first .y_listName').text(g[0].game_name)
-							$('.first .y_listDownload').attr("data-url",g[0].game_download_ios)												
-							$('.first .game_recommend_starScore').text(g[0].grade)							
+							$('.first .y_listDownload').attr("data-url", g[0].game_download_ios)
+							$('.first .game_recommend_starScore').text(g[0].grade)
 							$('.second').attr('data-id', g[1].id)
 							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
 							$('.second .y_listName').text(g[1].game_name)
-							$('.second .y_listDownload').attr("data-url",g[1].game_download_ios)	
+							$('.second .y_listDownload').attr("data-url", g[1].game_download_ios)
 							$('.second .game_recommend_starScore').text(g[1].grade)
 							$('.third ').attr('data-id', g[2].id)
 							$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
 							$('.third  .y_listName').text(g[2].game_name)
 							$('.third  .game_recommend_starScore').text(g[2].grade)
-							$('.third .y_listDownload').attr("data-url",g[2].game_download_ios)
+							$('.third .y_listDownload').attr("data-url", g[2].game_download_ios)
 						} else {
 							var signs = '';
 							if(g[i].tagList && g[i].tagList !== "null") {

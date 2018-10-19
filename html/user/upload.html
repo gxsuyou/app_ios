@@ -119,11 +119,9 @@
 
 			function onStateChanged(download, status) {
 				downloding(download)
-//				console.log("啊哈哈")
 			}
 
 			function downloding(download) {
-//				console.log(JSON.stringify(download))
 				switch(download.state) {
 					case 0:
 						//			$(".ldownload_btn_text").text('等待');
@@ -144,14 +142,15 @@
 			}
 
 			function loading(num) {
+				if(num>100){
+					num=100
+				}
 				$(".progress-move").css("width", num + "%")
 				$(".progress-num").text("正在更新 " + num + "%")
 
 			}
 			// 更新应用资源
 			function installWgt(path) {
-				//				hiddenUpload()
-				//			plus.nativeUI.showWaiting("安装wgt文件...");
 				plus.runtime.install(path, {}, function() {
 					plus.nativeUI.closeWaiting();
 					//				console.log("安装wgt文件成功！");

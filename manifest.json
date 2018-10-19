@@ -3,7 +3,7 @@
 	"id": "H5BD8D7F0",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "ONE游戏",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.43",/*应用版本名称*/
+		"name": "1.0.46",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -100,7 +100,7 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        },"OAuth":{}
+        }
 	},
 	"plus": {
 		"statusbar":{
@@ -108,11 +108,11 @@
 		},
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": false,"delay":"3000"
+			"waiting": false,"delay":"2000"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"oauth":{"qq":{"appid":"1106717102"},"weixin":{"appid":"wxf14a568196301aa2","appsecret":"eb2341d2397f0baf58fb6ef805103b34"}},"share":{
+		"distribute": {"plugins":{"oauth":{},"share":{
 			"weixin":{
 			"appid":"wxf14a568196301aa2",
 			"appsecret":"eb2341d2397f0baf58fb6ef805103b34",

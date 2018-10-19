@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -10,7 +9,6 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/share.css" />
 	</head>
-
 	<body>
 		<div onclick="back()" class="share-back mui-icon mui-icon-left-nav mui-pull-left">
 			< </div>
@@ -124,10 +122,8 @@
 		function plusReady() {
 			updateSerivces();
 			var shareInfo = plus.webview.currentWebview().shareInfo;
-			sharehref.value = shareInfo.href;
 			sharehrefTitle.value = shareInfo.title;
 			sharehrefDes.value = shareInfo.content;
-			shareInfo.appkey = "H5BD8D7F0";
 			only_id = shareInfo.only_id			
 			document.querySelector(".getid").innerText = only_id;
 		}
@@ -178,23 +174,22 @@
 					msg.content = sharehrefDes.value;
 				}
 				msg.href = "https://oneyouxi.com.cn/qrcode.html";
+		
+				if(sb.s.id=="weixin"){
+					msg.type="web";
+				}
+				
 				msg.thumbs = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
-				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];         
+				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];   
+				
 			} else {
 				if(pic && pic.realUrl) {
 					msg.pictures = [pic.realUrl];
 				}
 			}
 			// 发送分享  
-//			alert(JSON.stringify(msg))
-//          return false;
-//          var msg={
-//          	content:"ONE游戏",
-//          	href:"https://oneyouxi.com.cn/qrcode.html",
-//          	extra:{scene:"WXSceneSession"},
-//          	thumbs:["https://oneyouxi.com.cn/pc/img/oneicon.png"],
-//          	pictures:["https://oneyouxi.com.cn/pc/img/oneicon.png"]
-//          }
+
+            
 			if(sb.s.authenticated) {
 				console.log("---已授权---");
 				shareMessage(msg, sb.s);
@@ -219,40 +214,16 @@
 		 */
 
 		function shareMessage(msg, s) {
-//			alert(JSON.stringify(msg));
-//			alert(JSON.stringify(s))
 			s.send(msg, function() {
 				console.log("分享到\"" + s.description + "\"成功！ ");
-			}, function(e) {
+			},function(e){
 				console.log("分享到\"" + s.description + "\"失败: " + JSON.stringify(e));
 			});
 		}
 		// 分析链接  
 		function shareHref(index) {
 
-			if(index == 1) {
-
-				//				var message = {
-				//					title: "微信好友", //应用名字
-				//					content: "plusShare基于HTML5+的share模块，开发者只需调用一个API，即可调起微信好友、微信朋友圈、系统更多分享功能",
-				//					href: "http://www.dcloud.io/hellomui", //分享出去后，点击跳转地址
-				//					thumbs: ["http://img-cdn-qiniu.dcloud.net.cn/icon3.png"],//分享缩略图
-				//					pictures: ["https://oneyouxi.com/pc/img/oneicon.png"],//分享缩略图
-				//				    extra:{
-				//						scene: 'WXSceneSession'
-				//					}
-				//				}
-				//
-				//				plus.share.sendWithSystem(message, function() {
-				////				    TODO 系统分享暂不支持回调
-				////					callback && callback(true);
-				//				}, function() {
-				////					TODO 系统分享暂不支持回调
-				////					callback && callback(false);
-				//				});
-				//
-				//				return false;
-			}
+	
 
 			// 更新分享列表  
 			var shareBts = [];
@@ -273,8 +244,7 @@
 				s: ss
 			});
 
-//			alert(JSON.stringify(shareBts[index]))
-//			return false;
+
 			shareAction(shareBts[index], true);
 		}
 
