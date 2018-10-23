@@ -12,6 +12,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/qiniu.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../Public/js/face.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="header_box">
@@ -43,17 +44,6 @@
 		</div>
 		<script src="../../js/mui.zoom.js"></script>
 		<script src="../../js/mui.previewimage.js"></script>
-		<script src="../../js/strategy/strategy_comment.js" type="text/javascript" charset="utf-8"></script>	
-		<script>
-			mui.previewImage();
-			mui.init({
-					swipeBack: true, //启用右滑关闭功能
-					beforeback:function(){
-			            var list = plus.webview.getWebviewById("strategy_details.html"); //对游戏首页
-			            mui.fire(list, 'refresh');
-				        return true;//返回true,继续页面关闭逻辑
-			        }
-			})
-		</script>		
+		<script src="../../js/strategy/strategy_comment.js" type="text/javascript" charset="utf-8"></script>		
 	</body>
 </html>

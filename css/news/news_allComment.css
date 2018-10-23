@@ -110,7 +110,7 @@ html,body{
 	outline: 0;
 	border: 0;
 	color: #7A7A7A;
-	font-size: 14px;
+	font-size:14px;
 }
 
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -151,8 +151,8 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	display:none;
 	height:8.2rem;
 	overflow-y:scroll;
-
 }
+
 .faceContent img{
 	width:1.8rem;
 	margin:0 0.8rem;

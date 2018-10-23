@@ -6,8 +6,14 @@ var sort = "add_time";
 var target_img;
 var target_title;
 var lord_id;
+mui.previewImage();
+window.addEventListener('refresh', function(event) {
+	page = 0
+	$('.news_post_commentContents').empty()
+	getNum()
+	up()
+});
 $(function() {
-
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
@@ -618,7 +624,7 @@ function detail() {
 
 				$('.news_post_content_detail').html(detail);
 				$('.news_reviewNum').text(comment_num);
-				$('h4').text(str.title);
+				$('.news_post_content>h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
 				$('.news_userInfo_date').text(str.add_time);

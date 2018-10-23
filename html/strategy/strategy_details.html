@@ -16,15 +16,14 @@
 		<div class="header_box">
 			<div class="before_header"></div>
 			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
-				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">	
-				</div>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
 				<div class="notice">攻略</div>
 				<div class="share hidden"></div>
 			</header>
 		</div>
 		<div class="strategy_details" style="padding-bottom:2rem;">
 			<div class="news_post_content backgroundColor_white">
-				<h4 class="color_282828"></h4>
+				<h4 class="color_282828 head_title"></h4>
 				<div class="news_userInfo">
 					<div class="news_userInfo_img fl"></div>
 					<div class="news_userInfo_name font_14"></div>
@@ -121,16 +120,7 @@
 			<!--定位结束-->
 		</div>
 	</body>
-	<script src="../../js/strategy/strategy_details.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../js/mui.zoom.js"></script>
 	<script src="../../js/mui.previewimage.js"></script>
-	<script>
-		mui.previewImage();
-		window.addEventListener('refresh',function(event){
-			page = 0
-            $('.news_post_commentContents').empty()
-            getNum()          
-            up()
-		 });
-	</script>
+	<script src="../../js/strategy/strategy_details.js" type="text/javascript" charset="utf-8"></script>
 </html>

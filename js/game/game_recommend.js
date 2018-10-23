@@ -510,7 +510,7 @@ $(function() {
 		})
 	})
 
-	//		应用分类结束
+	//应用分类结束
 
 	//	分类结束
 
@@ -566,7 +566,7 @@ $('.game_rank').children().click(function() {
 	var name = $(this).attr('data-name')
 	$(this).children().addClass('border_green color_green').css('background-color', 'white')
 	$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.jpg)')
 	$('.game_lists').children().remove();
 	getRank(sort);
 })

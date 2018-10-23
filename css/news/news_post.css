@@ -10,6 +10,7 @@ a{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
+
 .news_dele_com{
 	margin-left:0.4rem;
 }
@@ -32,11 +33,25 @@ a{
     padding-bottom:7rem;
 }
 
-.detail p{
-	font-size:15px;
-	color:#282828;
+.head_title{
+	text-align:center;
+	line-height:30px;
 }
 
+.detail{
+	line-height:28px;
+	font-family:Microsoft Yahei,Simsun,Gotham-Medium,Arial; 
+}
+.detail p{
+	font-size:18px;
+	text-align:justify;	
+	color:#333 !important;
+}
+.detail h1,.detail h2,.detail h3,.detail h4,.detail h5,.detail h6{
+	font-size:20px;
+	margin:0.5rem 0;
+	color:#282828 !important;
+}
 .detail strong{
 	font-size:15px;
 }
@@ -373,4 +388,15 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	font-size:14px;
 	font-weight:600;
 	margin-top:1rem;
+}
+
+.faceContent div{
+	float: left;
+	height:1.8rem;
+	width:1.8rem;
+	margin:0 0.8rem;
+	margin-bottom:0.2rem;
+	background-size:contain;
+	background-position: center;
+	background-repeat: no-repeat;
 }

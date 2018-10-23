@@ -54,7 +54,7 @@ $(function() {
 			X = moveEndX - startX,
 			Y = moveEndY - startY;
 
-		if(X > 0 && X > 160) {
+		if(X > 0 && X > 150) {
 
 			if(sort == "comment_num") {
 				return false;
@@ -76,7 +76,7 @@ $(function() {
 			page = 0;
 			mui('.strategy').pullRefresh().refresh(true);
 			up()
-		} else if(X < 0 && 160 < -(X)) {
+		} else if(X < 0 && 150 < -(X)) {
 			//向右
 			if(sort == "comment_num") {
 				sort = "add_time"
